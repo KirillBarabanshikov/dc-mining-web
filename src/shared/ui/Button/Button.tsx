@@ -10,13 +10,19 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FC<IButtonProps> = ({
     size = 'lg',
     variant = 'solid',
+    className,
     children,
     ...props
 }) => {
     return (
         <button
             type={'button'}
-            className={clsx(styles.button, styles[size], styles[variant])}
+            className={clsx(
+                styles.button,
+                styles[size],
+                styles[variant],
+                className,
+            )}
             {...props}
         >
             {children}

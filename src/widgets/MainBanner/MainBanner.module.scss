@@ -1,0 +1,46 @@
+.banner {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    font-size: 40px;
+    margin-bottom: 40px;
+    line-height: 120%;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+
+    li {
+      font-size: 16px;
+      line-height: 130%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: var(--text-accent-blue);
+      }
+    }
+  }
+
+  .button {
+    margin-bottom: 88px;
+  }
+}
+
+.cover {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
