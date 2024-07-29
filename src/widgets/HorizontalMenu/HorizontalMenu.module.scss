@@ -1,0 +1,87 @@
+.horizontalMenu {
+  padding: 0 8px;
+
+  .horizontalMenuList {
+    display: flex;
+    gap: 8px;
+
+    .horizontalMenuItem {
+      padding: 6.5px 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+      user-select: none;
+
+      .horizontalMenuLink {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19.2px;
+        color: rgba(44, 44, 83, 1);
+        white-space: nowrap;
+        transition: color 300ms ease-out;
+
+          @media (hover: hover) {
+            &:hover {
+                color: rgba(73, 70, 255, 1);
+            }
+          }
+      }
+    }
+
+    .horizontalMenuDropdownItem {
+      position: relative;
+
+      .dropdown {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        transition: background-color 300ms ease-out;
+
+        &.isOpen {
+          background-color: white;
+        }
+
+        .dropdownList {
+          .box {
+            height: 16px;
+          }
+
+          li {
+
+            a {
+              font-size: 14px;
+              line-height: 19.2px;
+              color: rgba(44, 44, 83, 1);
+              white-space: nowrap;
+              display: block;
+              transition: color 300ms ease-out;
+
+              @media (hover: hover) {
+                &:hover {
+                  color: rgba(73, 70, 255, 1);
+                }
+              }
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 8px;
+            }
+
+            &:first-child {
+              height: 8px;
+            }
+
+            &:last-child {
+              margin-bottom: 5.5px;
+            }
+          }
+        }
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+    }
+  }
+}

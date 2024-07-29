@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.19",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -26,6 +28,7 @@
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
