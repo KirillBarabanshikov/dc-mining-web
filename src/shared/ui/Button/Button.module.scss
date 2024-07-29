@@ -6,7 +6,6 @@
   border-radius: 16px;
   padding: 0 16px;
   font-weight: 700;
-  cursor: pointer;
   transition: all 0.2s ease;
 
   &.solid {
@@ -46,6 +45,7 @@
       background: rgba(95, 92, 255, 1);
       border-color: rgba(95, 92, 255, 1);
       color: white;
+      cursor: pointer;
     }
   }
 
