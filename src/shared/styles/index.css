@@ -1,4 +1,5 @@
 @import "fonts.css";
+@import "colors.css";
 
 * {
     padding: 0;
@@ -21,6 +22,9 @@ html,
 body {
     font-family: 'MADE Evolve Sans', sans-serif;
     line-height: 1;
+
+    background-color: var(--background-tonal);
+    color: var(--text-primary);
 
     min-height: 100vh;
     scroll-behavior: smooth;
