@@ -1,0 +1,57 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 16px;
+  padding: 0 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.solid {
+    background: rgba(73, 70, 255, 1);
+    color: white;
+  }
+
+  &.outline {
+    border: 1px solid rgba(73, 70, 255, 1);
+    background: transparent;
+    color: rgba(73, 70, 255, 1);
+  }
+
+  &.lg {
+    height: 64px;
+
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &.md {
+    height: 48px;
+
+    font-size: 16px;
+    line-height: 19.2px;
+  }
+
+  &.sm {
+    height: 32px;
+
+    font-size: 14px;
+    line-height: 16.8px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: rgba(95, 92, 255, 1);
+      border-color: rgba(95, 92, 255, 1);
+      color: white;
+    }
+  }
+
+  &:active {
+    background: rgba(73, 71, 198, 1);
+    border-color: rgba(73, 71, 198, 1);
+    color: white;
+  }
+}

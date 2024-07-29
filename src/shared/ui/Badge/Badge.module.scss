@@ -1,0 +1,25 @@
+.badge {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+
+  border-radius: 4px;
+  padding: 4px;
+
+  &.green {
+    background-color: rgba(233, 255, 246, 1);
+    color: rgba(60, 199, 141, 1);
+  }
+
+  &.red {
+    background-color: rgba(255, 225, 238, 1);
+    color: rgba(238, 62, 136, 1);
+  }
+
+  &.blue {
+    background-color: rgba(73, 70, 255, 0.2);
+    color: rgba(73, 70, 255, 1);
+  }
+}
