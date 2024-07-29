@@ -4,7 +4,7 @@ import styles from './IconButton.module.scss';
 
 interface IIconButtonProps {
     icon: ReactNode;
-    className: string;
+    className?: string;
 }
 
 export const IconButton: FC<IIconButtonProps> = ({ icon, className }) => {
