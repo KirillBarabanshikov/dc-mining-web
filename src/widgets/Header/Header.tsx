@@ -14,7 +14,7 @@ import styles from './Header.module.scss';
 
 export const Header: FC = () => {
     return (
-        <header className={clsx(styles.header, 'container-wide')}>
+        <header className={clsx(styles.header)}>
             <div className={styles.mainMenu}>
                 <IconButton icon={<BurgerIcon />} />
                 <Link to={'/'} className={styles.logo}>
