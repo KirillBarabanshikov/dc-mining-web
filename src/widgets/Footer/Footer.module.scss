@@ -2,4 +2,9 @@
   background-color: rgba(231, 238, 255, 1);
   border-radius: 40px 40px 0 0;
   padding: 80px 0;
+  margin-top: 120px;
+
+  @media screen and (max-width: 992px) {
+    margin-top: 80px;
+  }
 }

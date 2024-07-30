@@ -1,0 +1,23 @@
+.sections {
+  margin-top: 54px;
+
+  .bestsellersWrapper {
+    position: relative;
+
+    .backgroundIcon {
+      position: absolute;
+      z-index: -1;
+      top: -51px;
+      left: -40px;
+      width: 100vw;
+
+      @media screen and (max-width: 992px) {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    margin-top: 80px;
+  }
+}
