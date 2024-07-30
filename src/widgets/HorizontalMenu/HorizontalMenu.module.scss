@@ -3,7 +3,12 @@
 
   .horizontalMenuList {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+
+    @media screen and (max-width: 992px) {
+      height: 32px;
+    }
 
     .horizontalMenuItem {
       padding: 6.5px 12px;
