@@ -21,6 +21,7 @@ html,
 
 body {
     font-family: 'MADE Evolve Sans', sans-serif;
+    font-size: 16px;
     line-height: 1;
 
     background-color: var(--background-tonal);
