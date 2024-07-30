@@ -4,7 +4,6 @@
 
   .advantagesContainer {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
     gap: 32px;
   }
@@ -27,6 +26,35 @@
       font-size: 20px;
       line-height: 120%;
       white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 992px) {
+      .advantagesContainer {
+        gap: 24px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .advantagesContainer {
+        gap: 16px;
+      }
+
+      .image {
+        border-radius: 16px;
+
+        img {
+          width: 120px;
+          height: 120px;
+        }
+      }
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        width: unset;
+        font-size: 14px;
+        line-height: 18.2px;
+        white-space: pre-wrap;
+      }
     }
   }
 }

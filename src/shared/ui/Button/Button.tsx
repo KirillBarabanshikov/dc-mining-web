@@ -5,6 +5,7 @@ import clsx from 'clsx';
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'solid' | 'outline';
     size?: 'lg' | 'md' | 'sm';
+    isWide?: boolean;
 }
 
 export const Button: FC<IButtonProps> = ({
@@ -12,6 +13,7 @@ export const Button: FC<IButtonProps> = ({
     variant = 'solid',
     className,
     children,
+    isWide = false,
     ...props
 }) => {
     return (
@@ -21,6 +23,7 @@ export const Button: FC<IButtonProps> = ({
                 styles.button,
                 styles[size],
                 styles[variant],
+                isWide && styles.isWide,
                 className,
             )}
             {...props}

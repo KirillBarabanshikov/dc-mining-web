@@ -56,4 +56,8 @@
     border-color: rgba(73, 71, 198, 1);
     color: white;
   }
+
+  &.isWide {
+    width: 100%;
+  }
 }
