@@ -6,6 +6,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'solid' | 'outline';
     size?: 'lg' | 'md' | 'sm';
     isWide?: boolean;
+    theme?: 'blue' | 'white';
 }
 
 export const Button: FC<IButtonProps> = ({
@@ -14,6 +15,7 @@ export const Button: FC<IButtonProps> = ({
     className,
     children,
     isWide = false,
+    theme = 'blue',
     ...props
 }) => {
     return (
@@ -23,6 +25,7 @@ export const Button: FC<IButtonProps> = ({
                 styles.button,
                 styles[size],
                 styles[variant],
+                styles[theme],
                 isWide && styles.isWide,
                 className,
             )}
