@@ -1,5 +1,5 @@
-@import "fonts.css";
-@import "colors.css";
+@import 'fonts.css';
+@import 'colors.css';
 
 * {
     padding: 0;
@@ -64,14 +64,19 @@ ul {
 a {
     color: inherit;
     text-decoration: none;
+    transition: color 300ms ease-out;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
+a:hover {
+    color: var(--text-accent-blue);
+}
+
+input[type='search']::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
 }
 
-input[type="search"] {
+input[type='search'] {
     -ms-clear: none;
     -webkit-clear: none;
     clear: none;

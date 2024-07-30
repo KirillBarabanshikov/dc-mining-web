@@ -5,3 +5,12 @@ export {
     MAX_WIDTH_XL,
     MAX_WIDTH_XXL,
 } from './breakpoints.ts';
+
+export {
+    ADDRESS,
+    EMAIL,
+    TELEGRAM,
+    TELEPHONE,
+    TELEPHONE_LINK,
+    WHATSAPP,
+} from './contacts.ts';
