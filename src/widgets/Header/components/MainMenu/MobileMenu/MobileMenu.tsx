@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './MobileMenu.module.scss';
 import { aboutNavItems, mainNavItems, servicesNavItems } from '@/widgets/Header/components/MainMenu/data/data.ts';

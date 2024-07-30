@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button, IconButton } from '@/shared/ui';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
@@ -23,9 +22,7 @@ export const Bestsellers = () => {
                                 <Badge text={'Новинка'} theme={'blue'} />
                             </div>
                             <p className={styles.price}>545 000 ₽</p>
-                            <p className={styles.name}>
-                                Asic майнер Bitmain Antminer L7 9500 MH/s
-                            </p>
+                            <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
                             <div className={styles.specifications}>
                                 <div>Хэшрейт — 9500 MH/s</div>
                                 <div>Хэшрейт — 9500 MH/s</div>
@@ -36,14 +33,8 @@ export const Bestsellers = () => {
                                 <Button size={'sm'} className={styles.button}>
                                     Заказать
                                 </Button>
-                                <IconButton
-                                    icon={<HeartIcon />}
-                                    className={styles.iconButton}
-                                />
-                                <IconButton
-                                    icon={<StatisticIcon />}
-                                    className={styles.iconButton}
-                                />
+                                <IconButton icon={<HeartIcon />} className={styles.iconButton} />
+                                <IconButton icon={<StatisticIcon />} className={styles.iconButton} />
                             </div>
                         </article>
                     </Link>
@@ -58,9 +49,7 @@ export const Bestsellers = () => {
                                 <Badge text={'Новинка'} theme={'blue'} />
                             </div>
                             <p className={styles.price}>545 000 ₽</p>
-                            <p className={styles.name}>
-                                Asic майнер Bitmain Antminer L7 9500 MH/s
-                            </p>
+                            <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
                             <div className={styles.specifications}>
                                 <div>Хэшрейт — 9500 MH/s</div>
                                 <div>Хэшрейт — 9500 MH/s</div>
@@ -71,14 +60,8 @@ export const Bestsellers = () => {
                                 <Button size={'sm'} className={styles.button}>
                                     Заказать
                                 </Button>
-                                <IconButton
-                                    icon={<HeartIcon />}
-                                    className={styles.iconButton}
-                                />
-                                <IconButton
-                                    icon={<StatisticIcon />}
-                                    className={styles.iconButton}
-                                />
+                                <IconButton icon={<HeartIcon />} className={styles.iconButton} />
+                                <IconButton icon={<StatisticIcon />} className={styles.iconButton} />
                             </div>
                         </article>
                     </Link>
@@ -93,9 +76,7 @@ export const Bestsellers = () => {
                                 <Badge text={'Новинка'} theme={'blue'} />
                             </div>
                             <p className={styles.price}>545 000 ₽</p>
-                            <p className={styles.name}>
-                                Asic майнер Bitmain Antminer L7 9500 MH/s
-                            </p>
+                            <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
                             <div className={styles.specifications}>
                                 <div>Хэшрейт — 9500 MH/s</div>
                                 <div>Хэшрейт — 9500 MH/s</div>
@@ -106,14 +87,8 @@ export const Bestsellers = () => {
                                 <Button size={'sm'} className={styles.button}>
                                     Заказать
                                 </Button>
-                                <IconButton
-                                    icon={<HeartIcon />}
-                                    className={styles.iconButton}
-                                />
-                                <IconButton
-                                    icon={<StatisticIcon />}
-                                    className={styles.iconButton}
-                                />
+                                <IconButton icon={<HeartIcon />} className={styles.iconButton} />
+                                <IconButton icon={<StatisticIcon />} className={styles.iconButton} />
                             </div>
                         </article>
                     </Link>
@@ -128,9 +103,7 @@ export const Bestsellers = () => {
                                 <Badge text={'Новинка'} theme={'blue'} />
                             </div>
                             <p className={styles.price}>545 000 ₽</p>
-                            <p className={styles.name}>
-                                Asic майнер Bitmain Antminer L7 9500 MH/s
-                            </p>
+                            <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
                             <div className={styles.specifications}>
                                 <div>Хэшрейт — 9500 MH/s</div>
                                 <div>Хэшрейт — 9500 MH/s</div>
@@ -141,14 +114,8 @@ export const Bestsellers = () => {
                                 <Button size={'sm'} className={styles.button}>
                                     Заказать
                                 </Button>
-                                <IconButton
-                                    icon={<HeartIcon />}
-                                    className={styles.iconButton}
-                                />
-                                <IconButton
-                                    icon={<StatisticIcon />}
-                                    className={styles.iconButton}
-                                />
+                                <IconButton icon={<HeartIcon />} className={styles.iconButton} />
+                                <IconButton icon={<StatisticIcon />} className={styles.iconButton} />
                             </div>
                         </article>
                     </Link>
@@ -163,9 +130,7 @@ export const Bestsellers = () => {
                                 <Badge text={'Новинка'} theme={'blue'} />
                             </div>
                             <p className={styles.price}>545 000 ₽</p>
-                            <p className={styles.name}>
-                                Asic майнер Bitmain Antminer L7 9500 MH/s
-                            </p>
+                            <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
                             <div className={styles.specifications}>
                                 <div>Хэшрейт — 9500 MH/s</div>
                                 <div>Хэшрейт — 9500 MH/s</div>
@@ -176,14 +141,8 @@ export const Bestsellers = () => {
                                 <Button size={'sm'} className={styles.button}>
                                     Заказать
                                 </Button>
-                                <IconButton
-                                    icon={<HeartIcon />}
-                                    className={styles.iconButton}
-                                />
-                                <IconButton
-                                    icon={<StatisticIcon />}
-                                    className={styles.iconButton}
-                                />
+                                <IconButton icon={<HeartIcon />} className={styles.iconButton} />
+                                <IconButton icon={<StatisticIcon />} className={styles.iconButton} />
                             </div>
                         </article>
                     </Link>

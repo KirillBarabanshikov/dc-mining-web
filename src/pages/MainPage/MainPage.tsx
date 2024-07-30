@@ -1,4 +1,3 @@
-import React from 'react';
 import clsx from 'clsx';
 import { Bestsellers, MainBanner, Managers, Offers } from '@/widgets';
 import { Advantages } from '@/widgets/Advantages';

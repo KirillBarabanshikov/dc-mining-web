@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import clsx from 'clsx';
 import clock from '@/shared/assets/images/advantages/clock.png';
 import energy from '@/shared/assets/images/advantages/energy.png';

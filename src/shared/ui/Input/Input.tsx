@@ -6,15 +6,13 @@ import styles from './Input.module.scss';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export const Input: FC<IInputProps> = ({
-    type = 'text',
-    className,
-    ...props
-}) => {
+export const Input: FC<IInputProps> = ({ type = 'text', className, ...props }) => {
     const [value, setValue] = useState('');
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     function handleInputFocus() {
+        if (!inputRef.current) return;
+
         if ('focus' in inputRef.current) {
             inputRef.current.focus();
         }
@@ -25,6 +23,7 @@ export const Input: FC<IInputProps> = ({
     };
 
     const clearInput = () => {
+        if (!inputRef.current) return;
         setValue('');
         if ('focus' in inputRef.current) {
             inputRef.current.focus();
@@ -32,22 +31,9 @@ export const Input: FC<IInputProps> = ({
     };
 
     return (
-        <div
-            className={clsx(styles.input, className)}
-            onClick={handleInputFocus}
-        >
-            <input
-                type={type}
-                ref={inputRef}
-                value={value}
-                onChange={handleChange}
-                {...props}
-            />
-            {type === 'search' && value ? (
-                <CloseIcon onClick={clearInput} />
-            ) : (
-                <SearchIcon />
-            )}
+        <div className={clsx(styles.input, className)} onClick={handleInputFocus}>
+            <input type={type} ref={inputRef} value={value} onChange={handleChange} {...props} />
+            {type === 'search' && value ? <CloseIcon onClick={clearInput} /> : <SearchIcon />}
         </div>
     );
 };

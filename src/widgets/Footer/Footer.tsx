@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from '@/shared/assets/logo.svg?react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
@@ -33,10 +32,7 @@ export const Footer = () => {
                 <section>
                     <h5>Контакты</h5>
                     <div>
-                        <a
-                            href={`tel:${TELEPHONE_LINK}`}
-                            className={styles.contact}
-                        >
+                        <a href={`tel:${TELEPHONE_LINK}`} className={styles.contact}>
                             {TELEPHONE}
                         </a>
                         <a href={`mailto:${EMAIL}`} className={styles.contact}>
@@ -47,9 +43,7 @@ export const Footer = () => {
                 <section>
                     <h5>Офис</h5>
                     <div>
-                        <a className={clsx(styles.link, styles.address)}>
-                            {ADDRESS}
-                        </a>
+                        <a className={clsx(styles.link, styles.address)}>{ADDRESS}</a>
                     </div>
                 </section>
                 <section>

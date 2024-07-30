@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom';
 import { IconButton, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_LG, MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
+import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import Logo from '@/shared/assets/logo.svg?react';
 import BurgerIcon from '@/shared/assets/icons/burger.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
@@ -46,7 +46,7 @@ export const Header: FC = () => {
                                 <HeartIcon />
                                 <span>Избранное</span>
                             </NavLink>
-                            <NavLink className={styles.option}>
+                            <NavLink to={''} className={styles.option}>
                                 <StatisticIcon />
                                 <span>Сравнить</span>
                             </NavLink>

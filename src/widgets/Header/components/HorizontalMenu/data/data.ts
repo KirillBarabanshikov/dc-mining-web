@@ -1,4 +1,10 @@
-export const horizontalMenuItems = [
+export interface IMenuItem {
+    title: string;
+    children?: { title: string; path: string }[];
+    path?: string;
+}
+
+export const horizontalMenuItems: IMenuItem[] = [
     {
         title: 'ASIC майнеры',
         children: [

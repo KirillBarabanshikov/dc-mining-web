@@ -1,4 +1,3 @@
-import React from 'react';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';

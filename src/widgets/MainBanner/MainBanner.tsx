@@ -1,4 +1,3 @@
-import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
@@ -31,8 +30,7 @@ export const MainBanner = () => {
                     <section className={styles.slide}>
                         <div className={styles.slideContent}>
                             <h2>
-                                Размещение вашего оборудования{' '}
-                                <span>в дата центре</span>
+                                Размещение вашего оборудования <span>в дата центре</span>
                             </h2>
                             <ul>
                                 <li>Официальное размещение от 4,7 руб/кВт</li>
@@ -40,18 +38,12 @@ export const MainBanner = () => {
                                 <li>Профессиональный сервис-центр</li>
                                 <li>Более 1000 устройств в обслуживании</li>
                             </ul>
-                            <Button
-                                className={styles.button}
-                                size={matches ? 'md' : 'lg'}
-                            >
+                            <Button className={styles.button} size={matches ? 'md' : 'lg'}>
                                 Подробнее
                             </Button>
                         </div>
                         <div className={styles.imageWrap}>
-                            <img
-                                src={`${matches ? minersMd : miners}`}
-                                alt={'Оборудование'}
-                            />
+                            <img src={`${matches ? minersMd : miners}`} alt={'Оборудование'} />
                         </div>
                     </section>
                 </SwiperSlide>
@@ -59,27 +51,19 @@ export const MainBanner = () => {
                     <section className={styles.slide}>
                         <div className={styles.slideContent}>
                             <h2>
-                                Продажа{' '}
-                                <span>оборудования и комплектующих</span> для
-                                майнинга
+                                Продажа <span>оборудования и комплектующих</span> для майнинга
                             </h2>
                             <ul>
                                 <li>Прямые поставки от производителей</li>
                                 <li>Официальный ввоз с ГТД</li>
                                 <li>Гибкая система скидок</li>
                             </ul>
-                            <Button
-                                className={styles.button}
-                                size={matches ? 'md' : 'lg'}
-                            >
+                            <Button className={styles.button} size={matches ? 'md' : 'lg'}>
                                 Подробнее
                             </Button>
                         </div>
                         <div className={styles.imageWrap}>
-                            <img
-                                src={`${matches ? minerMd : miner}`}
-                                alt={'Оборудование'}
-                            />
+                            <img src={`${matches ? minerMd : miner}`} alt={'Оборудование'} />
                         </div>
                     </section>
                 </SwiperSlide>
@@ -94,18 +78,12 @@ export const MainBanner = () => {
                                 <li>Не нужно ждать доставки оборудования</li>
                                 <li>Начните зарабатывать с 1 дня</li>
                             </ul>
-                            <Button
-                                className={styles.button}
-                                size={matches ? 'md' : 'lg'}
-                            >
+                            <Button className={styles.button} size={matches ? 'md' : 'lg'}>
                                 Подробнее
                             </Button>
                         </div>
                         <div className={styles.imageWrap}>
-                            <img
-                                src={`${matches ? cloudsMd : clouds}`}
-                                alt={'Оборудование'}
-                            />
+                            <img src={`${matches ? cloudsMd : clouds}`} alt={'Оборудование'} />
                         </div>
                     </section>
                 </SwiperSlide>
@@ -113,8 +91,7 @@ export const MainBanner = () => {
                     <section className={styles.slide}>
                         <div className={styles.slideContent}>
                             <h2>
-                                <span>Конейнеры</span> для размещения
-                                оборудования
+                                <span>Конейнеры</span> для размещения оборудования
                             </h2>
                             <ul>
                                 <li>Максимальная нагрузка до 1,5 мВт</li>
@@ -123,18 +100,12 @@ export const MainBanner = () => {
                                 <li>Видеонаблюдение</li>
                                 <li>Автоматика</li>
                             </ul>
-                            <Button
-                                className={styles.button}
-                                size={matches ? 'md' : 'lg'}
-                            >
+                            <Button className={styles.button} size={matches ? 'md' : 'lg'}>
                                 Подробнее
                             </Button>
                         </div>
                         <div className={styles.imageWrap}>
-                            <img
-                                src={`${matches ? dataCenterMd : dataCenter}`}
-                                alt={'Оборудование'}
-                            />
+                            <img src={`${matches ? dataCenterMd : dataCenter}`} alt={'Оборудование'} />
                         </div>
                     </section>
                 </SwiperSlide>
