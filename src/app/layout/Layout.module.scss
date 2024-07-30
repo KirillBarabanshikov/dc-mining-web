@@ -1,17 +1,15 @@
 .layout {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+    min-height: 100%;
 
-  main {
-    padding: 0 40px;
+    main {
+        padding: 0 40px;
 
-    @media screen and (max-width: 960px) {
-      padding: 0 32px;
+        @media screen and (max-width: 992px) {
+            padding: 0 32px;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding: 0 16px;
+        }
     }
-
-    @media screen and (max-width: 360px) {
-      padding: 0 16px;
-    }
-  }
 }
