@@ -9,14 +9,14 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: rgba(231, 238, 255, 1);
+      background-color: var(--background-secondary);
       cursor: pointer;
     }
   }
 
   @media (hover: none) {
     &:active {
-      background-color: rgba(231, 238, 255, 1);
+      background-color: var(--background-secondary);
     }
   }
 }

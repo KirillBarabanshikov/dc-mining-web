@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainBanner, Offers } from '@/widgets';
+import { Bestsellers, MainBanner, Offers } from '@/widgets';
 import { Advantages } from '@/widgets/Advantages';
 
 export const MainPage = () => {
@@ -8,6 +8,7 @@ export const MainPage = () => {
             <MainBanner />
             <Advantages as={'main'} />
             <Offers />
+            <Bestsellers />
         </div>
     );
 };
