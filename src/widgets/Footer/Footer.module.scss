@@ -77,6 +77,12 @@
                 h5 {
                     margin-bottom: 20px;
                 }
+
+                div {
+                    .address {
+                        max-width: unset;
+                    }
+                }
             }
         }
     }

@@ -1,121 +1,141 @@
 .header {
-  margin: 20px 40px 0;
+    position: relative;
+    z-index: 3;
+    max-width: 1840px;
+    margin: 20px auto 0;
+    padding: 0 40px;
+    box-sizing: content-box;
 
-  @media screen and (max-width: 992px) {
-    margin: 20px 32px 0;
-  }
+    @media screen and (max-width: 992px) {
+        padding: 0 32px;
+    }
 
-  @media screen and (max-width: 768px) {
-    margin: 16px 16px 0;
-  }
+    @media screen and (max-width: 768px) {
+        padding: 0 16px;
+    }
 
-  .headerContainer {
-    background-color: rgba(231, 238, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    padding: 8px;
+    .headerContainer {
+        background-color: rgba(231, 238, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        padding: 8px;
 
-    .mainMenu {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
-
-      @media screen and (max-width: 768px) {
-        margin-bottom: unset;
-      }
-
-      .menuIcon {
-        @media screen and (max-width: 768px) {
-          width: 40px;
-          height: 40px;
-        }
-      }
-
-      .logo {
-        margin-left: 16px;
-
-        @media screen and (max-width: 992px) {
-          flex: 1;
-        }
-
-        @media screen and (max-width: 768px) {
-          margin-left: 8px;
-          height: 20px;
-
-          svg {
-            height: 20px;
-            width: 136px;
-          }
-        }
-      }
-
-      .search {
-        flex: 1;
-        margin: 0 32px;
-        height: 48px;
-      }
-
-      .options {
-        display: flex;
-
-        .option {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 8px;
-          border-radius: 8px;
-          transition: background-color 300ms ease-out;
-
-          svg {
+        .mainMenu {
+            position: relative;
+            display: flex;
+            align-items: center;
             margin-bottom: 8px;
 
             @media screen and (max-width: 768px) {
-              margin-bottom: unset;
-            }
-          }
-
-          span {
-            color: var(--text-primary);
-            line-height: 20.8px;
-
-            @media screen and (max-width: 768px) {
-              display: none;
-            }
-          }
-
-          @media (hover: hover) {
-            &:hover {
-              cursor: pointer;
-              background-color: var(--background-primary);
-            }
-          }
-        }
-
-        .contacts {
-          display: flex;
-          margin-left: 8px;
-          background-color: rgba(231, 238, 255, 0.8);
-          border-radius: 12px;
-          padding: 4px;
-
-          .option {
-            padding: 13.5px 8px;
-
-            span {
-              transition: color 300ms ease-out;
+                margin-bottom: unset;
             }
 
-            @media (hover: hover) {
-              &:hover {
-                span {
-                  color: var(--text-accent-blue);
+            .menuIcon {
+                @media screen and (max-width: 768px) {
+                    width: 40px;
+                    height: 40px;
                 }
-              }
             }
-          }
+
+            .logo {
+                margin-left: 16px;
+
+                @media screen and (max-width: 1200px) {
+                    flex: 1;
+                }
+
+                @media screen and (max-width: 768px) {
+                    margin-left: 8px;
+                    height: 20px;
+
+                    svg {
+                        height: 20px;
+                        width: 136px;
+                    }
+                }
+            }
+
+            .search {
+                flex: 1;
+                margin: 0 32px;
+                height: 48px;
+            }
+
+            .options {
+                display: flex;
+
+                .option {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px;
+                    border-radius: 8px;
+                    transition: background-color 300ms ease-out;
+
+                    svg {
+                        margin-bottom: 8px;
+
+                        @media screen and (max-width: 768px) {
+                            margin-bottom: unset;
+                        }
+                    }
+
+                    span {
+                        color: var(--text-primary);
+                        line-height: 20.8px;
+
+                        @media screen and (max-width: 768px) {
+                            display: none;
+                        }
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            cursor: pointer;
+                            background-color: var(--background-primary);
+                        }
+                    }
+                }
+
+                .contacts {
+                    display: flex;
+                    margin-left: 8px;
+                    background-color: rgba(231, 238, 255, 0.8);
+                    border-radius: 12px;
+                    padding: 4px;
+
+                    .option {
+                        padding: 13.5px 8px;
+
+                        span {
+                            transition: color 300ms ease-out;
+                        }
+
+                        @media (hover: hover) {
+                            &:hover {
+                                span {
+                                    color: var(--text-accent-blue);
+                                }
+                            }
+                        }
+                    }
+
+                    @media screen and (max-width: 900px) {
+                        display: none;
+                    }
+                }
+            }
         }
-      }
     }
-  }
+}
+
+.overlay {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 32, 53, 0.3);
 }

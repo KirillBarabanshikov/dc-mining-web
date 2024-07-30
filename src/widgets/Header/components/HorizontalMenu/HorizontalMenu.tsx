@@ -4,10 +4,10 @@ import { horizontalMenuItems } from './data/data.ts';
 import { MenuItemDropdown } from './components/MenuItemDropdown.tsx';
 import styles from './HorizontalMenu.module.scss';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_LG } from '@/shared/consts';
+import { MAX_WIDTH_XXL } from '@/shared/consts';
 
 export const HorizontalMenu = () => {
-    const matches = useMediaQuery(MAX_WIDTH_LG);
+    const matches = useMediaQuery(MAX_WIDTH_XXL);
 
     return (
         <nav className={styles.horizontalMenu}>
@@ -19,14 +19,8 @@ export const HorizontalMenu = () => {
 
                     if ('path' in item && !matches) {
                         return (
-                            <li
-                                key={index}
-                                className={styles.horizontalMenuItem}
-                            >
-                                <Link
-                                    to={item.path}
-                                    className={styles.horizontalMenuLink}
-                                >
+                            <li key={index} className={styles.horizontalMenuItem}>
+                                <Link to={item.path} className={styles.horizontalMenuLink}>
                                     {item.title}
                                 </Link>
                             </li>
