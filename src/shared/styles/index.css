@@ -85,3 +85,23 @@ input[type="search"] {
     max-width: 1528px;
     margin: 0 auto;
 }
+
+.section-title {
+    font-size: 48px;
+    line-height: 57.6px;
+    color: var(--text-ultramarin);
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 992px) {
+    .section-title {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-title {
+        text-align: center;
+    }
+}
