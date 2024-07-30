@@ -15,6 +15,13 @@
       background-color: var(--background-white);
       border-radius: 40px;
       margin-bottom: 20px;
+      transition: background-color 300ms ease-out;
+
+      @media (hover:hover) {
+        &:hover {
+          background-color: var(--background-secondary);
+        }
+      }
     }
 
     p {
