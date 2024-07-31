@@ -3,3 +3,4 @@ export { Input } from './Input';
 export { Badge } from './Badge';
 export { IconButton } from './IconButton';
 export { Modal } from './Modal';
+export { Checkbox } from './Checkbox';

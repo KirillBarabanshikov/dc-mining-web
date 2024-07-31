@@ -157,3 +157,37 @@ input[type='search'] {
 .main-banner .swiper-slide-active {
     opacity: 1 !important;
 }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.list li {
+    line-height: 20.8px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.list li::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--text-accent-blue);
+}
+
+input[type='checkbox'] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}

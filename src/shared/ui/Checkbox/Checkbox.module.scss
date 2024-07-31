@@ -1,0 +1,47 @@
+.wrap {
+    display: flex;
+    align-items: center;
+
+    .checkbox {
+        position: relative;
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        min-width: 20px;
+        margin-right: 12px;
+        border-radius: 4px;
+        transition: background-color 300ms ease-out;
+
+        &.blue {
+            border: 1px var(--stroke-secondary) solid;
+
+            &.active {
+                border-color: var(--button-normal);
+                background-color: var(--button-normal);
+
+                svg {
+                    color: var(--text-contrast);
+                }
+            }
+        }
+
+        &.white {
+            border: 1px var(--background-white) solid;
+
+            &.active {
+                background-color: var(--background-white);
+
+                svg {
+                    color: var(--text-accent-blue);
+                }
+            }
+        }
+
+        svg {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            color: transparent;
+        }
+    }
+}

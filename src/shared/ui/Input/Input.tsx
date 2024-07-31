@@ -33,7 +33,7 @@ export const Input: FC<IInputProps> = ({ type = 'text', className, ...props }) =
     return (
         <div className={clsx(styles.input, className)} onClick={handleInputFocus}>
             <input type={type} ref={inputRef} value={value} onChange={handleChange} {...props} />
-            {type === 'search' && value ? <CloseIcon onClick={clearInput} /> : <SearchIcon />}
+            {type === 'search' ? value ? <CloseIcon onClick={clearInput} /> : <SearchIcon /> : <></>}
         </div>
     );
 };
