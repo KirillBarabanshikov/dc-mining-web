@@ -3,7 +3,7 @@ import { Bestsellers, MainBanner, Managers, Offers } from '@/widgets';
 import { Advantages } from '@/widgets/Advantages';
 import Background from '@/shared/assets/backgrounds/main-bg.svg?react';
 import styles from './MainPage.module.scss';
-export const MainPage = () => {
+const MainPage = () => {
     return (
         <>
             <MainBanner />
@@ -19,3 +19,5 @@ export const MainPage = () => {
         </>
     );
 };
+
+export default MainPage;

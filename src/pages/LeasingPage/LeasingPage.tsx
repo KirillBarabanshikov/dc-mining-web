@@ -11,7 +11,7 @@ import dottedLineSm2 from '@/shared/assets/images/leasing/dotted-line-sm2.png';
 import styles from './Leasing.module.scss';
 import { Link } from 'react-router-dom';
 
-export const LeasingPage = () => {
+const LeasingPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 854px)');
     const matchesLg = useMediaQuery(MAX_WIDTH_LG);
@@ -138,3 +138,5 @@ export const LeasingPage = () => {
         </div>
     );
 };
+
+export default LeasingPage;

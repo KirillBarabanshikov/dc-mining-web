@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 
-export const AboutPage = () => {
+const AboutPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
@@ -172,3 +172,5 @@ export const AboutPage = () => {
         </>
     );
 };
+
+export default AboutPage;
