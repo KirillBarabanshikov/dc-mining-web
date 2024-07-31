@@ -4,3 +4,4 @@ export { MainBanner } from './MainBanner';
 export { Offers } from './Offers';
 export { Bestsellers } from './Bestsellers';
 export { Managers } from './Managers';
+export { LogoAnimationBanner } from './LogoAnimationBanner';

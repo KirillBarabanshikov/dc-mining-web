@@ -1,0 +1,269 @@
+.about {
+    .wrap {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+
+        .placeholder {
+            width: 748px;
+            height: 420px;
+            background-color: var(--background-secondary);
+            border-radius: 20px;
+            flex: 1;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 24px;
+            flex: 1;
+        }
+
+        @media screen and (max-width: 992px) {
+            gap: 32px;
+
+            .placeholder {
+                height: 244px;
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 20.8px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            gap: 24px;
+
+            .placeholder {
+                width: 100%;
+                height: 183px;
+                flex: unset;
+            }
+
+            p {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 18.2px;
+            }
+        }
+    }
+}
+
+.advantages {
+    .advantagesTitle {
+        @media screen and (max-width: 768px) {
+            text-align: center;
+            span {
+                display: block;
+            }
+        }
+    }
+
+    .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .advantage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+
+            .placeholder {
+                width: 160px;
+                height: 160px;
+                background-color: var(--background-white);
+                border-radius: 20px;
+            }
+
+            .title {
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                color: var(--text-accent-blue);
+                text-align: center;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                line-height: 20.8px;
+                text-align: center;
+                max-width: 318px;
+                color: rgba(90, 101, 156, 1);
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .advantage {
+                .subtitle {
+                    font-size: 14px;
+                    line-height: 18.2px;
+                    max-width: 196px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .advantage {
+                .placeholder {
+                    width: 156px;
+                }
+
+                .title {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 16px;
+                    line-height: 19.2px;
+                }
+
+                .subtitle {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 12px;
+                    line-height: 15.6px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            .advantage {
+                .title {
+                    max-width: 140px;
+                }
+
+                &:last-child {
+                    .title {
+                        max-width: 80px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.news {
+    .newsTitle {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        h2 {
+            margin-bottom: unset;
+        }
+    }
+
+    .wrap {
+        display: flex;
+        gap: 32px;
+
+        .newsCard {
+            flex: 1 1 100%;
+            background-color: var(--background-white);
+            border-radius: 20px;
+            max-width: 488px;
+
+            box-shadow: 0 20px 20px rgba(22, 32, 53, 0.1);
+            transition:
+                background-color 300ms ease-out,
+                box-shadow 300ms ease-out;
+
+            @media (hover: hover) {
+                &:hover {
+                    box-shadow: 0 0 0 transparent;
+                    background-color: var(--background-secondary);
+                }
+            }
+
+            img {
+                width: 100%;
+            }
+
+            .cardBody {
+                padding: 32px;
+
+                time {
+                    font-weight: 700;
+                    color: var(--text-tertiary);
+                    margin-bottom: 8px;
+                    display: block;
+                }
+
+                .title {
+                    font-size: 20px;
+                    line-height: 24px;
+                    margin-bottom: 32px;
+                }
+
+                .subtitle {
+                    font-size: 14px;
+                    line-height: 18.2px;
+                    color: rgba(90, 101, 156, 1);
+                }
+
+                @media screen and (max-width: 768px) {
+                    padding: 24px;
+
+                    time {
+                        font-family: 'Roboto', sans-serif;
+                        font-size: 14px;
+                        line-height: 16.8px;
+                    }
+
+                    .title {
+                        font-size: 16px;
+                        line-height: 16px;
+                        margin-bottom: 24px;
+                    }
+
+                    .subtitle {
+                        font-family: 'Roboto', sans-serif;
+                        font-size: 12px;
+                        line-height: 15.6px;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 992px) {
+                &:last-child {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                max-width: unset;
+                &:first-child {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .button {
+        margin-top: 28px;
+    }
+}
+
+.partners {
+    .partner {
+        width: 280px;
+        height: 100px;
+        background-color: var(--background-white);
+        border-radius: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        @media screen and (max-width: 768px) {
+            width: 168px;
+            height: 60px;
+            padding: 0 8px;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

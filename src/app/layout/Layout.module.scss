@@ -1,7 +1,11 @@
 .layout {
+    display: flex;
+    flex-direction: column;
+
     min-height: 100%;
 
     main {
+        flex: 1;
         padding: 0 40px;
 
         @media screen and (max-width: 992px) {

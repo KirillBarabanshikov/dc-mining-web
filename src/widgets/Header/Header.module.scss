@@ -3,8 +3,7 @@
     z-index: 3;
     max-width: 1840px;
     margin: 20px auto 0;
-    padding: 0 40px;
-    box-sizing: content-box;
+    width: 100%;
 
     @media screen and (max-width: 992px) {
         padding: 0 32px;

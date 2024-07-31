@@ -12,11 +12,10 @@ import dataCenter from '@/shared/assets/images/slides/data-center.png';
 import dataCenterMd from '@/shared/assets/images/slides/data-center-md.png';
 import Background from '@/shared/assets/backgrounds/main-banner-bg.svg?react';
 import styles from './MainBanner.module.scss';
+import clsx from 'clsx';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 import { EffectFade } from 'swiper/modules';
 
@@ -24,7 +23,7 @@ export const MainBanner = () => {
     const matches = useMediaQuery(MAX_WIDTH_LG);
 
     return (
-        <div className={styles.banner}>
+        <div className={clsx(styles.banner, 'main-banner')}>
             <Swiper effect={'fade'} modules={[EffectFade]}>
                 <SwiperSlide>
                     <section className={styles.slide}>
