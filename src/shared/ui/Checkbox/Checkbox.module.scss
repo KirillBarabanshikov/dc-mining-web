@@ -1,6 +1,7 @@
 .wrap {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    cursor: pointer;
 
     .checkbox {
         position: relative;
