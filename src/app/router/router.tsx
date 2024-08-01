@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { MainPage, AboutPage, LeasingPage, DataCenterPage, FAQPage, DeliveryPage, NewsPage } from '@/pages';
-import { Layout } from '@/app/layout';
+import { BaseLayout, LayoutWithoutFooter } from '@/app/layout';
 
 export const router = createBrowserRouter([
     {
-        element: <Layout />,
+        element: <BaseLayout />,
         children: [
             {
                 path: '/',
@@ -22,6 +22,11 @@ export const router = createBrowserRouter([
                 path: '/data-center',
                 element: <DataCenterPage />,
             },
+        ],
+    },
+    {
+        element: <LayoutWithoutFooter />,
+        children: [
             {
                 path: '/faq',
                 element: <FAQPage />,

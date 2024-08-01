@@ -6,3 +6,4 @@ export { Modal } from './Modal';
 export { Checkbox } from './Checkbox';
 export { Breadcrumbs } from './Breadcrumbs';
 export { Accordion } from './Accordion';
+export { Layout } from './Layout';

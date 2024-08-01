@@ -1,1 +1,2 @@
-export { Layout } from './Layout.tsx';
+export { BaseLayout } from './BaseLayout.tsx';
+export { LayoutWithoutFooter } from './LayoutWithoutFooter.tsx';

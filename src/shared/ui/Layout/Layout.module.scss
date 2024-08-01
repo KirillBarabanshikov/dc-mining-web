@@ -1,8 +1,15 @@
 .layout {
     display: flex;
     flex-direction: column;
-
     min-height: 100%;
+
+    &.withoutFooter {
+        padding-bottom: 120px;
+
+        @media screen and (max-width: 1024px) {
+            padding-bottom: 80px;
+        }
+    }
 
     main {
         flex: 1;
