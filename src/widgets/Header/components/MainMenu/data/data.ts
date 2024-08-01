@@ -51,14 +51,14 @@ export const mainNavItems = [
 export const servicesNavItems = [
     { title: 'Лизинг', path: '/leasing' },
     { title: 'Готовый бизнес', path: '' },
-    { title: 'Ремонт и сервис', path: '' },
+    { title: 'Ремонт и сервис', path: '/service' },
     { title: 'Размещение в дата центре', path: '/data-center' },
 ];
 
 export const aboutNavItems = [
-    { title: 'Доставка и оплата', path: '' },
+    { title: 'Доставка и оплата', path: '/delivery' },
     { title: 'О компании', path: '/about' },
-    { title: 'СМИ о нас', path: '' },
-    { title: 'FAQ', path: '' },
+    { title: 'СМИ о нас', path: '/news' },
+    { title: 'FAQ', path: '/faq' },
     { title: 'Полезные ссылки', path: '' },
 ];
