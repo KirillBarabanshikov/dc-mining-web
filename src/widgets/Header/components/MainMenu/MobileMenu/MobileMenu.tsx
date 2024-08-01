@@ -5,6 +5,7 @@ import { aboutNavItems, mainNavItems, servicesNavItems } from '@/widgets/Header/
 import ArrowDown from '@/shared/assets/icons/arrow-down2.svg?react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { createPortal } from 'react-dom';
 
 interface IMobileMenuProps {
     isOpen: boolean;
@@ -20,7 +21,7 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
         setSelectedCollapse([...selectedCollapse, index]);
     };
 
-    return (
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
                 <motion.div
@@ -88,6 +89,7 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
                     </div>
                 </motion.div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.getElementById('portal'),
     );
 };

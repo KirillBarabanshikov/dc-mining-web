@@ -8,6 +8,7 @@ import {
     DeliveryPage,
     NewsPage,
     ServicePage,
+    FavoritesPage,
 } from '@/pages';
 import { BaseLayout, LayoutWithoutFooter } from '@/app/layout';
 
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path: '/service',
                 element: <ServicePage />,
+            },
+            {
+                path: '/favorites',
+                element: <FavoritesPage />,
             },
         ],
     },

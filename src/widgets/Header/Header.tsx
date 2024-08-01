@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IconButton, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
+import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
 import Logo from '@/shared/assets/logo.svg?react';
 import BurgerIcon from '@/shared/assets/icons/burger.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
@@ -14,6 +14,7 @@ import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
 import SearchIcon from '@/shared/assets/icons/search.svg?react';
 import styles from './Header.module.scss';
 import { HorizontalMenu, MainMenu } from './components';
+import clsx from 'clsx';
 
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,23 +48,29 @@ export const Header: FC = () => {
                                     <span>Поиск</span>
                                 </div>
                             )}
-                            <NavLink to={''} className={styles.option}>
+                            <NavLink
+                                to={'/favorites'}
+                                className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
+                            >
                                 <HeartIcon />
                                 <span>Избранное</span>
                             </NavLink>
-                            <NavLink to={''} className={styles.option}>
+                            <NavLink
+                                to={'/compare'}
+                                className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
+                            >
                                 <StatisticIcon />
                                 <span>Сравнить</span>
                             </NavLink>
                             <div className={styles.contacts}>
-                                <div className={styles.option}>
+                                <a href={TELEGRAM} target={'_blank'} className={styles.option}>
                                     <TelegramIcon />
                                     <span>Telegram</span>
-                                </div>
-                                <div className={styles.option}>
+                                </a>
+                                <a href={WHATSAPP} target={'_blank'} className={styles.option}>
                                     <WhatsappIcon />
                                     <span>Whatsapp</span>
-                                </div>
+                                </a>
                                 <div className={styles.option}>
                                     <PhoneIcon />
                                     <span>Заказать звонок</span>

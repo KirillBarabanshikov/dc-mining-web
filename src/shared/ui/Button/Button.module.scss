@@ -44,6 +44,22 @@
         }
     }
 
+    &.outline {
+        color: var(--button-normal);
+        border: 1px solid var(--button-normal);
+
+        @media (hover: hover) {
+            &:hover {
+                color: var(--text-contrast);
+                background-color: var(--button-hover);
+            }
+        }
+
+        &:active {
+            background: var(--button-active);
+        }
+    }
+
     &.lg {
         height: 64px;
 

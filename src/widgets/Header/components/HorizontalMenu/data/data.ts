@@ -18,11 +18,9 @@ export const horizontalMenuItems: IMenuItem[] = [
     {
         title: 'Контейнеры для майнинг ферм',
         children: [
-            { title: 'Bitmain', path: '' },
-            { title: 'Whatsminer', path: '' },
-            { title: 'Iceriver', path: '' },
-            { title: 'Jasminer', path: '' },
-            { title: 'Elphapex', path: '' },
+            { title: 'Контейнер S-size', path: '' },
+            { title: 'Контейнер M-size', path: '' },
+            { title: 'Контейнер L-size', path: '' },
         ],
     },
     {
@@ -38,20 +36,20 @@ export const horizontalMenuItems: IMenuItem[] = [
     {
         title: 'Комплектующие',
         children: [
-            { title: 'Bitmain', path: '' },
-            { title: 'Whatsminer', path: '' },
-            { title: 'Iceriver', path: '' },
-            { title: 'Jasminer', path: '' },
-            { title: 'Elphapex', path: '' },
+            { title: 'Блоки питания', path: '' },
+            { title: 'Хэш платы', path: '' },
+            { title: 'Платы управления', path: '' },
+            { title: 'Системы охлаждения', path: '' },
+            { title: 'Кабели', path: '' },
         ],
     },
     {
         title: 'Ремонт и сервис',
-        path: '',
+        path: '/service',
     },
     {
         title: 'Размещение в дата центре',
-        path: '',
+        path: '/data-center',
     },
     {
         title: 'Полезные ссылки',
