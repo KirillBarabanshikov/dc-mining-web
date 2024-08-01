@@ -5,3 +5,4 @@ export const AboutPage = lazy(() => import('./AboutPage/AboutPage.tsx'));
 export const LeasingPage = lazy(() => import('./LeasingPage/LeasingPage.tsx'));
 export const DataCenterPage = lazy(() => import('./DataCenterPage/DataCenterPage.tsx'));
 export const FAQPage = lazy(() => import('./FAQPage/FAQPage.tsx'));
+export const DeliveryPage = lazy(() => import('./DeliveryPage/DeliveryPage.tsx'));

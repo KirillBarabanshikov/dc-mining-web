@@ -5,3 +5,4 @@ export { Offers } from './Offers';
 export { Bestsellers } from './Bestsellers';
 export { Managers } from './Managers';
 export { LogoAnimationBanner } from './LogoAnimationBanner';
+export { DeliveryAndPayment } from './DeliveryAndPayment';

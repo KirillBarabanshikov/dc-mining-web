@@ -111,6 +111,12 @@ input[type='search'] {
     color: var(--text-accent-blue);
 }
 
+.section-title-secondary {
+    font-size: 48px;
+    line-height: 57.6px;
+    margin-bottom: 32px;
+}
+
 .sections {
     display: flex;
     flex-direction: column;
@@ -119,9 +125,14 @@ input[type='search'] {
 
 @media screen and (max-width: 992px) {
     .section-title,
-    .section-title-primary {
+    .section-title-primary,
+    .section-title-secondary {
         font-size: 40px;
         line-height: 48px;
+    }
+
+    .section-title-secondary {
+        margin-bottom: 24px;
     }
 
     .sections {

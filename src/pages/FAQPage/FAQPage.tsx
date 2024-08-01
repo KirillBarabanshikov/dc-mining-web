@@ -14,7 +14,7 @@ const FAQPage = () => {
             </div>
             <section>
                 <div className={'container'}>
-                    <h1 className={'section-title-primary'}>FAQ</h1>
+                    <h1 className={'section-title-secondary'}>FAQ</h1>
                     <div className={styles.list}>
                         <Accordion
                             title={'Как подключить асик-майнер?'}
