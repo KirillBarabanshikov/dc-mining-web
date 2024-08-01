@@ -1,0 +1,65 @@
+.newsCard {
+    background-color: var(--background-white);
+    border-radius: 20px;
+
+    box-shadow: 0 20px 20px rgba(22, 32, 53, 0.1);
+    transition:
+        background-color 300ms ease-out,
+        box-shadow 300ms ease-out;
+
+    @media (hover: hover) {
+        &:hover {
+            box-shadow: 0 0 0 transparent;
+            background-color: var(--background-secondary);
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .cardBody {
+        padding: 32px;
+
+        time {
+            font-weight: 700;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .title {
+            font-size: 20px;
+            line-height: 24px;
+            margin-bottom: 32px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            line-height: 18.2px;
+            color: rgba(90, 101, 156, 1);
+        }
+
+        @media screen and (max-width: 768px) {
+            padding: 24px;
+
+            time {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16.8px;
+            }
+
+            .title {
+                font-size: 16px;
+                line-height: 16px;
+                margin-bottom: 24px;
+            }
+
+            .subtitle {
+                font-family: 'Roboto', sans-serif;
+                font-size: 12px;
+                line-height: 15.6px;
+            }
+        }
+    }
+}
