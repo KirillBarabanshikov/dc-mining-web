@@ -90,6 +90,6 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
                 </motion.div>
             )}
         </AnimatePresence>,
-        document.getElementById('portal'),
+        document.getElementById('portal') as HTMLDivElement,
     );
 };

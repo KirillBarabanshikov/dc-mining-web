@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Badge, Button, IconButton } from '@/shared/ui';
-import HeartIcon from '@/shared/assets/icons/heart.svg?react';
-import StatisticIcon from '@/shared/assets/icons/statistic.svg?react';
+import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
+import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
 import img from './img.png';
 import styles from './Bestsellers.module.scss';
 

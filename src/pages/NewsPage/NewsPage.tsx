@@ -1,4 +1,3 @@
-import React from 'react';
 import { Breadcrumbs } from '@/shared/ui';
 import { NewsList } from '@/widgets';
 

@@ -71,6 +71,13 @@
 
                 .iconButton {
                     border-radius: 16px;
+                    color: rgba(44, 43, 124, 1);
+
+                    @media (hover: hover) {
+                        &:hover {
+                            color: var(--text-accent-blue);
+                        }
+                    }
                 }
             }
 

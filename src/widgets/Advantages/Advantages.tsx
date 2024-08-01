@@ -7,6 +7,8 @@ import briefcase from '@/shared/assets/images/advantages/briefcase.png';
 import shield from '@/shared/assets/images/advantages/shield.png';
 import tools from '@/shared/assets/images/advantages/tools.png';
 import styles from './Advantages.module.scss';
+import { useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 
 const items = {
     main: [
@@ -17,7 +19,38 @@ const items = {
         { image: shield, title: 'Круглосуточная\nохрана' },
         { image: tools, title: 'ТО и сервис\nоборудования на месте' },
     ],
-    'data-center': [],
+    'data-center': [
+        {
+            image: clock,
+            title: 'Uptime\n99%',
+            subtitle: 'Uptime работы оборудования от 95%',
+            desc: 'Обеспечивает высокую надежность: таким образом ваше оборудование не будет простаивать и будет приносить больше прибыли.',
+        },
+        {
+            image: energy,
+            title: 'Низкая стоимость электроэнергии',
+            subtitle: 'Стоимость электроэнергии – от 5 руб/кВт',
+            desc: 'Это полностью легальная электроэнергия — от 5,5 рубля кВТ/час с НДС.',
+        },
+        {
+            image: camera,
+            title: 'Мониторинг\nразмещения',
+            subtitle: 'Удаленный\nмониторинг',
+            desc: 'В онлайн формате сможете отслеживать эффективность вашего оборудования из любой точки мира.',
+        },
+        {
+            image: briefcase,
+            title: 'Всё оборудование застраховано',
+            subtitle: 'Страхование\nоборудования',
+            desc: 'Поэтому ваши средства всегда находятся в безопасности и в случае непредвиденных обстоятельств мы вернем вам деньги.',
+        },
+        {
+            image: shield,
+            title: 'Охрана\nРосгвардии',
+            subtitle: 'Круглосуточная\nохрана',
+            desc: 'Весь объект в круглосуточном режиме находится под охраной — все оборудование надежно защищено.',
+        },
+    ],
 };
 
 interface IAdvantagesProps {
@@ -25,16 +58,23 @@ interface IAdvantagesProps {
 }
 
 export const Advantages: FC<IAdvantagesProps> = ({ as }) => {
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
     return (
-        <div className={styles.advantages}>
+        <div className={clsx(styles.advantages, styles[matches ? 'main' : as])}>
             <div className={clsx(styles.advantagesContainer, 'container-wide')}>
                 {items[as].map((item, index) => {
                     return (
                         <div key={index} className={styles.item}>
                             <div className={styles.image}>
-                                <img src={item.image} alt={item.title} />
+                                <img src={`${item.image}`} alt={item.title} />
                             </div>
-                            <p>{item.title}</p>
+                            {as === 'data-center' && matches ? (
+                                <p className={styles.title}>{'subtitle' in item && item.subtitle}</p>
+                            ) : (
+                                <p className={styles.title}>{item.title}</p>
+                            )}
+                            {'desc' in item && <p className={styles.desc}>{item.desc}</p>}
                         </div>
                     );
                 })}

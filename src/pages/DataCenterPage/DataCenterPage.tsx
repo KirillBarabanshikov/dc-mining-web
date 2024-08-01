@@ -32,7 +32,7 @@ const DataCenterPage = () => {
                 <div className={styles.background}></div>
             </section>
             <div className={clsx(styles.content, 'sections')}>
-                <Advantages as={'main'} />
+                <Advantages as={'data-center'} />
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>

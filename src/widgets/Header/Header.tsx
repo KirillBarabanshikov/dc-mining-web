@@ -4,16 +4,19 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IconButton, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
+import { HorizontalMenu, MainMenu } from './components';
 import Logo from '@/shared/assets/logo.svg?react';
 import BurgerIcon from '@/shared/assets/icons/burger.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
+import HeartIcon2 from '@/shared/assets/icons/heart2.svg?react';
 import StatisticIcon from '@/shared/assets/icons/statistic.svg?react';
+import StatisticIcon2 from '@/shared/assets/icons/statistic2.svg?react';
 import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
 import SearchIcon from '@/shared/assets/icons/search.svg?react';
+import SearchIcon2 from '@/shared/assets/icons/search2.svg?react';
 import styles from './Header.module.scss';
-import { HorizontalMenu, MainMenu } from './components';
 import clsx from 'clsx';
 
 export const Header: FC = () => {
@@ -44,7 +47,7 @@ export const Header: FC = () => {
                         <div className={styles.options}>
                             {matchesLG && (
                                 <div className={styles.option}>
-                                    <SearchIcon />
+                                    {matchesMD ? <SearchIcon2 /> : <SearchIcon />}
                                     <span>Поиск</span>
                                 </div>
                             )}
@@ -52,14 +55,14 @@ export const Header: FC = () => {
                                 to={'/favorites'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
                             >
-                                <HeartIcon />
+                                {matchesMD ? <HeartIcon2 /> : <HeartIcon />}
                                 <span>Избранное</span>
                             </NavLink>
                             <NavLink
                                 to={'/compare'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
                             >
-                                <StatisticIcon />
+                                {matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}
                                 <span>Сравнить</span>
                             </NavLink>
                             <div className={styles.contacts}>

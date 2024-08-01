@@ -1,7 +1,7 @@
 import Logo from '@/shared/assets/logo.svg?react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { ADDRESS, EMAIL, TELEPHONE, TELEPHONE_LINK } from '@/shared/consts';
+import { ADDRESS, EMAIL, TELEGRAM, TELEPHONE, TELEPHONE_LINK, WHATSAPP } from '@/shared/consts';
 import TelegramIcon from '@/shared/assets/icons/telegram2.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp2.svg?react';
 import styles from './Footer.module.scss';
@@ -49,10 +49,10 @@ export const Footer = () => {
                 <section>
                     <h5>О компании</h5>
                     <div className={styles.socials}>
-                        <a>
+                        <a href={TELEGRAM} target={'_blank'}>
                             <TelegramIcon />
                         </a>
-                        <a>
+                        <a href={WHATSAPP} target={'_blank'}>
                             <WhatsappIcon />
                         </a>
                     </div>

@@ -101,6 +101,11 @@
                             background-color: var(--background-primary);
                         }
                     }
+
+                    @media screen and (max-width: 768px) {
+                        padding: 10px;
+                        color: rgba(44, 43, 124, 1);
+                    }
                 }
 
                 .contacts {

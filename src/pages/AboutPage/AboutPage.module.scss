@@ -245,6 +245,16 @@
 }
 
 .partners {
+    .title {
+        font-size: 40px;
+        line-height: 48px;
+
+        @media screen and (max-width: 768px) {
+            font-size: 32px;
+            line-height: 38.4px;
+        }
+    }
+
     .partner {
         width: 280px;
         height: 100px;

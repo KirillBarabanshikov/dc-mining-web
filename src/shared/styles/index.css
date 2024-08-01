@@ -1,5 +1,6 @@
 @import 'fonts.css';
 @import 'colors.css';
+@import 'swiper.css';
 
 * {
     padding: 0;
@@ -151,23 +152,6 @@ input[type='search'] {
         line-height: 38.4px;
         margin-bottom: 24px;
     }
-}
-
-.main-banner .swiper-container {
-    width: 100%;
-    height: 100%;
-}
-
-.main-banner .swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0 !important;
-    transition: opacity 1s ease-in-out;
-}
-
-.main-banner .swiper-slide-active {
-    opacity: 1 !important;
 }
 
 .list {

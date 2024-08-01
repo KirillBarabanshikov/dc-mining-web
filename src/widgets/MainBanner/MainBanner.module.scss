@@ -2,15 +2,17 @@
     .slide {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         gap: 32px;
 
         width: 100%;
         max-width: 1528px;
+        height: 580px;
 
         .slideContent {
             width: 592px;
             height: 500px;
+            min-width: 538px;
 
             h2 {
                 font-size: 40px;
@@ -31,10 +33,11 @@
             }
         }
 
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1200px) {
             .slideContent {
                 width: 292px;
                 height: 440px;
+                min-width: 260px;
 
                 h2 {
                     font-size: 32px;
@@ -66,6 +69,8 @@
 
         @media screen and (max-width: 768px) {
             flex-direction: column;
+            gap: 20px;
+            height: unset;
 
             h2 {
                 text-align: center;
@@ -94,17 +99,17 @@
             }
         }
     }
+}
 
-    .bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: -1;
-        border-radius: 0 0 40px 40px;
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    border-radius: 0 0 40px 40px;
 
-        @media screen and (max-width: 768px) {
-            height: 360px;
-        }
+    @media screen and (max-width: 768px) {
+        height: 360px;
     }
 }

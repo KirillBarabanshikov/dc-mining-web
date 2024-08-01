@@ -129,7 +129,7 @@ const AboutPage = () => {
                 </section>
                 <section className={styles.partners}>
                     <div className={'container'}>
-                        <h2 className={'section-title-primary'}>Партнеры</h2>
+                        <h2 className={clsx(styles.title, 'section-title-primary')}>Партнеры</h2>
 
                         <Swiper
                             spaceBetween={32}

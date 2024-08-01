@@ -87,6 +87,12 @@
             .hidden {
                 visibility: hidden;
             }
+
+            @media screen and (max-width: 855px) {
+                &:last-child {
+                    display: none;
+                }
+            }
         }
     }
 }
