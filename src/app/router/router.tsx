@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { MainPage, AboutPage, LeasingPage, DataCenterPage } from '@/pages';
+import { MainPage, AboutPage, LeasingPage, DataCenterPage, FAQPage } from '@/pages';
 import { Layout } from '@/app/layout';
 
 export const router = createBrowserRouter([
@@ -21,6 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: '/data-center',
                 element: <DataCenterPage />,
+            },
+            {
+                path: '/faq',
+                element: <FAQPage />,
             },
         ],
     },
