@@ -9,6 +9,7 @@ import {
     NewsPage,
     ServicePage,
     FavoritesPage,
+    ComparePage,
 } from '@/pages';
 import { BaseLayout, LayoutWithoutFooter } from '@/app/layout';
 
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: '/data-center',
                 element: <DataCenterPage />,
+            },
+            {
+                path: '/compare',
+                element: <ComparePage />,
             },
         ],
     },

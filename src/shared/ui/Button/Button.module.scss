@@ -56,6 +56,7 @@
         }
 
         &:active {
+            color: var(--text-contrast);
             background: var(--button-active);
         }
     }

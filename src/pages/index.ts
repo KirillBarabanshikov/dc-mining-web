@@ -9,3 +9,4 @@ export const DeliveryPage = lazy(() => import('./DeliveryPage/DeliveryPage.tsx')
 export const NewsPage = lazy(() => import('./NewsPage/NewsPage.tsx'));
 export const ServicePage = lazy(() => import('./ServicePage/ServicePage.tsx'));
 export const FavoritesPage = lazy(() => import('./FavoritesPage/FavoritesPage.tsx'));
+export const ComparePage = lazy(() => import('./ComparePage/ComparePage.tsx'));
