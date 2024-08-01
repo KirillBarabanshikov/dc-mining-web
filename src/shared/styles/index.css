@@ -35,6 +35,7 @@ body {
 }
 
 input,
+textarea,
 button {
     font-family: inherit;
     outline: none;
@@ -193,7 +194,9 @@ input[type='search'] {
     background-color: var(--text-accent-blue);
 }
 
-input[type='checkbox'] {
+input[type='checkbox'],
+input[type='radio'],
+input[type='file'] {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;

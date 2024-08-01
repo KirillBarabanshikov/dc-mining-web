@@ -1,5 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { MainPage, AboutPage, LeasingPage, DataCenterPage, FAQPage, DeliveryPage, NewsPage } from '@/pages';
+import {
+    MainPage,
+    AboutPage,
+    LeasingPage,
+    DataCenterPage,
+    FAQPage,
+    DeliveryPage,
+    NewsPage,
+    ServicePage,
+} from '@/pages';
 import { BaseLayout, LayoutWithoutFooter } from '@/app/layout';
 
 export const router = createBrowserRouter([
@@ -38,6 +47,10 @@ export const router = createBrowserRouter([
             {
                 path: '/news',
                 element: <NewsPage />,
+            },
+            {
+                path: '/service',
+                element: <ServicePage />,
             },
         ],
     },
