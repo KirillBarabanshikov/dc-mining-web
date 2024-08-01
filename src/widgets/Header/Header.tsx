@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IconButton, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
@@ -17,9 +17,14 @@ import { HorizontalMenu, MainMenu } from './components';
 
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
 
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location]);
 
     return (
         <>

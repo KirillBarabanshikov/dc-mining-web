@@ -125,7 +125,7 @@
         }
 
         .wrap {
-            gap: 10px;
+            gap: 40px;
         }
 
         .linkTitle {
@@ -149,5 +149,9 @@
 
     @media screen and (max-width: 900px) {
         top: 77px;
+
+        .wrap {
+            gap: 10px;
+        }
     }
 }

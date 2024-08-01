@@ -49,15 +49,15 @@ export const mainNavItems = [
 ];
 
 export const servicesNavItems = [
-    { title: 'Лизинг', path: '' },
+    { title: 'Лизинг', path: '/leasing' },
     { title: 'Готовый бизнес', path: '' },
     { title: 'Ремонт и сервис', path: '' },
-    { title: 'Размещение в дата центре', path: '' },
+    { title: 'Размещение в дата центре', path: '/data-center' },
 ];
 
 export const aboutNavItems = [
     { title: 'Доставка и оплата', path: '' },
-    { title: 'О компании', path: '' },
+    { title: 'О компании', path: '/about' },
     { title: 'СМИ о нас', path: '' },
     { title: 'FAQ', path: '' },
     { title: 'Полезные ссылки', path: '' },

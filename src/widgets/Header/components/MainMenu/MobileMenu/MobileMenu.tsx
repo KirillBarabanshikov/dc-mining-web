@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './MobileMenu.module.scss';
 import { aboutNavItems, mainNavItems, servicesNavItems } from '@/widgets/Header/components/MainMenu/data/data.ts';
@@ -34,12 +34,8 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
                         <div className={styles.mainItems}>
                             {mainNavItems.map((item, index) => {
                                 return (
-                                    <>
-                                        <div
-                                            key={index}
-                                            onClick={() => handleCollapse(index)}
-                                            className={styles.collapseItem}
-                                        >
+                                    <Fragment key={index}>
+                                        <div onClick={() => handleCollapse(index)} className={styles.collapseItem}>
                                             <span>{item.title}</span>
                                             <ArrowDown />
                                         </div>
@@ -61,7 +57,7 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
-                                    </>
+                                    </Fragment>
                                 );
                             })}
                         </div>
