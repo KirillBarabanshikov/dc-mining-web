@@ -1,8 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Modal.module.scss';
 import clsx from 'clsx';
+import { useBodyScrollLock } from '@/shared/lib';
 
 interface IModal extends PropsWithChildren {
     isOpen: boolean;
@@ -11,6 +12,12 @@ interface IModal extends PropsWithChildren {
 }
 
 export const Modal: FC<IModal> = ({ children, isOpen, onClose, className }) => {
+    const { setIsLocked } = useBodyScrollLock();
+
+    useEffect(() => {
+        setIsLocked(isOpen);
+    }, [isOpen]);
+
     return createPortal(
         <AnimatePresence>
             {isOpen && (
