@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IconButton, Input } from '@/shared/ui';
-import { useMediaQuery } from '@/shared/lib';
+import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
 import { HorizontalMenu, MainMenu } from './components';
 import Logo from '@/shared/assets/logo.svg?react';
@@ -21,6 +21,7 @@ import clsx from 'clsx';
 
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { isLocked, setIsLocked } = useBodyScrollLock();
     const location = useLocation();
 
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
@@ -28,18 +29,20 @@ export const Header: FC = () => {
 
     useEffect(() => {
         setIsOpen(false);
+        setIsLocked(false);
     }, [location]);
+
+    const toggleMenu = () => {
+        setIsOpen((prev) => !prev);
+        setIsLocked(!isLocked);
+    };
 
     return (
         <>
             <header className={styles.header}>
                 <div className={styles.headerContainer}>
                     <div className={styles.mainMenu}>
-                        <IconButton
-                            icon={<BurgerIcon />}
-                            className={styles.menuIcon}
-                            onClick={() => setIsOpen((prev) => !prev)}
-                        />
+                        <IconButton icon={<BurgerIcon />} className={styles.menuIcon} onClick={toggleMenu} />
                         <Link to={'/'} className={styles.logo}>
                             <Logo />
                         </Link>
@@ -92,7 +95,7 @@ export const Header: FC = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className={styles.overlay}
-                        onClick={() => setIsOpen(false)}
+                        onClick={toggleMenu}
                     />
                 )}
             </AnimatePresence>

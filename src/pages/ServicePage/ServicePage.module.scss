@@ -119,6 +119,13 @@
         background-position: bottom;
     }
 
+    @media screen and (max-width: 992px) {
+        .body {
+            margin-top: 24px;
+            max-width: unset;
+        }
+    }
+
     @media screen and (max-width: 768px) {
         .body {
             h1 {

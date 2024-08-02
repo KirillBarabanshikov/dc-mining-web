@@ -38,7 +38,13 @@ export const MobileMenu: FC<IMobileMenuProps> = ({ isOpen }) => {
                                     <Fragment key={index}>
                                         <div onClick={() => handleCollapse(index)} className={styles.collapseItem}>
                                             <span>{item.title}</span>
-                                            <ArrowDown />
+                                            <motion.span
+                                                animate={{ rotate: selectedCollapse.includes(index) ? 180 : 0 }}
+                                                transition={{ damping: 0 }}
+                                                className={styles.icon}
+                                            >
+                                                <ArrowDown />
+                                            </motion.span>
                                         </div>
                                         <AnimatePresence initial={false}>
                                             {selectedCollapse.includes(index) && (
