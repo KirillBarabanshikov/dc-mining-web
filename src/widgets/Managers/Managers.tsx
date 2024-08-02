@@ -5,8 +5,12 @@ import { MAX_WIDTH_LG } from '@/shared/consts';
 import manager from '@/shared/assets/images/managers/manager.png';
 import calculator from '@/shared/assets/images/managers/calculator.png';
 import styles from './Managers.module.scss';
+import { OrderCallModal } from '@/features/call';
+import { useState } from 'react';
 
 export const Managers = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
     const matches = useMediaQuery(MAX_WIDTH_LG);
 
     return (
@@ -14,7 +18,9 @@ export const Managers = () => {
             <section className={styles.request}>
                 <h3>Не знаете какое оборудование выбрать?</h3>
                 <p>Направьте запрос нашим менеджерам </p>
-                <Button size={!matches ? 'lg' : 'md'}>Оставить запрос</Button>
+                <Button size={!matches ? 'lg' : 'md'} onClick={() => setIsOpen(true)}>
+                    Оставить запрос
+                </Button>
                 <img src={`${manager}`} alt={'Manager'} />
             </section>
             <section className={styles.calculator}>
@@ -24,6 +30,13 @@ export const Managers = () => {
                 </Button>
                 <img src={`${calculator}`} alt={'Calculator'} />
             </section>
+
+            <OrderCallModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                title={'Выбор оборудования'}
+                subtitle={'Оставьте контактные данные и наши менеджеры помогут вам с выбором'}
+            />
         </div>
     );
 };

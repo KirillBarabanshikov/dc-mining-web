@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import clsx from 'clsx';
 import { Button, Checkbox, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
+import { OrderCallModal } from '@/features/call';
 import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
@@ -14,6 +16,7 @@ import miner from '@/shared/assets/images/slides/miner-md.png';
 import styles from './DataCenterPage.module.scss';
 
 const DataCenterPage = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 959px)');
     const matchesLg = useMediaQuery('(max-width: 1440px)');
@@ -34,7 +37,7 @@ const DataCenterPage = () => {
                         <li>Круглосуточная военизированная охрана</li>
                         <li>Обеспечение бесперебойной работы</li>
                     </ul>
-                    <Button size={matches ? 'md' : 'lg'} isWide={matches}>
+                    <Button size={matches ? 'md' : 'lg'} isWide={matches} onClick={() => setIsOpen(true)}>
                         Разместить оборудование
                     </Button>
                 </div>
@@ -158,6 +161,12 @@ const DataCenterPage = () => {
                     </div>
                 </section>
             </div>
+            <OrderCallModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                title={'Заказать звонок'}
+                subtitle={'Оставьте свои контакты и мы вам перезвоним'}
+            />
         </>
     );
 };
