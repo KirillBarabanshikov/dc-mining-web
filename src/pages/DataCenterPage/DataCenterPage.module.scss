@@ -32,6 +32,13 @@
     @media screen and (max-width: 992px) {
         .dataCenterContainer {
             margin-bottom: 140px;
+
+            ul {
+                li {
+                    font-size: 14px;
+                    line-height: 18.2px;
+                }
+            }
         }
 
         h1 {
@@ -48,6 +55,14 @@
         .dataCenterContainer {
             margin-top: 328px;
             margin-bottom: unset;
+
+            ul {
+                li {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 12px;
+                    line-height: 15.6px;
+                }
+            }
         }
 
         h1 {
