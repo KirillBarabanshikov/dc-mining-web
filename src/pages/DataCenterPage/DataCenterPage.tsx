@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Button, Checkbox, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_LG, MAX_WIDTH_MD } from '@/shared/consts';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
