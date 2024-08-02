@@ -1,5 +1,6 @@
 import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
+import { ProductCard } from '@/entities/product';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import styles from './FavoritesPage.module.scss';
 
@@ -14,6 +15,11 @@ const FavoritesPage = () => {
                     <Button variant={'outline'} size={matches ? 'sm' : 'md'}>
                         Очистить
                     </Button>
+                </div>
+                <div className={styles.wrap}>
+                    {Array.from({ length: 6 }).map(() => {
+                        return <ProductCard />;
+                    })}
                 </div>
             </div>
         </section>
