@@ -7,3 +7,4 @@ export { Managers } from './Managers';
 export { LogoAnimationBanner } from './LogoAnimationBanner';
 export { DeliveryAndPayment } from './DeliveryAndPayment';
 export { NewsList } from './NewsList';
+export { RecentProductsList } from './RecentProductsList';

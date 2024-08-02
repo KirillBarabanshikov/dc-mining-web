@@ -1,0 +1,42 @@
+.card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background-color: var(--background-white);
+    border-radius: 20px;
+    padding: 16px;
+
+    img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+    }
+
+    .name {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19.2px;
+        margin-bottom: 16px;
+    }
+
+    .price {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .name {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            line-height: 16.8px;
+        }
+
+        .price {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 19.2px;
+        }
+    }
+}

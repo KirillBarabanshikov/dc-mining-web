@@ -14,10 +14,6 @@ import Background from '@/shared/assets/backgrounds/main-banner-bg.svg?react';
 import styles from './MainBanner.module.scss';
 import clsx from 'clsx';
 
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-
 import { EffectFade, Autoplay, Pagination } from 'swiper/modules';
 
 export const MainBanner = () => {

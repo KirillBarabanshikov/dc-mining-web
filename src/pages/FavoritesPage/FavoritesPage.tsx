@@ -17,8 +17,8 @@ const FavoritesPage = () => {
                     </Button>
                 </div>
                 <div className={styles.wrap}>
-                    {Array.from({ length: 6 }).map(() => {
-                        return <ProductCard />;
+                    {Array.from({ length: 6 }).map((_, index) => {
+                        return <ProductCard key={index} />;
                     })}
                 </div>
             </div>

@@ -12,8 +12,6 @@ import innosilocon from '@/shared/assets/images/partners/innosilocon.png';
 import styles from './AboutPage.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'swiper/css';
-
 const AboutPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
 

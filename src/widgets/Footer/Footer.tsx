@@ -21,7 +21,7 @@ export const Footer = () => {
                         <Link to={''} className={styles.link}>
                             ASIC майнеры
                         </Link>
-                        <Link to={''} className={styles.link}>
+                        <Link to={'/data-center'} className={styles.link}>
                             Размещение в дата центре
                         </Link>
                         <Link to={''} className={styles.link}>
