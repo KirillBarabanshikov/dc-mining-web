@@ -13,27 +13,27 @@ export const Offers = () => {
             <div className={'container-wide'}>
                 <h2 className={'section-title'}>Мы предлагаем</h2>
                 <div className={styles.offersList}>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img1}`} alt={'img'} />
                         <p>ASIC майнеры</p>
                     </Link>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img2}`} alt={'img'} />
                         <p>Контейнеры для майнинг ферм</p>
                     </Link>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img3}`} alt={'img'} />
                         <p>Прошивки для оборудования</p>
                     </Link>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img4}`} alt={'img'} />
                         <p>Комплектующие</p>
                     </Link>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img5}`} alt={'img'} />
                         <p>Размещение в дата центре</p>
                     </Link>
-                    <Link to={''} className={styles.offersItem}>
+                    <Link to={'/catalog'} className={styles.offersItem}>
                         <img src={`${img6}`} alt={'img'} />
                         <p>Ремонт и сервис</p>
                     </Link>
