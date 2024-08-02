@@ -60,6 +60,7 @@
         &.collapse {
             overflow: hidden;
             padding: 0 8px;
+            will-change: height;
 
             a {
                 &:first-child {
