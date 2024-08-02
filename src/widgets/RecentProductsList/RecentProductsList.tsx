@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { RecentProductCard } from '@/entities/product/ui/RecentProductCard/RecentProductCard.tsx';
+import styles from './RecentProductsList.module.scss';
 
 export const RecentProductsList = () => {
     return (
-        <section>
+        <section className={styles.recent}>
             <div className={'container'}>
                 <h2 className={'section-title-primary'}>Вы недавно смотрели</h2>
                 <Swiper
