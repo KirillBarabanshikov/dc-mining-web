@@ -11,6 +11,9 @@
     overflow: auto;
 
     background-color: var(--background-tonal);
+    background-image: url('../../../../../shared/assets/backgrounds/mobile-menu-bg.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
     padding: 40px 20px;
 
     .title {
