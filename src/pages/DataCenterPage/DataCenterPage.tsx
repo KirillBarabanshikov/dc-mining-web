@@ -1,16 +1,25 @@
 import clsx from 'clsx';
 import { Button, Checkbox, Input } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD } from '@/shared/consts';
+import { MAX_WIDTH_LG, MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import container from '@/shared/assets/images/containers/container.png';
-import dottedline from '@/shared/assets/images/data-center/dotted-line.png';
-import dottedline2 from '@/shared/assets/images/data-center/dotted-line2.png';
+import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
+import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
+import dottedLineMd from '@/shared/assets/images/data-center/dotted-line-md.png';
+import dottedLineMd2 from '@/shared/assets/images/data-center/dotted-line-md2.png';
+import dottedLineSm from '@/shared/assets/images/data-center/dotted-line-sm.png';
+import dottedLineSm2 from '@/shared/assets/images/data-center/dotted-line-sm2.png';
 import miner from '@/shared/assets/images/slides/miner-md.png';
 import styles from './DataCenterPage.module.scss';
 
 const DataCenterPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const matchesMd = useMediaQuery('(max-width: 959px)');
+    const matchesLg = useMediaQuery('(max-width: 1440px)');
+
+    const currentLine = matchesMd ? dottedLineSm : matchesLg ? dottedLineMd : dottedLine;
+    const currentLine2 = matchesMd ? dottedLineSm2 : matchesLg ? dottedLineMd2 : dottedLine2;
 
     return (
         <>
@@ -95,21 +104,21 @@ const DataCenterPage = () => {
                             <div className={styles.item}>
                                 <div className={styles.number}>
                                     1
-                                    <img src={`${dottedline}`} alt={'Line'} className={styles.dottedLine} />
+                                    <img src={`${currentLine}`} alt={'Line'} className={styles.dottedLine} />
                                 </div>
                                 <p>Покупаете оборудование в dc-mining.com</p>
                             </div>
                             <div className={styles.item}>
                                 <div className={styles.number}>
                                     2
-                                    <img src={`${dottedline2}`} alt={'Line'} className={styles.dottedLineLarge} />
+                                    <img src={`${currentLine2}`} alt={'Line'} className={styles.dottedLineLarge} />
                                 </div>
                                 <p>Мы доставляем оборудование в наш дата-центр</p>
                             </div>
                             <div className={styles.item}>
                                 <div className={styles.number}>
                                     3
-                                    <img src={`${dottedline}`} alt={'Line'} className={styles.dottedLine} />
+                                    <img src={`${currentLine}`} alt={'Line'} className={styles.dottedLine} />
                                 </div>
                                 <p>Страхуем оборудование</p>
                             </div>
@@ -140,7 +149,9 @@ const DataCenterPage = () => {
                                     }
                                 />
                                 <div>
-                                    <Button>Отправить</Button>
+                                    <Button size={matches ? 'md' : 'lg'} isWide={matches}>
+                                        Отправить
+                                    </Button>
                                 </div>
                             </div>
                         </div>

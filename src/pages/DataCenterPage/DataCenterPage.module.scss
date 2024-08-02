@@ -272,8 +272,6 @@
     }
 
     .wrap {
-        overflow: hidden;
-
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -302,14 +300,11 @@
 
                 .dottedLine {
                     position: absolute;
-                    left: 165px;
                     top: calc(50% - 2px);
                 }
 
                 .dottedLineLarge {
                     position: absolute;
-                    right: -220px;
-                    top: 33px;
                 }
             }
 
@@ -320,25 +315,63 @@
             }
         }
 
-        @media screen and (max-width: 992px) {
+        @media screen and (min-width: 0px) {
+            max-width: 328px;
+            margin: 0 auto;
+            gap: 48px 16px;
+
             .item {
+                gap: 16.5px;
+
                 p {
                     font-size: 16px;
                     line-height: 20.8px;
                 }
 
-                //TODO
-                img {
-                    display: none;
+                .number {
+                    .dottedLine {
+                        left: 134px;
+                    }
+
+                    .dottedLineLarge {
+                        right: -15px;
+                        top: 30px;
+                    }
                 }
             }
         }
 
-        @media screen and (max-width: 768px) {
-            gap: 48px 16px;
+        @media screen and (min-width: 960px) {
+            max-width: 896px;
 
             .item {
-                gap: 16.5px;
+                .number {
+                    .dottedLine {
+                        left: 150px;
+                    }
+
+                    .dottedLineLarge {
+                        right: -152px;
+                        top: 30px;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: 1440px) {
+            max-width: unset;
+
+            .item {
+                .number {
+                    .dottedLine {
+                        left: 165px;
+                    }
+
+                    .dottedLineLarge {
+                        right: -220px;
+                        top: 33px;
+                    }
+                }
             }
         }
     }
@@ -464,8 +497,9 @@
                 }
 
                 .label {
-                    font-size: 14px;
-                    line-height: 18.2px;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 12px;
+                    line-height: 15.6px;
                 }
             }
         }
