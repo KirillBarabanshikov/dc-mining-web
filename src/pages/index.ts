@@ -11,3 +11,4 @@ export const ServicePage = lazy(() => import('./ServicePage/ServicePage.tsx'));
 export const FavoritesPage = lazy(() => import('./FavoritesPage/FavoritesPage.tsx'));
 export const ComparePage = lazy(() => import('./ComparePage/ComparePage.tsx'));
 export const CatalogPage = lazy(() => import('./CatalogPage/CatalogPage.tsx'));
+export const ProductPage = lazy(() => import('./ProductPage/ProductPage.tsx'));
