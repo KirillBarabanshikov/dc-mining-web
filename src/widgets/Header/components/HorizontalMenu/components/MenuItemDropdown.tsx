@@ -15,13 +15,17 @@ export const MenuItemDropdown: FC<IMenuItemProps> = ({ item }) => {
 
     return (
         <li className={styles.horizontalMenuDropdownItem}>
-            <span className={clsx(styles.horizontalMenuItem, styles.hidden)}>{item.title}</span>
+            <span className={clsx(styles.horizontalMenuItem, styles.hidden)} aria-hidden={true}>
+                {item.title}
+            </span>
             <motion.div
                 onHoverStart={() => setIsOpen(true)}
                 onHoverEnd={() => setIsOpen(false)}
                 className={clsx(styles.horizontalMenuItem, styles.dropdown, isOpen && styles.isOpen)}
             >
-                <span className={styles.horizontalMenuLink}>{item.title}</span>
+                <Link to={item.path} className={styles.horizontalMenuLink}>
+                    {item.title}
+                </Link>
                 <AnimatePresence mode={'wait'}>
                     {isOpen && (
                         <motion.ul

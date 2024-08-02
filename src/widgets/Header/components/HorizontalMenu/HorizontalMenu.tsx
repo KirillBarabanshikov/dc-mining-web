@@ -16,7 +16,7 @@ export const HorizontalMenu = () => {
                         return <MenuItemDropdown key={index} item={item} />;
                     }
 
-                    if (item.path !== undefined && !matches) {
+                    if (!matches) {
                         return (
                             <li key={index} className={styles.horizontalMenuItem}>
                                 <Link to={item.path} className={styles.horizontalMenuLink}>

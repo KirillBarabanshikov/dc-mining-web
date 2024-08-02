@@ -1,7 +1,7 @@
 import { Button } from '@/shared/ui';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
-import { EMAIL, MAX_WIDTH_LG, MAX_WIDTH_MD, TELEPHONE, TELEPHONE_LINK } from '@/shared/consts';
+import { EMAIL, MAX_WIDTH_LG, MAX_WIDTH_MD, TELEPHONE, TELEPHONE_HREF } from '@/shared/consts';
 import dottedLine from '@/shared/assets/images/leasing/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/leasing/dotted-line2.png';
 import dottedLineMd from '@/shared/assets/images/leasing/dotted-line-md.png';
@@ -129,7 +129,7 @@ const LeasingPage = () => {
                             <span>Свяжитесь с нами </span> — мы индивидуально обсудим условия сотрудничества
                         </p>
                         <div className={styles.links}>
-                            <Link to={`tel:${TELEPHONE_LINK}`}>{TELEPHONE}</Link>
+                            <Link to={TELEPHONE_HREF}>{TELEPHONE}</Link>
                             <Link to={`mailto:${EMAIL}`}>{EMAIL}</Link>
                         </div>
                     </div>

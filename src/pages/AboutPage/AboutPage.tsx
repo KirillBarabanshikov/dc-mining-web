@@ -134,7 +134,10 @@ const AboutPage = () => {
                             breakpoints={{
                                 0: { slidesPerView: 1.8 },
                                 425: { slidesPerView: 2 },
-                                960: { slidesPerView: 3 },
+                                500: { slidesPerView: 2.8 },
+                                600: { slidesPerView: 3 },
+                                768: { slidesPerView: 2.5 },
+                                900: { slidesPerView: 3 },
                                 1500: { slidesPerView: 5 },
                             }}
                         >

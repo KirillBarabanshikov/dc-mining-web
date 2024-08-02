@@ -5,7 +5,7 @@ import { mainNavItems, servicesNavItems, aboutNavItems } from './data/data.ts';
 import ArrowDown from '@/shared/assets/icons/arrow-down.svg?react';
 import styles from './MainMenu.module.scss';
 import clsx from 'clsx';
-import { EMAIL, MAX_WIDTH_MD, TELEGRAM, TELEPHONE, TELEPHONE_LINK, WHATSAPP } from '@/shared/consts';
+import { EMAIL, MAX_WIDTH_MD, TELEGRAM, TELEPHONE, TELEPHONE_HREF, WHATSAPP } from '@/shared/consts';
 import TelegramIcon from '@/shared/assets/icons/telegram2.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp2.svg?react';
 import { MobileMenu } from './MobileMenu';
@@ -118,7 +118,7 @@ export const MainMenu: FC<IMainMenuProps> = ({ isOpen }) => {
                         <div className={styles.contacts}>
                             <div>
                                 <p>Многоконтактный телефон</p>
-                                <a href={`tel:${TELEPHONE_LINK}`}>{TELEPHONE}</a>
+                                <a href={TELEPHONE_HREF}>{TELEPHONE}</a>
                             </div>
                             <div>
                                 <p>Электронная почта</p>
