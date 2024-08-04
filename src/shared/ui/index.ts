@@ -10,3 +10,4 @@ export { Layout } from './Layout';
 export { Radio } from './Radio';
 export { File } from './File';
 export { Switch } from './Switch';
+export { Dropdown } from './Dropdown';

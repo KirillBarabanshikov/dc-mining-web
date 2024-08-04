@@ -17,4 +17,114 @@
             color: var(--text-fourthiary);
         }
     }
+
+    .receipts {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 32px;
+
+        .receipt {
+            background-color: var(--background-white);
+            border-radius: 8px;
+            padding: 7.5px 8px;
+
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16.8px;
+            color: rgba(66, 66, 66, 1);
+            transition: background-color 300ms ease-out;
+
+            &.active {
+                color: var(--text-contrast);
+                background-color: rgba(73, 70, 255, 1);
+
+                @media (hover: hover) {
+                    &:hover {
+                        background-color: rgba(73, 70, 255, 1);
+                    }
+                }
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba(73, 70, 255, 0.2);
+                }
+            }
+        }
+    }
+
+    .catalogContent {
+        display: flex;
+        gap: 32px;
+
+        .filters {
+            background-color: var(--background-white);
+            border-radius: 20px;
+            padding: 16px;
+
+            width: 283px;
+        }
+
+        .wrap {
+            flex: 1;
+
+            .sort {
+                background-color: var(--background-white);
+                border-radius: 20px;
+                padding: 20px;
+                margin-bottom: 32px;
+
+                display: flex;
+                justify-content: space-between;
+
+                .sortDropdown {
+                    display: flex;
+                    align-items: center;
+
+                    .sortLabel {
+                        font-family: 'Roboto', sans-serif;
+                        line-height: 20.8px;
+                        color: rgba(66, 66, 66, 1);
+                        margin-right: 8px;
+                    }
+
+                    .dropdown {
+                        width: 232px;
+                    }
+                }
+
+                .viewModeWrap {
+                    .iconButton {
+                        width: 32px;
+                        height: 32px;
+                        color: var(--stroke-fourthiary);
+
+                        &.selected {
+                            color: var(--stroke-primary);
+                            pointer-events: none;
+
+                            @media (hover: hover) {
+                                &:hover {
+                                    color: var(--stroke-primary);
+                                }
+                            }
+                        }
+
+                        @media (hover: hover) {
+                            &:hover {
+                                color: var(--text-accent-blue);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+                gap: 16px;
+            }
+        }
+    }
 }
