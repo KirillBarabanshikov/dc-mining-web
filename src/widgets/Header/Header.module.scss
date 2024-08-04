@@ -9,20 +9,34 @@
         padding: 0 40px;
     }
 
+    @media screen and (max-width: 1200px) {
+        position: relative;
+        z-index: initial;
+    }
+
     @media screen and (max-width: 992px) {
         padding: 0 32px;
     }
 
     @media screen and (max-width: 768px) {
         padding: 0 16px;
+        margin: 16px auto 0;
     }
 
     .headerContainer {
-        background-color: rgba(231, 238, 255, 0.3);
+        position: relative;
         border: 1px solid rgba(255, 255, 255, 0.5);
         border-radius: 20px;
         padding: 8px;
-        backdrop-filter: blur(15px);
+
+        &:before {
+            background-color: rgba(231, 238, 255, 0.3);
+            border-radius: 20px;
+            content: '';
+            backdrop-filter: blur(15px);
+            position: absolute;
+            inset: 0;
+        }
 
         .mainMenu {
             position: relative;
@@ -62,7 +76,6 @@
             .search {
                 flex: 1;
                 margin: 0 32px;
-                height: 48px;
             }
 
             .options {
@@ -109,6 +122,14 @@
                     @media screen and (max-width: 768px) {
                         padding: 10px;
                         color: rgba(44, 43, 124, 1);
+                    }
+                }
+
+                .searchOption {
+                    padding: 8px 16px;
+
+                    @media screen and (max-width: 768px) {
+                        padding: 10px;
                     }
                 }
 

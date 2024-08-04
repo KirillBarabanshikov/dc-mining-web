@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { IconButton, Input } from '@/shared/ui';
+import { IconButton } from '@/shared/ui';
 import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
 import { HorizontalMenu, MainMenu } from './components';
+import clsx from 'clsx';
+import { Search, SearchButton } from '@/features/search';
 import Logo from '@/shared/assets/logo.svg?react';
 import BurgerIcon from '@/shared/assets/icons/burger.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
@@ -14,10 +16,7 @@ import StatisticIcon2 from '@/shared/assets/icons/statistic2.svg?react';
 import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
-import SearchIcon from '@/shared/assets/icons/search.svg?react';
-import SearchIcon2 from '@/shared/assets/icons/search2.svg?react';
 import styles from './Header.module.scss';
-import clsx from 'clsx';
 
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -46,14 +45,9 @@ export const Header: FC = () => {
                         <Link to={'/'} className={styles.logo}>
                             <Logo />
                         </Link>
-                        {!matchesLG && <Input type={'search'} placeholder={'Поиск'} className={styles.search} />}
+                        {!matchesLG && <Search className={styles.search} />}
                         <div className={styles.options}>
-                            {matchesLG && (
-                                <div className={styles.option}>
-                                    {matchesMD ? <SearchIcon2 /> : <SearchIcon />}
-                                    <span>Поиск</span>
-                                </div>
-                            )}
+                            {matchesLG && <SearchButton className={clsx(styles.option, styles.searchOption)} />}
                             <NavLink
                                 to={'/favorites'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}

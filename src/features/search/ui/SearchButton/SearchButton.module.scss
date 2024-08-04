@@ -1,0 +1,14 @@
+.search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+
+    @media screen and (max-width: 768px) {
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        width: unset;
+    }
+}
