@@ -1,5 +1,6 @@
-import { LogoAnimationBanner } from '@/widgets';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import clsx from 'clsx';
+import { AdvantagesDCMinig, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 import { MAX_WIDTH_MD } from '@/shared/consts';
@@ -10,7 +11,6 @@ import goldshell from '@/shared/assets/images/partners/goldshell.png';
 import microbt from '@/shared/assets/images/partners/microbt.png';
 import innosilocon from '@/shared/assets/images/partners/innosilocon.png';
 import styles from './AboutPage.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 const AboutPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
@@ -35,39 +35,7 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </section>
-                <section className={styles.advantages}>
-                    <div className={'container'}>
-                        <h2 className={clsx(styles.advantagesTitle, 'section-title-primary')}>
-                            Преимущества <span>DC Mining</span>
-                        </h2>
-                        <div className={styles.wrap}>
-                            <article className={styles.advantage}>
-                                <div className={styles.placeholder}></div>
-                                <p className={styles.title}>Предоплата от 30%</p>
-                                <p className={styles.subtitle}>гибкие условия оплаты, которые подойдут именно Вам</p>
-                            </article>
-                            <article className={styles.advantage}>
-                                <div className={styles.placeholder}></div>
-                                <p className={styles.title}>Работа по договору</p>
-                                <p className={styles.subtitle}>
-                                    заключаем договор, где прописаны сроки и наша ответственность перед Вами
-                                </p>
-                            </article>
-                            <article className={styles.advantage}>
-                                <div className={styles.placeholder}></div>
-                                <p className={styles.title}>Удобные способы оплаты</p>
-                                <p className={styles.subtitle}>
-                                    от приёма наличных в Вашем городе до оплаты по безналу от юр. лица (в т.ч. с НДС)
-                                </p>
-                            </article>
-                            <article className={styles.advantage}>
-                                <div className={styles.placeholder}></div>
-                                <p className={styles.title}>Работа под ключ</p>
-                                <p className={styles.subtitle}>в комплекс услуг входит проверка, упаковка, доставка</p>
-                            </article>
-                        </div>
-                    </div>
-                </section>
+                <AdvantagesDCMinig />
                 <section className={styles.news}>
                     <div className={'container'}>
                         <div className={styles.newsTitle}>

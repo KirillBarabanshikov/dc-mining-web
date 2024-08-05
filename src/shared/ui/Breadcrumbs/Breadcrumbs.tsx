@@ -1,4 +1,5 @@
 import { FC, Fragment } from 'react';
+import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import ArrowIcon from '@/shared/assets/icons/arrow-right.svg?react';
 import styles from './Breadcrumbs.module.scss';
@@ -10,11 +11,12 @@ interface IBreadcrumbsPath {
 
 interface IBreadcrumbsProps {
     paths: IBreadcrumbsPath[];
+    className?: string;
 }
 
-export const Breadcrumbs: FC<IBreadcrumbsProps> = ({ paths }) => {
+export const Breadcrumbs: FC<IBreadcrumbsProps> = ({ paths, className }) => {
     return (
-        <nav className={styles.breadcrumbs}>
+        <nav className={clsx(styles.breadcrumbs, className)}>
             {paths.map((path, index) => {
                 return (
                     <Fragment key={index}>
