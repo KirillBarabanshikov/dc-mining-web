@@ -22,14 +22,14 @@ export const Managers: FC<IManagersProps> = ({ className }) => {
             <section className={styles.request}>
                 <h3>Не знаете какое оборудование выбрать?</h3>
                 <p>Направьте запрос нашим менеджерам </p>
-                <Button size={!matches ? 'lg' : 'md'} onClick={() => setIsOpen(true)}>
+                <Button size={!matches ? 'lg' : 'md'} onClick={() => setIsOpen(true)} className={styles.button}>
                     Оставить запрос
                 </Button>
                 <img src={`${manager}`} alt={'Manager'} />
             </section>
             <section className={styles.calculator}>
                 <h4>Либо воспользуйтесь калькулятором доходности</h4>
-                <Button theme={'white'} size={!matches ? 'lg' : 'md'}>
+                <Button theme={'white'} size={!matches ? 'lg' : 'md'} className={styles.button}>
                     Открыть калькулятор
                 </Button>
                 <img src={`${calculator}`} alt={'Calculator'} />

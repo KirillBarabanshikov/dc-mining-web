@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
-import { Checkbox, Radio } from '@/shared/ui';
+import { Checkbox, Modal, Radio } from '@/shared/ui';
 import ArrowIcon from '@/shared/assets/icons/arrow-down2.svg?react';
 import styles from './Dropdown.module.scss';
 
@@ -17,6 +17,7 @@ interface IDropdownProps {
     label?: string;
     open?: boolean;
     physical?: boolean;
+    variant?: 'dropdown' | 'modal';
     className?: string;
 }
 
@@ -27,6 +28,7 @@ export const Dropdown: FC<IDropdownProps> = ({
     label = '',
     open = false,
     physical = false,
+    variant = 'dropdown',
     className,
 }) => {
     const [selectedValue, setSelectedValue] = useState<string[]>([defaultValue]);
@@ -46,28 +48,67 @@ export const Dropdown: FC<IDropdownProps> = ({
     };
 
     return (
-        <div className={clsx(styles.dropdown, physical && styles.physical, className)}>
+        <div className={clsx(styles.dropdown, isOpen && styles.isOpen, physical && styles.physical, className)}>
             <div className={styles.head} onClick={() => setIsOpen(!isOpen)}>
                 <span className={styles.label}>
                     {label ? label : items.find((item) => item.value === selectedValue[0])?.label}
                 </span>
                 <motion.div
                     initial={false}
-                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    animate={{ rotate: isOpen && variant === 'dropdown' ? 180 : 0 }}
                     transition={{ damping: 0 }}
                     className={styles.icon}
                 >
                     <ArrowIcon />
                 </motion.div>
             </div>
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className={styles.list}
-                    >
+            {variant === 'dropdown' && (
+                <AnimatePresence initial={false}>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className={styles.list}
+                        >
+                            <div className={styles.itemsWrap}>
+                                {items.map((item) => {
+                                    return (
+                                        <div key={item.value} onClick={() => handleSelect(item.value)}>
+                                            {multiply ? (
+                                                <Checkbox
+                                                    label={item.label}
+                                                    checkboxSize={'sm'}
+                                                    className={clsx(
+                                                        styles.item,
+                                                        selectedValue.includes(item.value) && styles.selected,
+                                                    )}
+                                                    isChecked={selectedValue.includes(item.value)}
+                                                    disabled
+                                                />
+                                            ) : (
+                                                <Radio
+                                                    label={item.label}
+                                                    radioSize={'sm'}
+                                                    className={clsx(
+                                                        styles.item,
+                                                        selectedValue.includes(item.value) && styles.selected,
+                                                    )}
+                                                    isChecked={selectedValue.includes(item.value)}
+                                                    disabled
+                                                />
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            )}
+            {variant === 'modal' && (
+                <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
+                    <div className={styles.list}>
                         <div className={styles.itemsWrap}>
                             {items.map((item) => {
                                 return (
@@ -99,9 +140,9 @@ export const Dropdown: FC<IDropdownProps> = ({
                                 );
                             })}
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    </div>
+                </Modal>
+            )}
         </div>
     );
 };

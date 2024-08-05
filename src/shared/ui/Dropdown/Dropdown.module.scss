@@ -1,8 +1,13 @@
 .dropdown {
     position: relative;
     background-color: var(--background-white);
-    border-radius: 8px 8px 0 0;
+    border-radius: 8px;
     padding: 0 8px;
+    width: 100%;
+
+    &.isOpen {
+        border-radius: 8px 8px 0 0;
+    }
 
     .head {
         display: flex;
@@ -83,6 +88,21 @@
                 border-radius: unset;
                 border-bottom: 1px solid rgba(241, 241, 241, 1);
             }
+        }
+    }
+}
+
+.modal {
+    padding: 8px;
+
+    .item {
+        width: 100%;
+        padding: 20px;
+        border-radius: 8px;
+        transition: background-color 300ms ease-out;
+
+        &.selected {
+            background-color: var(--background-primary);
         }
     }
 }

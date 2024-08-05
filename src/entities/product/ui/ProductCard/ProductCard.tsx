@@ -8,6 +8,8 @@ import img from '@/widgets/Bestsellers/img.png';
 import img2 from './img.png';
 import styles from './ProductCard.module.scss';
 import { TProductCardViewMode } from '@/entities/product';
+import { useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 
 const images = [img, img2, img, img2];
 
@@ -19,6 +21,7 @@ export const ProductCard: FC<IProductCardProps> = ({ viewMode = 'tile' }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
+    const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
         <article className={clsx(styles.productCard, styles[viewMode])} onClick={() => navigate('/product')}>
@@ -42,43 +45,45 @@ export const ProductCard: FC<IProductCardProps> = ({ viewMode = 'tile' }) => {
                     })}
                 </div>
             </div>
-            <div className={clsx(styles.wrap, styles.info)}>
-                <div className={styles.tags}>
-                    <Badge text={'В наличии'} theme={'green'} />
-                    <Badge text={'Скидка — 15% '} theme={'red'} />
-                    <Badge text={'Новинка'} theme={'blue'} />
+            <div className={styles.body}>
+                <div className={clsx(styles.wrap, styles.info)}>
+                    <div className={styles.tags}>
+                        <Badge text={'В наличии'} theme={'green'} />
+                        <Badge text={'Скидка — 15% '} theme={'red'} />
+                        <Badge text={'Новинка'} theme={'blue'} />
+                    </div>
+                    {(viewMode === 'tile' || matches) && <p className={styles.price}>545 000 ₽</p>}
+                    <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
+                    <div className={styles.specifications}>
+                        <div>Хэшрейт — 9500 MH/s</div>
+                        <div>Алгоритм — Scrypt</div>
+                        <div>Монеты — LTC/DOGE</div>
+                        <div>Потребление — 3420 ± 10% Вт/ч</div>
+                    </div>
                 </div>
-                {viewMode === 'tile' && <p className={styles.price}>545 000 ₽</p>}
-                <p className={styles.name}>Asic майнер Bitmain Antminer L7 9500 MH/s</p>
-                <div className={styles.specifications}>
-                    <div>Хэшрейт — 9500 MH/s</div>
-                    <div>Алгоритм — Scrypt</div>
-                    <div>Монеты — LTC/DOGE</div>
-                    <div>Потребление — 3420 ± 10% Вт/ч</div>
-                </div>
-            </div>
-            <div className={clsx(styles.wrap, styles.buttonsWrap)}>
-                {viewMode === 'simple' && <p className={styles.price}>545 000 ₽</p>}
-                <div className={styles.buttons}>
-                    <Button size={'sm'} className={styles.button}>
-                        Заказать
-                    </Button>
-                    <IconButton
-                        icon={<HeartIcon />}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsFavorite(!isFavorite);
-                        }}
-                        className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
-                    />
-                    <IconButton
-                        icon={<StatisticIcon />}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsFavorite(!isFavorite);
-                        }}
-                        className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
-                    />
+                <div className={clsx(styles.wrap, styles.buttonsWrap)}>
+                    {!matches && viewMode === 'simple' && <p className={styles.price}>545 000 ₽</p>}
+                    <div className={styles.buttons}>
+                        <Button size={'sm'} className={styles.button}>
+                            Заказать
+                        </Button>
+                        <IconButton
+                            icon={<HeartIcon />}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsFavorite(!isFavorite);
+                            }}
+                            className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
+                        />
+                        <IconButton
+                            icon={<StatisticIcon />}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsFavorite(!isFavorite);
+                            }}
+                            className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
+                        />
+                    </div>
                 </div>
             </div>
         </article>

@@ -4,11 +4,12 @@ import styles from './Input.module.scss';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
     icon?: ReactNode;
+    theme?: 'white' | 'dark';
 }
 
-export const Input: FC<IInputProps> = ({ type = 'text', className, icon, ...props }) => {
+export const Input: FC<IInputProps> = ({ type = 'text', className, icon, theme = 'white', ...props }) => {
     return (
-        <div className={clsx(styles.input, className)}>
+        <div className={clsx(styles.input, styles[theme], className)}>
             <input type={type} {...props} />
             {icon}
         </div>
