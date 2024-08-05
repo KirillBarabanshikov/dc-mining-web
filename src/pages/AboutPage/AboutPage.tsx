@@ -1,18 +1,16 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { useRef } from 'react';
 import clsx from 'clsx';
+import { useDraggable } from 'react-use-draggable-scroll';
 import { AdvantagesDCMinig, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import newsImg from '@/shared/assets/images/news/news.png';
-import bitmain from '@/shared/assets/images/partners/bitmain.png';
-import canaan from '@/shared/assets/images/partners/canaan.png';
-import goldshell from '@/shared/assets/images/partners/goldshell.png';
-import microbt from '@/shared/assets/images/partners/microbt.png';
-import innosilocon from '@/shared/assets/images/partners/innosilocon.png';
 import styles from './AboutPage.module.scss';
 
 const AboutPage = () => {
+    const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLDivElement>;
+    const { events } = useDraggable(ref);
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
@@ -94,47 +92,22 @@ const AboutPage = () => {
                     </div>
                 </section>
                 <section className={styles.partners}>
-                    <div className={'container'}>
+                    <div className={'container scrollable'}>
                         <h2 className={clsx(styles.title, 'section-title-primary')}>Партнеры</h2>
 
-                        <Swiper
-                            spaceBetween={32}
-                            breakpoints={{
-                                0: { slidesPerView: 1.8 },
-                                425: { slidesPerView: 2 },
-                                500: { slidesPerView: 2.8 },
-                                600: { slidesPerView: 3 },
-                                768: { slidesPerView: 2.5 },
-                                900: { slidesPerView: 3 },
-                                1500: { slidesPerView: 5 },
-                            }}
-                        >
-                            <SwiperSlide>
-                                <div className={styles.partner}>
-                                    <img src={`${bitmain}`} alt={'bitmain'} />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className={styles.partner}>
-                                    <img src={`${canaan}`} alt={'canaan'} />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className={styles.partner}>
-                                    <img src={`${goldshell}`} alt={'goldshell'} />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className={styles.partner}>
-                                    <img src={`${microbt}`} alt={'microbt'} />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className={styles.partner}>
-                                    <img src={`${innosilocon}`} alt={'innosilocon'} />
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
+                        <div className={clsx(styles.partnersList, 'scrollbar-hide')} {...events} ref={ref}>
+                            {Array.from({ length: 12 }).map((_, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={styles.partner}
+                                        style={{
+                                            backgroundImage: 'url(src/shared/assets/images/partners/bitmain.png)',
+                                        }}
+                                    />
+                                );
+                            })}
+                        </div>
                     </div>
                 </section>
             </div>

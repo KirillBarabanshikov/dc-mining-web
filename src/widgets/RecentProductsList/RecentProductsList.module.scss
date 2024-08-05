@@ -1,7 +1,19 @@
 .recent {
+    .list {
+        display: flex;
+        gap: 32px;
+        overflow-x: scroll;
+        padding: 0 16px;
+    }
+
     @media screen and (max-width: 768px) {
+        .list {
+            gap: 10px;
+        }
+
         h2 {
             margin-bottom: 20px;
+            padding: 0 16px;
         }
     }
 }

@@ -16,10 +16,6 @@
             flex-direction: column;
             gap: 8px;
             overflow-y: auto;
-            scrollbar-width: none;
-            &::-webkit-scrollbar {
-                width: 0;
-            }
 
             img {
                 width: 100px;
@@ -120,6 +116,7 @@
             }
 
             .price {
+                font-family: 'Gilroy', sans-serif;
                 font-weight: 700;
                 font-size: 24px;
                 line-height: 28.8px;
@@ -232,6 +229,14 @@
                 .buttons {
                     gap: 8px;
                 }
+            }
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .slider {
+            .mainImage {
+                height: 328px;
             }
         }
     }

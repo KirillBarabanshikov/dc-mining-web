@@ -8,10 +8,12 @@ import { useBodyScrollLock } from '@/shared/lib';
 interface IModal extends PropsWithChildren {
     isOpen: boolean;
     onClose: () => void;
+    title?: string;
+    subtitle?: string;
     className?: string;
 }
 
-export const Modal: FC<IModal> = ({ children, isOpen, onClose, className }) => {
+export const Modal: FC<IModal> = ({ children, isOpen, onClose, title, subtitle, className }) => {
     const { setIsLocked } = useBodyScrollLock();
 
     useEffect(() => {
@@ -29,6 +31,8 @@ export const Modal: FC<IModal> = ({ children, isOpen, onClose, className }) => {
                     onClick={onClose}
                 >
                     <div className={clsx(styles.modal, className)} onClick={(e) => e.stopPropagation()}>
+                        {title && <h2>{title}</h2>}
+                        {subtitle && <p>{subtitle}</p>}
                         {children}
                     </div>
                 </motion.div>

@@ -15,7 +15,9 @@ const MainPage = () => {
                     <Background className={styles.backgroundIcon} />
                 </div>
             </div>
-            <Managers />
+            <div className={'container'}>
+                <Managers />
+            </div>
         </>
     );
 };

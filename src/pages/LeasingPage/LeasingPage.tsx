@@ -127,16 +127,18 @@ const LeasingPage = () => {
                         </div>
                     </div>
                 </section>
-                <section className={styles.contactsBanner}>
-                    <div className={clsx(styles.wrap, 'container')}>
-                        <div className={styles.content}>
-                            <h2>Хотите узнать, подойдёт ли лизинг вашей компании?</h2>
-                            <p>
-                                <span>Свяжитесь с нами </span> — мы индивидуально обсудим условия сотрудничества
-                            </p>
-                            <div className={styles.links}>
-                                <Link to={TELEPHONE_HREF}>{TELEPHONE}</Link>
-                                <Link to={`mailto:${EMAIL}`}>{EMAIL}</Link>
+                <section className={clsx(styles.contactsBanner)}>
+                    <div className={'container'}>
+                        <div className={clsx(styles.wrap)}>
+                            <div className={styles.content}>
+                                <h2>Хотите узнать, подойдёт ли лизинг вашей компании?</h2>
+                                <p>
+                                    <span>Свяжитесь с нами </span> — мы индивидуально обсудим условия сотрудничества
+                                </p>
+                                <div className={styles.links}>
+                                    <Link to={TELEPHONE_HREF}>{TELEPHONE}</Link>
+                                    <Link to={`mailto:${EMAIL}`}>{EMAIL}</Link>
+                                </div>
                             </div>
                         </div>
                     </div>

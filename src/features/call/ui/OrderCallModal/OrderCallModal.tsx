@@ -15,12 +15,8 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ isOpen, onClose, titl
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} title={title} subtitle={subtitle}>
             <div className={styles.content}>
-                <div>
-                    <h2>{title}</h2>
-                    <p>{subtitle}</p>
-                </div>
                 <form>
                     <div>
                         <Input placeholder={'Имя'} className={styles.inputName} />

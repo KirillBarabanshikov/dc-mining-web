@@ -1,28 +1,22 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { RecentProductCard } from '@/entities/product/ui/RecentProductCard/RecentProductCard.tsx';
+import React, { useRef } from 'react';
+import { useDraggable } from 'react-use-draggable-scroll';
+import clsx from 'clsx';
+import { RecentProductCard } from '@/entities/product';
 import styles from './RecentProductsList.module.scss';
 
 export const RecentProductsList = () => {
+    const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLDivElement>;
+    const { events } = useDraggable(ref);
+
     return (
         <section className={styles.recent}>
-            <div className={'container'}>
+            <div className={'container scrollable'}>
                 <h2 className={'section-title-primary'}>Вы недавно смотрели</h2>
-                <Swiper
-                    breakpoints={{
-                        0: { slidesPerView: 1.1, spaceBetween: 10 },
-                        500: { slidesPerView: 1.4, spaceBetween: 10 },
-                        700: { slidesPerView: 2, spaceBetween: 32 },
-                        992: { slidesPerView: 3.3, spaceBetween: 32 },
-                    }}
-                >
+                <div className={clsx(styles.list, 'scrollbar-hide')} {...events} ref={ref}>
                     {Array.from({ length: 5 }).map((_, index) => {
-                        return (
-                            <SwiperSlide key={index}>
-                                <RecentProductCard />
-                            </SwiperSlide>
-                        );
+                        return <RecentProductCard key={index} />;
                     })}
-                </Swiper>
+                </div>
             </div>
         </section>
     );

@@ -160,27 +160,33 @@
         @media screen and (max-width: 768px) {
             font-size: 32px;
             line-height: 38.4px;
+            padding-left: 16px;
         }
     }
 
-    .partner {
-        width: 280px;
-        height: 100px;
-        background-color: var(--background-white);
-        border-radius: 20px;
-
+    .partnersList {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        gap: 32px;
+        overflow-x: scroll;
+        padding: 0 16px;
 
-        @media screen and (max-width: 768px) {
-            width: 168px;
-            height: 60px;
-            padding: 0 8px;
+        .partner {
+            min-width: 280px;
+            height: 100px;
+            background-color: var(--background-white);
+            border-radius: 20px;
 
-            img {
-                width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+
+            @media screen and (max-width: 768px) {
+                min-width: 168px;
+                height: 60px;
             }
         }
     }

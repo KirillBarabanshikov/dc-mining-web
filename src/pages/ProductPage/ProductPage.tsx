@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Badge, Breadcrumbs, Button, IconButton } from '@/shared/ui';
 import { AdvantagesDCMinig, CallMeBanner, DeliveryAndPayment, RecentProductsList } from '@/widgets';
@@ -8,6 +8,9 @@ import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
 import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
 import ShareIcon from '@/shared/assets/icons/share.svg?react';
 import styles from './ProductPage.module.scss';
+import { OrderProductModal } from '@/features/product/orderProduct/ui/OrderProductModal';
+import { useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 
 const images = [img, img2, img, img2, img, img2];
 
@@ -18,6 +21,8 @@ const paths = [
 ];
 
 const ProductPage = () => {
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
     return (
         <div>
             <div className={'container'}>
@@ -28,7 +33,7 @@ const ProductPage = () => {
                         <ProductTabs />
                     </div>
                     <AdvantagesDCMinig />
-                    <RecentProductsList />
+                    {!matches && <RecentProductsList />}
                     <CallMeBanner />
                 </div>
             </div>
@@ -40,11 +45,12 @@ export default ProductPage;
 
 const ProductInfo = () => {
     const [currentImage, setCurrentImage] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className={styles.productInfo}>
             <div className={styles.slider}>
-                <div className={styles.images}>
+                <div className={clsx(styles.images, 'scrollbar-hide')}>
                     {images.map((image, index) => {
                         return (
                             <img
@@ -101,7 +107,7 @@ const ProductInfo = () => {
                         <p className={styles.price}>163 620 ₽</p>
                     </div>
                     <div className={styles.buttons}>
-                        <Button size={'sm'} className={styles.button}>
+                        <Button size={'sm'} className={styles.button} onClick={() => setIsOpen(true)}>
                             Заказать
                         </Button>
                         <IconButton icon={<HeartIcon />} className={styles.iconButton} />
@@ -110,6 +116,7 @@ const ProductInfo = () => {
                     </div>
                 </div>
             </section>
+            <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
     );
 };

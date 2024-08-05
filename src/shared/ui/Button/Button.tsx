@@ -16,6 +16,7 @@ export const Button: FC<IButtonProps> = ({
     children,
     isWide = false,
     theme = 'blue',
+    disabled,
     ...props
 }) => {
     return (
@@ -27,8 +28,10 @@ export const Button: FC<IButtonProps> = ({
                 styles[variant],
                 styles[theme],
                 isWide && styles.isWide,
+                disabled && styles.disabled,
                 className,
             )}
+            disabled={disabled}
             {...props}
         >
             {children}

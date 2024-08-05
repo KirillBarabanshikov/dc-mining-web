@@ -10,6 +10,7 @@ import styles from './ProductCard.module.scss';
 import { TProductCardViewMode } from '@/entities/product';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
+import { OrderProductModal } from '@/features/product';
 
 const images = [img, img2, img, img2];
 
@@ -18,6 +19,7 @@ interface IProductCardProps {
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ viewMode = 'tile' }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
@@ -64,7 +66,14 @@ export const ProductCard: FC<IProductCardProps> = ({ viewMode = 'tile' }) => {
                 <div className={clsx(styles.wrap, styles.buttonsWrap)}>
                     {!matches && viewMode === 'simple' && <p className={styles.price}>545 000 ₽</p>}
                     <div className={styles.buttons}>
-                        <Button size={'sm'} className={styles.button}>
+                        <Button
+                            size={'sm'}
+                            className={styles.button}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsOpen(true);
+                            }}
+                        >
                             Заказать
                         </Button>
                         <IconButton
@@ -86,6 +95,7 @@ export const ProductCard: FC<IProductCardProps> = ({ viewMode = 'tile' }) => {
                     </div>
                 </div>
             </div>
+            <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </article>
     );
 };

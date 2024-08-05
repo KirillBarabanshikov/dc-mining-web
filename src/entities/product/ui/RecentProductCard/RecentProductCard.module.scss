@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    min-width: 436px;
 
     background-color: var(--background-white);
     border-radius: 20px;
@@ -27,6 +28,8 @@
     }
 
     @media screen and (max-width: 768px) {
+        min-width: 300px;
+
         .name {
             font-family: 'Roboto', sans-serif;
             font-size: 14px;
