@@ -56,7 +56,9 @@
 
     .catalogContent {
         display: flex;
+        align-items: flex-start;
         gap: 32px;
+        margin-bottom: 32px;
 
         .filters {
             background-color: var(--background-white);
@@ -64,6 +66,27 @@
             padding: 16px;
 
             width: 283px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .switchWrap {
+                margin: 16px 0 36px 0;
+
+                .switch {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 12px 8px;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
         }
 
         .wrap {
@@ -119,12 +142,18 @@
                     }
                 }
             }
-
-            .list {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-                gap: 16px;
-            }
         }
+    }
+
+    .pagination {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 1213px;
+        margin-left: auto;
+    }
+
+    .managers {
+        margin-top: 200px;
     }
 }

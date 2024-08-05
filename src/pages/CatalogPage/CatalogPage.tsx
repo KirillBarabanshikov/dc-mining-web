@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Breadcrumbs, Dropdown, IconButton } from '@/shared/ui';
+import { Breadcrumbs, Button, Dropdown, IconButton, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { TProductCardViewMode } from '@/entities/product';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
@@ -14,6 +14,8 @@ const paths = [
 
 const CatalogPage = () => {
     const [viewMode, setViewMode] = useState<TProductCardViewMode>('tile');
+    const [isOn, setIsOn] = useState(false);
+    const [isOn2, setIsOn2] = useState(false);
 
     return (
         <div className={styles.catalog}>
@@ -36,14 +38,63 @@ const CatalogPage = () => {
                             label={'Предложения'}
                             defaultValue={'1'}
                             items={[
-                                { label: 'Сначала популярные', value: '1' },
-                                { label: 'По скидке (%)', value: '2' },
-                                { label: 'Сначала недорогие', value: '3' },
-                                { label: 'Сначала дорогие', value: '4' },
+                                { label: 'В наличии', value: '1' },
+                                { label: 'Скидка', value: '2' },
+                                { label: 'Новинка', value: '3' },
                             ]}
                             multiply
-                            className={styles.dropdown}
+                            open
+                            physical
                         />
+                        <Dropdown
+                            label={'Цена'}
+                            defaultValue={'1'}
+                            items={[
+                                { label: 'В наличии', value: '1' },
+                                { label: 'Скидка', value: '2' },
+                                { label: 'Новинка', value: '3' },
+                            ]}
+                            multiply
+                            physical
+                        />
+                        <Dropdown
+                            label={'Бренд'}
+                            defaultValue={'1'}
+                            items={[
+                                { label: 'В наличии', value: '1' },
+                                { label: 'Скидка', value: '2' },
+                                { label: 'Новинка', value: '3' },
+                            ]}
+                            multiply
+                            physical
+                        />
+                        <Dropdown
+                            label={'Алгоритм'}
+                            defaultValue={'1'}
+                            items={[
+                                { label: 'В наличии', value: '1' },
+                                { label: 'Скидка', value: '2' },
+                                { label: 'Новинка', value: '3' },
+                            ]}
+                            multiply
+                            physical
+                        />
+                        <div className={styles.switchWrap}>
+                            <div className={styles.switch}>
+                                <span>Самый прибыльный</span>
+                                <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
+                            </div>
+                            <div className={styles.switch}>
+                                <span>Самый мощный</span>
+                                <Switch isOn={isOn2} onClick={() => setIsOn2(!isOn2)} />
+                            </div>
+                        </div>
+                        <div className={styles.buttons}>
+                            <Button size={'md'}>Применить</Button>
+                            <Button size={'md'} variant={'outline'}>
+                                Сбросить
+                            </Button>
+                        </div>
                     </div>
                     <div className={styles.wrap}>
                         <div className={styles.sort}>
@@ -76,9 +127,15 @@ const CatalogPage = () => {
                         <ProductsList viewMode={viewMode} />
                     </div>
                 </div>
+                <div className={styles.pagination}>
+                    <Button variant={'outline'} isWide>
+                        Показать ещё
+                    </Button>
+                    <Pagination />
+                </div>
             </div>
 
-            <Managers />
+            <Managers className={styles.managers} />
         </div>
     );
 };

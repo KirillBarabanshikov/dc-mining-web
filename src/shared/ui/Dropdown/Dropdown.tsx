@@ -15,12 +15,22 @@ interface IDropdownProps {
     defaultValue: string;
     multiply?: boolean;
     label?: string;
+    open?: boolean;
+    physical?: boolean;
     className?: string;
 }
 
-export const Dropdown: FC<IDropdownProps> = ({ items, defaultValue, multiply = false, label = '', className }) => {
+export const Dropdown: FC<IDropdownProps> = ({
+    items,
+    defaultValue,
+    multiply = false,
+    label = '',
+    open = false,
+    physical = false,
+    className,
+}) => {
     const [selectedValue, setSelectedValue] = useState<string[]>([defaultValue]);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(open);
 
     const handleSelect = (value: string) => {
         if (multiply) {
@@ -36,16 +46,21 @@ export const Dropdown: FC<IDropdownProps> = ({ items, defaultValue, multiply = f
     };
 
     return (
-        <div className={clsx(styles.dropdown, className)}>
+        <div className={clsx(styles.dropdown, physical && styles.physical, className)}>
             <div className={styles.head} onClick={() => setIsOpen(!isOpen)}>
                 <span className={styles.label}>
                     {label ? label : items.find((item) => item.value === selectedValue[0])?.label}
                 </span>
-                <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ damping: 0 }} className={styles.icon}>
+                <motion.div
+                    initial={false}
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ damping: 0 }}
+                    className={styles.icon}
+                >
                     <ArrowIcon />
                 </motion.div>
             </div>
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}

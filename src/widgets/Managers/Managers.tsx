@@ -1,3 +1,4 @@
+import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -6,15 +7,18 @@ import manager from '@/shared/assets/images/managers/manager.png';
 import calculator from '@/shared/assets/images/managers/calculator.png';
 import styles from './Managers.module.scss';
 import { OrderCallModal } from '@/features/call';
-import { useState } from 'react';
 
-export const Managers = () => {
+interface IManagersProps {
+    className?: string;
+}
+
+export const Managers: FC<IManagersProps> = ({ className }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const matches = useMediaQuery(MAX_WIDTH_LG);
 
     return (
-        <div className={clsx(styles.managers)}>
+        <div className={clsx(styles.managers, className)}>
             <section className={styles.request}>
                 <h3>Не знаете какое оборудование выбрать?</h3>
                 <p>Направьте запрос нашим менеджерам </p>

@@ -71,4 +71,18 @@
             }
         }
     }
+
+    &.physical {
+        padding: unset;
+
+        .list {
+            position: unset;
+
+            .itemsWrap {
+                padding: 24px 0;
+                border-radius: unset;
+                border-bottom: 1px solid rgba(241, 241, 241, 1);
+            }
+        }
+    }
 }
