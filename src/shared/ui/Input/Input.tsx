@@ -14,6 +14,7 @@ interface IInputProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
     autoFocus?: boolean;
+    style?: object;
     className?: string;
 }
 

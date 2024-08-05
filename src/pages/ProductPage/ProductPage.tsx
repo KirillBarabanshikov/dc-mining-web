@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 import { Badge, Breadcrumbs, Button, IconButton } from '@/shared/ui';
 import { AdvantagesDCMinig, CallMeBanner, DeliveryAndPayment, RecentProductsList } from '@/widgets';

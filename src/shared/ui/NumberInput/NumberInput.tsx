@@ -35,15 +35,15 @@ export const NumberInput: FC<INumberInputProps> = ({ min, max, defaultValue = 0 
                 size={'md'}
                 className={clsx(styles.item, styles.button)}
                 onClick={decrement}
-                disabled={count <= min}
+                disabled={count <= min!}
             >
                 <MinusIcon />
             </Button>
             <div className={styles.item}>
                 <Input
                     type={'number'}
-                    min={min}
-                    max={max}
+                    // min={min!}
+                    // max={max!}
                     value={`${count}`}
                     onChange={(e) => setCount(+e.target.value)}
                     style={{ textAlign: 'center' }}
@@ -53,7 +53,7 @@ export const NumberInput: FC<INumberInputProps> = ({ min, max, defaultValue = 0 
                 size={'md'}
                 className={clsx(styles.item, styles.button)}
                 onClick={increment}
-                disabled={count >= max}
+                disabled={count >= max!}
             >
                 <PlusIcon />
             </Button>
