@@ -1,0 +1,128 @@
+.slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+
+    width: 100%;
+    max-width: 1528px;
+    height: 580px;
+
+    .slideContent {
+        width: 592px;
+        height: 500px;
+        min-width: 538px;
+
+        h2 {
+            font-size: 40px;
+            line-height: 48px;
+            margin-bottom: 40px;
+        }
+
+        .description {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20.8px;
+            margin-bottom: 40px;
+
+            ul,
+            ol {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        width: 4px;
+                        height: 4px;
+                        border-radius: 4px;
+                        background-color: var(--text-accent-blue);
+                    }
+                }
+            }
+        }
+    }
+
+    .imageWrap {
+        width: 100%;
+        max-width: 904px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .slideContent {
+            width: 292px;
+            height: 440px;
+            min-width: 260px;
+
+            h2 {
+                font-size: 32px;
+                line-height: 38.4px;
+                margin-bottom: 20px;
+
+                span {
+                    color: var(--text-accent-blue);
+                }
+            }
+
+            .description {
+                font-size: 14px;
+                line-height: 18.2px;
+
+                ul,
+                ol {
+                    gap: 8px;
+                }
+            }
+        }
+
+        .imageWrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            max-width: 580px;
+            height: 580px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+        height: unset;
+
+        h2 {
+            text-align: center;
+        }
+
+        .description {
+            font-size: 12px;
+            line-height: 15.6px;
+        }
+
+        .slideContent {
+            width: 100%;
+            height: unset;
+            padding: 0 16px;
+        }
+
+        .imageWrap {
+            order: -1;
+            height: 328px;
+            max-width: 328px;
+        }
+
+        .button {
+            width: 100%;
+        }
+    }
+}
