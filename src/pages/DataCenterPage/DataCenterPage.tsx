@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Button, Checkbox, Input } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
-import { OrderCallModal } from '@/features/call';
+import { OrderCallModal, OrderCallBanner } from '@/features/call';
 import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
@@ -12,7 +12,6 @@ import dottedLineMd from '@/shared/assets/images/data-center/dotted-line-md.png'
 import dottedLineMd2 from '@/shared/assets/images/data-center/dotted-line-md2.png';
 import dottedLineSm from '@/shared/assets/images/data-center/dotted-line-sm.png';
 import dottedLineSm2 from '@/shared/assets/images/data-center/dotted-line-sm2.png';
-import miner from '@/shared/assets/images/slides/miner-md.png';
 import styles from './DataCenterPage.module.scss';
 
 const DataCenterPage = () => {
@@ -132,34 +131,7 @@ const DataCenterPage = () => {
                         </div>
                     </div>
                 </section>
-                <section className={styles.feedback}>
-                    <div className={'container'}>
-                        <div className={styles.wrap}>
-                            <img src={`${miner}`} alt={'Miner'} />
-                            <div className={styles.form}>
-                                <h2>Заказать обратный звонок</h2>
-                                <p>Оставьте свои контакты и мы вам перезвоним</p>
-                                <div className={styles.formFields}>
-                                    <Input placeholder={'Имя'} className={styles.input} />
-                                    <Input placeholder={'Телефон'} className={styles.input} />
-                                </div>
-                                <Checkbox
-                                    theme={'white'}
-                                    labelSlot={
-                                        <span className={styles.label}>
-                                            Я согласен на обработку персональных данных
-                                        </span>
-                                    }
-                                />
-                                <div>
-                                    <Button size={matches ? 'md' : 'lg'} isWide={matches}>
-                                        Отправить
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <OrderCallBanner />
             </div>
             <OrderCallModal
                 isOpen={isOpen}

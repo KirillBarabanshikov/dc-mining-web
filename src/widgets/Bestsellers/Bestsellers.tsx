@@ -11,8 +11,6 @@ export const Bestsellers = () => {
                 <div className={styles.bestsellersList}>
                     {products &&
                         products.map((product) => {
-                            if (!product.display) return <></>;
-
                             return <ProductCard key={product.id} product={product} />;
                         })}
                 </div>

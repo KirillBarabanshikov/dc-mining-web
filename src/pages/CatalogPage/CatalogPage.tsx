@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Breadcrumbs, Button, Checkbox, Dropdown, IconButton, Input, Modal, Pagination, Switch } from '@/shared/ui';
+import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { TProductCardViewMode } from '@/entities/product';
 import { useMediaQuery } from '@/shared/lib';
@@ -10,6 +10,7 @@ import SimpleIcon from '@/shared/assets/icons/view-mode-simple.svg?react';
 import SimpleIcon2 from '@/shared/assets/icons/view-mode-simple2.svg?react';
 import FilterIcon from '@/shared/assets/icons/filter.svg?react';
 import styles from './CatalogPage.module.scss';
+import { OrderCallHelpBanner } from '@/features/call';
 
 const paths = [
     { name: 'Главная', path: '/' },
@@ -106,7 +107,7 @@ const CatalogPage = () => {
                                     Сбросить
                                 </Button>
                             </div>
-                            <CallBanner />
+                            <OrderCallHelpBanner />
                         </div>
                         <div className={styles.wrap}>
                             <div className={styles.sort}>
@@ -136,7 +137,7 @@ const CatalogPage = () => {
                                     />
                                 </div>
                             </div>
-                            <ProductsList viewMode={viewMode} />
+                            {/*<ProductsList viewMode={viewMode} />*/}
                         </div>
                     </>
                 ) : (
@@ -189,7 +190,7 @@ const CatalogPage = () => {
                     </Button>
                     {!matches && <Pagination />}
                 </div>
-                {matches && <CallBanner />}
+                {matches && <OrderCallHelpBanner />}
                 <Managers className={styles.managers} />
             </div>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
@@ -261,21 +262,3 @@ const CatalogPage = () => {
 };
 
 export default CatalogPage;
-
-const CallBanner = () => {
-    return (
-        <div className={styles.callBanner}>
-            <h3>Помочь с выбором?</h3>
-            <form>
-                <Input placeholder={'Телефон'} theme={'dark'} />
-                <Input placeholder={'Имя'} theme={'dark'} />
-                <Checkbox
-                    labelSlot={<span className={styles.label}>Я согласен на обработку персональных данных</span>}
-                    theme={'white'}
-                    className={styles.checkbox}
-                />
-                <Button size={'md'}>Отправить</Button>
-            </form>
-        </div>
-    );
-};
