@@ -5,7 +5,7 @@ import { Badge, Button, IconButton } from '@/shared/ui';
 import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
 import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
 import { IProduct, TProductCardViewMode } from '@/entities/product';
-import { useMediaQuery } from '@/shared/lib';
+import { formatter, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { OrderProductModal } from '@/features/product';
 import styles from './ProductCard.module.scss';
@@ -51,7 +51,9 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             return <Badge key={tag.id} text={tag.title} color={tag.color} />;
                         })}
                     </div>
-                    {(viewMode === 'tile' || matches) && <p className={styles.price}>{product.price}</p>}
+                    {(viewMode === 'tile' || matches) && (
+                        <p className={styles.price}>{formatter.format(product.price)}</p>
+                    )}
                     <p className={styles.name}>{product.title}</p>
                     <div className={styles.specifications}>
                         {product.value.map((value) => {
