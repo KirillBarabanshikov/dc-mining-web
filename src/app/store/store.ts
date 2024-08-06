@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: [],
 };
 
 export const store = configureStore({
