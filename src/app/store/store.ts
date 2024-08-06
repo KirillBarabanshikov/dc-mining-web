@@ -5,13 +5,11 @@ import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer,
-    // [sessionSlice.name]: sessionSlice.reducer,
 });
 
 const persistConfig = {
     key: 'root',
     storage,
-    // whitelist: [sessionSlice.name],
 };
 
 export const store = configureStore({
