@@ -1,5 +1,5 @@
 export interface IService {
-    mediaFile: string;
+    mediaFile?: File;
     title: string;
     name: string;
     phone: string;

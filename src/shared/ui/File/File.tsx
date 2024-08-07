@@ -1,17 +1,23 @@
-import React, { forwardRef, InputHTMLAttributes, useState } from 'react';
+import React, { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import FileIcon from '@/shared/assets/icons/file.svg?react';
 import styles from './File.module.scss';
 
-interface IFileProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface IFileProps extends InputHTMLAttributes<HTMLInputElement> {
+    reset?: boolean;
+}
 
-export const File = forwardRef<HTMLInputElement, IFileProps>(({ className, onChange, ...props }, ref) => {
+export const File = forwardRef<HTMLInputElement, IFileProps>(({ className, onChange, reset, ...props }, ref) => {
     const [file, setFile] = useState('');
 
+    useEffect(() => {
+        reset && setFile('Файл не выбран');
+    }, [reset]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(e);
         if (!e.target.files) return;
         setFile(e.target.files.length ? e.target.files[0].name : 'Файл не выбран');
-        onChange && onChange(e);
     };
 
     return (

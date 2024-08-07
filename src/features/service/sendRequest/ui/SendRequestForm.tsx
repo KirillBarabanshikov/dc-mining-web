@@ -7,9 +7,11 @@ import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Radio, File, Modal, StateModal } from '@/shared/ui';
 import styles from './SendRequestForm.module.scss';
+import { useState } from 'react';
 
 export const SendRequestForm = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const [resetFile, setResetFile] = useState(false);
     const [sendRequest, { isLoading, isError, isSuccess, reset: resetSendRequest }] = useSendRequestMutation();
     const {
         handleSubmit,
@@ -21,12 +23,14 @@ export const SendRequestForm = () => {
     });
 
     const onSubmit = async (data: TSendRequestFormScheme) => {
-        await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile[0] }).unwrap();
+        await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile?.[0] }).unwrap();
         reset();
+        setResetFile(true);
     };
 
     const handleClose = () => {
         resetSendRequest();
+        setResetFile(false);
     };
 
     return (
@@ -80,7 +84,7 @@ export const SendRequestForm = () => {
                     </div>
                     <div className={clsx(styles.textarea, !!errors.description && styles.error)}>
                         <textarea placeholder={'Описание характера проблемы'} rows={2} {...register('description')} />
-                        <File className={styles.file} {...register('mediaFile')} />
+                        <File className={styles.file} reset={resetFile} {...register('mediaFile')} />
                     </div>
                     <span className={styles.formats}>
                         Допустимые форматы файла: *.doc, *.docx, *.xls, *xlsx, *.pdf, *.png, *.jpg. Максимальный размер
