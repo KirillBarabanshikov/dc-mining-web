@@ -16,7 +16,7 @@ export const OrderProductModal: FC<IOrderProductModalProps> = ({ isOpen, onClose
     useEffect(() => {
         setIsFinally(false);
         setIsError(false);
-    }, [product]);
+    }, [isOpen]);
 
     return (
         <Modal
