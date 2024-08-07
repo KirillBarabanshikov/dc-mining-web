@@ -1,2 +1,2 @@
 export type { IAboutInfo } from './model';
-export { useGetAboutInfoQuery } from './api';
+export { useGetAboutInfoQuery, useGetLeasingInfoQuery } from './api';

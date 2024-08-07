@@ -26,3 +26,19 @@ export interface IMassMedia {
     description: string;
     display: boolean;
 }
+
+export interface ILeasingInfo {
+    id: number;
+    description: string;
+    information: {
+        id: number;
+        title: string;
+        description: string;
+    }[];
+    steps: {
+        id: number;
+        number: number;
+        description: string;
+    }[];
+    informationTitle: string;
+}
