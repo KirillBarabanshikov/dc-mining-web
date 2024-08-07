@@ -46,10 +46,8 @@ export const NumberInput: FC<INumberInputProps> = ({ min, max, defaultValue = 0,
             <div className={styles.item}>
                 <Input
                     type={'number'}
-                    // min={min!}
-                    // max={max!}
                     value={`${count}`}
-                    onChange={(e) => setCount(+e.target.value)}
+                    onChange={(e) => setCount(+e.target.value <= 0 ? 1 : +e.target.value)}
                     style={{ textAlign: 'center' }}
                 />
             </div>
