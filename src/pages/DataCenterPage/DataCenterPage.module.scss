@@ -2,6 +2,7 @@
     .dataCenterContainer {
         margin-top: 56px;
         margin-bottom: 60px;
+        height: 420px;
     }
 
     h1 {
@@ -13,6 +14,10 @@
         span {
             color: var(--text-accent-blue);
         }
+    }
+
+    .description {
+        margin-bottom: 40px;
     }
 
     .background {
@@ -32,13 +37,7 @@
     @media screen and (max-width: 992px) {
         .dataCenterContainer {
             margin-bottom: 140px;
-
-            ul {
-                li {
-                    font-size: 14px;
-                    line-height: 18.2px;
-                }
-            }
+            height: 340px;
         }
 
         h1 {
@@ -55,14 +54,7 @@
         .dataCenterContainer {
             margin-top: 328px;
             margin-bottom: unset;
-
-            ul {
-                li {
-                    font-family: 'Roboto', sans-serif;
-                    font-size: 12px;
-                    line-height: 15.6px;
-                }
-            }
+            height: unset;
         }
 
         h1 {
@@ -345,13 +337,21 @@
 
                 .number {
                     .dottedLine {
-                        left: 134px;
+                        left: 138px;
                     }
 
                     .dottedLineLarge {
                         right: -15px;
                         top: 30px;
                     }
+                }
+            }
+        }
+
+        @media screen and (max-width: 959px) {
+            .item {
+                p {
+                    max-width: 156px;
                 }
             }
         }
@@ -384,7 +384,7 @@
 
                     .dottedLineLarge {
                         right: -220px;
-                        top: 33px;
+                        top: 25px;
                     }
                 }
             }

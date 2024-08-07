@@ -6,6 +6,7 @@ import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_XL } from '@/shared/consts';
 import styles from './MainSlider.module.scss';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
 
 export const MainSlider = () => {
     const { data: slides } = useGetSliderQuery();
@@ -50,7 +51,7 @@ export const MainSlider = () => {
                                 <div className={styles.slideContent}>
                                     <h2>{slide.title}</h2>
                                     <div
-                                        className={styles.description}
+                                        className={clsx(styles.description, 'list')}
                                         dangerouslySetInnerHTML={{ __html: slide.description }}
                                     />
                                     <Button

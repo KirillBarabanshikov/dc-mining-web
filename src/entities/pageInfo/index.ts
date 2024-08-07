@@ -1,2 +1,2 @@
-export type { IAboutInfo } from './model';
-export { useGetAboutInfoQuery, useGetLeasingInfoQuery } from './api';
+export type { IAboutInfo, IDataCenterInfo, ILeasingInfo, IAdvantage, IMassMedia } from './model';
+export { useGetAboutInfoQuery, useGetLeasingInfoQuery, useGetDataCenterInfoQuery } from './api';

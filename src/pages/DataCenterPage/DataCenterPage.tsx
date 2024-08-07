@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui';
-import { useMediaQuery } from '@/shared/lib';
+import { formatter, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import { OrderCallModal, OrderCallBanner } from '@/features/call';
+import { useGetDataCenterInfoQuery } from '@/entities/pageInfo';
 import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
@@ -15,6 +16,7 @@ import dottedLineSm2 from '@/shared/assets/images/data-center/dotted-line-sm2.pn
 import styles from './DataCenterPage.module.scss';
 
 const DataCenterPage = () => {
+    const { data: info } = useGetDataCenterInfoQuery();
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 959px)');
@@ -27,15 +29,11 @@ const DataCenterPage = () => {
         <>
             <section className={styles.dataCenterBanner}>
                 <div className={clsx(styles.dataCenterContainer, 'container')}>
-                    <h1>
-                        <span>Майнинг-отель</span> по выгодной цене, собственный дата-центр
-                    </h1>
-                    <ul className={'list'}>
-                        <li>Доставка в дата-центр</li>
-                        <li>Размещение оборудования</li>
-                        <li>Круглосуточная военизированная охрана</li>
-                        <li>Обеспечение бесперебойной работы</li>
-                    </ul>
+                    <h1>{info?.title}</h1>
+                    <div
+                        className={clsx(styles.description, 'list')}
+                        dangerouslySetInnerHTML={{ __html: info?.description ?? '' }}
+                    />
                     <Button size={matches ? 'md' : 'lg'} isWide={matches} onClick={() => setIsOpen(true)}>
                         Разместить оборудование
                     </Button>
@@ -47,24 +45,15 @@ const DataCenterPage = () => {
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>
-                            <div className={styles.item}>
-                                <p className={styles.title}>UPTIME 99%</p>
-                                <p className={styles.subtitle}>
-                                    Обеспечивает высокую надежность: таким образом ваше оборудование не будет
-                                    простаивать и будет приносить больше прибыли.
-                                </p>
-                            </div>
-                            <div className={styles.item}>
-                                <p className={styles.title}>от 5,5 руб за кВт/час</p>
-                                <p className={styles.subtitle}>
-                                    Обеспечивает высокую надежность: таким образом ваше оборудование не будет
-                                    простаивать и будет приносить больше прибыли.
-                                </p>
-                            </div>
-                            <div className={styles.item}>
-                                <p className={styles.title}>24/7</p>
-                                <p className={styles.subtitle}>Мониторинг и обслуживание</p>
-                            </div>
+                            {info &&
+                                info.information.map((item) => {
+                                    return (
+                                        <div key={item.id} className={styles.item}>
+                                            <p className={styles.title}>{item.title}</p>
+                                            <p className={styles.subtitle}>{item.description}</p>
+                                        </div>
+                                    );
+                                })}
                         </div>
                     </div>
                 </div>
@@ -72,24 +61,21 @@ const DataCenterPage = () => {
                     <div className={'container'}>
                         <div className={styles.wrap}>
                             <div className={styles.containersContent}>
-                                <h2 className={'section-title'}>Контейнеры для майнинга</h2>
-                                <p>
-                                    Если вы планируете размещение более 50 аппаратов, то мы рекомендуем купить отдельный
-                                    контейнер
-                                </p>
+                                <h2 className={'section-title'}>{info?.containerTitle}</h2>
+                                <p>{info?.containerDescription}</p>
                                 <div className={styles.advantages}>
                                     <div className={styles.advantage}>
                                         <div>Срок производства от</div>
-                                        <span>14 дней</span>
+                                        <span>{info?.containerTerm}</span>
                                     </div>
                                     <div className={styles.advantage}>
                                         <div>Стоимость от</div>
-                                        <span>850 000 ₽</span>
+                                        <span>{info && formatter.format(info.containerPrice)}</span>
                                     </div>
                                 </div>
                                 <div className={styles.advantage}>
                                     <div>Вместимость</div>
-                                    <span>от 36 до 308 единиц</span>
+                                    <span>{info?.containerCapacity}</span>
                                 </div>
                                 <Button size={matches ? 'md' : 'lg'} isWide={matches} className={styles.button}>
                                     Выбрать контейнер
@@ -103,31 +89,26 @@ const DataCenterPage = () => {
                     <div className={'container'}>
                         <h2 className={clsx(styles.title, 'section-title-primary')}>Как это работает</h2>
                         <div className={styles.wrap}>
-                            <div className={styles.item}>
-                                <div className={styles.number}>
-                                    1
-                                    <img src={`${currentLine}`} alt={'Line'} className={styles.dottedLine} />
-                                </div>
-                                <p>Покупаете оборудование в dc-mining.com</p>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.number}>
-                                    2
-                                    <img src={`${currentLine2}`} alt={'Line'} className={styles.dottedLineLarge} />
-                                </div>
-                                <p>Мы доставляем оборудование в наш дата-центр</p>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.number}>
-                                    3
-                                    <img src={`${currentLine}`} alt={'Line'} className={styles.dottedLine} />
-                                </div>
-                                <p>Страхуем оборудование</p>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.number}>4</div>
-                                <p>Настраиваем и размещаем оборудование</p>
-                            </div>
+                            {info &&
+                                info.steps.map((item, index) => {
+                                    return (
+                                        <div key={item.id} className={styles.item}>
+                                            <div className={styles.number}>
+                                                {index}
+                                                {index < 3 && (
+                                                    <img
+                                                        src={`${index === 1 ? currentLine2 : currentLine}`}
+                                                        alt={'Line'}
+                                                        className={
+                                                            index === 1 ? styles.dottedLineLarge : styles.dottedLine
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+                                            <p>{item.description}</p>
+                                        </div>
+                                    );
+                                })}
                         </div>
                     </div>
                 </section>

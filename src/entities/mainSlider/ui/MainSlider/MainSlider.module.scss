@@ -20,32 +20,7 @@
         }
 
         .description {
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20.8px;
             margin-bottom: 40px;
-
-            ul,
-            ol {
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-
-                li {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-
-                    &::before {
-                        content: '';
-                        display: block;
-                        width: 4px;
-                        height: 4px;
-                        border-radius: 4px;
-                        background-color: var(--text-accent-blue);
-                    }
-                }
-            }
         }
     }
 
@@ -73,16 +48,6 @@
                     color: var(--text-accent-blue);
                 }
             }
-
-            .description {
-                font-size: 14px;
-                line-height: 18.2px;
-
-                ul,
-                ol {
-                    gap: 8px;
-                }
-            }
         }
 
         .imageWrap {
@@ -102,11 +67,6 @@
 
         h2 {
             text-align: center;
-        }
-
-        .description {
-            font-size: 12px;
-            line-height: 15.6px;
         }
 
         .slideContent {

@@ -172,15 +172,19 @@ input[type='search'] {
 }
 
 .list {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.8px;
+}
+
+.list ul,
+ol {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-bottom: 40px;
 }
 
 .list li {
-    line-height: 20.8px;
-
     display: flex;
     align-items: center;
     gap: 8px;
@@ -193,6 +197,25 @@ input[type='search'] {
     height: 4px;
     border-radius: 4px;
     background-color: var(--text-accent-blue);
+}
+
+@media screen and (max-width: 1200px) {
+    .list {
+        font-size: 14px;
+        line-height: 18.2px;
+    }
+
+    .list ul,
+    ol {
+        gap: 8px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .list {
+        font-size: 12px;
+        line-height: 15.6px;
+    }
 }
 
 input[type='checkbox'],

@@ -1,6 +1,5 @@
 import { baseApi } from '@/shared/api';
-import { IAboutInfo } from '@/entities/pageInfo';
-import { ILeasingInfo } from '@/entities/pageInfo/model';
+import { IAboutInfo, IDataCenterInfo, ILeasingInfo } from '@/entities/pageInfo';
 
 const pageInfoApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -20,7 +19,15 @@ const pageInfoApi = baseApi.injectEndpoints({
                 return (response as unknown as ILeasingInfo[])[0];
             },
         }),
+        getDataCenterInfo: build.query<IDataCenterInfo, void>({
+            query: () => ({
+                url: '/data_centers',
+            }),
+            transformResponse: (response: IDataCenterInfo) => {
+                return (response as unknown as IDataCenterInfo[])[0];
+            },
+        }),
     }),
 });
 
-export const { useGetAboutInfoQuery, useGetLeasingInfoQuery } = pageInfoApi;
+export const { useGetAboutInfoQuery, useGetLeasingInfoQuery, useGetDataCenterInfoQuery } = pageInfoApi;

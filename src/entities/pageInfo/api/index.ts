@@ -1,1 +1,1 @@
-export { useGetAboutInfoQuery, useGetLeasingInfoQuery } from './pageInfoApi.ts';
+export { useGetAboutInfoQuery, useGetLeasingInfoQuery, useGetDataCenterInfoQuery } from './pageInfoApi.ts';

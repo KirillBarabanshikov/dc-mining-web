@@ -42,3 +42,24 @@ export interface ILeasingInfo {
     }[];
     informationTitle: string;
 }
+
+export interface IDataCenterInfo {
+    id: number;
+    title: string;
+    description: string;
+    information: {
+        id: number;
+        title: string;
+        description: string;
+    }[];
+    steps: {
+        id: number;
+        number: number;
+        description: string;
+    }[];
+    containerTitle: string;
+    containerDescription: string;
+    containerTerm: string;
+    containerPrice: number;
+    containerCapacity: string;
+}
