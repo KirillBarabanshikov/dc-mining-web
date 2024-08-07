@@ -1,5 +1,13 @@
 export type TProductCardViewMode = 'tile' | 'simple';
 
+export interface IOrderProduct {
+    name: string;
+    phone: string;
+    productId: number;
+    price: number;
+    count: number;
+}
+
 export interface IProduct {
     id: number;
     title: string;

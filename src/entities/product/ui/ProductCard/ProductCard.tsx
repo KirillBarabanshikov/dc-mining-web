@@ -103,7 +103,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                     </div>
                 </div>
             </article>
-            <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} product={product} />
         </>
     );
 };

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button, Input } from '@/shared/ui';
 import clsx from 'clsx';
 import MinusIcon from '@/shared/assets/icons/minus.svg?react';
@@ -9,11 +9,15 @@ interface INumberInputProps {
     min?: number;
     max?: number;
     defaultValue?: number;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (count: number) => void;
 }
 
-export const NumberInput: FC<INumberInputProps> = ({ min, max, defaultValue = 0 }) => {
+export const NumberInput: FC<INumberInputProps> = ({ min, max, defaultValue = 0, onChange }) => {
     const [count, setCount] = useState(defaultValue);
+
+    useEffect(() => {
+        onChange && onChange(count);
+    }, [count]);
 
     const increment = () => {
         if (typeof max !== 'undefined') {

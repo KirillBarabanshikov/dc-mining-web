@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api';
-import { IProduct } from '@/entities/product';
+import { IProduct, IOrderProduct } from '@/entities/product';
 
 const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -8,7 +8,14 @@ const productApi = baseApi.injectEndpoints({
                 url: '/products',
             }),
         }),
+        orderProduct: build.mutation({
+            query: (body: IOrderProduct) => ({
+                url: '/buy',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useOrderProductMutation } = productApi;

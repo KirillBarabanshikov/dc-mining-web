@@ -1,1 +1,1 @@
-export type { IProduct, TProductCardViewMode } from './types.ts';
+export type { IProduct, TProductCardViewMode, IOrderProduct } from './types.ts';
