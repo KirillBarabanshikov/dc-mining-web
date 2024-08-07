@@ -21,7 +21,7 @@ export const Search: FC<ISearchProps> = ({ autoFocus = false, onClose, className
     const [searchValue, setSearchValue] = useState('');
     const [inFocus, setInFocus] = useState(false);
 
-    const { debouncedFunction: getDebouncedProducts } = useDebounce((title: string) => getProducts({ title }));
+    const { debouncedFunction: getDebouncedProducts } = useDebounce((title: string) => getProducts({ title }), 250);
 
     const handleClose = () => {
         setInFocus(false);
@@ -35,10 +35,7 @@ export const Search: FC<ISearchProps> = ({ autoFocus = false, onClose, className
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchValue = e.target.value.trim();
         setSearchValue(searchValue);
-
-        if (searchValue) {
-            getDebouncedProducts(searchValue);
-        }
+        searchValue && getDebouncedProducts(searchValue);
     };
 
     return (
