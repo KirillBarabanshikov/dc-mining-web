@@ -94,7 +94,7 @@ const DataCenterPage = () => {
                                     return (
                                         <div key={item.id} className={styles.item}>
                                             <div className={styles.number}>
-                                                {index}
+                                                {index + 1}
                                                 {index < 3 && (
                                                     <img
                                                         src={`${index === 1 ? currentLine2 : currentLine}`}
