@@ -56,7 +56,7 @@ export const Footer = () => {
                                 {contacts.socials.map((social) => {
                                     return (
                                         <a key={social.id} href={social.url} target={'_blank'}>
-                                            <img src={BASE_URL + social.image} />
+                                            <img src={BASE_URL + social.image} alt={'social'} />
                                         </a>
                                     );
                                 })}
