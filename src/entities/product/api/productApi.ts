@@ -3,9 +3,10 @@ import { IProduct, IOrderProduct } from '@/entities/product';
 
 const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        getProducts: build.query<IProduct[], void>({
-            query: () => ({
+        getProducts: build.query<IProduct[], Record<string, any> | undefined>({
+            query: (params) => ({
                 url: '/products',
+                params: params,
             }),
         }),
         orderProduct: build.mutation({

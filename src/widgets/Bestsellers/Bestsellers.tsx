@@ -2,7 +2,7 @@ import { ProductCard, useGetProductsQuery } from '@/entities/product';
 import styles from './Bestsellers.module.scss';
 
 export const Bestsellers = () => {
-    const { data: products } = useGetProductsQuery();
+    const { data: products } = useGetProductsQuery({ display: true });
 
     return (
         <section className={styles.bestsellers}>
