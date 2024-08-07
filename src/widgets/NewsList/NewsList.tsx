@@ -1,12 +1,16 @@
-import styles from './NewsList.module.scss';
 import { NewsCard } from '@/entities/news';
+import { useGetAboutInfoQuery } from '@/entities/pageInfo';
+import styles from './NewsList.module.scss';
 
 export const NewsList = () => {
+    const { data: info } = useGetAboutInfoQuery();
+
     return (
         <div className={styles.newsList}>
-            {Array.from({ length: 6 }).map((_, index) => {
-                return <NewsCard key={index} />;
-            })}
+            {info &&
+                info.massMedia.map((media) => {
+                    return <NewsCard key={media.id} media={media} />;
+                })}
         </div>
     );
 };
