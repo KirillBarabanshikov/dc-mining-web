@@ -47,7 +47,11 @@
 
             .socials {
                 flex-direction: row;
-                color: var(--text-ultramarin);
+
+                img {
+                    width: 48px;
+                    height: 48px;
+                }
             }
         }
     }
