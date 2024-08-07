@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import clsx from 'clsx';
 import { Input } from '@/shared/ui';
 import { createPortal } from 'react-dom';
@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { DropdownSearchItem } from '../DropdownSearchItem';
 import SearchIcon from '@/shared/assets/icons/search.svg?react';
 import CloseIcon from '@/shared/assets/icons/close.svg?react';
+import { useLazyGetProductsQuery } from '@/entities/product';
+import { useDebounce } from '@/shared/lib';
 import styles from './Search.module.scss';
 
 interface ISearchProps {
@@ -15,21 +17,37 @@ interface ISearchProps {
 }
 
 export const Search: FC<ISearchProps> = ({ autoFocus = false, onClose, className }) => {
+    const [getProducts, { data: products }] = useLazyGetProductsQuery();
     const [searchValue, setSearchValue] = useState('');
     const [inFocus, setInFocus] = useState(false);
+
+    const { debouncedFunction: getDebouncedProducts } = useDebounce((title: string) => getProducts({ title }));
 
     const handleClose = () => {
         setInFocus(false);
         onClose && onClose();
     };
 
+    const handleFocus = () => {
+        setInFocus(true);
+    };
+
+    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const searchValue = e.target.value.trim();
+        setSearchValue(searchValue);
+
+        if (searchValue) {
+            getDebouncedProducts(searchValue);
+        }
+    };
+
     return (
         <div className={clsx(styles.searchWrap, className)}>
             <Input
                 placeholder={'Поиск'}
-                onFocus={() => setInFocus(true)}
+                onFocus={handleFocus}
                 onBlur={handleClose}
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={onChangeSearch}
                 value={searchValue}
                 autoFocus={autoFocus}
                 icon={
@@ -49,9 +67,10 @@ export const Search: FC<ISearchProps> = ({ autoFocus = false, onClose, className
                         exit={{ opacity: 0 }}
                         className={styles.dropdown}
                     >
-                        {Array.from({ length: 4 }).map((_, index) => {
-                            return <DropdownSearchItem key={index} />;
-                        })}
+                        {products &&
+                            products.map((product) => {
+                                return <DropdownSearchItem key={product.id} product={product} />;
+                            })}
                     </motion.div>
                 )}
             </AnimatePresence>

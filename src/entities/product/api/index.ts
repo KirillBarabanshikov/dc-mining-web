@@ -1,1 +1,1 @@
-export { useGetProductsQuery, useOrderProductMutation } from './productApi';
+export { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery } from './productApi';

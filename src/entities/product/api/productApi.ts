@@ -19,4 +19,4 @@ const productApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetProductsQuery, useOrderProductMutation } = productApi;
+export const { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery } = productApi;
