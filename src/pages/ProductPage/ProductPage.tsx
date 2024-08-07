@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Badge, Breadcrumbs, Button, IconButton } from '@/shared/ui';
-import { AdvantagesDCMinig, CallMeBanner, DeliveryAndPayment, RecentProductsList } from '@/widgets';
+import { AdvantagesDCMining, CallMeBanner, DeliveryAndPayment, RecentProductsList } from '@/widgets';
 import img from '@/widgets/Bestsellers/img.png';
 import img2 from '@/entities/product/ui/ProductCard/img.png';
 import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
@@ -32,7 +32,7 @@ const ProductPage = () => {
                         <ProductInfo />
                         <ProductTabs />
                     </div>
-                    <AdvantagesDCMinig />
+                    <AdvantagesDCMining />
                     {!matches && <RecentProductsList />}
                     <CallMeBanner />
                 </div>

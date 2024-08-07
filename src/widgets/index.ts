@@ -9,5 +9,5 @@ export { DeliveryAndPayment } from './DeliveryAndPayment';
 export { NewsList } from './NewsList';
 export { RecentProductsList } from './RecentProductsList';
 export { ProductsList } from './ProductsList';
-export { AdvantagesDCMinig } from './AdvantagesDCMinig';
+export { AdvantagesDCMining } from './AdvantagesDCMinig';
 export { CallMeBanner } from './CallMeBanner';

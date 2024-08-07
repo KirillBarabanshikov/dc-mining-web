@@ -1,1 +1,1 @@
-export { AdvantagesDCMinig } from './AdvantagesDCMinig.tsx';
+export { AdvantagesDCMining } from './AdvantagesDCMining.tsx';
