@@ -1,14 +1,15 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { Badge, Button, IconButton } from '@/shared/ui';
 import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
 import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
 import { IProduct, TProductCardViewMode } from '@/entities/product';
-import { formatter, useMediaQuery } from '@/shared/lib';
+import { formatter, useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { OrderProductModal } from '@/features/product';
 import styles from './ProductCard.module.scss';
+import { toggleFavorite } from '@/entities/favorites';
 
 interface IProductCardProps {
     product: IProduct;
@@ -18,9 +19,20 @@ interface IProductCardProps {
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isFavorite, setIsFavorite] = useState(false);
+    // const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const dispatch = useAppDispatch();
+    const favorites = useAppSelector((state) => state.favorites.products);
+
+    console.log(favorites);
+
+    const isFavorite = favorites.find((favorite) => favorite.id === product.id);
+
+    const onToggleFavorite = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        dispatch(toggleFavorite(product));
+    };
 
     return (
         <>
@@ -85,19 +97,16 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             </Button>
                             <IconButton
                                 icon={<HeartIcon />}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsFavorite(!isFavorite);
-                                }}
+                                onClick={onToggleFavorite}
                                 className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
                             />
                             <IconButton
                                 icon={<StatisticIcon />}
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    setIsFavorite(!isFavorite);
+                                    // setIsFavorite(!isFavorite);
                                 }}
-                                className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
+                                className={clsx(styles.iconButton, styles.isFavorite)}
                             />
                         </div>
                     </div>
