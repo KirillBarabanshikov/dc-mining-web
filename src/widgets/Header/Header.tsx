@@ -31,7 +31,7 @@ export const Header: FC = () => {
     useEffect(() => {
         setIsOpen(false);
         setIsLocked(false);
-    }, [location]);
+    }, [location, setIsLocked]);
 
     const toggleMenu = () => {
         setIsOpen((prev) => !prev);
