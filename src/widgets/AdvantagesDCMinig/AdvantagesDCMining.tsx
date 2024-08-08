@@ -24,7 +24,10 @@ export const AdvantagesDCMining: FC<IAdvantagesDCMiningProps> = ({ advantages })
                                         <img src={BASE_URL + advantage.image} alt={advantage.title} />
                                     </div>
                                     <p className={styles.title}>{advantage.title}</p>
-                                    <p className={styles.subtitle}>{advantage.description}</p>
+                                    <p
+                                        className={styles.subtitle}
+                                        dangerouslySetInnerHTML={{ __html: advantage.description }}
+                                    />
                                 </article>
                             );
                         })}

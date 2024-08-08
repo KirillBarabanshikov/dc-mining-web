@@ -17,7 +17,7 @@ export const NewsCard: FC<INewsCardProps> = ({ media, className }) => {
             <div className={styles.cardBody}>
                 <time dateTime={media.dateAt}>{formatDate(media.dateAt)}</time>
                 <h5 className={styles.title}>{media.title}</h5>
-                <p className={styles.subtitle}>{media.description}</p>
+                <p className={styles.subtitle} dangerouslySetInnerHTML={{ __html: media.description }} />
             </div>
         </article>
     );
