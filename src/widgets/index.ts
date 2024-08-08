@@ -11,3 +11,4 @@ export { RecentProductsList } from './RecentProductsList';
 export { ProductsList } from './ProductsList';
 export { AdvantagesDCMining } from './AdvantagesDCMinig';
 export { CallMeBanner } from './CallMeBanner';
+export { CompareList } from './CompareList';

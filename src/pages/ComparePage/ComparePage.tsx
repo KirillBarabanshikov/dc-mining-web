@@ -1,25 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import { Button, Switch } from '@/shared/ui';
+import { useDispatch } from 'react-redux';
+import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
-import { RecentProductsList } from '@/widgets';
-import { RootState } from '@/shared/types';
-import { clearCompare, ProductCompareCard } from '@/entities/product';
-import { useCompareProductsMutation } from '@/entities/product/api';
+import { CompareList, RecentProductsList } from '@/widgets';
+import { clearCompare } from '@/entities/product';
 import styles from './ComparePage.module.scss';
 
 const ComparePage = () => {
-    const [isOn, setIsOn] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const compare: number[] = useSelector((state: RootState) => state.products.compare);
-    const [compareProducts, { data: products }] = useCompareProductsMutation();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        compare.length && compareProducts(compare);
-    }, [compare, compareProducts]);
 
     return (
         <div className={'sections'}>
@@ -35,16 +24,7 @@ const ComparePage = () => {
                             Очистить
                         </Button>
                     </div>
-                    <div className={styles.wrap}>
-                        <span>Только отличия</span>
-                        <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
-                    </div>
-                    <ScrollContainer className={styles.list}>
-                        {products &&
-                            products.map((product) => {
-                                return <ProductCompareCard key={product.id} product={product} onlyDifference={isOn} />;
-                            })}
-                    </ScrollContainer>
+                    <CompareList />
                 </div>
             </section>
             <RecentProductsList />
