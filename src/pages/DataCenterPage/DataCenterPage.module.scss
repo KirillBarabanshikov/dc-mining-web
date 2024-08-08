@@ -2,7 +2,7 @@
     .dataCenterContainer {
         margin-top: 56px;
         margin-bottom: 60px;
-        height: 420px;
+        min-height: 420px;
     }
 
     h1 {
@@ -37,7 +37,7 @@
     @media screen and (max-width: 992px) {
         .dataCenterContainer {
             margin-bottom: 140px;
-            height: 340px;
+            min-height: 340px;
         }
 
         h1 {
@@ -54,7 +54,7 @@
         .dataCenterContainer {
             margin-top: 328px;
             margin-bottom: unset;
-            height: unset;
+            min-height: unset;
         }
 
         h1 {

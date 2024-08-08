@@ -50,7 +50,10 @@ const DataCenterPage = () => {
                                     return (
                                         <div key={item.id} className={styles.item}>
                                             <p className={styles.title}>{item.title}</p>
-                                            <p className={styles.subtitle}>{item.description}</p>
+                                            <p
+                                                className={styles.subtitle}
+                                                dangerouslySetInnerHTML={{ __html: item.description }}
+                                            />
                                         </div>
                                     );
                                 })}
@@ -62,7 +65,7 @@ const DataCenterPage = () => {
                         <div className={styles.wrap}>
                             <div className={styles.containersContent}>
                                 <h2 className={'section-title'}>{info?.containerTitle}</h2>
-                                <p>{info?.containerDescription}</p>
+                                {info && <p dangerouslySetInnerHTML={{ __html: info.containerDescription }} />}
                                 <div className={styles.advantages}>
                                     <div className={styles.advantage}>
                                         <div>Срок производства от</div>
@@ -105,7 +108,7 @@ const DataCenterPage = () => {
                                                     />
                                                 )}
                                             </div>
-                                            <p>{item.description}</p>
+                                            <p dangerouslySetInnerHTML={{ __html: item.description }} />
                                         </div>
                                     );
                                 })}
