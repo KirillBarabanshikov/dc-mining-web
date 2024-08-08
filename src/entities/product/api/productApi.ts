@@ -1,5 +1,6 @@
 import { baseApi } from '@/shared/api';
 import { IProduct, IOrderProduct } from '@/entities/product';
+import { createSlug } from '@/shared/lib';
 
 const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -8,6 +9,9 @@ const productApi = baseApi.injectEndpoints({
                 url: '/products',
                 params: params,
             }),
+            transformResponse: (response: IProduct[]) => {
+                return response.map((product) => ({ ...product, slug: createSlug(product.title) }));
+            },
         }),
         orderProduct: build.mutation({
             query: (body: IOrderProduct) => ({

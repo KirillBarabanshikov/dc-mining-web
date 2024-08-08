@@ -17,7 +17,7 @@ export const AddToFavoritesButton: FC<IAddToFavoritesButton> = ({ product, class
     const favorites: IProduct[] = useSelector((state: RootState) => state.products.favorites);
 
     const onClick = (e: React.MouseEvent) => {
-        e.stopPropagation();
+        e.preventDefault();
         dispatch(toggleFavorite(product));
     };
 

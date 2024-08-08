@@ -17,7 +17,7 @@ export const AddToCompareButton: FC<IAddToCompareButton> = ({ product, className
     const compare: number[] = useSelector((state: RootState) => state.products.compare);
 
     const onClick = (e: React.MouseEvent) => {
-        e.stopPropagation();
+        e.preventDefault();
         dispatch(toggleCompare(product.id));
     };
 

@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Badge, Button } from '@/shared/ui';
 import { IProduct, TProductCardViewMode } from '@/entities/product';
@@ -15,53 +15,54 @@ interface IProductCardProps {
 
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
         <>
-            <article className={clsx(styles.productCard, styles[viewMode])} onClick={() => navigate('/product')}>
-                <ProductCardImage product={product} />
-                <div className={styles.body}>
-                    <div className={clsx(styles.wrap, styles.info)}>
-                        <div className={styles.tags}>
-                            {product.tags.map((tag) => {
-                                return <Badge key={tag.id} text={tag.title} color={tag.color} />;
-                            })}
+            <Link to={`/product/${product.slug}`} state={product.id}>
+                <article className={clsx(styles.productCard, styles[viewMode])}>
+                    <ProductCardImage product={product} />
+                    <div className={styles.body}>
+                        <div className={clsx(styles.wrap, styles.info)}>
+                            <div className={styles.tags}>
+                                {product.tags.map((tag) => {
+                                    return <Badge key={tag.id} text={tag.title} color={tag.color} />;
+                                })}
+                            </div>
+                            {(viewMode === 'tile' || matches) && (
+                                <p className={styles.price}>{formatter.format(product.price)}</p>
+                            )}
+                            <p className={styles.name}>{product.title}</p>
+                            <div className={styles.specifications}>
+                                {product.value.slice(0, 4).map((value) => {
+                                    return (
+                                        <div key={value.id}>
+                                            {value.valueInKey} — {value.title} {value.unitInKey}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                        {(viewMode === 'tile' || matches) && (
-                            <p className={styles.price}>{formatter.format(product.price)}</p>
-                        )}
-                        <p className={styles.name}>{product.title}</p>
-                        <div className={styles.specifications}>
-                            {product.value.slice(0, 4).map((value) => {
-                                return (
-                                    <div key={value.id}>
-                                        {value.valueInKey} — {value.title} {value.unitInKey}
-                                    </div>
-                                );
-                            })}
+                        <div className={clsx(styles.wrap, styles.buttonsWrap)}>
+                            {!matches && viewMode === 'simple' && <p className={styles.price}>{product.price}</p>}
+                            <div className={styles.buttons}>
+                                <Button
+                                    size={'sm'}
+                                    className={styles.button}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsOpen(true);
+                                    }}
+                                >
+                                    Заказать
+                                </Button>
+                                <AddToFavoritesButton product={product} className={styles.iconButton} />
+                                <AddToCompareButton product={product} className={styles.iconButton} />
+                            </div>
                         </div>
                     </div>
-                    <div className={clsx(styles.wrap, styles.buttonsWrap)}>
-                        {!matches && viewMode === 'simple' && <p className={styles.price}>{product.price}</p>}
-                        <div className={styles.buttons}>
-                            <Button
-                                size={'sm'}
-                                className={styles.button}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsOpen(true);
-                                }}
-                            >
-                                Заказать
-                            </Button>
-                            <AddToFavoritesButton product={product} className={styles.iconButton} />
-                            <AddToCompareButton product={product} className={styles.iconButton} />
-                        </div>
-                    </div>
-                </div>
-            </article>
+                </article>
+            </Link>
             <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} product={product} />
         </>
     );

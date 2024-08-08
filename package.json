@@ -22,6 +22,7 @@
     "react-router-dom": "^6.25.1",
     "react-use-draggable-scroll": "^0.4.7",
     "redux-persist": "^6.0.0",
+    "slugify": "^1.6.6",
     "swiper": "^11.1.8",
     "yup": "^1.4.0"
   },
