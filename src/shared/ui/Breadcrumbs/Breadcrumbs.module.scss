@@ -8,6 +8,10 @@
     a {
         font-weight: 500;
         color: var(--text-tertiary);
+
+        &:last-child {
+            pointer-events: none;
+        }
     }
 
     @media screen and (max-width: 768px) {
