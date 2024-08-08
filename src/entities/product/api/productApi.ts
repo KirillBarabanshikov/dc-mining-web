@@ -16,6 +16,13 @@ const productApi = baseApi.injectEndpoints({
                 body,
             }),
         }),
+        compareProducts: build.mutation({
+            query: (body) => ({
+                url: '/product/compare',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 

@@ -183,15 +183,6 @@
             border-radius: 16px;
             color: rgba(44, 43, 124, 1);
 
-            &.isFavorite {
-                background-color: var(--background-secondary);
-
-                svg {
-                    color: var(--text-accent-blue);
-                    fill: var(--text-accent-blue);
-                }
-            }
-
             @media (hover: hover) {
                 &:hover {
                     color: var(--text-accent-blue);

@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { IconButton } from '@/shared/ui';
-import { useAppSelector, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
-import { HorizontalMenu, MainMenu } from './components';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { IconButton } from '@/shared/ui';
+import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import Logo from '@/shared/assets/logo.svg?react';
 import BurgerIcon from '@/shared/assets/icons/burger.svg?react';
@@ -16,19 +16,17 @@ import StatisticIcon2 from '@/shared/assets/icons/statistic2.svg?react';
 import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
+import { RootState } from '@/shared/types';
+import { HorizontalMenu, MainMenu } from './components';
 import styles from './Header.module.scss';
-import { IProduct } from '@/entities/product';
 
-//TODO
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { isLocked, setIsLocked } = useBodyScrollLock();
     const location = useLocation();
-
-    const favorites: IProduct[] = useAppSelector((state) => state.favorites.products);
-
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
+    const { favorites, compare } = useSelector((state: RootState) => state.products);
 
     useEffect(() => {
         setIsOpen(false);
@@ -66,7 +64,10 @@ export const Header: FC = () => {
                                 to={'/compare'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
                             >
-                                <div className={styles.icon}>{matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}</div>
+                                <div className={styles.icon}>
+                                    {matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}
+                                    {!!compare.length && <div className={styles.count}>{compare.length}</div>}
+                                </div>
                                 <span>Сравнить</span>
                             </NavLink>
                             <div className={styles.contacts}>

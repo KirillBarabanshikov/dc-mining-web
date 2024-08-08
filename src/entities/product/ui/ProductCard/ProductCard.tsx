@@ -1,65 +1,27 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { Badge, Button, IconButton } from '@/shared/ui';
-import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
-import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
+import { Badge, Button } from '@/shared/ui';
 import { IProduct, TProductCardViewMode } from '@/entities/product';
-import { formatter, useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
+import { formatter, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
-import { OrderProductModal } from '@/features/product';
+import { AddToCompareButton, AddToFavoritesButton, OrderProductModal } from '@/features/product';
 import styles from './ProductCard.module.scss';
-import { toggleFavorite } from '@/entities/favorites';
 
 interface IProductCardProps {
     product: IProduct;
     viewMode?: TProductCardViewMode;
 }
 
-// TODO
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentSlide, setCurrentSlide] = useState(0);
-    // const [isFavorite, setIsFavorite] = useState(false);
     const navigate = useNavigate();
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const dispatch = useAppDispatch();
-    const favorites = useAppSelector((state) => state.favorites.products);
-
-    const isFavorite = favorites.find((favorite: any) => favorite.id === product.id);
-
-    const onToggleFavorite = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        dispatch(toggleFavorite(product));
-    };
 
     return (
         <>
             <article className={clsx(styles.productCard, styles[viewMode])} onClick={() => navigate('/product')}>
-                <div className={styles.image}>
-                    <img src={BASE_URL + `${product.images[currentSlide].image}`} alt={'product'} />
-                    <div className={styles.slides}>
-                        {product.images.map((image, index) => {
-                            return (
-                                <span
-                                    key={image.id}
-                                    onMouseEnter={() => setCurrentSlide(index)}
-                                    className={styles.slide}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className={styles.pagination}>
-                        {product.images.slice(0, 4).map((image, index) => {
-                            return (
-                                <span
-                                    key={image.id}
-                                    className={clsx(styles.bullet, index === currentSlide && styles.active)}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
+                <ProductCardImage product={product} />
                 <div className={styles.body}>
                     <div className={clsx(styles.wrap, styles.info)}>
                         <div className={styles.tags}>
@@ -94,24 +56,39 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             >
                                 Заказать
                             </Button>
-                            <IconButton
-                                icon={<HeartIcon />}
-                                onClick={onToggleFavorite}
-                                className={clsx(styles.iconButton, isFavorite && styles.isFavorite)}
-                            />
-                            <IconButton
-                                icon={<StatisticIcon />}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    // setIsFavorite(!isFavorite);
-                                }}
-                                className={clsx(styles.iconButton)}
-                            />
+                            <AddToFavoritesButton product={product} className={styles.iconButton} />
+                            <AddToCompareButton product={product} className={styles.iconButton} />
                         </div>
                     </div>
                 </div>
             </article>
             <OrderProductModal isOpen={isOpen} onClose={() => setIsOpen(false)} product={product} />
         </>
+    );
+};
+
+interface IProductCardImageProps {
+    product: IProduct;
+}
+
+const ProductCardImage: FC<IProductCardImageProps> = ({ product }) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    return (
+        <div className={styles.image}>
+            <img src={BASE_URL + `${product.images[currentSlide].image}`} alt={'product'} />
+            <div className={styles.slides}>
+                {product.images.map((image, index) => {
+                    return <span key={image.id} onMouseEnter={() => setCurrentSlide(index)} className={styles.slide} />;
+                })}
+            </div>
+            <div className={styles.pagination}>
+                {product.images.slice(0, 4).map((image, index) => {
+                    return (
+                        <span key={image.id} className={clsx(styles.bullet, index === currentSlide && styles.active)} />
+                    );
+                })}
+            </div>
+        </div>
     );
 };
