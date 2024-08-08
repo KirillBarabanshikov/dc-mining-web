@@ -22,6 +22,7 @@ export interface IProduct {
     display: boolean;
     payments: IProductPayment[];
     deliveries: IProductDelivery[];
+    slug: string;
 }
 
 interface IProductCategory {
