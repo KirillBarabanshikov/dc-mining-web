@@ -2,7 +2,7 @@
     .leasingContainer {
         margin-top: 72px;
         margin-bottom: 80px;
-        height: 392px;
+        min-height: 392px;
     }
 
     h1 {
@@ -42,7 +42,7 @@
     @media screen and (max-width: 992px) {
         .leasingContainer {
             margin-bottom: 135px;
-            height: 337px;
+            min-height: 337px;
         }
 
         h1 {
@@ -61,7 +61,7 @@
         .leasingContainer {
             margin-top: 328px;
             margin-bottom: unset;
-            height: unset;
+            min-height: unset;
         }
 
         h1 {

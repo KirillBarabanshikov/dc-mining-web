@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Button } from '@/shared/ui';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { Button } from '@/shared/ui';
 import { formatPhoneNumber, intFormatPhoneNumber, useMediaQuery } from '@/shared/lib';
 import { OrderCallModal } from '@/features/call';
-import { Link } from 'react-router-dom';
+import { useGetLeasingInfoQuery } from '@/entities/pageInfo';
+import { useGetContactsQuery } from '@/entities/contacts';
 import { MAX_WIDTH_LG, MAX_WIDTH_MD } from '@/shared/consts';
 import dottedLine from '@/shared/assets/images/leasing/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/leasing/dotted-line2.png';
@@ -12,8 +14,6 @@ import dottedLineMd2 from '@/shared/assets/images/leasing/dotted-line-md2.png';
 import dottedLineSm from '@/shared/assets/images/leasing/dotted-line-sm.png';
 import dottedLineSm2 from '@/shared/assets/images/leasing/dotted-line-sm2.png';
 import styles from './Leasing.module.scss';
-import { useGetLeasingInfoQuery } from '@/entities/pageInfo';
-import { useGetContactsQuery } from '@/entities/contacts';
 
 const LeasingPage = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +32,7 @@ const LeasingPage = () => {
                 <section className={styles.leasingBanner}>
                     <div className={clsx(styles.leasingContainer, 'container')}>
                         <h1>Лизинг</h1>
-                        <p>{info?.description}</p>
+                        {info && <p dangerouslySetInnerHTML={{ __html: info.description }} />}
                         <Button size={matches ? 'md' : 'lg'} isWide={matches} onClick={() => setIsOpen(true)}>
                             Получить консультацию
                         </Button>
@@ -47,7 +47,10 @@ const LeasingPage = () => {
                                     return (
                                         <div key={item.id} className={styles.infoItem}>
                                             <p className={styles.title}>{item.title}</p>
-                                            <p className={styles.subtitle}>{item.description}</p>
+                                            <p
+                                                className={styles.subtitle}
+                                                dangerouslySetInnerHTML={{ __html: item.description }}
+                                            />
                                         </div>
                                     );
                                 })}
@@ -63,7 +66,7 @@ const LeasingPage = () => {
                                     return (
                                         <div key={step.id} className={styles.item}>
                                             <div className={styles.number}>{++index}</div>
-                                            <p>{step.description}</p>
+                                            <p dangerouslySetInnerHTML={{ __html: step.description }} />
                                         </div>
                                     );
                                 })}
