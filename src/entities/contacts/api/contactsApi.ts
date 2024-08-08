@@ -7,9 +7,6 @@ const contactsApi = baseApi.injectEndpoints({
             query: () => ({
                 url: '/contacts',
             }),
-            transformResponse: (response: IContacts) => {
-                return (response as unknown as IContacts[])[0];
-            },
         }),
     }),
 });

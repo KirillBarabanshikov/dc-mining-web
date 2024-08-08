@@ -1,8 +1,8 @@
-import Logo from '@/shared/assets/logo.svg?react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import Logo from '@/shared/assets/logo.svg?react';
 import { useGetContactsQuery } from '@/entities/contacts';
-import { ADDRESS, BASE_URL } from '@/shared/consts';
+import { BASE_URL } from '@/shared/consts';
 import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
 import styles from './Footer.module.scss';
 
@@ -21,7 +21,7 @@ export const Footer = () => {
                     <>
                         <section>
                             <h5>Услуги</h5>
-                            <div>
+                            <div className={styles.wrap}>
                                 <Link to={'/catalog'} className={styles.link}>
                                     ASIC майнеры
                                 </Link>
@@ -35,7 +35,7 @@ export const Footer = () => {
                         </section>
                         <section>
                             <h5>Контакты</h5>
-                            <div>
+                            <div className={styles.wrap}>
                                 <a href={`tel:${intFormatPhoneNumber(contacts.phone)}`} className={styles.contact}>
                                     {formatPhoneNumber(contacts.phone)}
                                 </a>
@@ -46,14 +46,17 @@ export const Footer = () => {
                         </section>
                         <section>
                             <h5>Офис</h5>
-                            <div>
-                                <a className={clsx(styles.link, styles.address)}>{ADDRESS}</a>
+                            <div className={styles.wrap}>
+                                <div
+                                    className={clsx(styles.link, styles.address)}
+                                    dangerouslySetInnerHTML={{ __html: contacts.office }}
+                                />
                             </div>
                         </section>
                         <section>
                             <h5>О компании</h5>
                             <div className={styles.socials}>
-                                {contacts.socials.map((social) => {
+                                {contacts.images.map((social) => {
                                     return (
                                         <a key={social.id} href={social.url} target={'_blank'}>
                                             <img src={BASE_URL + social.image} alt={'social'} />
