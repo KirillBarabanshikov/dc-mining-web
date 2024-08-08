@@ -18,9 +18,7 @@ export const favoritesSlice = createSlice({
             state.products = [];
         },
         toggleFavorite: (state, action: PayloadAction<IProduct>) => {
-            console.log(!!state.products.find((product) => product.id === action.payload.id));
-
-            if (!!state.products.find((product) => product.id === action.payload.id)) {
+            if (state.products.find((product) => product.id === action.payload.id)) {
                 state.products = state.products.filter((product) => product.id !== action.payload.id);
             } else {
                 state.products = [...state.products, action.payload];

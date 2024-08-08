@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IconButton } from '@/shared/ui';
-import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
+import { useAppSelector, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL, TELEGRAM, WHATSAPP } from '@/shared/consts';
 import { HorizontalMenu, MainMenu } from './components';
 import clsx from 'clsx';
@@ -17,11 +17,15 @@ import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
 import styles from './Header.module.scss';
+import { IProduct } from '@/entities/product';
 
+//TODO
 export const Header: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { isLocked, setIsLocked } = useBodyScrollLock();
     const location = useLocation();
+
+    const favorites: IProduct[] = useAppSelector((state) => state.favorites.products);
 
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
@@ -52,27 +56,36 @@ export const Header: FC = () => {
                                 to={'/favorites'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
                             >
-                                {matchesMD ? <HeartIcon2 /> : <HeartIcon />}
+                                <div className={styles.icon}>
+                                    {matchesMD ? <HeartIcon2 /> : <HeartIcon />}
+                                    {!!favorites.length && <div className={styles.count}>{favorites.length}</div>}
+                                </div>
                                 <span>Избранное</span>
                             </NavLink>
                             <NavLink
                                 to={'/compare'}
                                 className={({ isActive }) => clsx(styles.option, isActive && styles.active)}
                             >
-                                {matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}
+                                <div className={styles.icon}>{matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}</div>
                                 <span>Сравнить</span>
                             </NavLink>
                             <div className={styles.contacts}>
                                 <a href={TELEGRAM} target={'_blank'} className={styles.option}>
-                                    <TelegramIcon />
+                                    <div className={styles.icon}>
+                                        <TelegramIcon />
+                                    </div>
                                     <span>Telegram</span>
                                 </a>
                                 <a href={WHATSAPP} target={'_blank'} className={styles.option}>
-                                    <WhatsappIcon />
+                                    <div className={styles.icon}>
+                                        <WhatsappIcon />
+                                    </div>
                                     <span>Whatsapp</span>
                                 </a>
                                 <div className={styles.option}>
-                                    <PhoneIcon />
+                                    <div className={styles.icon}>
+                                        <PhoneIcon />
+                                    </div>
                                     <span>Заказать звонок</span>
                                 </div>
                             </div>

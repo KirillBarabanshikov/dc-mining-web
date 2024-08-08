@@ -1,3 +1,11 @@
+.icon {
+    margin-bottom: 8px;
+
+    @media screen and (max-width: 768px) {
+        margin-bottom: unset;
+    }
+}
+
 .search {
     position: absolute;
     top: 0;

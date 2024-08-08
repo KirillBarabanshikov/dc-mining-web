@@ -19,7 +19,7 @@ export const SearchButton: FC<ISearchButtonProps> = ({ className }) => {
     return (
         <>
             <div onClick={() => setIsShown(true)} className={className}>
-                {matchesMD ? <SearchIcon2 /> : <SearchIcon />}
+                {matchesMD ? <SearchIcon2 className={styles.icon} /> : <SearchIcon className={styles.icon} />}
                 <span>Поиск</span>
             </div>
             <AnimatePresence>

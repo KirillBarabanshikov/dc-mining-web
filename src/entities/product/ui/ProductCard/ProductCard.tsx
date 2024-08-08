@@ -16,6 +16,7 @@ interface IProductCardProps {
     viewMode?: TProductCardViewMode;
 }
 
+// TODO
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,9 +26,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
     const dispatch = useAppDispatch();
     const favorites = useAppSelector((state) => state.favorites.products);
 
-    console.log(favorites);
-
-    const isFavorite = favorites.find((favorite) => favorite.id === product.id);
+    const isFavorite = favorites.find((favorite: any) => favorite.id === product.id);
 
     const onToggleFavorite = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -106,7 +105,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                                     e.stopPropagation();
                                     // setIsFavorite(!isFavorite);
                                 }}
-                                className={clsx(styles.iconButton, styles.isFavorite)}
+                                className={clsx(styles.iconButton)}
                             />
                         </div>
                     </div>
