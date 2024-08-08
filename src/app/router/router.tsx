@@ -13,7 +13,7 @@ import {
     CatalogPage,
     ProductPage,
 } from '@/pages';
-import { BaseLayout, LayoutWithoutFooter } from '@/app/layout';
+import { BaseLayout } from '@/app/layout';
 
 export const router = createBrowserRouter([
     {
@@ -47,11 +47,6 @@ export const router = createBrowserRouter([
                 path: '/product',
                 element: <ProductPage />,
             },
-        ],
-    },
-    {
-        element: <LayoutWithoutFooter />,
-        children: [
             {
                 path: '/faq',
                 element: <FAQPage />,
