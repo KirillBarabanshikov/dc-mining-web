@@ -86,7 +86,7 @@ export const SendRequestForm = () => {
                         <textarea placeholder={'Описание характера проблемы'} rows={2} {...register('description')} />
                         <File className={styles.file} reset={resetFile} {...register('mediaFile')} />
                     </div>
-                    <span className={styles.formats}>
+                    <span className={clsx(styles.formats, !!errors.mediaFile && styles.error)}>
                         Допустимые форматы файла: *.doc, *.docx, *.xls, *xlsx, *.pdf, *.png, *.jpg. Максимальный размер
                         файла: 10МБ!
                     </span>

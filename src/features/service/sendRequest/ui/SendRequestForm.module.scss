@@ -98,14 +98,18 @@
             line-height: 18.2px;
             color: var(--text-tertiary);
             margin-bottom: 20px;
+
+            &.error {
+                color: var(--text-accent);
+            }
         }
     }
 
     @media screen and (max-width: 768px) {
         .label {
             font-family: 'Roboto', sans-serif;
-            line-height: 14px;
-            margin-bottom: 16.8px;
+            font-size: 14px;
+            line-height: 16.8px;
         }
 
         .inputs {
