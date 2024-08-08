@@ -12,7 +12,7 @@ export const DeliveryAndPayment = () => {
                 <div className={styles.wrap}>
                     {payments &&
                         payments.map((delivery) => {
-                            return <DeliveryCard delivery={delivery} />;
+                            return <DeliveryCard key={delivery.id} delivery={delivery} />;
                         })}
                 </div>
             </section>
@@ -21,7 +21,7 @@ export const DeliveryAndPayment = () => {
                 <div className={styles.wrap}>
                     {deliveries &&
                         deliveries.map((delivery) => {
-                            return <DeliveryCard delivery={delivery} />;
+                            return <DeliveryCard key={delivery.id} delivery={delivery} />;
                         })}
                 </div>
             </section>
