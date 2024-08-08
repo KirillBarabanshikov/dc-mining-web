@@ -7,6 +7,7 @@ import { persistedStore, store } from './store';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
+import '@/shared/styles/index.css';
 
 export const App = () => {
     return (
