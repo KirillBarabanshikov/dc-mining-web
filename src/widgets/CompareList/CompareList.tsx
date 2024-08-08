@@ -24,6 +24,7 @@ export const CompareList = () => {
             </div>
             <ScrollContainer className={styles.list}>
                 {products &&
+                    !!compare.length &&
                     products.map((product) => {
                         return <ProductCompareCard key={product.id} product={product} onlyDifference={isOn} />;
                     })}
