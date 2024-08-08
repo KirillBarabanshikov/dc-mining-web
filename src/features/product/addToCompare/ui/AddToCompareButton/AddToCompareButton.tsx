@@ -14,20 +14,20 @@ interface IAddToCompareButton {
 
 export const AddToCompareButton: FC<IAddToCompareButton> = ({ product, className }) => {
     const dispatch = useDispatch();
-    const compare: IProduct[] = useSelector((state: RootState) => state.products.compare);
+    const compare: number[] = useSelector((state: RootState) => state.products.compare);
 
     const onClick = (e: React.MouseEvent) => {
         e.stopPropagation();
-        dispatch(toggleCompare(product));
+        dispatch(toggleCompare(product.id));
     };
 
-    const isCompare = compare.find((item) => item.id === product.id);
+    const isCompare = compare.includes(product.id);
 
     return (
         <IconButton
             icon={<StatisticIcon />}
             onClick={onClick}
-            className={clsx(!!isCompare && styles.isCompare, className)}
+            className={clsx(isCompare && styles.isCompare, className)}
         />
     );
 };

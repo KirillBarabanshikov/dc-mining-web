@@ -2,13 +2,12 @@
     .list {
         display: flex;
         gap: 32px;
-        overflow-x: scroll;
-        padding: 0 16px;
     }
 
     @media screen and (max-width: 768px) {
         .list {
             gap: 10px;
+            padding: 0 16px;
         }
 
         h2 {

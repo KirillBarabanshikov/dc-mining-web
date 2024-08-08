@@ -34,7 +34,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                         )}
                         <p className={styles.name}>{product.title}</p>
                         <div className={styles.specifications}>
-                            {product.value.map((value) => {
+                            {product.value.slice(0, 4).map((value) => {
                                 return (
                                     <div key={value.id}>
                                         {value.valueInKey} — {value.title} {value.unitInKey}

@@ -16,14 +16,15 @@ const productApi = baseApi.injectEndpoints({
                 body,
             }),
         }),
-        compareProducts: build.mutation({
-            query: (body) => ({
+        compareProducts: build.mutation<IProduct[], number[]>({
+            query: (productId) => ({
                 url: '/product/compare',
                 method: 'POST',
-                body,
+                body: { productId },
             }),
         }),
     }),
 });
 
-export const { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery, useCompareProductsMutation } =
+    productApi;

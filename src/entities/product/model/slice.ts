@@ -3,7 +3,7 @@ import { IProduct, TProductCardViewMode } from '@/entities/product';
 
 interface IInitialState {
     favorites: IProduct[];
-    compare: IProduct[];
+    compare: number[];
     viewMode: TProductCardViewMode;
 }
 
@@ -30,9 +30,9 @@ export const productsSlice = createSlice({
                 state.favorites = [...state.favorites, action.payload];
             }
         },
-        toggleCompare: (state, action: PayloadAction<IProduct>) => {
-            if (state.compare.find((product) => product.id === action.payload.id)) {
-                state.compare = state.compare.filter((product) => product.id !== action.payload.id);
+        toggleCompare: (state, action: PayloadAction<number>) => {
+            if (state.compare.includes(action.payload)) {
+                state.compare = state.compare.filter((id) => id !== action.payload);
             } else {
                 state.compare = [...state.compare, action.payload];
             }

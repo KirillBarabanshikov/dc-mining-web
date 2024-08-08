@@ -38,6 +38,7 @@ interface IProductValue {
     display: boolean;
     valueInKey: string;
     unitInKey: string;
+    difference?: boolean;
 }
 
 interface IProductImage {

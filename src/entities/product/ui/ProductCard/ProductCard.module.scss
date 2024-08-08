@@ -17,7 +17,14 @@
 
         .body {
             flex-direction: column;
-            justify-content: space-between;
+
+            .info {
+                height: 100%;
+
+                .name {
+                    height: 100%;
+                }
+            }
         }
     }
 

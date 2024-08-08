@@ -1,4 +1,4 @@
-export { ProductCard, RecentProductCard } from './ui';
+export { ProductCard, RecentProductCard, ProductCompareCard } from './ui';
 export {
     type TProductCardViewMode,
     type IProduct,
