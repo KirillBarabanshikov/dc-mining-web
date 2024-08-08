@@ -23,7 +23,7 @@ const AboutPage = () => {
                     <div className={'container'}>
                         <h2 className={'section-title-primary'}>О компании</h2>
                         <div className={styles.wrap}>
-                            <img src={BASE_URL + info?.image} alt={'About'} />
+                            {info && <img src={BASE_URL + info.image} alt={'About'} />}
                             {info && <p dangerouslySetInnerHTML={{ __html: info.description }} />}
                         </div>
                     </div>
