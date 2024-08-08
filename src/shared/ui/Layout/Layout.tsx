@@ -13,7 +13,7 @@ export const Layout: FC<ILayoutProps> = ({ headerSlot, footerSlot }) => {
         <div className={clsx(styles.layout, !footerSlot && styles.withoutFooter)}>
             {headerSlot}
             <main>
-                <Suspense>
+                <Suspense fallback={<div className={styles.placeholder} />}>
                     <Outlet />
                 </Suspense>
             </main>
