@@ -1,5 +1,6 @@
 .card {
     .header {
+        position: relative;
         background-color: var(--background-white);
         padding: 16px;
         border-radius: 20px;
@@ -12,6 +13,16 @@
 
         img {
             width: 100%;
+        }
+
+        .trash {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
         }
 
         .name {

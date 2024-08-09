@@ -44,7 +44,9 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             </div>
                         </div>
                         <div className={clsx(styles.wrap, styles.buttonsWrap)}>
-                            {!matches && viewMode === 'simple' && <p className={styles.price}>{product.price}</p>}
+                            {!matches && viewMode === 'simple' && (
+                                <p className={styles.price}>{formatter.format(product.price)}</p>
+                            )}
                             <div className={styles.buttons}>
                                 <Button
                                     size={'sm'}

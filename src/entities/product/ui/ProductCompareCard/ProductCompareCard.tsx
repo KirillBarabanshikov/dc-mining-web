@@ -4,7 +4,7 @@ import { IProduct } from '@/entities/product';
 import { Button } from '@/shared/ui';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { formatter, useMediaQuery } from '@/shared/lib';
-import { AddToFavoritesButton, OrderProductModal } from '@/features/product';
+import { AddToCompareButton, AddToFavoritesButton, OrderProductModal } from '@/features/product';
 import styles from './ProductCompareCard.module.scss';
 
 interface IProductCompareCardProps {
@@ -19,6 +19,7 @@ export const ProductCompareCard: FC<IProductCompareCardProps> = ({ product, only
     return (
         <div className={styles.card}>
             <div className={styles.header}>
+                <AddToCompareButton product={product} variant={'trash'} className={styles.trash} />
                 <img src={BASE_URL + product.images[0].image} alt={product.title} />
                 <p className={styles.name}>{product.title}</p>
                 <p className={styles.price}>{formatter.format(product.price)}</p>

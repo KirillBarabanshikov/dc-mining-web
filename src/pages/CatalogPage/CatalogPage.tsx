@@ -2,7 +2,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
-import { TProductCardViewMode } from '@/entities/product';
+import { TProductCardViewMode, useGetProductsQuery } from '@/entities/product';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
@@ -23,6 +23,7 @@ const CatalogPage = () => {
     const [isOn2, setIsOn2] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const { data: products } = useGetProductsQuery({});
 
     return (
         <div className={styles.catalog}>
@@ -33,7 +34,7 @@ const CatalogPage = () => {
                     <span>318 товаров</span>
                 </div>
                 {!matches && (
-                    <div className={styles.receipts}>
+                    <div className={clsx(styles.receipts, 'scrollbar-hide')}>
                         <div className={clsx(styles.receipt, styles.active)}>ASIC для майнинга Bitcoin</div>
                         <div className={clsx(styles.receipt)}>ASIC для майнинга LTC / DOGE</div>
                         <div className={clsx(styles.receipt)}>Мощные асики</div>
@@ -137,7 +138,7 @@ const CatalogPage = () => {
                                     />
                                 </div>
                             </div>
-                            {/*<ProductsList viewMode={viewMode} />*/}
+                            <ProductsList products={products} viewMode={viewMode} />
                         </div>
                     </>
                 ) : (
@@ -179,7 +180,7 @@ const CatalogPage = () => {
                             <div className={clsx(styles.receipt)}>Быстрая окупаемость</div>
                             <div className={clsx(styles.receipt)}>Прибыльные асики</div>
                         </div>
-                        <ProductsList viewMode={viewMode} className={styles.list} />
+                        <ProductsList products={products} viewMode={viewMode} className={styles.list} />
                     </>
                 )}
             </div>

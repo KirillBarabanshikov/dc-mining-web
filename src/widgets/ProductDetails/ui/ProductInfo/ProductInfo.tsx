@@ -15,11 +15,13 @@ export const ProductInfo: FC<IProductInfoProps> = ({ product }) => {
 
     return (
         <section className={styles.info}>
-            <div className={styles.tags}>
-                {product.tags.map((tag) => {
-                    return <Badge key={tag.id} text={tag.title} color={tag.color} />;
-                })}
-            </div>
+            {!!product.tags.length && (
+                <div className={styles.tags}>
+                    {product.tags.map((tag) => {
+                        return <Badge key={tag.id} text={tag.title} color={tag.color} />;
+                    })}
+                </div>
+            )}
             <div className={styles.content}>
                 <h1>{product.title}</h1>
                 <div className={styles.specifications}>
@@ -41,7 +43,9 @@ export const ProductInfo: FC<IProductInfoProps> = ({ product }) => {
                     <span className={styles.more}>Подробнее</span>
                 </div>
                 <div>
-                    <span className={styles.oldPrice}>{formatter.format(product.oldPrice)}</span>
+                    {!!product.oldPrice && (
+                        <span className={styles.oldPrice}>{formatter.format(product.oldPrice)}</span>
+                    )}
                     <p className={styles.price}>{formatter.format(product.price)}</p>
                 </div>
                 <div className={styles.buttons}>

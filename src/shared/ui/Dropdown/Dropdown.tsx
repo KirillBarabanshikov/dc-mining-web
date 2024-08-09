@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
-import { Modal } from '@/shared/ui';
+import { Checkbox, Modal, Radio } from '@/shared/ui';
 import ArrowIcon from '@/shared/assets/icons/arrow-down2.svg?react';
 import styles from './Dropdown.module.scss';
 
@@ -74,30 +74,34 @@ export const Dropdown: FC<IDropdownProps> = ({
                             <div className={styles.itemsWrap}>
                                 {items.map((item) => {
                                     return (
-                                        <div key={item.value} onClick={() => handleSelect(item.value)}>
-                                            {/*{multiply ? (*/}
-                                            {/*    <Checkbox*/}
-                                            {/*        label={item.label}*/}
-                                            {/*        checkboxSize={'sm'}*/}
-                                            {/*        className={clsx(*/}
-                                            {/*            styles.item,*/}
-                                            {/*            selectedValue.includes(item.value) && styles.selected,*/}
-                                            {/*        )}*/}
-                                            {/*        isChecked={selectedValue.includes(item.value)}*/}
-                                            {/*        disabled*/}
-                                            {/*    />*/}
-                                            {/*) : (*/}
-                                            {/*    <Radio*/}
-                                            {/*        label={item.label}*/}
-                                            {/*        radioSize={'sm'}*/}
-                                            {/*        className={clsx(*/}
-                                            {/*            styles.item,*/}
-                                            {/*            selectedValue.includes(item.value) && styles.selected,*/}
-                                            {/*        )}*/}
-                                            {/*        isChecked={selectedValue.includes(item.value)}*/}
-                                            {/*        disabled*/}
-                                            {/*    />*/}
-                                            {/*)}*/}
+                                        <div
+                                            key={item.value}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleSelect(item.value);
+                                            }}
+                                        >
+                                            {multiply ? (
+                                                <Checkbox
+                                                    label={item.label}
+                                                    className={clsx(
+                                                        styles.item,
+                                                        selectedValue.includes(item.value) && styles.selected,
+                                                    )}
+                                                    checked={selectedValue.includes(item.value)}
+                                                    onChange={(e) => console.log(e)}
+                                                />
+                                            ) : (
+                                                <Radio
+                                                    label={item.label}
+                                                    radioSize={'sm'}
+                                                    className={clsx(
+                                                        styles.item,
+                                                        selectedValue.includes(item.value) && styles.selected,
+                                                    )}
+                                                    isChecked={selectedValue.includes(item.value)}
+                                                />
+                                            )}
                                         </div>
                                     );
                                 })}
@@ -112,30 +116,32 @@ export const Dropdown: FC<IDropdownProps> = ({
                         <div className={styles.itemsWrap}>
                             {items.map((item) => {
                                 return (
-                                    <div key={item.value} onClick={() => handleSelect(item.value)}>
-                                        {/*{multiply ? (*/}
-                                        {/*    // <Checkbox*/}
-                                        {/*    //     label={item.label}*/}
-                                        {/*    //     checkboxSize={'sm'}*/}
-                                        {/*    //     className={clsx(*/}
-                                        {/*    //         styles.item,*/}
-                                        {/*    //         selectedValue.includes(item.value) && styles.selected,*/}
-                                        {/*    //     )}*/}
-                                        {/*    //     isChecked={selectedValue.includes(item.value)}*/}
-                                        {/*    //     disabled*/}
-                                        {/*    // />*/}
-                                        {/*) : (*/}
-                                        {/*    // <Radio*/}
-                                        {/*    //     label={item.label}*/}
-                                        {/*    //     radioSize={'sm'}*/}
-                                        {/*    //     className={clsx(*/}
-                                        {/*    //         styles.item,*/}
-                                        {/*    //         selectedValue.includes(item.value) && styles.selected,*/}
-                                        {/*    //     )}*/}
-                                        {/*    //     isChecked={selectedValue.includes(item.value)}*/}
-                                        {/*    //     disabled*/}
-                                        {/*    // />*/}
-                                        {/*)}*/}
+                                    <div
+                                        key={item.value}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleSelect(item.value);
+                                        }}
+                                    >
+                                        {multiply ? (
+                                            <Checkbox
+                                                label={item.label}
+                                                className={clsx(
+                                                    styles.item,
+                                                    selectedValue.includes(item.value) && styles.selected,
+                                                )}
+                                                checked={selectedValue.includes(item.value)}
+                                            />
+                                        ) : (
+                                            <Radio
+                                                label={item.label}
+                                                className={clsx(
+                                                    styles.item,
+                                                    selectedValue.includes(item.value) && styles.selected,
+                                                )}
+                                                checked={selectedValue.includes(item.value)}
+                                            />
+                                        )}
                                     </div>
                                 );
                             })}

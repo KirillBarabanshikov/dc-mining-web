@@ -7,11 +7,7 @@ import { useGetProductByIdQuery } from '@/entities/product';
 import { useGetAboutInfoQuery } from '@/entities/pageInfo';
 import styles from './ProductPage.module.scss';
 
-const paths = [
-    { name: 'Главная', path: '/' },
-    { name: 'ASIC майнеры', path: '/catalog' },
-    { name: 'Antminer S19k Pro – 120 TH', path: '/product' },
-];
+const paths = [{ name: 'Главная', path: '/' }];
 
 const ProductPage = () => {
     const { state } = useLocation();
@@ -19,10 +15,21 @@ const ProductPage = () => {
     const { data: info } = useGetAboutInfoQuery();
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
+    const breadcrumbsPaths = [
+        ...paths,
+        ...[
+            {
+                name: product?.category.title ?? '',
+                path: '/catalog',
+            },
+            { name: product?.title ?? '', path: `/product/${product?.slug}` },
+        ],
+    ];
+
     return (
         <div>
             <div className={'container'}>
-                <Breadcrumbs paths={paths} className={styles.breadcrumbs} />
+                <Breadcrumbs paths={breadcrumbsPaths} className={styles.breadcrumbs} />
                 <div className={'sections'}>
                     {product && <ProductDetails product={product} />}
                     {info && <AdvantagesDCMining advantages={info.advantages} />}
