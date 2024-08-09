@@ -4,12 +4,14 @@ import { IProduct, TProductCardViewMode } from '@/entities/product';
 interface IInitialState {
     favorites: IProduct[];
     compare: number[];
+    recent: IProduct[];
     viewMode: TProductCardViewMode;
 }
 
 const initialState: IInitialState = {
     favorites: [],
     compare: [],
+    recent: [],
     viewMode: 'tile',
 };
 
@@ -37,7 +39,15 @@ export const productsSlice = createSlice({
                 state.compare = [...state.compare, action.payload];
             }
         },
+        addToRecent: (state, action: PayloadAction<IProduct>) => {
+            if (state.recent.find((product) => product.id === action.payload.id)) return;
+            if (state.recent.length >= 10) {
+                state.recent = [action.payload, ...state.recent.slice(1)];
+                return;
+            }
+            state.recent = [action.payload, ...state.recent];
+        },
     },
 });
 
-export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare } = productsSlice.actions;
+export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare, addToRecent } = productsSlice.actions;

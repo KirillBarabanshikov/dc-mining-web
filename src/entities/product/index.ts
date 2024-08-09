@@ -9,5 +9,6 @@ export {
     clearCompare,
     productsSlice,
     clearFavorites,
+    addToRecent,
 } from './model';
 export { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery, useGetProductByIdQuery } from './api';

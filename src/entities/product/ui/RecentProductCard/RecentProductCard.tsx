@@ -1,13 +1,20 @@
-import img from '@/widgets/Bestsellers/img.png';
+import { FC } from 'react';
+import { IProduct } from '@/entities/product';
+import { formatter } from '@/shared/lib';
+import { BASE_URL } from '@/shared/consts';
 import styles from './RecentProductCard.module.scss';
 
-export const RecentProductCard = () => {
+interface IRecentProductCardProps {
+    product: IProduct;
+}
+
+export const RecentProductCard: FC<IRecentProductCardProps> = ({ product }) => {
     return (
         <article className={styles.card}>
-            <img src={`${img}`} alt={'Product'} />
+            <img src={BASE_URL + product.images[0].image} alt={product.title} />
             <div>
-                <p className={styles.name}>Asic майнер Bitmain Antminer S19K PRO 115 TH/s</p>
-                <p className={styles.price}>163 620 ₽</p>
+                <p className={styles.name}>{product.title}</p>
+                <p className={styles.price}>{formatter.format(product.price)}</p>
             </div>
         </article>
     );
