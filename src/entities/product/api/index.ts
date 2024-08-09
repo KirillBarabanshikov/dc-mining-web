@@ -3,4 +3,5 @@ export {
     useOrderProductMutation,
     useLazyGetProductsQuery,
     useCompareProductsMutation,
+    useGetProductByIdQuery,
 } from './productApi';

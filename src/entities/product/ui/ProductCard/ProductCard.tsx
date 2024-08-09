@@ -76,10 +76,10 @@ const ProductCardImage: FC<IProductCardImageProps> = ({ product }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     return (
-        <div className={styles.image}>
+        <div className={styles.image} onMouseLeave={() => setCurrentSlide(0)}>
             <img src={BASE_URL + `${product.images[currentSlide].image}`} alt={'product'} />
             <div className={styles.slides}>
-                {product.images.map((image, index) => {
+                {product.images.slice(0, 4).map((image, index) => {
                     return <span key={image.id} onMouseEnter={() => setCurrentSlide(index)} className={styles.slide} />;
                 })}
             </div>

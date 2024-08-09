@@ -1,3 +1,9 @@
+.swiper-slide-thumb-active {
+    outline: 1px solid var(--stroke-tertiary);
+    outline-offset: -1px;
+    border-radius: 12px;
+}
+
 .main-banner {
     position: relative;
 }

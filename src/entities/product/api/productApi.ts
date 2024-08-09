@@ -13,6 +13,11 @@ const productApi = baseApi.injectEndpoints({
                 return response.map((product) => ({ ...product, slug: createSlug(product.title) }));
             },
         }),
+        getProductById: build.query<IProduct, number>({
+            query: (id) => ({
+                url: `/products/${id}`,
+            }),
+        }),
         orderProduct: build.mutation({
             query: (body: IOrderProduct) => ({
                 url: '/buy',
@@ -30,5 +35,10 @@ const productApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery, useCompareProductsMutation } =
-    productApi;
+export const {
+    useGetProductsQuery,
+    useGetProductByIdQuery,
+    useOrderProductMutation,
+    useLazyGetProductsQuery,
+    useCompareProductsMutation,
+} = productApi;

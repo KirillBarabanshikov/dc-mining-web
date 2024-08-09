@@ -33,7 +33,7 @@ interface IProductCategory {
     countOfProducts: number;
 }
 
-interface IProductValue {
+export interface IProductValue {
     id: number;
     title: string;
     display: boolean;
@@ -42,7 +42,7 @@ interface IProductValue {
     difference?: boolean;
 }
 
-interface IProductImage {
+export interface IProductImage {
     id: number;
     image: string;
 }
