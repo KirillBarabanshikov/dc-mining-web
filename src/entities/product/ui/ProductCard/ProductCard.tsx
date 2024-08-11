@@ -34,13 +34,15 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             )}
                             <p className={styles.name}>{product.title}</p>
                             <div className={styles.specifications}>
-                                {product.value.slice(0, 4).map((value) => {
-                                    return (
-                                        <div key={value.id}>
-                                            {value.valueInKey} — {value.title} {value.unitInKey}
-                                        </div>
-                                    );
-                                })}
+                                {product.value
+                                    .filter((value) => value.display)
+                                    .map((value) => {
+                                        return (
+                                            <div key={value.id}>
+                                                {value.valueInKey} — {value.title} {value.unitInKey}
+                                            </div>
+                                        );
+                                    })}
                             </div>
                         </div>
                         <div className={clsx(styles.wrap, styles.buttonsWrap)}>
