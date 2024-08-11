@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { IconButton } from '@/shared/ui';
 import HeartIcon from '@/shared/assets/icons/heart2.svg?react';
-import { RootState } from '@/shared/types';
 import { IProduct, toggleFavorite } from '@/entities/product';
 import styles from './AddToFavoritesButton.module.scss';
 
@@ -13,8 +12,8 @@ interface IAddToFavoritesButton {
 }
 
 export const AddToFavoritesButton: FC<IAddToFavoritesButton> = ({ product, className }) => {
-    const dispatch = useDispatch();
-    const favorites: IProduct[] = useSelector((state: RootState) => state.products.favorites);
+    const dispatch = useAppDispatch();
+    const { favorites } = useAppSelector((state) => state.products);
 
     const onClick = (e: React.MouseEvent) => {
         e.preventDefault();

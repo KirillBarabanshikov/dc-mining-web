@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { IconButton } from '@/shared/ui';
 import StatisticIcon from '@/shared/assets/icons/statistic2.svg?react';
-import { RootState } from '@/shared/types';
 import { IProduct, toggleCompare } from '@/entities/product';
 import TrashIcon from '@/shared/assets/icons/trash.svg?react';
 import styles from './AddToCompareButton.module.scss';
@@ -15,8 +14,8 @@ interface IAddToCompareButton {
 }
 
 export const AddToCompareButton: FC<IAddToCompareButton> = ({ product, variant = 'default', className }) => {
-    const dispatch = useDispatch();
-    const compare: number[] = useSelector((state: RootState) => state.products.compare);
+    const dispatch = useAppDispatch();
+    const { compare } = useAppSelector((state) => state.products);
 
     const onClick = (e: React.MouseEvent) => {
         e.preventDefault();
