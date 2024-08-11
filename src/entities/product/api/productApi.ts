@@ -17,6 +17,9 @@ const productApi = baseApi.injectEndpoints({
             query: (id) => ({
                 url: `/products/${id}`,
             }),
+            transformResponse: (response: IProduct) => {
+                return { ...response, slug: createSlug(response.title) };
+            },
         }),
         orderProduct: build.mutation({
             query: (body: IOrderProduct) => ({

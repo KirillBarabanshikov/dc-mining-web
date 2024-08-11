@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Breadcrumbs } from '@/shared/ui';
 import { AdvantagesDCMining, CallMeBanner, ProductDetails, RecentProductsList } from '@/widgets';
-import { useMediaQuery } from '@/shared/lib';
+import { useAppDispatch, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
-import { useGetProductByIdQuery } from '@/entities/product';
+import { addToRecent, useGetProductByIdQuery } from '@/entities/product';
 import { useGetAboutInfoQuery } from '@/entities/pageInfo';
 import styles from './ProductPage.module.scss';
 
@@ -14,6 +15,11 @@ const ProductPage = () => {
     const { data: product } = useGetProductByIdQuery(id as string);
     const { data: info } = useGetAboutInfoQuery();
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        product && dispatch(addToRecent(product));
+    }, [product]);
 
     const breadcrumbsPaths = [
         ...paths,

@@ -40,12 +40,17 @@ export const productsSlice = createSlice({
             }
         },
         addToRecent: (state, action: PayloadAction<IProduct>) => {
-            if (state.recent.find((product) => product.id === action.payload.id)) return;
-            if (state.recent.length >= 10) {
-                state.recent = [action.payload, ...state.recent.slice(1)];
-                return;
+            let recentProducts = state.recent;
+
+            if (recentProducts.find((product) => product.id === action.payload.id)) {
+                recentProducts = recentProducts.filter((product) => product.id !== action.payload.id);
             }
-            state.recent = [action.payload, ...state.recent];
+
+            if (recentProducts.length >= 10) {
+                recentProducts = recentProducts.slice(0, -1);
+            }
+
+            state.recent = [action.payload, ...recentProducts];
         },
     },
 });
