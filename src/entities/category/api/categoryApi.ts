@@ -1,6 +1,7 @@
 import { baseApi } from '@/shared/api';
 import { ICategory } from '../model';
 import { mapCategory } from '../lib';
+import { ICategoryDto } from './types.ts';
 
 const categoryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -8,9 +9,15 @@ const categoryApi = baseApi.injectEndpoints({
             query: () => ({
                 url: '/product_categories',
             }),
-            transformResponse: (response: ICategory[]) => response.map(mapCategory),
+            transformResponse: (response: ICategoryDto[]) => response.map(mapCategory),
+        }),
+        getCategoryById: build.query<ICategory, string | number>({
+            query: (id) => ({
+                url: `/product_categories/${id}`,
+            }),
+            transformResponse: (response: ICategoryDto) => mapCategory(response),
         }),
     }),
 });
 
-export const { useGetCategoriesQuery } = categoryApi;
+export const { useGetCategoriesQuery, useGetCategoryByIdQuery } = categoryApi;

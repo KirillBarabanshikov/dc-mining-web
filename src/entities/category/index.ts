@@ -1,3 +1,3 @@
-export { useGetCategoriesQuery } from './api';
+export { useGetCategoriesQuery, useGetCategoryByIdQuery } from './api';
 export type { ICategory } from './model';
 export { CategoryCard } from './ui';

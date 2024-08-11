@@ -24,6 +24,8 @@ const ComparePage = () => {
                             Очистить
                         </Button>
                     </div>
+                </div>
+                <div className={'container scrollable'}>
                     <CompareList />
                 </div>
             </section>

@@ -11,4 +11,11 @@ export {
     clearFavorites,
     addToRecent,
 } from './model';
-export { useGetProductsQuery, useOrderProductMutation, useLazyGetProductsQuery, useGetProductByIdQuery } from './api';
+export {
+    useGetProductsQuery,
+    useOrderProductMutation,
+    useLazyGetProductsQuery,
+    useGetProductByIdQuery,
+    useCompareProductsMutation,
+    useGetProductsByCategoryIdQuery,
+} from './api';

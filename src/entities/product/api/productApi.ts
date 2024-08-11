@@ -1,6 +1,7 @@
 import { baseApi } from '@/shared/api';
 import { IProduct, IOrderProduct } from '@/entities/product';
-import { createSlug } from '@/shared/lib';
+import { IProductDto } from './types.ts';
+import { mapProduct } from '../lib';
 
 const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -9,20 +10,16 @@ const productApi = baseApi.injectEndpoints({
                 url: '/products',
                 params: params,
             }),
-            transformResponse: (response: IProduct[]) => {
-                return response.map((product) => ({ ...product, slug: createSlug(product.title) }));
-            },
+            transformResponse: (response: IProductDto[]) => response.map(mapProduct),
         }),
         getProductById: build.query<IProduct, number | string>({
             query: (id) => ({
                 url: `/products/${id}`,
             }),
-            transformResponse: (response: IProduct) => {
-                return { ...response, slug: createSlug(response.title) };
-            },
+            transformResponse: (response: IProductDto) => mapProduct(response),
         }),
-        orderProduct: build.mutation({
-            query: (body: IOrderProduct) => ({
+        orderProduct: build.mutation<void, IOrderProduct>({
+            query: (body) => ({
                 url: '/buy',
                 method: 'POST',
                 body,
@@ -35,6 +32,12 @@ const productApi = baseApi.injectEndpoints({
                 body: { productId },
             }),
         }),
+        getProductsByCategoryId: build.query<IProduct[], number | string>({
+            query: (categoryId) => ({
+                url: `/productCategoryShow/${categoryId}`,
+            }),
+            transformResponse: (response: IProductDto[]) => response.map(mapProduct),
+        }),
     }),
 });
 
@@ -44,4 +47,5 @@ export const {
     useOrderProductMutation,
     useLazyGetProductsQuery,
     useCompareProductsMutation,
+    useGetProductsByCategoryIdQuery,
 } = productApi;

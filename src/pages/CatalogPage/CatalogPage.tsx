@@ -2,7 +2,8 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
-import { TProductCardViewMode, useGetProductsQuery } from '@/entities/product';
+import { TProductCardViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
+import { useGetCategoryByIdQuery } from '@/entities/category';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
@@ -11,26 +12,27 @@ import SimpleIcon2 from '@/shared/assets/icons/view-mode-simple2.svg?react';
 import FilterIcon from '@/shared/assets/icons/filter.svg?react';
 import styles from './CatalogPage.module.scss';
 import { OrderCallHelpBanner } from '@/features/call';
+import { useParams } from 'react-router-dom';
 
-const paths = [
-    { name: 'Главная', path: '/' },
-    { name: 'ASIC майнеры', path: '/catalog' },
-];
+const paths = [{ name: 'Главная', path: '/' }];
 
 const CatalogPage = () => {
+    const { id } = useParams();
+    const { data: products } = useGetProductsByCategoryIdQuery(id as string);
+    const { data: category } = useGetCategoryByIdQuery(id as string);
+
     const [viewMode, setViewMode] = useState<TProductCardViewMode>('tile');
     const [isOn, setIsOn] = useState(false);
     const [isOn2, setIsOn2] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const { data: products } = useGetProductsQuery({});
 
     return (
         <div className={styles.catalog}>
             <div className={'container'}>
-                <Breadcrumbs paths={paths} />
+                <Breadcrumbs paths={[...paths, { name: category?.name ?? '', path: '' }]} />
                 <div className={styles.catalogTitle}>
-                    <h1>ASIC майнеры</h1>
+                    <h1>{category?.name}</h1>
                     <span>318 товаров</span>
                 </div>
                 {!matches && (
