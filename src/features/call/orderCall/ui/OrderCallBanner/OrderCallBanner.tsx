@@ -5,10 +5,12 @@ import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
+import { useGetPersonalDataQuery } from '@/entities/personalData';
 import miner from '@/shared/assets/images/data-center/miner.png';
 import styles from './OrderCallBanner.module.scss';
 
 export const OrderCallBanner = () => {
+    const { data: personalData } = useGetPersonalDataQuery();
     const [orderCall, { isLoading, isError, isSuccess, reset: resetOrderCall }] = useOrderCallMutation();
     const {
         handleSubmit,
@@ -51,7 +53,7 @@ export const OrderCallBanner = () => {
                                 label={
                                     <>
                                         Я согласен на обработку{' '}
-                                        <a href={'/'} target={'_blank'}>
+                                        <a href={personalData?.image} target={'_blank'}>
                                             персональных данных
                                         </a>
                                     </>

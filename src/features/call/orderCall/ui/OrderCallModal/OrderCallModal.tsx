@@ -6,6 +6,7 @@ import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/order
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
+import { useGetPersonalDataQuery } from '@/entities/personalData';
 import styles from './OrderCallModal.module.scss';
 
 interface IOrderCallModalProps {
@@ -16,6 +17,7 @@ interface IOrderCallModalProps {
 }
 
 export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOpen, onClose }) => {
+    const { data: personalData } = useGetPersonalDataQuery();
     const [orderCall, { isLoading, isError, isSuccess, reset: resetOrderCall }] = useOrderCallMutation();
     const {
         handleSubmit,
@@ -60,7 +62,7 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
                         label={
                             <>
                                 Я согласен на обработку{' '}
-                                <a href={'/'} target={'_blank'}>
+                                <a href={personalData?.image} target={'_blank'}>
                                     персональных данных
                                 </a>
                             </>

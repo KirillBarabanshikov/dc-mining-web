@@ -2,10 +2,11 @@ import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Checkbox, Input, NumberInput } from '@/shared/ui';
-import { orderProductFormScheme, TOrderProductFormScheme } from '../../model';
 import { formatter, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { IProduct, useOrderProductMutation } from '@/entities/product';
+import { useGetPersonalDataQuery } from '@/entities/personalData';
+import { orderProductFormScheme, TOrderProductFormScheme } from '../../model';
 import styles from './OrderProductForm.module.scss';
 
 interface IOrderProductFormProps {
@@ -16,6 +17,7 @@ interface IOrderProductFormProps {
 }
 
 export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product, setIsFinally, setIsError }) => {
+    const { data: personalData } = useGetPersonalDataQuery();
     const [price, setPrice] = useState(product.price);
     const [count, setCount] = useState(1);
     const matches = useMediaQuery(MAX_WIDTH_MD);
@@ -72,7 +74,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
                     label={
                         <>
                             Я согласен на обработку{' '}
-                            <a href={'/'} target={'_blank'}>
+                            <a href={personalData?.image} target={'_blank'}>
                                 персональных данных
                             </a>
                         </>

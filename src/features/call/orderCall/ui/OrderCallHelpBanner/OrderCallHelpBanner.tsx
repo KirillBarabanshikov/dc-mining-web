@@ -1,11 +1,13 @@
+import { useForm } from 'react-hook-form';
 import { Button, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
 import { useOrderCallMutation } from '@/entities/call';
-import { useForm } from 'react-hook-form';
+import { useGetPersonalDataQuery } from '@/entities/personalData';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './OrderCallHelpBanner.module.scss';
 
 export const OrderCallHelpBanner = () => {
+    const { data: personalData } = useGetPersonalDataQuery();
     const [orderCall, { isLoading, isError, isSuccess, reset: resetOrderCall }] = useOrderCallMutation();
     const {
         handleSubmit,
@@ -29,7 +31,7 @@ export const OrderCallHelpBanner = () => {
                     label={
                         <>
                             Я согласен на обработку{' '}
-                            <a href={'/'} target={'_blank'}>
+                            <a href={personalData?.image} target={'_blank'}>
                                 персональных данных
                             </a>
                         </>
