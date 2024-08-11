@@ -79,7 +79,7 @@ const ProductCardImage: FC<IProductCardImageProps> = ({ product }) => {
 
     return (
         <div className={styles.image} onMouseLeave={() => setCurrentSlide(0)}>
-            <img src={BASE_URL + `${product.images[currentSlide].image}`} alt={'product'} />
+            <img src={BASE_URL + `${product.images[currentSlide]?.image}`} alt={'product'} />
             <div className={styles.slides}>
                 {product.images.length >= 2 &&
                     product.images.slice(0, 4).map((image, index) => {

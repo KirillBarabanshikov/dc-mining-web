@@ -79,3 +79,14 @@
         transform: translateX(0);
     }
 }
+
+.product-slider .swiper-slide {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    border-radius: 8px;
+    transition: outline-color 300ms ease-out;
+}
+
+.product-slider .swiper-slide-thumb-active {
+    outline: 1px solid var(--stroke-tertiary);
+}

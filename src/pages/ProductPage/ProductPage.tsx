@@ -15,18 +15,20 @@ const ProductPage = () => {
     const { data: info } = useGetAboutInfoQuery();
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
-    const breadcrumbsPaths = [...paths];
+    const breadcrumbsPaths = [
+        ...paths,
+        { name: 'ASIC майнеры', path: '' },
+        { name: product?.title ?? '', path: `/product/${product?.id}/${product?.slug}` },
+    ];
 
     return (
-        <div>
-            <div className={'container'}>
-                <Breadcrumbs paths={breadcrumbsPaths} className={styles.breadcrumbs} />
-                <div className={'sections'}>
-                    {product && <ProductDetails product={product} />}
-                    {info && <AdvantagesDCMining advantages={info.advantages} />}
-                    {!matches && <RecentProductsList />}
-                    <CallMeBanner />
-                </div>
+        <div className={'container'}>
+            <Breadcrumbs paths={breadcrumbsPaths} className={styles.breadcrumbs} />
+            <div className={'sections'}>
+                {product && <ProductDetails product={product} />}
+                {info && <AdvantagesDCMining advantages={info.advantages} />}
+                {!matches && <RecentProductsList />}
+                <CallMeBanner />
             </div>
         </div>
     );

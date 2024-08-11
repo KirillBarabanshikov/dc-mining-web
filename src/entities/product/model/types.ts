@@ -15,7 +15,7 @@ export interface IProduct {
     oldPrice?: number;
     price: number;
     description: string;
-    category: IProductCategory;
+    category?: IProductCategory;
     value: IProductValue[];
     images: IProductImage[];
     tags: IProductTag[];
@@ -38,7 +38,7 @@ export interface IProductValue {
     title: string;
     display: boolean;
     valueInKey: string;
-    unitInKey: string;
+    unitInKey?: string;
     difference?: boolean;
 }
 

@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
-import { IProduct, IProductValue } from '@/entities/product';
-import styles from '@/pages/ProductPage/ProductPage.module.scss';
 import clsx from 'clsx';
+import { IProduct, IProductValue } from '@/entities/product';
 import { DeliveryAndPayment } from '@/widgets';
+import styles from './ProductsTabs.module.scss';
 
 interface IProductTabsProps {
     product: IProduct;
