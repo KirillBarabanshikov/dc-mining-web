@@ -17,7 +17,7 @@ export const ProductCompareCard: FC<IProductCompareCardProps> = ({ product, only
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
-        <div className={clsx(styles.card, 'compare-card')}>
+        <div className={clsx(styles.card)}>
             <div className={styles.header}>
                 <AddToCompareButton product={product} variant={'trash'} className={styles.trash} />
                 <img src={BASE_URL + product.images[0].image} alt={product.title} />

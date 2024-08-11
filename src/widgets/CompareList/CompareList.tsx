@@ -31,7 +31,7 @@ export const CompareList = () => {
                 <span>Только отличия</span>
                 <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
             </div>
-            <ScrollContainer className={styles.list} ignoreElements={'compare-card'}>
+            <ScrollContainer className={styles.list} nativeMobileScroll>
                 {compareList.map((product) => {
                     return <ProductCompareCard key={product.id} product={product} onlyDifference={isOn} />;
                 })}

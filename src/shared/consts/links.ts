@@ -10,5 +10,5 @@ export const ABOUT_LINKS = [
     { title: 'О компании', path: '/about' },
     { title: 'СМИ о нас', path: '/news' },
     { title: 'FAQ', path: '/faq' },
-    { title: 'Полезные ссылки', path: '' },
+    { title: 'Полезные ссылки', path: '/links' },
 ];
