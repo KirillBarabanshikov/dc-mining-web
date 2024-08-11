@@ -12,6 +12,8 @@ import {
     ComparePage,
     CatalogPage,
     ProductPage,
+    LinksPage,
+    LinkDetailsPage,
 } from '@/pages';
 import { BaseLayout } from '@/app/layout';
 
@@ -66,6 +68,14 @@ export const router = createBrowserRouter([
             {
                 path: '/favorites',
                 element: <FavoritesPage />,
+            },
+            {
+                path: '/links',
+                element: <LinksPage />,
+            },
+            {
+                path: '/links/:id/:slug',
+                element: <LinkDetailsPage />,
             },
         ],
     },

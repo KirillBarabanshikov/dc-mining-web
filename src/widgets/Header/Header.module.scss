@@ -89,6 +89,7 @@
                     padding: 8px;
                     border-radius: 8px;
                     transition: background-color 300ms ease-out;
+                    white-space: nowrap;
 
                     &.active {
                         background-color: rgba(231, 238, 255, 0.8);
