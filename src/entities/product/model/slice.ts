@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProduct, TProductCardViewMode } from '@/entities/product';
 
-interface IInitialState {
+type TInitialState = {
     favorites: IProduct[];
     compare: number[];
     recent: IProduct[];
     viewMode: TProductCardViewMode;
-}
+};
 
-const initialState: IInitialState = {
+const initialState: TInitialState = {
     favorites: [],
     compare: [],
     recent: [],

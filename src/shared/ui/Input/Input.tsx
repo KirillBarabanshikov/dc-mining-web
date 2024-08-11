@@ -1,21 +1,11 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
 import styles from './Input.module.scss';
 
-interface IInputProps {
-    type?: 'text' | 'number';
-    placeholder?: string;
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
     icon?: ReactNode;
     theme?: 'white' | 'dark';
-    disabled?: boolean;
     error?: boolean;
-    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value?: string;
-    autoFocus?: boolean;
-    style?: object;
-    className?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, IInputProps>(

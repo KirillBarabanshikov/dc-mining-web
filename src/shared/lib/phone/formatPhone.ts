@@ -2,7 +2,7 @@ function cleanPhoneNumber(number: string): string {
     const cleanedPhoneNumber = ('' + number).replace(/\D/g, '');
 
     if (cleanedPhoneNumber.length !== 11) {
-        throw new Error('Неверный формат номера телефона');
+        return number;
     }
 
     return cleanedPhoneNumber;

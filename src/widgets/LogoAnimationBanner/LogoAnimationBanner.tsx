@@ -1,8 +1,9 @@
+import { MAX_WIDTH_MD } from '@/shared/consts';
+import { useMediaQuery } from '@/shared/lib';
 import animationPC from '@/shared/assets/animations/logo-animation-pc.webm';
 import animationMobile from '@/shared/assets/animations/logo-animation-mobile.webm';
 import styles from './LogoAnimationBanner.module.scss';
-import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD } from '@/shared/consts';
+
 export const LogoAnimationBanner = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
 

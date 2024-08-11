@@ -1,1 +1,1 @@
-export { store, persistedStore } from './store.ts';
+export { store, persistedStore, type RootState, type AppDispatch } from './store.ts';

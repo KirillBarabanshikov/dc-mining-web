@@ -1,13 +1,10 @@
-export interface ICategory {
+export interface ICategoryDto {
     id: number;
     title: string;
-    image: string;
+    image?: string;
     display: boolean;
-    name: string;
-    slug: string;
     subCategory: {
         id: number;
         title: string;
     }[];
-    link?: string;
 }

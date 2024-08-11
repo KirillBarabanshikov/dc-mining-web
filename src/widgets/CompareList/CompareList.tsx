@@ -1,20 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { Switch } from '@/shared/ui';
-import { ProductCompareCard } from '@/entities/product';
+import { IProduct, ProductCompareCard } from '@/entities/product';
 import { useCompareProductsMutation } from '@/entities/product/api';
-import { RootState } from '@/shared/types';
+import { useAppSelector } from '@/shared/lib';
 import styles from './CompareList.module.scss';
 
 export const CompareList = () => {
     const [isOn, setIsOn] = useState(false);
-    const compare: number[] = useSelector((state: RootState) => state.products.compare);
-    const [compareProducts, { data: products }] = useCompareProductsMutation();
+    const [compareList, setCompareList] = useState<IProduct[]>([]);
+    const { compare } = useAppSelector((state) => state.products);
+    const [compareProducts] = useCompareProductsMutation();
 
     useEffect(() => {
-        compare.length && compareProducts(compare);
-    }, [compare, compareProducts]);
+        setProducts();
+    }, [compare]);
+
+    const setProducts = async () => {
+        if (compare.length) {
+            await compareProducts(compare)
+                .unwrap()
+                .then((data) => setCompareList(data));
+        } else {
+            setCompareList([]);
+        }
+    };
 
     return (
         <>
@@ -23,11 +33,9 @@ export const CompareList = () => {
                 <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
             </div>
             <ScrollContainer className={styles.list}>
-                {products &&
-                    !!compare.length &&
-                    products.map((product) => {
-                        return <ProductCompareCard key={product.id} product={product} onlyDifference={isOn} />;
-                    })}
+                {compareList.map((product) => {
+                    return <ProductCompareCard key={product.id} product={product} onlyDifference={isOn} />;
+                })}
             </ScrollContainer>
         </>
     );

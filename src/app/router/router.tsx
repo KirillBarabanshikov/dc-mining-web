@@ -40,11 +40,11 @@ export const router = createBrowserRouter([
                 element: <ComparePage />,
             },
             {
-                path: '/catalog/:slug',
+                path: '/catalog/:id/:slug',
                 element: <CatalogPage />,
             },
             {
-                path: '/product/:slug',
+                path: '/product/:id/:slug',
                 element: <ProductPage />,
             },
             {

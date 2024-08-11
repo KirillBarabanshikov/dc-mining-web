@@ -9,7 +9,7 @@ interface ICategoryCardProps {
 
 export const CategoryCard: FC<ICategoryCardProps> = ({ category }) => {
     return (
-        <Link to={`/catalog/${category.slug}`} state={category.id} className={styles.categoryCard}>
+        <Link to={category.link ?? `/catalog/${category.id}/${category.slug}`} className={styles.categoryCard}>
             <img src={category.image} alt={category.title} />
             <p>{category.name}</p>
         </Link>

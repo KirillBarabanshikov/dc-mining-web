@@ -1,15 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/shared/ui';
-import { useMediaQuery } from '@/shared/lib';
-import { clearFavorites, IProduct, ProductCard } from '@/entities/product';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
+import { clearFavorites, ProductCard } from '@/entities/product';
 import { MAX_WIDTH_MD } from '@/shared/consts';
-import { RootState } from '@/shared/types';
 import styles from './FavoritesPage.module.scss';
 
 const FavoritesPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const favorites: IProduct[] = useSelector((state: RootState) => state.products.favorites);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const { favorites } = useAppSelector((state) => state.products);
 
     return (
         <section className={styles.favorites}>

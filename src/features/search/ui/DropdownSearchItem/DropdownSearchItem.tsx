@@ -12,7 +12,7 @@ export const DropdownSearchItem: FC<IDropdownSearchItem> = ({ product }) => {
     const navigate = useNavigate();
 
     return (
-        <div className={styles.item} onClick={() => navigate('/product')}>
+        <div className={styles.item} onClick={() => navigate(`/product/${product.id}/${product.slug}`)}>
             <SearchIcon className={styles.icon} />
             <div className={styles.name}>{product.title}</div>
         </div>

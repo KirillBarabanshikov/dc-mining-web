@@ -13,7 +13,7 @@ const productApi = baseApi.injectEndpoints({
                 return response.map((product) => ({ ...product, slug: createSlug(product.title) }));
             },
         }),
-        getProductById: build.query<IProduct, number>({
+        getProductById: build.query<IProduct, number | string>({
             query: (id) => ({
                 url: `/products/${id}`,
             }),

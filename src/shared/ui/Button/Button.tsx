@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC } from 'react';
-import styles from './Button.module.scss';
 import clsx from 'clsx';
+import styles from './Button.module.scss';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'solid' | 'outline';

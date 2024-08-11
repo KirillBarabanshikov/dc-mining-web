@@ -1,13 +1,13 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useSendRequestMutation } from '@/entities/service';
-import { useForm } from 'react-hook-form';
-import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Radio, File, Modal, StateModal } from '@/shared/ui';
+import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import styles from './SendRequestForm.module.scss';
-import { useState } from 'react';
 
 export const SendRequestForm = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);

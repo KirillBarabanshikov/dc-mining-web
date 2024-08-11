@@ -81,17 +81,6 @@ a {
     }
 }
 
-input[type='search']::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-input[type='search'] {
-    -ms-clear: none;
-    -webkit-clear: none;
-    clear: none;
-}
-
 .container-wide {
     max-width: 1840px;
     margin: 0 auto;
@@ -133,6 +122,75 @@ input[type='search'] {
     gap: 120px;
 }
 
+.list {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.8px;
+}
+
+.list ul,
+ol {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.list li::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--text-accent-blue);
+}
+
+input[type='checkbox'],
+input[type='radio'],
+input[type='file'] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+.scrollbar-hide {
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .list {
+        font-size: 14px;
+        line-height: 18.2px;
+    }
+
+    .list ul,
+    ol {
+        gap: 8px;
+    }
+}
+
 @media screen and (max-width: 992px) {
     .section-title,
     .section-title-primary,
@@ -169,80 +227,9 @@ input[type='search'] {
     .scrollable {
         padding: unset;
     }
-}
 
-.list {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20.8px;
-}
-
-.list ul,
-ol {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.list li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.list li::before {
-    content: '';
-    display: block;
-    width: 4px;
-    height: 4px;
-    border-radius: 4px;
-    background-color: var(--text-accent-blue);
-}
-
-@media screen and (max-width: 1200px) {
-    .list {
-        font-size: 14px;
-        line-height: 18.2px;
-    }
-
-    .list ul,
-    ol {
-        gap: 8px;
-    }
-}
-
-@media screen and (max-width: 768px) {
     .list {
         font-size: 12px;
         line-height: 15.6px;
-    }
-}
-
-input[type='checkbox'],
-input[type='radio'],
-input[type='file'] {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type='number'] {
-    -moz-appearance: textfield;
-}
-
-.scrollbar-hide {
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        width: 0;
     }
 }

@@ -19,7 +19,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
 
     return (
         <>
-            <Link to={`/product/${product.slug}`} state={product.id}>
+            <Link to={`/product/${product.id}/${product.slug}`}>
                 <article className={clsx(styles.productCard, styles[viewMode])}>
                     <ProductCardImage product={product} />
                     <div className={styles.body}>
@@ -81,16 +81,23 @@ const ProductCardImage: FC<IProductCardImageProps> = ({ product }) => {
         <div className={styles.image} onMouseLeave={() => setCurrentSlide(0)}>
             <img src={BASE_URL + `${product.images[currentSlide].image}`} alt={'product'} />
             <div className={styles.slides}>
-                {product.images.slice(0, 4).map((image, index) => {
-                    return <span key={image.id} onMouseEnter={() => setCurrentSlide(index)} className={styles.slide} />;
-                })}
+                {product.images.length >= 2 &&
+                    product.images.slice(0, 4).map((image, index) => {
+                        return (
+                            <span key={image.id} onMouseEnter={() => setCurrentSlide(index)} className={styles.slide} />
+                        );
+                    })}
             </div>
             <div className={styles.pagination}>
-                {product.images.slice(0, 4).map((image, index) => {
-                    return (
-                        <span key={image.id} className={clsx(styles.bullet, index === currentSlide && styles.active)} />
-                    );
-                })}
+                {product.images.length >= 2 &&
+                    product.images.slice(0, 4).map((image, index) => {
+                        return (
+                            <span
+                                key={image.id}
+                                className={clsx(styles.bullet, index === currentSlide && styles.active)}
+                            />
+                        );
+                    })}
             </div>
         </div>
     );

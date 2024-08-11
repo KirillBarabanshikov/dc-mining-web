@@ -21,6 +21,7 @@ interface IDropdownProps {
     className?: string;
 }
 
+// TODO
 export const Dropdown: FC<IDropdownProps> = ({
     items,
     defaultValue,
@@ -94,12 +95,10 @@ export const Dropdown: FC<IDropdownProps> = ({
                                             ) : (
                                                 <Radio
                                                     label={item.label}
-                                                    radioSize={'sm'}
                                                     className={clsx(
                                                         styles.item,
                                                         selectedValue.includes(item.value) && styles.selected,
                                                     )}
-                                                    isChecked={selectedValue.includes(item.value)}
                                                 />
                                             )}
                                         </div>

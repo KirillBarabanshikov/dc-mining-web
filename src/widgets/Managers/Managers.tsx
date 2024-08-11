@@ -5,8 +5,8 @@ import { Button } from '@/shared/ui';
 import { MAX_WIDTH_LG } from '@/shared/consts';
 import manager from '@/shared/assets/images/managers/manager.png';
 import calculator from '@/shared/assets/images/managers/calculator.png';
-import styles from './Managers.module.scss';
 import { OrderCallModal } from '@/features/call';
+import styles from './Managers.module.scss';
 
 interface IManagersProps {
     className?: string;

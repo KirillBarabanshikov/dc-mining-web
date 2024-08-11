@@ -1,6 +1,6 @@
+import { Fragment } from 'react';
 import { CategoryCard, useGetCategoriesQuery } from '@/entities/category';
 import styles from './Offers.module.scss';
-import { Fragment } from 'react';
 
 export const Offers = () => {
     const { data: categories } = useGetCategoriesQuery();

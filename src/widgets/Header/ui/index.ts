@@ -1,2 +1,2 @@
+export { SideMenu } from './SideMenu';
 export { HorizontalMenu } from './HorizontalMenu';
-export { MainMenu } from './MainMenu';
