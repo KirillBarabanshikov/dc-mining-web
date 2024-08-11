@@ -4,15 +4,31 @@
     gap: 12px;
     cursor: pointer;
 
-    .radio {
-        width: 20px;
-        height: 20px;
-        border-radius: 20px;
+    &.lg {
+        .radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
 
-        .ellipse {
-            width: 8px;
-            height: 8px;
-            border-radius: 8px;
+            .ellipse {
+                width: 8px;
+                height: 8px;
+                border-radius: 8px;
+            }
+        }
+    }
+
+    &.sm {
+        .radio {
+            width: 16px;
+            height: 16px;
+            border-radius: 16px;
+
+            .ellipse {
+                width: 6px;
+                height: 6px;
+                border-radius: 6px;
+            }
         }
     }
 

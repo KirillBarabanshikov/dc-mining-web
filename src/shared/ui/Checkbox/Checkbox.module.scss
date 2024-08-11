@@ -1,14 +1,36 @@
 .wrap {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+
+    &.lg {
+        gap: 12px;
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 4px;
+        }
+    }
+
+    &.sm {
+        gap: 8px;
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            border-radius: 3.2px;
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
 
     .checkbox {
         position: relative;
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        border-radius: 4px;
         transition:
             background-color 300ms ease-out,
             border-color 300ms ease-out;

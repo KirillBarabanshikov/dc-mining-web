@@ -91,6 +91,7 @@ export const Dropdown: FC<IDropdownProps> = ({
                                                     )}
                                                     checked={selectedValue.includes(item.value)}
                                                     onChange={(e) => console.log(e)}
+                                                    sizing={'sm'}
                                                 />
                                             ) : (
                                                 <Radio
@@ -99,6 +100,9 @@ export const Dropdown: FC<IDropdownProps> = ({
                                                         styles.item,
                                                         selectedValue.includes(item.value) && styles.selected,
                                                     )}
+                                                    checked={selectedValue.includes(item.value)}
+                                                    onChange={(e) => console.log(e)}
+                                                    sizing={'sm'}
                                                 />
                                             )}
                                         </div>
@@ -130,6 +134,8 @@ export const Dropdown: FC<IDropdownProps> = ({
                                                     selectedValue.includes(item.value) && styles.selected,
                                                 )}
                                                 checked={selectedValue.includes(item.value)}
+                                                onChange={(e) => console.log(e)}
+                                                sizing={'sm'}
                                             />
                                         ) : (
                                             <Radio
@@ -139,6 +145,8 @@ export const Dropdown: FC<IDropdownProps> = ({
                                                     selectedValue.includes(item.value) && styles.selected,
                                                 )}
                                                 checked={selectedValue.includes(item.value)}
+                                                onChange={(e) => console.log(e)}
+                                                sizing={'sm'}
                                             />
                                         )}
                                     </div>
