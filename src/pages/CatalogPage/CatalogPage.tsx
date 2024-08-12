@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { setViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
@@ -24,11 +24,6 @@ const CatalogPage = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [currentPage, setCurrentPage] = useState(1);
     const viewMode = useAppSelector((state) => state.products.viewMode);
-    const dispatch = useAppDispatch();
-
-    const setMode = (viewMode: 'tile' | 'simple') => {
-        dispatch(setViewMode(viewMode));
-    };
 
     return (
         <div className={styles.catalog}>
@@ -38,15 +33,7 @@ const CatalogPage = () => {
                     <h1>{category?.name}</h1>
                     <span>318 товаров</span>
                 </div>
-                {!matches && (
-                    <div className={clsx(styles.receipts, 'scrollbar-hide')}>
-                        <div className={clsx(styles.receipt, styles.active)}>ASIC для майнинга Bitcoin</div>
-                        <div className={clsx(styles.receipt)}>ASIC для майнинга LTC / DOGE</div>
-                        <div className={clsx(styles.receipt)}>Мощные асики</div>
-                        <div className={clsx(styles.receipt)}>Быстрая окупаемость</div>
-                        <div className={clsx(styles.receipt)}>Прибыльные асики</div>
-                    </div>
-                )}
+                {!matches && <Receipts />}
             </div>
             <div className={styles.catalogContent}>
                 {!matches ? (
@@ -56,30 +43,9 @@ const CatalogPage = () => {
                             <div className={styles.sort}>
                                 <div className={styles.sortDropdown}>
                                     <span className={styles.sortLabel}>Сортировка:</span>
-                                    <Dropdown
-                                        defaultValue={'1'}
-                                        items={[
-                                            { label: 'Сначала популярные', value: '1' },
-                                            { label: 'По скидке (%)', value: '2' },
-                                            { label: 'Сначала недорогие', value: '3' },
-                                            { label: 'Сначала дорогие', value: '4' },
-                                        ]}
-                                        className={styles.dropdown}
-                                        onChange={(value) => console.log(value)}
-                                    />
+                                    <SortDropdown />
                                 </div>
-                                <div className={styles.viewModeWrap}>
-                                    <IconButton
-                                        icon={<SimpleIcon />}
-                                        onClick={() => setMode('simple')}
-                                        className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
-                                    />
-                                    <IconButton
-                                        icon={<TileIcon />}
-                                        onClick={() => setMode('tile')}
-                                        className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
-                                    />
-                                </div>
+                                <ViewModeButtons viewMode={viewMode} />
                             </div>
                             <ProductsList products={products} viewMode={viewMode} />
                         </div>
@@ -87,43 +53,16 @@ const CatalogPage = () => {
                 ) : (
                     <>
                         <div className={styles.actions}>
-                            <Dropdown
-                                defaultValue={'1'}
-                                items={[
-                                    { label: 'Сначала популярные', value: '1' },
-                                    { label: 'По скидке (%)', value: '2' },
-                                    { label: 'Сначала недорогие', value: '3' },
-                                    { label: 'Сначала дорогие', value: '4' },
-                                ]}
-                                variant={'modal'}
-                                onChange={(value) => console.log(value)}
-                            />
+                            <SortDropdown />
                             <div className={styles.filtersWrap}>
                                 <button className={styles.filterButton} onClick={() => setIsOpen(true)}>
                                     <FilterIcon />
                                     Фильтры
                                 </button>
-                                <div className={styles.viewModeWrap}>
-                                    <IconButton
-                                        icon={<SimpleIcon2 />}
-                                        onClick={() => setMode('simple')}
-                                        className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
-                                    />
-                                    <IconButton
-                                        icon={<TileIcon />}
-                                        onClick={() => setMode('tile')}
-                                        className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
-                                    />
-                                </div>
+                                <ViewModeButtons viewMode={viewMode} />
                             </div>
                         </div>
-                        <div className={clsx(styles.receipts, 'scrollbar-hide')}>
-                            <div className={clsx(styles.receipt, styles.active)}>ASIC для майнинга Bitcoin</div>
-                            <div className={clsx(styles.receipt)}>ASIC для майнинга LTC / DOGE</div>
-                            <div className={clsx(styles.receipt)}>Мощные асики</div>
-                            <div className={clsx(styles.receipt)}>Быстрая окупаемость</div>
-                            <div className={clsx(styles.receipt)}>Прибыльные асики</div>
-                        </div>
+                        <Receipts />
                         <ProductsList products={products} viewMode={viewMode} className={styles.list} />
                     </>
                 )}
@@ -140,7 +79,7 @@ const CatalogPage = () => {
                 {matches && <OrderCallHelpBanner />}
                 <Managers className={styles.managers} />
             </div>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={clsx(styles.modal, 'scrollbar-hide')}>
                 <Filters />
             </Modal>
         </div>
@@ -150,15 +89,30 @@ const CatalogPage = () => {
 export default CatalogPage;
 
 const Filters = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isOn, setIsOn] = useState(false);
     const [isOn2, setIsOn2] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const params = useRef<Record<string, string>>({});
+
+    const handleOnChange = ({ key, value }: { key: string; value: string[] }) => {
+        if (value.length) {
+            params.current[key] = value.join(',');
+        } else {
+            delete params.current[key];
+        }
+    };
+
+    const set = () => {
+        setSearchParams(params.current);
+    };
 
     return (
         <div className={styles.filters}>
             <Dropdown
                 label={'Предложения'}
-                defaultValue={'1'}
+                defaultValue={searchParams.get('offers') ? searchParams.get('offers')?.split(',') : ['1']}
+                onChange={(value) => handleOnChange({ key: 'offers', value })}
                 items={[
                     { label: 'В наличии', value: '1' },
                     { label: 'Скидка', value: '2' },
@@ -170,7 +124,6 @@ const Filters = () => {
             />
             <Dropdown
                 label={'Цена'}
-                defaultValue={'1'}
                 items={[
                     { label: 'В наличии', value: '1' },
                     { label: 'Скидка', value: '2' },
@@ -181,18 +134,19 @@ const Filters = () => {
             />
             <Dropdown
                 label={'Бренд'}
-                defaultValue={'1'}
+                defaultValue={searchParams.get('brand') ? searchParams.get('brand')?.split(',') : undefined}
                 items={[
-                    { label: 'В наличии', value: '1' },
-                    { label: 'Скидка', value: '2' },
-                    { label: 'Новинка', value: '3' },
+                    { label: 'Bitmain', value: 'bitmain' },
+                    { label: 'Whatsminer', value: 'whatsminer' },
+                    { label: 'IceRiver', value: 'iceriver' },
                 ]}
+                onChange={(value) => handleOnChange({ key: 'brand', value })}
                 multiply
                 physical
+                open={!!searchParams.get('brand')}
             />
             <Dropdown
                 label={'Алгоритм'}
-                defaultValue={'1'}
                 items={[
                     { label: 'В наличии', value: '1' },
                     { label: 'Скидка', value: '2' },
@@ -212,12 +166,69 @@ const Filters = () => {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <Button size={'md'}>Применить</Button>
+                <Button size={'md'} onClick={set}>
+                    Применить
+                </Button>
                 <Button size={'md'} variant={'outline'}>
                     Сбросить
                 </Button>
             </div>
             {!matches && <OrderCallHelpBanner />}
+        </div>
+    );
+};
+
+const Receipts = () => {
+    return (
+        <div className={clsx(styles.receipts, 'scrollbar-hide')}>
+            <div className={clsx(styles.receipt, styles.active)}>ASIC для майнинга Bitcoin</div>
+            <div className={clsx(styles.receipt)}>ASIC для майнинга LTC / DOGE</div>
+            <div className={clsx(styles.receipt)}>Мощные асики</div>
+            <div className={clsx(styles.receipt)}>Быстрая окупаемость</div>
+            <div className={clsx(styles.receipt)}>Прибыльные асики</div>
+        </div>
+    );
+};
+
+const SortDropdown = () => {
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
+    return (
+        <Dropdown
+            defaultValue={['1']}
+            items={[
+                { label: 'Сначала популярные', value: '1' },
+                { label: 'По скидке (%)', value: '2' },
+                { label: 'Сначала недорогие', value: '3' },
+                { label: 'Сначала дорогие', value: '4' },
+            ]}
+            variant={matches ? 'modal' : 'dropdown'}
+            className={styles.dropdown}
+            onChange={(value) => console.log(value)}
+        />
+    );
+};
+
+const ViewModeButtons: FC<{ viewMode: 'tile' | 'simple' }> = ({ viewMode }) => {
+    const dispatch = useAppDispatch();
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
+    const setMode = (viewMode: 'tile' | 'simple') => {
+        dispatch(setViewMode(viewMode));
+    };
+
+    return (
+        <div className={styles.viewModeWrap}>
+            <IconButton
+                icon={matches ? <SimpleIcon2 /> : <SimpleIcon />}
+                onClick={() => setMode('simple')}
+                className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
+            />
+            <IconButton
+                icon={<TileIcon />}
+                onClick={() => setMode('tile')}
+                className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
+            />
         </div>
     );
 };
