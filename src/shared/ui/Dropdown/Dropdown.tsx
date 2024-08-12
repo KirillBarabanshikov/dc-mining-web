@@ -12,7 +12,7 @@ interface IDropdownItem {
 
 interface IDropdownProps {
     items: IDropdownItem[];
-    defaultValue: string;
+    defaultValue?: string[];
     multiply?: boolean;
     label?: string;
     open?: boolean;
@@ -24,7 +24,7 @@ interface IDropdownProps {
 
 export const Dropdown: FC<IDropdownProps> = ({
     items,
-    defaultValue,
+    defaultValue = [],
     multiply = false,
     label = '',
     open = false,
@@ -33,7 +33,7 @@ export const Dropdown: FC<IDropdownProps> = ({
     onChange,
     className,
 }) => {
-    const [selectedValue, setSelectedValue] = useState<string[]>([defaultValue]);
+    const [selectedValue, setSelectedValue] = useState<string[]>([...defaultValue]);
     const [isOpen, setIsOpen] = useState(open);
 
     const handleSelect = (value: string) => {
@@ -114,7 +114,7 @@ const ItemsList: FC<IItemsListProps> = ({ items, handleSelect, multiply, selecte
             exit={withAnimation ? { height: 0, opacity: 0 } : {}}
         >
             <div className={styles.itemsWrap}>
-                <div className={clsx(styles.items, 'scrollbar-hide')}>
+                <div className={clsx(styles.items)}>
                     {items.map((item) => {
                         return (
                             <div

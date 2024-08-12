@@ -59,6 +59,8 @@
             .items {
                 max-height: 208px;
                 overflow: auto;
+                scrollbar-color: var(--stroke-fourthiary) var(--background-tonal);
+                scrollbar-width: thin;
             }
 
             .item {
