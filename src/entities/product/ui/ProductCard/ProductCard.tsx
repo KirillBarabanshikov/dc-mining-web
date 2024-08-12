@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Badge, Button } from '@/shared/ui';
-import { IProduct, TProductCardViewMode } from '@/entities/product';
+import { IProduct } from '@/entities/product';
 import { formatter, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { AddToCompareButton, AddToFavoritesButton, OrderProductModal } from '@/features/product';
@@ -10,7 +10,7 @@ import styles from './ProductCard.module.scss';
 
 interface IProductCardProps {
     product: IProduct;
-    viewMode?: TProductCardViewMode;
+    viewMode?: 'tile' | 'simple';
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {

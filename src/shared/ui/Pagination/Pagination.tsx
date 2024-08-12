@@ -40,18 +40,25 @@ export const Pagination: FC<IPaginationProps> = ({ currentPage, length, onChange
             <div onClick={handlePrev} className={styles.item}>
                 <ArrowIcon />
             </div>
-            {Array.from({ length }).map((_, index) => {
-                const pageNumber = index + 1;
-                return (
-                    <div
-                        key={index}
-                        onClick={() => handleSelectPage(pageNumber)}
-                        className={clsx(styles.item, pageNumber === currentPage && styles.current)}
-                    >
-                        {pageNumber}
-                    </div>
-                );
-            })}
+            {Array.from({ length })
+                .slice(0, 8)
+                .map((_, index) => {
+                    const pageNumber =
+                        currentPage <= 4
+                            ? index + 1
+                            : currentPage >= length - 3
+                              ? length - 7 + index
+                              : currentPage - 4 + index;
+                    return (
+                        <div
+                            key={pageNumber}
+                            onClick={() => handleSelectPage(pageNumber)}
+                            className={clsx(styles.item, pageNumber === currentPage && styles.current)}
+                        >
+                            {pageNumber}
+                        </div>
+                    );
+                })}
             <div onClick={handleNext} className={clsx(styles.item, styles.right)}>
                 <ArrowIcon />
             </div>

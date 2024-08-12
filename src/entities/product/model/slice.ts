@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProduct, TProductCardViewMode } from '@/entities/product';
+import { IProduct } from '@/entities/product';
 
 type TInitialState = {
     favorites: IProduct[];
     compare: number[];
     recent: IProduct[];
-    viewMode: TProductCardViewMode;
+    viewMode: 'tile' | 'simple';
 };
 
 const initialState: TInitialState = {
@@ -52,7 +52,11 @@ export const productsSlice = createSlice({
 
             state.recent = [action.payload, ...recentProducts];
         },
+        setViewMode: (state, action: PayloadAction<'tile' | 'simple'>) => {
+            state.viewMode = action.payload;
+        },
     },
 });
 
-export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare, addToRecent } = productsSlice.actions;
+export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare, addToRecent, setViewMode } =
+    productsSlice.actions;

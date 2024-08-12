@@ -22,7 +22,6 @@ interface IDropdownProps {
     className?: string;
 }
 
-// TODO
 export const Dropdown: FC<IDropdownProps> = ({
     items,
     defaultValue,

@@ -1,7 +1,5 @@
 import { ICategory } from '@/entities/category';
 
-export type TProductCardViewMode = 'tile' | 'simple';
-
 export interface IOrderProduct {
     name: string;
     phone: string;

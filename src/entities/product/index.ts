@@ -1,6 +1,5 @@
 export { ProductCard, RecentProductCard, ProductCompareCard } from './ui';
 export {
-    type TProductCardViewMode,
     type IProduct,
     type IOrderProduct,
     type IProductValue,
@@ -10,6 +9,7 @@ export {
     productsSlice,
     clearFavorites,
     addToRecent,
+    setViewMode,
 } from './model';
 export {
     useGetProductsQuery,

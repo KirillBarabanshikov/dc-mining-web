@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import clsx from 'clsx';
-import { IProduct, ProductCard, TProductCardViewMode } from '@/entities/product';
+import { IProduct, ProductCard } from '@/entities/product';
 import styles from './ProductsList.module.scss';
 
 interface IProductsListProps {
-    viewMode?: TProductCardViewMode;
+    viewMode?: 'tile' | 'simple';
     products?: IProduct[];
     className?: string;
 }

@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { useParams } from 'react-router-dom';
 import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
-import { TProductCardViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
+import { setViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
 import { useGetCategoryByIdQuery } from '@/entities/category';
-import { useMediaQuery } from '@/shared/lib';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { OrderCallHelpBanner } from '@/features/call';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
@@ -20,10 +20,15 @@ const CatalogPage = () => {
     const { id } = useParams();
     const { data: products } = useGetProductsByCategoryIdQuery(id as string);
     const { data: category } = useGetCategoryByIdQuery(id as string);
-    const [viewMode, setViewMode] = useState<TProductCardViewMode>('tile');
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [currentPage, setCurrentPage] = useState(1);
+    const viewMode = useAppSelector((state) => state.products.viewMode);
+    const dispatch = useAppDispatch();
+
+    const setMode = (viewMode: 'tile' | 'simple') => {
+        dispatch(setViewMode(viewMode));
+    };
 
     return (
         <div className={styles.catalog}>
@@ -66,12 +71,12 @@ const CatalogPage = () => {
                                 <div className={styles.viewModeWrap}>
                                     <IconButton
                                         icon={<SimpleIcon />}
-                                        onClick={() => setViewMode('simple')}
+                                        onClick={() => setMode('simple')}
                                         className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
                                     />
                                     <IconButton
                                         icon={<TileIcon />}
-                                        onClick={() => setViewMode('tile')}
+                                        onClick={() => setMode('tile')}
                                         className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
                                     />
                                 </div>
@@ -101,12 +106,12 @@ const CatalogPage = () => {
                                 <div className={styles.viewModeWrap}>
                                     <IconButton
                                         icon={<SimpleIcon2 />}
-                                        onClick={() => setViewMode('simple')}
+                                        onClick={() => setMode('simple')}
                                         className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
                                     />
                                     <IconButton
                                         icon={<TileIcon />}
-                                        onClick={() => setViewMode('tile')}
+                                        onClick={() => setMode('tile')}
                                         className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
                                     />
                                 </div>
@@ -129,7 +134,7 @@ const CatalogPage = () => {
                         Показать ещё
                     </Button>
                     {!matches && (
-                        <Pagination currentPage={currentPage} length={9} onChange={(page) => setCurrentPage(page)} />
+                        <Pagination currentPage={currentPage} length={40} onChange={(page) => setCurrentPage(page)} />
                     )}
                 </div>
                 {matches && <OrderCallHelpBanner />}
