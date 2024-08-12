@@ -1,28 +1,29 @@
-import { DeliveryCard, useGetDeliveriesQuery, useGetPaymentsQuery } from '@/entities/delivery';
+import { FC } from 'react';
+import { DeliveryAndPaymentCard, IDeliveryAndPayment } from '@/entities/deliveryAndPayment';
 import styles from './DeliveryAndPayment.module.scss';
 
-export const DeliveryAndPayment = () => {
-    const { data: deliveries } = useGetDeliveriesQuery();
-    const { data: payments } = useGetPaymentsQuery();
+interface IDeliveryAndPaymentProps {
+    payments: IDeliveryAndPayment[];
+    deliveries: IDeliveryAndPayment[];
+}
 
+export const DeliveryAndPayment: FC<IDeliveryAndPaymentProps> = ({ payments, deliveries }) => {
     return (
         <div className={styles.delivery}>
             <section>
                 <h2>Оплата</h2>
                 <div className={styles.wrap}>
-                    {payments &&
-                        payments.map((delivery) => {
-                            return <DeliveryCard key={delivery.id} delivery={delivery} />;
-                        })}
+                    {payments.map((data) => {
+                        return <DeliveryAndPaymentCard key={data.id} data={data} />;
+                    })}
                 </div>
             </section>
             <section>
                 <h2>Доставка</h2>
                 <div className={styles.wrap}>
-                    {deliveries &&
-                        deliveries.map((delivery) => {
-                            return <DeliveryCard key={delivery.id} delivery={delivery} />;
-                        })}
+                    {deliveries.map((data) => {
+                        return <DeliveryAndPaymentCard key={data.id} data={data} />;
+                    })}
                 </div>
             </section>
         </div>

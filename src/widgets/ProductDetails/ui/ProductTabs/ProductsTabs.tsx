@@ -33,7 +33,7 @@ export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
                     [
                         <ProductDescription description={product.description} />,
                         <ProductSpecifications value={product.value} />,
-                        <DeliveryAndPayment />,
+                        <DeliveryAndPayment deliveries={product.deliveries} payments={product.payments} />,
                     ][currentTab]
                 }
             </div>
@@ -42,7 +42,9 @@ export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
 };
 
 const ProductDescription: FC<{ description: string }> = ({ description }) => {
-    return <div className={styles.productDescription} dangerouslySetInnerHTML={{ __html: description }} />;
+    return (
+        <div className={clsx(styles.productDescription, 'list')} dangerouslySetInnerHTML={{ __html: description }} />
+    );
 };
 
 const ProductSpecifications: FC<{ value: IProductValue[] }> = ({ value }) => {

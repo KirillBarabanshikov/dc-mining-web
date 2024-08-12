@@ -1,12 +1,16 @@
 import { Breadcrumbs } from '@/shared/ui';
 import { DeliveryAndPayment } from '@/widgets';
+import { useGetDeliveriesQuery, useGetPaymentsQuery } from '@/entities/deliveryAndPayment';
 
 const paths = [
     { name: 'Главная', path: '/' },
-    { name: 'Доставка и оплата', path: '/delivery' },
+    { name: 'Доставка и оплата', path: '/delivery-delivery' },
 ];
 
-const DeliveryPage = () => {
+const DeliveryAndPaymentPage = () => {
+    const { data: deliveries } = useGetDeliveriesQuery();
+    const { data: payments } = useGetPaymentsQuery();
+
     return (
         <div>
             <div className={'container'}>
@@ -15,11 +19,11 @@ const DeliveryPage = () => {
             <section>
                 <div className={'container'}>
                     <h1 className={'section-title-secondary'}>Доставка и оплата</h1>
-                    <DeliveryAndPayment />
+                    {deliveries && payments && <DeliveryAndPayment deliveries={deliveries} payments={payments} />}
                 </div>
             </section>
         </div>
     );
 };
 
-export default DeliveryPage;
+export default DeliveryAndPaymentPage;

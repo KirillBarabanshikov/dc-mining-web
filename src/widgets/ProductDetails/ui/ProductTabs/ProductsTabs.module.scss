@@ -53,58 +53,32 @@
 }
 
 .productDescription {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-
-    h4 {
+    h1 {
         font-size: 24px;
         line-height: 28.8px;
+        margin-bottom: 20px;
     }
 
-    h5 {
-        font-size: 20px;
-        line-height: 24px;
-    }
-
-    h3 {
-        font-size: 32px;
-        line-height: 38.4px;
-    }
-
-    p {
+    div {
         line-height: 20.8px;
         color: var(--text-secondary);
+
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
     }
 
-    @media screen and (max-width: 910px) {
-        h4 {
+    @media screen and (max-width: 768px) {
+        h1 {
             font-size: 20px;
             line-height: 24px;
         }
 
-        h5 {
-            font-size: 16px;
-            line-height: 19.2px;
-        }
-
-        h3 {
-            font-size: 24px;
-            line-height: 28.8px;
-        }
-
-        p {
+        div {
             font-family: 'Roboto', sans-serif;
             font-size: 14px;
             line-height: 18.2px;
-            color: var(--text-secondary);
         }
-    }
-
-    section {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
     }
 }
 

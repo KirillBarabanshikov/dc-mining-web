@@ -5,7 +5,7 @@ import {
     LeasingPage,
     DataCenterPage,
     FAQPage,
-    DeliveryPage,
+    DeliveryAndPaymentPage,
     NewsPage,
     ServicePage,
     FavoritesPage,
@@ -54,8 +54,8 @@ export const router = createBrowserRouter([
                 element: <FAQPage />,
             },
             {
-                path: '/delivery',
-                element: <DeliveryPage />,
+                path: '/delivery-payment',
+                element: <DeliveryAndPaymentPage />,
             },
             {
                 path: '/news',

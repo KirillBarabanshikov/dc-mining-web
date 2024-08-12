@@ -1,4 +1,4 @@
-export interface IDelivery {
+export interface IDeliveryAndPayment {
     id: number;
     image: string;
     title: string;
