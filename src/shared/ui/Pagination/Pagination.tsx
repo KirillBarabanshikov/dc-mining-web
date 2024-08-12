@@ -34,10 +34,10 @@ export const Pagination: FC<IPaginationProps> = ({ currentPage, length, onChange
 
     return (
         <div className={clsx(styles.pagination, className)}>
-            <div className={styles.item} onClick={handleStart}>
+            <div onClick={handleStart} className={clsx(styles.item, currentPage === 1 && styles.disabled)}>
                 <DoubleArrowIcon />
             </div>
-            <div onClick={handlePrev} className={styles.item}>
+            <div onClick={handlePrev} className={clsx(styles.item, currentPage === 1 && styles.disabled)}>
                 <ArrowIcon />
             </div>
             {Array.from({ length })
@@ -59,10 +59,16 @@ export const Pagination: FC<IPaginationProps> = ({ currentPage, length, onChange
                         </div>
                     );
                 })}
-            <div onClick={handleNext} className={clsx(styles.item, styles.right)}>
+            <div
+                onClick={handleNext}
+                className={clsx(styles.item, styles.right, currentPage === length && styles.disabled)}
+            >
                 <ArrowIcon />
             </div>
-            <div className={clsx(styles.item, styles.right)} onClick={handleEnd}>
+            <div
+                onClick={handleEnd}
+                className={clsx(styles.item, styles.right, currentPage === length && styles.disabled)}
+            >
                 <DoubleArrowIcon />
             </div>
         </div>
