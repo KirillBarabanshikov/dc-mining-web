@@ -5,30 +5,58 @@ import DoubleArrowIcon from '@/shared/assets/icons/double-arrow-left.svg?react';
 import styles from './Pagination.module.scss';
 
 interface IPaginationProps {
+    currentPage: number;
+    length: number;
+    onChange: (page: number) => void;
     className?: string;
 }
 
-export const Pagination: FC<IPaginationProps> = ({ className }) => {
+export const Pagination: FC<IPaginationProps> = ({ currentPage, length, onChange, className }) => {
+    const handleNext = () => {
+        onChange(currentPage >= length ? currentPage : currentPage + 1);
+    };
+
+    const handlePrev = () => {
+        onChange(currentPage <= 1 ? currentPage : currentPage - 1);
+    };
+
+    const handleSelectPage = (page: number) => {
+        onChange(page);
+    };
+
+    const handleStart = () => {
+        onChange(1);
+    };
+
+    const handleEnd = () => {
+        onChange(length);
+    };
+
     return (
         <div className={clsx(styles.pagination, className)}>
-            <div className={styles.item}>
+            <div className={styles.item} onClick={handleStart}>
                 <DoubleArrowIcon />
             </div>
-            <div className={styles.item}>
+            <div onClick={handlePrev} className={styles.item}>
                 <ArrowIcon />
             </div>
-            {Array.from({ length: 9 }).map((_, index) => {
+            {Array.from({ length }).map((_, index) => {
+                const pageNumber = index + 1;
                 return (
-                    <div key={index} className={clsx(styles.item, index === 0 && styles.current)}>
-                        {index + 1}
+                    <div
+                        key={index}
+                        onClick={() => handleSelectPage(pageNumber)}
+                        className={clsx(styles.item, pageNumber === currentPage && styles.current)}
+                    >
+                        {pageNumber}
                     </div>
                 );
             })}
-            <div className={clsx(styles.item, styles.right)}>
-                <DoubleArrowIcon />
-            </div>
-            <div className={clsx(styles.item, styles.right)}>
+            <div onClick={handleNext} className={clsx(styles.item, styles.right)}>
                 <ArrowIcon />
+            </div>
+            <div className={clsx(styles.item, styles.right)} onClick={handleEnd}>
+                <DoubleArrowIcon />
             </div>
         </div>
     );

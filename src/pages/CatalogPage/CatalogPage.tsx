@@ -23,6 +23,7 @@ const CatalogPage = () => {
     const [viewMode, setViewMode] = useState<TProductCardViewMode>('tile');
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const [currentPage, setCurrentPage] = useState(1);
 
     return (
         <div className={styles.catalog}>
@@ -127,7 +128,9 @@ const CatalogPage = () => {
                     <Button variant={'outline'} isWide size={matches ? 'md' : 'lg'}>
                         Показать ещё
                     </Button>
-                    {!matches && <Pagination />}
+                    {!matches && (
+                        <Pagination currentPage={currentPage} length={9} onChange={(page) => setCurrentPage(page)} />
+                    )}
                 </div>
                 {matches && <OrderCallHelpBanner />}
                 <Managers className={styles.managers} />
