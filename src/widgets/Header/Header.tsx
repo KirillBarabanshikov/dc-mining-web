@@ -51,13 +51,13 @@ export const Header: FC = () => {
                             <FavoritesOption />
                             <CompareOption />
                             <div className={styles.contacts}>
-                                <a href={'TELEGRAM'} target={'_blank'} className={styles.option}>
+                                <a href={''} target={'_blank'} className={styles.option}>
                                     <div className={styles.icon}>
                                         <TelegramIcon />
                                     </div>
                                     <span>Telegram</span>
                                 </a>
-                                <a href={'WHATSAPP'} target={'_blank'} className={styles.option}>
+                                <a href={''} target={'_blank'} className={styles.option}>
                                     <div className={styles.icon}>
                                         <WhatsappIcon />
                                     </div>
