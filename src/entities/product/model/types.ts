@@ -1,3 +1,5 @@
+import { ICategory } from '@/entities/category';
+
 export type TProductCardViewMode = 'tile' | 'simple';
 
 export interface IOrderProduct {
@@ -15,7 +17,7 @@ export interface IProduct {
     oldPrice?: number;
     price: number;
     description: string;
-    category?: IProductCategory;
+    category?: ICategory;
     value: IProductValue[];
     images: IProductImage[];
     tags: IProductTag[];
@@ -25,13 +27,13 @@ export interface IProduct {
     slug: string;
 }
 
-interface IProductCategory {
-    id: number;
-    title: string;
-    image: string;
-    display: boolean;
-    countOfProducts: number;
-}
+// interface IProductCategory {
+//     id: number;
+//     title: string;
+//     image: string;
+//     display: boolean;
+//     countOfProducts: number;
+// }
 
 export interface IProductValue {
     id: number;
