@@ -52,11 +52,14 @@
         overflow: hidden;
 
         .itemsWrap {
-            display: flex;
-            flex-direction: column;
             background-color: var(--background-white);
             padding: 24px 8px 8px 8px;
             border-radius: 0 0 8px 8px;
+
+            .items {
+                max-height: 208px;
+                overflow: auto;
+            }
 
             .item {
                 width: 100%;
@@ -82,11 +85,11 @@
 
         .list {
             position: unset;
+            border-bottom: 1px solid rgba(241, 241, 241, 1);
 
             .itemsWrap {
                 padding: 24px 0;
                 border-radius: unset;
-                border-bottom: 1px solid rgba(241, 241, 241, 1);
             }
         }
     }

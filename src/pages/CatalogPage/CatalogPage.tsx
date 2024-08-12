@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import clsx from 'clsx';
+import { useParams } from 'react-router-dom';
 import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { TProductCardViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
 import { useGetCategoryByIdQuery } from '@/entities/category';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
+import { OrderCallHelpBanner } from '@/features/call';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
 import SimpleIcon from '@/shared/assets/icons/view-mode-simple.svg?react';
 import SimpleIcon2 from '@/shared/assets/icons/view-mode-simple2.svg?react';
 import FilterIcon from '@/shared/assets/icons/filter.svg?react';
 import styles from './CatalogPage.module.scss';
-import { OrderCallHelpBanner } from '@/features/call';
-import { useParams } from 'react-router-dom';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
@@ -20,10 +20,7 @@ const CatalogPage = () => {
     const { id } = useParams();
     const { data: products } = useGetProductsByCategoryIdQuery(id as string);
     const { data: category } = useGetCategoryByIdQuery(id as string);
-
     const [viewMode, setViewMode] = useState<TProductCardViewMode>('tile');
-    const [isOn, setIsOn] = useState(false);
-    const [isOn2, setIsOn2] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
@@ -48,70 +45,7 @@ const CatalogPage = () => {
             <div className={styles.catalogContent}>
                 {!matches ? (
                     <>
-                        <div className={styles.filters}>
-                            <Dropdown
-                                label={'Предложения'}
-                                defaultValue={'1'}
-                                items={[
-                                    { label: 'В наличии', value: '1' },
-                                    { label: 'Скидка', value: '2' },
-                                    { label: 'Новинка', value: '3' },
-                                ]}
-                                multiply
-                                open
-                                physical
-                            />
-                            <Dropdown
-                                label={'Цена'}
-                                defaultValue={'1'}
-                                items={[
-                                    { label: 'В наличии', value: '1' },
-                                    { label: 'Скидка', value: '2' },
-                                    { label: 'Новинка', value: '3' },
-                                ]}
-                                multiply
-                                physical
-                            />
-                            <Dropdown
-                                label={'Бренд'}
-                                defaultValue={'1'}
-                                items={[
-                                    { label: 'В наличии', value: '1' },
-                                    { label: 'Скидка', value: '2' },
-                                    { label: 'Новинка', value: '3' },
-                                ]}
-                                multiply
-                                physical
-                            />
-                            <Dropdown
-                                label={'Алгоритм'}
-                                defaultValue={'1'}
-                                items={[
-                                    { label: 'В наличии', value: '1' },
-                                    { label: 'Скидка', value: '2' },
-                                    { label: 'Новинка', value: '3' },
-                                ]}
-                                multiply
-                                physical
-                            />
-                            <div className={styles.switchWrap}>
-                                <div className={styles.switch}>
-                                    <span>Самый прибыльный</span>
-                                    <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
-                                </div>
-                                <div className={styles.switch}>
-                                    <span>Самый мощный</span>
-                                    <Switch isOn={isOn2} onClick={() => setIsOn2(!isOn2)} />
-                                </div>
-                            </div>
-                            <div className={styles.buttons}>
-                                <Button size={'md'}>Применить</Button>
-                                <Button size={'md'} variant={'outline'}>
-                                    Сбросить
-                                </Button>
-                            </div>
-                            <OrderCallHelpBanner />
-                        </div>
+                        <Filters />
                         <div className={styles.wrap}>
                             <div className={styles.sort}>
                                 <div className={styles.sortDropdown}>
@@ -125,6 +59,7 @@ const CatalogPage = () => {
                                             { label: 'Сначала дорогие', value: '4' },
                                         ]}
                                         className={styles.dropdown}
+                                        onChange={(value) => console.log(value)}
                                     />
                                 </div>
                                 <div className={styles.viewModeWrap}>
@@ -155,6 +90,7 @@ const CatalogPage = () => {
                                     { label: 'Сначала дорогие', value: '4' },
                                 ]}
                                 variant={'modal'}
+                                onChange={(value) => console.log(value)}
                             />
                             <div className={styles.filtersWrap}>
                                 <button className={styles.filterButton} onClick={() => setIsOpen(true)}>
@@ -197,71 +133,83 @@ const CatalogPage = () => {
                 <Managers className={styles.managers} />
             </div>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
-                <div className={styles.filters}>
-                    <Dropdown
-                        label={'Предложения'}
-                        defaultValue={'1'}
-                        items={[
-                            { label: 'В наличии', value: '1' },
-                            { label: 'Скидка', value: '2' },
-                            { label: 'Новинка', value: '3' },
-                        ]}
-                        multiply
-                        physical
-                    />
-                    <Dropdown
-                        label={'Цена'}
-                        defaultValue={'1'}
-                        items={[
-                            { label: 'В наличии', value: '1' },
-                            { label: 'Скидка', value: '2' },
-                            { label: 'Новинка', value: '3' },
-                        ]}
-                        multiply
-                        physical
-                    />
-                    <Dropdown
-                        label={'Бренд'}
-                        defaultValue={'1'}
-                        items={[
-                            { label: 'В наличии', value: '1' },
-                            { label: 'Скидка', value: '2' },
-                            { label: 'Новинка', value: '3' },
-                        ]}
-                        multiply
-                        physical
-                    />
-                    <Dropdown
-                        label={'Алгоритм'}
-                        defaultValue={'1'}
-                        items={[
-                            { label: 'В наличии', value: '1' },
-                            { label: 'Скидка', value: '2' },
-                            { label: 'Новинка', value: '3' },
-                        ]}
-                        multiply
-                        physical
-                    />
-                    <div className={styles.switchWrap}>
-                        <div className={styles.switch}>
-                            <span>Самый прибыльный</span>
-                            <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
-                        </div>
-                        <div className={styles.switch}>
-                            <span>Самый мощный</span>
-                            <Switch isOn={isOn2} onClick={() => setIsOn2(!isOn2)} />
-                        </div>
-                    </div>
-                    <div className={styles.buttons}>
-                        <Button size={'md'}>Применить</Button>
-                        <Button size={'md'} variant={'outline'}>
-                            Сбросить
-                        </Button>
-                    </div>
-                </div>
+                <Filters />
             </Modal>
         </div>
     );
 };
 
 export default CatalogPage;
+
+const Filters = () => {
+    const [isOn, setIsOn] = useState(false);
+    const [isOn2, setIsOn2] = useState(false);
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
+    return (
+        <div className={styles.filters}>
+            <Dropdown
+                label={'Предложения'}
+                defaultValue={'1'}
+                items={[
+                    { label: 'В наличии', value: '1' },
+                    { label: 'Скидка', value: '2' },
+                    { label: 'Новинка', value: '3' },
+                ]}
+                multiply
+                open
+                physical
+            />
+            <Dropdown
+                label={'Цена'}
+                defaultValue={'1'}
+                items={[
+                    { label: 'В наличии', value: '1' },
+                    { label: 'Скидка', value: '2' },
+                    { label: 'Новинка', value: '3' },
+                ]}
+                multiply
+                physical
+            />
+            <Dropdown
+                label={'Бренд'}
+                defaultValue={'1'}
+                items={[
+                    { label: 'В наличии', value: '1' },
+                    { label: 'Скидка', value: '2' },
+                    { label: 'Новинка', value: '3' },
+                ]}
+                multiply
+                physical
+            />
+            <Dropdown
+                label={'Алгоритм'}
+                defaultValue={'1'}
+                items={[
+                    { label: 'В наличии', value: '1' },
+                    { label: 'Скидка', value: '2' },
+                    { label: 'Новинка', value: '3' },
+                ]}
+                multiply
+                physical
+            />
+            <div className={styles.switchWrap}>
+                <div className={styles.switch}>
+                    <span>Самый прибыльный</span>
+                    <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
+                </div>
+                <div className={styles.switch}>
+                    <span>Самый мощный</span>
+                    <Switch isOn={isOn2} onClick={() => setIsOn2(!isOn2)} />
+                </div>
+            </div>
+            <div className={styles.buttons}>
+                <Button size={'md'}>Применить</Button>
+                <Button size={'md'} variant={'outline'}>
+                    Сбросить
+                </Button>
+            </div>
+            {!matches && <OrderCallHelpBanner />}
+        </div>
+    );
+};

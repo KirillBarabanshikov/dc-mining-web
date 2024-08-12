@@ -18,6 +18,7 @@ interface IDropdownProps {
     open?: boolean;
     physical?: boolean;
     variant?: 'dropdown' | 'modal';
+    onChange?: (value: string[]) => void;
     className?: string;
 }
 
@@ -30,22 +31,29 @@ export const Dropdown: FC<IDropdownProps> = ({
     open = false,
     physical = false,
     variant = 'dropdown',
+    onChange,
     className,
 }) => {
     const [selectedValue, setSelectedValue] = useState<string[]>([defaultValue]);
     const [isOpen, setIsOpen] = useState(open);
 
     const handleSelect = (value: string) => {
+        let selected = selectedValue;
+
         if (multiply) {
-            if (selectedValue.includes(value)) {
-                setSelectedValue(selectedValue.filter((val) => val !== value));
+            if (selected.includes(value)) {
+                selected = selected.filter((val) => val !== value);
+                setSelectedValue(selected);
             } else {
-                setSelectedValue([...selectedValue, value]);
+                selected = [...selected, value];
+                setSelectedValue(selected);
             }
         } else {
-            setSelectedValue([value]);
+            selected = [value];
+            setSelectedValue(selected);
             setIsOpen(false);
         }
+        onChange && onChange(selected);
     };
 
     return (
@@ -66,96 +74,85 @@ export const Dropdown: FC<IDropdownProps> = ({
             {variant === 'dropdown' && (
                 <AnimatePresence initial={false}>
                     {isOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className={styles.list}
-                        >
-                            <div className={styles.itemsWrap}>
-                                {items.map((item) => {
-                                    return (
-                                        <div
-                                            key={item.value}
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                handleSelect(item.value);
-                                            }}
-                                        >
-                                            {multiply ? (
-                                                <Checkbox
-                                                    label={item.label}
-                                                    className={clsx(
-                                                        styles.item,
-                                                        selectedValue.includes(item.value) && styles.selected,
-                                                    )}
-                                                    checked={selectedValue.includes(item.value)}
-                                                    onChange={(e) => console.log(e)}
-                                                    sizing={'sm'}
-                                                />
-                                            ) : (
-                                                <Radio
-                                                    label={item.label}
-                                                    className={clsx(
-                                                        styles.item,
-                                                        selectedValue.includes(item.value) && styles.selected,
-                                                    )}
-                                                    checked={selectedValue.includes(item.value)}
-                                                    onChange={(e) => console.log(e)}
-                                                    sizing={'sm'}
-                                                />
-                                            )}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </motion.div>
+                        <ItemsList
+                            items={items}
+                            handleSelect={handleSelect}
+                            multiply={multiply}
+                            selectedValue={selectedValue}
+                        />
                     )}
                 </AnimatePresence>
             )}
             {variant === 'modal' && (
                 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
-                    <div className={styles.list}>
-                        <div className={styles.itemsWrap}>
-                            {items.map((item) => {
-                                return (
-                                    <div
-                                        key={item.value}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleSelect(item.value);
-                                        }}
-                                    >
-                                        {multiply ? (
-                                            <Checkbox
-                                                label={item.label}
-                                                className={clsx(
-                                                    styles.item,
-                                                    selectedValue.includes(item.value) && styles.selected,
-                                                )}
-                                                checked={selectedValue.includes(item.value)}
-                                                onChange={(e) => console.log(e)}
-                                                sizing={'sm'}
-                                            />
-                                        ) : (
-                                            <Radio
-                                                label={item.label}
-                                                className={clsx(
-                                                    styles.item,
-                                                    selectedValue.includes(item.value) && styles.selected,
-                                                )}
-                                                checked={selectedValue.includes(item.value)}
-                                                onChange={(e) => console.log(e)}
-                                                sizing={'sm'}
-                                            />
-                                        )}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                    <ItemsList
+                        items={items}
+                        handleSelect={handleSelect}
+                        multiply={multiply}
+                        selectedValue={selectedValue}
+                        withAnimation={false}
+                    />
                 </Modal>
             )}
         </div>
+    );
+};
+
+interface IItemsListProps {
+    items: IDropdownItem[];
+    handleSelect: (value: string) => void;
+    multiply: boolean;
+    selectedValue: string[];
+    withAnimation?: boolean;
+}
+
+const ItemsList: FC<IItemsListProps> = ({ items, handleSelect, multiply, selectedValue, withAnimation = true }) => {
+    return (
+        <motion.div
+            className={styles.list}
+            initial={withAnimation ? { height: 0, opacity: 0 } : {}}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={withAnimation ? { height: 0, opacity: 0 } : {}}
+        >
+            <div className={styles.itemsWrap}>
+                <div className={clsx(styles.items, 'scrollbar-hide')}>
+                    {items.map((item) => {
+                        return (
+                            <div
+                                key={item.value}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleSelect(item.value);
+                                }}
+                            >
+                                {multiply ? (
+                                    <Checkbox
+                                        label={item.label}
+                                        className={clsx(
+                                            styles.item,
+                                            selectedValue.includes(item.value) && styles.selected,
+                                        )}
+                                        checked={selectedValue.includes(item.value)}
+                                        onChange={(e) => console.log(e)}
+                                        sizing={'sm'}
+                                    />
+                                ) : (
+                                    <Radio
+                                        label={item.label}
+                                        className={clsx(
+                                            styles.item,
+                                            selectedValue.includes(item.value) && styles.selected,
+                                        )}
+                                        checked={selectedValue.includes(item.value)}
+                                        onChange={(e) => console.log(e)}
+                                        sizing={'sm'}
+                                    />
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </motion.div>
     );
 };
