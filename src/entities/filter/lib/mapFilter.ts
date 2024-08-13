@@ -1,13 +1,20 @@
 import { IFilterDto } from '../api';
-// import { IFilter } from '../model';
-import { createSlug } from '@/shared/lib';
+import { IFilter } from '../model';
+import { CATEGORIES_KEYS, CHARACTERISTICS } from '@/shared/consts';
 
-export function mapFilter(filter: IFilterDto) {
+export function mapFilter(filter: IFilterDto): IFilter {
     return {
         id: filter.id,
         category: {
-            key: createSlug(filter.characteristics),
-            characteristics: filter.characteristics,
+            name: filter.category,
+            value: CATEGORIES_KEYS[filter.category],
         },
+        characteristics: {
+            name: filter.characteristics,
+            value: CHARACTERISTICS[filter.characteristics],
+        },
+        lists: filter.lists,
+        start: filter.start,
+        end: filter.end,
     };
 }

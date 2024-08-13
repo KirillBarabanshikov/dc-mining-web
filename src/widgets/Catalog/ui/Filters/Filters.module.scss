@@ -1,0 +1,17 @@
+.filters {
+    background-color: var(--background-white);
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 283px;
+    width: 100%;
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 20px 0;
+    }
+}
