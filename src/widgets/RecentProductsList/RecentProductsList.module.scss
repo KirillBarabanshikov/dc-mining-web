@@ -1,7 +1,28 @@
 .recent {
     .list {
-        display: flex;
-        gap: 32px;
+        &:hover {
+            .swiperButton {
+                opacity: 1;
+            }
+        }
+    }
+
+    .swiperButton {
+        &.next {
+            right: 16px;
+        }
+
+        &.prev {
+            left: 16px;
+        }
+    }
+
+    .slide {
+        max-width: 436px;
+
+        @media screen and (max-width: 768px) {
+            max-width: 300px;
+        }
     }
 
     @media screen and (max-width: 768px) {

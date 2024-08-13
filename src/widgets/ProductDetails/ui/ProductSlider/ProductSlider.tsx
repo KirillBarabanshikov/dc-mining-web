@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
 import clsx from 'clsx';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs, Mousewheel } from 'swiper/modules';
 import { IProductImage } from '@/entities/product/model';
 import { BASE_URL, MAX_WIDTH_XL } from '@/shared/consts';
 import { useMediaQuery } from '@/shared/lib';
-import Arrow from '@/shared/assets/icons/arrow-down2.svg?react';
+import { SwiperButton } from '@/shared/ui';
 import styles from './ProductSlider.module.scss';
 
 interface IProductSliderProps {
@@ -48,7 +48,13 @@ export const ProductSlider: FC<IProductSliderProps> = ({ images }) => {
                     modules={[Thumbs]}
                     onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
                 >
-                    {images.length >= 2 && <SwiperButtonPrev disabled={currentSlide === 0} />}
+                    {images.length >= 2 && (
+                        <SwiperButton
+                            variant={'prev'}
+                            disabled={currentSlide === 0}
+                            className={clsx(styles.swiperButton, styles.prev)}
+                        />
+                    )}
                     {images.map((image) => (
                         <SwiperSlide key={image.id}>
                             <div className={styles.mainImage}>
@@ -56,35 +62,15 @@ export const ProductSlider: FC<IProductSliderProps> = ({ images }) => {
                             </div>
                         </SwiperSlide>
                     ))}
-                    {images.length >= 2 && <SwiperButtonNext disabled={currentSlide === images.length - 1} />}
+                    {images.length >= 2 && (
+                        <SwiperButton
+                            variant={'next'}
+                            disabled={currentSlide === images.length - 1}
+                            className={clsx(styles.swiperButton, styles.next)}
+                        />
+                    )}
                 </Swiper>
             </div>
         </div>
-    );
-};
-
-const SwiperButtonNext = ({ disabled }: { disabled: boolean }) => {
-    const swiper = useSwiper();
-    return (
-        <button
-            onClick={() => swiper.slideNext()}
-            className={clsx(styles.swiperButton, styles.next)}
-            disabled={disabled}
-        >
-            <Arrow />
-        </button>
-    );
-};
-
-const SwiperButtonPrev = ({ disabled }: { disabled: boolean }) => {
-    const swiper = useSwiper();
-    return (
-        <button
-            onClick={() => swiper.slidePrev()}
-            className={clsx(styles.swiperButton, styles.prev)}
-            disabled={disabled}
-        >
-            <Arrow />
-        </button>
     );
 };

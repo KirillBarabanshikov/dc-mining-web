@@ -13,3 +13,4 @@ export { Switch } from './Switch';
 export { Dropdown } from './Dropdown';
 export { Pagination } from './Pagination';
 export { NumberInput } from './NumberInput';
+export { SwiperButton } from './SwiperButton';
