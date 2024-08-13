@@ -9,7 +9,7 @@ const personalDataApi = baseApi.injectEndpoints({
                 url: '/personal_datas',
             }),
             transformResponse: (response: IPersonalData[]) => {
-                return { ...response[0], image: BASE_URL + response[0].image };
+                return { ...response[0], image: BASE_URL + response[0]?.image };
             },
         }),
     }),
