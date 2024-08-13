@@ -62,4 +62,10 @@ export interface IDataCenterInfo {
     containerTerm: string;
     containerPrice: number;
     containerCapacity: string;
+    top: {
+        id: number;
+        description: string;
+        image: string;
+        title: string;
+    }[];
 }

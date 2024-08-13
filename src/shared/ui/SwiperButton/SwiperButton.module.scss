@@ -24,10 +24,12 @@
         transform: rotate(90deg);
     }
 
-    &:hover {
-        cursor: pointer;
-        background-color: var(--button-hover);
-        color: var(--stroke-white);
+    @media (hover: hover) {
+        &:hover {
+            cursor: pointer;
+            background-color: var(--button-hover);
+            color: var(--stroke-white);
+        }
     }
 
     &:active {

@@ -8,7 +8,7 @@ const MainPage = () => {
         <>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
-                <Advantages as={'main'} />
+                <Advantages />
                 <Offers />
                 <div className={styles.bestsellersWrapper}>
                     <Bestsellers />

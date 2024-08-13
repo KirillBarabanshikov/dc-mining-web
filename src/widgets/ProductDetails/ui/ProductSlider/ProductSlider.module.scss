@@ -95,4 +95,8 @@
     &.prev {
         left: 8px;
     }
+
+    @media screen and (max-width: 768px) {
+        opacity: 1;
+    }
 }

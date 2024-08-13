@@ -111,7 +111,7 @@ const CollapseItemsList = () => {
         <div className={styles.collapseItems}>
             {categories &&
                 categories.map((item, index) => {
-                    if (!item.subCategory.length) return <Fragment key={item.id} />;
+                    if (item.link) return <Fragment key={item.id} />;
 
                     return (
                         <div key={item.id}>

@@ -32,17 +32,7 @@
             white-space: pre-wrap;
         }
 
-        @media screen and (max-width: 992px) {
-            .advantagesContainer {
-                gap: 24px;
-            }
-        }
-
         @media screen and (max-width: 768px) {
-            .advantagesContainer {
-                gap: 16px;
-            }
-
             .image {
                 border-radius: 16px;
 
@@ -64,10 +54,12 @@
 
     &.data-center {
         .title {
+            font-family: 'Gilroy', sans-serif;
             font-weight: 700;
             font-size: 24px;
             line-height: 28.8px;
             margin-bottom: 20px;
+            height: 100%;
 
             @media screen and (max-width: 992px) {
                 font-size: 20px;
@@ -103,9 +95,29 @@
                 }
             }
         }
+
+        @media screen and (max-width: 768px) {
+            .title {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18.2px;
+                margin-bottom: unset;
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .advantagesContainer {
+            gap: 24px;
+        }
     }
 
     @media screen and (max-width: 768px) {
+        .advantagesContainer {
+            gap: 16px;
+        }
+
         .desc {
             display: none;
         }

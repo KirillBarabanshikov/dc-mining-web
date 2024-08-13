@@ -20,7 +20,7 @@ export const ProductCompareCard: FC<IProductCompareCardProps> = ({ product, only
         <div className={clsx(styles.card)}>
             <div className={styles.header}>
                 <AddToCompareButton product={product} variant={'trash'} className={styles.trash} />
-                <img src={BASE_URL + product.images[0].image} alt={product.title} />
+                <img src={BASE_URL + product.images[0]?.image} alt={product.title} />
                 <p className={styles.name}>{product.title}</p>
                 <p className={styles.price}>{formatter.format(product.price)}</p>
                 <div className={styles.buttons}>
