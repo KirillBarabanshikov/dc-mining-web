@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 import { Checkbox, Modal, Radio } from '@/shared/ui';
@@ -10,7 +10,7 @@ interface IDropdownItem {
     label: string;
 }
 
-interface IDropdownProps {
+interface IDropdownProps extends PropsWithChildren {
     items: IDropdownItem[];
     defaultValue?: string[];
     multiply?: boolean;
@@ -19,9 +19,11 @@ interface IDropdownProps {
     physical?: boolean;
     variant?: 'dropdown' | 'modal';
     onChange?: (value: string[]) => void;
+    reset?: boolean;
     className?: string;
 }
 
+// TODO
 export const Dropdown: FC<IDropdownProps> = ({
     items,
     defaultValue = [],
@@ -31,10 +33,16 @@ export const Dropdown: FC<IDropdownProps> = ({
     physical = false,
     variant = 'dropdown',
     onChange,
+    children,
+    reset = false,
     className,
 }) => {
-    const [selectedValue, setSelectedValue] = useState<string[]>([...defaultValue]);
+    const [selectedValue, setSelectedValue] = useState<string[]>(defaultValue);
     const [isOpen, setIsOpen] = useState(open);
+
+    useEffect(() => {
+        reset && setSelectedValue(defaultValue);
+    }, [reset]);
 
     const handleSelect = (value: string) => {
         let selected = selectedValue;
@@ -73,12 +81,16 @@ export const Dropdown: FC<IDropdownProps> = ({
             {variant === 'dropdown' && (
                 <AnimatePresence initial={false}>
                     {isOpen && (
-                        <ItemsList
-                            items={items}
-                            handleSelect={handleSelect}
-                            multiply={multiply}
-                            selectedValue={selectedValue}
-                        />
+                        <>
+                            <ItemsList
+                                items={items}
+                                handleSelect={handleSelect}
+                                multiply={multiply}
+                                selectedValue={selectedValue}
+                            >
+                                {children}
+                            </ItemsList>
+                        </>
                     )}
                 </AnimatePresence>
             )}
@@ -97,7 +109,7 @@ export const Dropdown: FC<IDropdownProps> = ({
     );
 };
 
-interface IItemsListProps {
+interface IItemsListProps extends PropsWithChildren {
     items: IDropdownItem[];
     handleSelect: (value: string) => void;
     multiply: boolean;
@@ -105,7 +117,14 @@ interface IItemsListProps {
     withAnimation?: boolean;
 }
 
-const ItemsList: FC<IItemsListProps> = ({ items, handleSelect, multiply, selectedValue, withAnimation = true }) => {
+const ItemsList: FC<IItemsListProps> = ({
+    items,
+    handleSelect,
+    multiply,
+    selectedValue,
+    withAnimation = true,
+    children,
+}) => {
     return (
         <motion.div
             className={styles.list}
@@ -115,6 +134,7 @@ const ItemsList: FC<IItemsListProps> = ({ items, handleSelect, multiply, selecte
         >
             <div className={styles.itemsWrap}>
                 <div className={clsx(styles.items)}>
+                    {children}
                     {items.map((item) => {
                         return (
                             <div

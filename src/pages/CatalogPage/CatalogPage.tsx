@@ -1,7 +1,7 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
+import { Breadcrumbs, Button, Dropdown, IconButton, Input, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { setViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
 import { useGetCategoryByIdQuery } from '@/entities/category';
@@ -16,14 +16,21 @@ import styles from './CatalogPage.module.scss';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
+// TODO
 const CatalogPage = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const { id } = useParams();
     const { data: products } = useGetProductsByCategoryIdQuery(id as string);
     const { data: category } = useGetCategoryByIdQuery(id as string);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const [currentPage, setCurrentPage] = useState(1);
     const viewMode = useAppSelector((state) => state.products.viewMode);
+
+    const onChangePage = (page: number) => {
+        searchParams.set('page', `${page}`);
+        setSearchParams(searchParams);
+    };
 
     return (
         <div className={styles.catalog}>
@@ -73,7 +80,11 @@ const CatalogPage = () => {
                         Показать ещё
                     </Button>
                     {!matches && (
-                        <Pagination currentPage={currentPage} length={40} onChange={(page) => setCurrentPage(page)} />
+                        <Pagination
+                            currentPage={searchParams.get('page') ? +searchParams.get('page')! : 1}
+                            length={Math.ceil(100 / 25)}
+                            onChange={onChangePage}
+                        />
                     )}
                 </div>
                 {matches && <OrderCallHelpBanner />}
@@ -90,21 +101,38 @@ export default CatalogPage;
 
 const Filters = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [isOn, setIsOn] = useState(false);
-    const [isOn2, setIsOn2] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const params = useRef<Record<string, string>>({});
+    const [params, setParams] = useState<Record<string, string>>({});
+    const [reset, setReset] = useState(false);
+
+    useEffect(() => {
+        const param = params;
+        for (const [key, value] of searchParams.entries()) {
+            param[key] = value;
+        }
+        setParams(param);
+    }, []);
 
     const handleOnChange = ({ key, value }: { key: string; value: string[] }) => {
+        const param = params;
+
         if (value.length) {
-            params.current[key] = value.join(',');
+            param[key] = value.join(',');
         } else {
-            delete params.current[key];
+            delete param[key];
         }
+        setParams({ ...param });
     };
 
-    const set = () => {
-        setSearchParams(params.current);
+    const onSet = () => {
+        setSearchParams(params);
+        setReset(false);
+    };
+
+    const onReset = () => {
+        setSearchParams({});
+        setParams({});
+        setReset(true);
     };
 
     return (
@@ -121,55 +149,86 @@ const Filters = () => {
                 multiply
                 open
                 physical
+                reset={reset}
             />
             <Dropdown
                 label={'Цена'}
+                defaultValue={searchParams.get('price') ? searchParams.get('price')?.split(',') : undefined}
+                onChange={(value) => handleOnChange({ key: 'price', value })}
                 items={[
-                    { label: 'В наличии', value: '1' },
-                    { label: 'Скидка', value: '2' },
-                    { label: 'Новинка', value: '3' },
+                    { label: 'Менее 90 000 ₽', value: '1' },
+                    { label: '90 000 - 108 000 ₽', value: '2' },
+                    { label: '108 000 - 140 000 ₽', value: '3' },
                 ]}
                 multiply
                 physical
-            />
+                open={!!searchParams.get('price')}
+                reset={reset}
+            >
+                <div className={styles.priceWrap}>
+                    <Input placeholder={'от 90 000'} className={styles.input} />
+                    <Input placeholder={'до 10 000 000'} className={styles.input} />
+                </div>
+            </Dropdown>
             <Dropdown
                 label={'Бренд'}
                 defaultValue={searchParams.get('brand') ? searchParams.get('brand')?.split(',') : undefined}
+                onChange={(value) => handleOnChange({ key: 'brand', value })}
                 items={[
                     { label: 'Bitmain', value: 'bitmain' },
                     { label: 'Whatsminer', value: 'whatsminer' },
                     { label: 'IceRiver', value: 'iceriver' },
                 ]}
-                onChange={(value) => handleOnChange({ key: 'brand', value })}
                 multiply
                 physical
                 open={!!searchParams.get('brand')}
+                reset={reset}
             />
             <Dropdown
                 label={'Алгоритм'}
+                defaultValue={searchParams.get('algorithm') ? searchParams.get('algorithm')?.split(',') : undefined}
+                onChange={(value) => handleOnChange({ key: 'algorithm', value })}
                 items={[
-                    { label: 'В наличии', value: '1' },
-                    { label: 'Скидка', value: '2' },
-                    { label: 'Новинка', value: '3' },
+                    { label: 'SHA-256', value: '1' },
+                    { label: 'Scrypt', value: '2' },
+                    { label: 'X11', value: '3' },
                 ]}
                 multiply
                 physical
+                open={!!searchParams.get('algorithm')}
+                reset={reset}
             />
             <div className={styles.switchWrap}>
                 <div className={styles.switch}>
                     <span>Самый прибыльный</span>
-                    <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />
+                    <Switch
+                        isOn={!!params['mostProfitable']}
+                        onClick={() =>
+                            handleOnChange({
+                                key: 'mostProfitable',
+                                value: params['mostProfitable'] ? [] : ['true'],
+                            })
+                        }
+                    />
                 </div>
                 <div className={styles.switch}>
                     <span>Самый мощный</span>
-                    <Switch isOn={isOn2} onClick={() => setIsOn2(!isOn2)} />
+                    <Switch
+                        isOn={!!params['mostPowerful']}
+                        onClick={() =>
+                            handleOnChange({
+                                key: 'mostPowerful',
+                                value: params['mostPowerful'] ? [] : ['true'],
+                            })
+                        }
+                    />
                 </div>
             </div>
             <div className={styles.buttons}>
-                <Button size={'md'} onClick={set}>
+                <Button size={'md'} onClick={onSet}>
                     Применить
                 </Button>
-                <Button size={'md'} variant={'outline'}>
+                <Button size={'md'} variant={'outline'} onClick={onReset}>
                     Сбросить
                 </Button>
             </div>

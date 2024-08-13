@@ -10,8 +10,8 @@ interface ISwitchProps {
 
 export const Switch: FC<ISwitchProps> = ({ isOn, onClick }) => {
     return (
-        <div className={clsx(styles.switch, isOn && styles.isOn)} onClick={onClick}>
+        <motion.div className={clsx(styles.switch, isOn && styles.isOn)} onClick={onClick} layout layoutRoot>
             <motion.div className={styles.handle} layout transition={{ type: 'easeOut' }} />
-        </div>
+        </motion.div>
     );
 };

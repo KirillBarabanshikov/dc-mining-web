@@ -281,3 +281,25 @@
         }
     }
 }
+
+.priceWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+
+    .input {
+        height: 32px;
+        border-radius: 8px;
+
+        input {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            padding: 8px;
+
+            &::placeholder {
+                color: var(--text-fourthiary);
+            }
+        }
+    }
+}
