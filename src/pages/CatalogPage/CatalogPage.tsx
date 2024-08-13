@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Breadcrumbs, Button, Dropdown, IconButton, Input, Modal, Pagination, Switch } from '@/shared/ui';
+import { Breadcrumbs, Button, Dropdown, IconButton, Modal, Pagination, Switch } from '@/shared/ui';
 import { Managers, ProductsList } from '@/widgets';
 import { setViewMode, useGetProductsByCategoryIdQuery } from '@/entities/product';
 import { useGetCategoryByIdQuery } from '@/entities/category';
@@ -13,6 +13,7 @@ import SimpleIcon from '@/shared/assets/icons/view-mode-simple.svg?react';
 import SimpleIcon2 from '@/shared/assets/icons/view-mode-simple2.svg?react';
 import FilterIcon from '@/shared/assets/icons/filter.svg?react';
 import styles from './CatalogPage.module.scss';
+import { useGetFiltersQuery, useSetFiltersMutation } from '@/entities/filter';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
@@ -45,7 +46,7 @@ const CatalogPage = () => {
             <div className={styles.catalogContent}>
                 {!matches ? (
                     <>
-                        <Filters />
+                        <Filters name={category?.name} />
                         <div className={styles.wrap}>
                             <div className={styles.sort}>
                                 <div className={styles.sortDropdown}>
@@ -91,7 +92,7 @@ const CatalogPage = () => {
                 <Managers className={styles.managers} />
             </div>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={clsx(styles.modal, 'scrollbar-hide')}>
-                <Filters />
+                <Filters name={category?.name} />
             </Modal>
         </div>
     );
@@ -99,7 +100,10 @@ const CatalogPage = () => {
 
 export default CatalogPage;
 
-const Filters = () => {
+const Filters: FC<{ name?: string }> = ({ name }) => {
+    const { data: filters } = useGetFiltersQuery();
+    const [setFilters] = useSetFiltersMutation();
+
     const [searchParams, setSearchParams] = useSearchParams();
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [params, setParams] = useState<Record<string, string>>({});
@@ -127,6 +131,7 @@ const Filters = () => {
     const onSet = () => {
         setSearchParams(params);
         setReset(false);
+        setFilters({ type: 'asicMiners', characteristics: 'algorithm=SHA-256', price: '', tags: '' });
     };
 
     const onReset = () => {
@@ -136,104 +141,128 @@ const Filters = () => {
     };
 
     return (
-        <div className={styles.filters}>
-            <Dropdown
-                label={'Предложения'}
-                defaultValue={searchParams.get('offers') ? searchParams.get('offers')?.split(',') : ['1']}
-                onChange={(value) => handleOnChange({ key: 'offers', value })}
-                items={[
-                    { label: 'В наличии', value: '1' },
-                    { label: 'Скидка', value: '2' },
-                    { label: 'Новинка', value: '3' },
-                ]}
-                multiply
-                open
-                physical
-                reset={reset}
-            />
-            <Dropdown
-                label={'Цена'}
-                defaultValue={searchParams.get('price') ? searchParams.get('price')?.split(',') : undefined}
-                onChange={(value) => handleOnChange({ key: 'price', value })}
-                items={[
-                    { label: 'Менее 90 000 ₽', value: '1' },
-                    { label: '90 000 - 108 000 ₽', value: '2' },
-                    { label: '108 000 - 140 000 ₽', value: '3' },
-                ]}
-                multiply
-                physical
-                open={!!searchParams.get('price')}
-                reset={reset}
-            >
-                <div className={styles.priceWrap}>
-                    <Input placeholder={'от 90 000'} className={styles.input} />
-                    <Input placeholder={'до 10 000 000'} className={styles.input} />
+        filters && (
+            <div className={styles.filters}>
+                {filters
+                    .filter((f) => f.category === name)
+                    .map((filter) => {
+                        return (
+                            <Dropdown
+                                key={filter.id}
+                                label={filter.characteristics}
+                                defaultValue={
+                                    searchParams.get(filter.characteristics)
+                                        ? searchParams.get(filter.characteristics)?.split(',')
+                                        : []
+                                }
+                                onChange={(value) => handleOnChange({ key: filter.characteristics, value })}
+                                items={filter.lists.map((item) => ({ label: item, value: item }))}
+                                multiply
+                                open
+                                physical
+                                reset={reset}
+                            />
+                        );
+                    })}
+
+                {/*<Dropdown*/}
+                {/*    label={'Предложения'}*/}
+                {/*    defaultValue={searchParams.get('offers') ? searchParams.get('offers')?.split(',') : ['1']}*/}
+                {/*    onChange={(value) => handleOnChange({ key: 'offers', value })}*/}
+                {/*    items={[*/}
+                {/*        { label: 'В наличии', value: '1' },*/}
+                {/*        { label: 'Скидка', value: '2' },*/}
+                {/*        { label: 'Новинка', value: '3' },*/}
+                {/*    ]}*/}
+                {/*    multiply*/}
+                {/*    open*/}
+                {/*    physical*/}
+                {/*    reset={reset}*/}
+                {/*/>*/}
+                {/*<Dropdown*/}
+                {/*    label={'Цена'}*/}
+                {/*    defaultValue={searchParams.get('price') ? searchParams.get('price')?.split(',') : undefined}*/}
+                {/*    onChange={(value) => handleOnChange({ key: 'price', value })}*/}
+                {/*    items={[*/}
+                {/*        { label: 'Менее 90 000 ₽', value: '1' },*/}
+                {/*        { label: '90 000 - 108 000 ₽', value: '2' },*/}
+                {/*        { label: '108 000 - 140 000 ₽', value: '3' },*/}
+                {/*    ]}*/}
+                {/*    multiply*/}
+                {/*    physical*/}
+                {/*    open={!!searchParams.get('price')}*/}
+                {/*    reset={reset}*/}
+                {/*>*/}
+                {/*    <div className={styles.priceWrap}>*/}
+                {/*        <Input placeholder={'от 90 000'} className={styles.input} />*/}
+                {/*        <Input placeholder={'до 10 000 000'} className={styles.input} />*/}
+                {/*    </div>*/}
+                {/*</Dropdown>*/}
+                {/*<Dropdown*/}
+                {/*    label={'Бренд'}*/}
+                {/*    defaultValue={searchParams.get('brand') ? searchParams.get('brand')?.split(',') : undefined}*/}
+                {/*    onChange={(value) => handleOnChange({ key: 'brand', value })}*/}
+                {/*    items={[*/}
+                {/*        { label: 'Bitmain', value: 'bitmain' },*/}
+                {/*        { label: 'Whatsminer', value: 'whatsminer' },*/}
+                {/*        { label: 'IceRiver', value: 'iceriver' },*/}
+                {/*    ]}*/}
+                {/*    multiply*/}
+                {/*    physical*/}
+                {/*    open={!!searchParams.get('brand')}*/}
+                {/*    reset={reset}*/}
+                {/*/>*/}
+                {/*<Dropdown*/}
+                {/*    label={'Алгоритм'}*/}
+                {/*    defaultValue={searchParams.get('algorithm') ? searchParams.get('algorithm')?.split(',') : undefined}*/}
+                {/*    onChange={(value) => handleOnChange({ key: 'algorithm', value })}*/}
+                {/*    items={[*/}
+                {/*        { label: 'SHA-256', value: '1' },*/}
+                {/*        { label: 'Scrypt', value: '2' },*/}
+                {/*        { label: 'X11', value: '3' },*/}
+                {/*    ]}*/}
+                {/*    multiply*/}
+                {/*    physical*/}
+                {/*    open={!!searchParams.get('algorithm')}*/}
+                {/*    reset={reset}*/}
+                {/*/>*/}
+                <div className={styles.switchWrap}>
+                    <div className={styles.switch}>
+                        <span>Самый прибыльный</span>
+                        <Switch
+                            isOn={!!params['mostProfitable']}
+                            onClick={() =>
+                                handleOnChange({
+                                    key: 'mostProfitable',
+                                    value: params['mostProfitable'] ? [] : ['true'],
+                                })
+                            }
+                        />
+                    </div>
+                    <div className={styles.switch}>
+                        <span>Самый мощный</span>
+                        <Switch
+                            isOn={!!params['mostPowerful']}
+                            onClick={() =>
+                                handleOnChange({
+                                    key: 'mostPowerful',
+                                    value: params['mostPowerful'] ? [] : ['true'],
+                                })
+                            }
+                        />
+                    </div>
                 </div>
-            </Dropdown>
-            <Dropdown
-                label={'Бренд'}
-                defaultValue={searchParams.get('brand') ? searchParams.get('brand')?.split(',') : undefined}
-                onChange={(value) => handleOnChange({ key: 'brand', value })}
-                items={[
-                    { label: 'Bitmain', value: 'bitmain' },
-                    { label: 'Whatsminer', value: 'whatsminer' },
-                    { label: 'IceRiver', value: 'iceriver' },
-                ]}
-                multiply
-                physical
-                open={!!searchParams.get('brand')}
-                reset={reset}
-            />
-            <Dropdown
-                label={'Алгоритм'}
-                defaultValue={searchParams.get('algorithm') ? searchParams.get('algorithm')?.split(',') : undefined}
-                onChange={(value) => handleOnChange({ key: 'algorithm', value })}
-                items={[
-                    { label: 'SHA-256', value: '1' },
-                    { label: 'Scrypt', value: '2' },
-                    { label: 'X11', value: '3' },
-                ]}
-                multiply
-                physical
-                open={!!searchParams.get('algorithm')}
-                reset={reset}
-            />
-            <div className={styles.switchWrap}>
-                <div className={styles.switch}>
-                    <span>Самый прибыльный</span>
-                    <Switch
-                        isOn={!!params['mostProfitable']}
-                        onClick={() =>
-                            handleOnChange({
-                                key: 'mostProfitable',
-                                value: params['mostProfitable'] ? [] : ['true'],
-                            })
-                        }
-                    />
+                <div className={styles.buttons}>
+                    <Button size={'md'} onClick={onSet}>
+                        Применить
+                    </Button>
+                    <Button size={'md'} variant={'outline'} onClick={onReset}>
+                        Сбросить
+                    </Button>
                 </div>
-                <div className={styles.switch}>
-                    <span>Самый мощный</span>
-                    <Switch
-                        isOn={!!params['mostPowerful']}
-                        onClick={() =>
-                            handleOnChange({
-                                key: 'mostPowerful',
-                                value: params['mostPowerful'] ? [] : ['true'],
-                            })
-                        }
-                    />
-                </div>
+                {!matches && <OrderCallHelpBanner />}
             </div>
-            <div className={styles.buttons}>
-                <Button size={'md'} onClick={onSet}>
-                    Применить
-                </Button>
-                <Button size={'md'} variant={'outline'} onClick={onReset}>
-                    Сбросить
-                </Button>
-            </div>
-            {!matches && <OrderCallHelpBanner />}
-        </div>
+        )
     );
 };
 
