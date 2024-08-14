@@ -1,5 +1,4 @@
 import { ICategoryDto } from '@/entities/category/api';
-import { IDeliveryAndPayment } from '@/entities/deliveryAndPayment';
 
 export interface IProductDto {
     id: number;
@@ -26,6 +25,11 @@ export interface IProductDto {
         color: string;
     }[];
     display: boolean;
-    payments: IDeliveryAndPayment[];
-    deliveries: IDeliveryAndPayment[];
+}
+
+export interface IProductsByCategoryDto {
+    category: {
+        product_count: number;
+        products: IProductDto[];
+    };
 }

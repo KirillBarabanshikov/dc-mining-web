@@ -66,3 +66,8 @@ interface IProductDelivery {
     title: string;
     description: string;
 }
+
+export interface IProductsByCategory {
+    countProducts: number;
+    products: IProduct[];
+}

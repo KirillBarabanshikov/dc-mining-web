@@ -1,7 +1,7 @@
 import { baseApi } from '@/shared/api';
-import { IProduct, IOrderProduct } from '@/entities/product';
-import { IProductDto } from './types.ts';
-import { mapProduct } from '../lib';
+import { IOrderProduct, IProduct, IProductsByCategory } from '../model';
+import { IProductDto, IProductsByCategoryDto } from './types.ts';
+import { mapProduct, mapProductsByCategory } from '../lib';
 
 export const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -32,16 +32,12 @@ export const productApi = baseApi.injectEndpoints({
                 body: { productId },
             }),
         }),
-        getProductsByCategoryId: build.query<{ countProducts: number; products: IProduct[] }, number | string>({
+        getProductsByCategoryId: build.query<IProductsByCategory, number | string>({
             query: (categoryId) => ({
                 url: `/productCategoryShow/${categoryId}`,
             }),
-            transformResponse: (response: { category: { product_count: number; products: IProductDto[] } }) => {
-                return {
-                    countProducts: response.category.product_count,
-                    products: response.category.products.map(mapProduct),
-                };
-            },
+            keepUnusedDataFor: 0,
+            transformResponse: (response: IProductsByCategoryDto) => mapProductsByCategory(response),
         }),
     }),
 });

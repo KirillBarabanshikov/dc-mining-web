@@ -3,7 +3,7 @@ import { ICategory } from '../model';
 import { mapCategory } from '../lib';
 import { ICategoryDto } from './types.ts';
 
-const categoryApi = baseApi.injectEndpoints({
+export const categoryApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getCategories: build.query<ICategory[], void>({
             query: () => ({
@@ -15,6 +15,7 @@ const categoryApi = baseApi.injectEndpoints({
             query: (id) => ({
                 url: `/product_categories/${id}`,
             }),
+            keepUnusedDataFor: 0,
             transformResponse: (response: ICategoryDto) => mapCategory(response),
         }),
     }),

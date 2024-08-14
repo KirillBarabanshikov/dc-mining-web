@@ -3,6 +3,7 @@ export {
     type IProduct,
     type IOrderProduct,
     type IProductValue,
+    type IProductsByCategory,
     toggleFavorite,
     toggleCompare,
     clearCompare,

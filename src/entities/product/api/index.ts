@@ -8,4 +8,4 @@ export {
     useGetProductsByCategoryIdQuery,
     useLazyGetProductsByCategoryIdQuery,
 } from './productApi';
-export type { IProductDto } from './types.ts';
+export type { IProductDto, IProductsByCategoryDto } from './types.ts';
