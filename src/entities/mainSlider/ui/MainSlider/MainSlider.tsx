@@ -4,10 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_XL } from '@/shared/consts';
-import styles from './MainSlider.module.scss';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { useGetCategoriesQuery } from '@/entities/category';
+import styles from './MainSlider.module.scss';
 
 export const MainSlider = () => {
     const { data: slides } = useGetSliderQuery();
@@ -16,23 +16,18 @@ export const MainSlider = () => {
     const { data: categories } = useGetCategoriesQuery();
 
     const handleNavigate = (link: string) => {
-        let path;
+        if (!categories) return;
 
-        switch (link) {
-            case 'dataCenters':
-                path = '/data-center';
-                break;
+        let path = '/';
 
-            case 'products':
-                path = categories ? `/catalog/${categories[0].id}/${categories[0].slug}` : '/';
-                break;
-
-            case 'containers':
-                path = categories ? `/catalog/${categories[1].id}/${categories[1].slug}` : '/';
-                break;
-
-            default:
-                path = '/';
+        if (link === 'dataCenters') {
+            path = '/data-center';
+        } else if (link === 'products') {
+            const category = categories.find((category) => category.title === 'asicMiners');
+            path = category ? `/catalog/${category.id}/${category.slug}` : '/';
+        } else if (link === 'containers') {
+            const category = categories.find((category) => category.title === 'containersMining');
+            path = category ? `/catalog/${category.id}/${category.slug}` : '/';
         }
 
         navigate(path);
