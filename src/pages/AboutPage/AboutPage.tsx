@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import clsx from 'clsx';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { AdvantagesDCMining, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -7,7 +7,6 @@ import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { useGetAboutInfoQuery } from '@/entities/pageInfo';
 import { useNavigate } from 'react-router-dom';
 import { NewsCard } from '@/entities/news';
-import ScrollContainer from 'react-indiana-drag-scroll';
 import styles from './AboutPage.module.scss';
 
 const AboutPage = () => {
@@ -37,10 +36,11 @@ const AboutPage = () => {
                         </div>
                         <div className={styles.wrap}>
                             {info &&
-                                info.massMedia.map((media) => {
-                                    if (!media.display) return <Fragment key={media.id} />;
-                                    return <NewsCard key={media.id} media={media} />;
-                                })}
+                                info.massMedia
+                                    .filter((media) => media.display)
+                                    .map((media) => {
+                                        return <NewsCard key={media.id} media={media} />;
+                                    })}
                         </div>
                         {matches && (
                             <Button size={'md'} isWide onClick={() => navigate('/news')} className={styles.button}>
