@@ -33,7 +33,7 @@ export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
                     [
                         <ProductDescription description={product.description} />,
                         <ProductSpecifications value={product.value} />,
-                        <DeliveryAndPayment deliveries={product.deliveries} payments={product.payments} />,
+                        <DeliveryAndPayment />,
                     ][currentTab]
                 }
             </div>

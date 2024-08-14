@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProduct } from '@/entities/product';
+import { productApi } from '../api';
 
 type TInitialState = {
     favorites: IProduct[];
@@ -39,24 +40,28 @@ export const productsSlice = createSlice({
                 state.compare = [...state.compare, action.payload];
             }
         },
-        addToRecent: (state, action: PayloadAction<IProduct>) => {
-            let recentProducts = state.recent;
-
-            if (recentProducts.find((product) => product.id === action.payload.id)) {
-                recentProducts = recentProducts.filter((product) => product.id !== action.payload.id);
-            }
-
-            if (recentProducts.length >= 10) {
-                recentProducts = recentProducts.slice(0, -1);
-            }
-
-            state.recent = [action.payload, ...recentProducts];
-        },
         setViewMode: (state, action: PayloadAction<'tile' | 'simple'>) => {
             state.viewMode = action.payload;
         },
     },
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            productApi.endpoints.getProductById.matchFulfilled,
+            (state, action: PayloadAction<IProduct>) => {
+                let recentProducts = state.recent;
+
+                if (recentProducts.find((product) => product.id === action.payload.id)) {
+                    recentProducts = recentProducts.filter((product) => product.id !== action.payload.id);
+                }
+
+                if (recentProducts.length >= 10) {
+                    recentProducts = recentProducts.slice(0, -1);
+                }
+
+                state.recent = [action.payload, ...recentProducts];
+            },
+        );
+    },
 });
 
-export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare, addToRecent, setViewMode } =
-    productsSlice.actions;
+export const { clearFavorites, clearCompare, toggleFavorite, toggleCompare, setViewMode } = productsSlice.actions;

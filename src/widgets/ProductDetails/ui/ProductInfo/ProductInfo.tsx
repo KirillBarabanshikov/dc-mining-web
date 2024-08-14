@@ -38,10 +38,7 @@ export const ProductInfo: FC<IProductInfoProps> = ({ product }) => {
                             );
                         })}
                 </div>
-                <div>
-                    <p className={styles.description} dangerouslySetInnerHTML={{ __html: product.shortDescription }} />
-                    <span className={styles.more}>Подробнее</span>
-                </div>
+                <p className={styles.description} dangerouslySetInnerHTML={{ __html: product.shortDescription }} />
                 <div>
                     {!!product.oldPrice && (
                         <span className={styles.oldPrice}>{formatter.format(product.oldPrice)}</span>

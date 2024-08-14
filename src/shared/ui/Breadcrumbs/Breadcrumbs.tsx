@@ -6,7 +6,7 @@ import styles from './Breadcrumbs.module.scss';
 
 interface IBreadcrumbsPath {
     name: string;
-    path: string;
+    path?: string;
 }
 
 interface IBreadcrumbsProps {
@@ -21,7 +21,13 @@ export const Breadcrumbs: FC<IBreadcrumbsProps> = ({ paths, className }) => {
                 return (
                     <Fragment key={index}>
                         {index > 0 && <ArrowIcon />}
-                        <Link to={path.path}>{path.name}</Link>
+                        {path.path ? (
+                            <Link to={path.path} className={styles.link}>
+                                {path.name}
+                            </Link>
+                        ) : (
+                            <span className={styles.link}>{path.name}</span>
+                        )}
                     </Fragment>
                 );
             })}

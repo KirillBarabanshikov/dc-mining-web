@@ -3,7 +3,7 @@ import { IProduct, IOrderProduct } from '@/entities/product';
 import { IProductDto } from './types.ts';
 import { mapProduct } from '../lib';
 
-const productApi = baseApi.injectEndpoints({
+export const productApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getProducts: build.query<IProduct[], Record<string, any> | undefined>({
             query: (params) => ({

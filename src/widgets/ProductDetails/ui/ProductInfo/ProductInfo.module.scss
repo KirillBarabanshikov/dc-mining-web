@@ -43,17 +43,6 @@
             margin-bottom: 4px;
         }
 
-        .more {
-            font-weight: 700;
-            line-height: 19.2px;
-            transition: color 300ms ease-out;
-
-            &:hover {
-                cursor: pointer;
-                color: var(--text-accent-blue);
-            }
-        }
-
         .oldPrice {
             font-size: 14px;
             line-height: 18.2px;
@@ -141,12 +130,6 @@
                 font-family: 'Roboto', sans-serif;
                 font-size: 12px;
                 line-height: 15.6px;
-            }
-
-            .more {
-                font-family: 'Roboto', sans-serif;
-                font-size: 14px;
-                line-height: 16.8px;
             }
 
             .oldPrice {

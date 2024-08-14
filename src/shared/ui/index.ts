@@ -14,3 +14,4 @@ export { Dropdown } from './Dropdown';
 export { Pagination } from './Pagination';
 export { NumberInput } from './NumberInput';
 export { SwiperButton } from './SwiperButton';
+export { Placeholder } from './Placeholder';
