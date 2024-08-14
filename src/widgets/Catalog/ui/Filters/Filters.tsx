@@ -10,6 +10,7 @@ import styles from './Filters.module.scss';
 import { IFilterBody } from '@/entities/filter/api';
 import { setProducts } from '@/entities/catalog';
 import { useLazyGetProductsByCategoryIdQuery } from '@/entities/product';
+import { setCountProducts } from '@/entities/catalog/model/slice.ts';
 
 interface IFiltersProps {
     onClose?: () => void;
@@ -42,8 +43,11 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
     const onSetFilters = async () => {
         setSearchParams(searchParams);
         const characteristics: string[] = [];
+        const currentPage = searchParams.get('page') ?? '1';
 
         for (const [key, value] of searchParams.entries()) {
+            if (key === 'brand') continue;
+
             if (key in CHARACTERISTICS_KEYS) {
                 characteristics.push(`${CHARACTERISTICS_KEYS[key]}=${value}`);
             }
@@ -60,9 +64,16 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
             body.tags = searchParams.get('offers') ?? '';
         }
 
-        await setFilters(body)
+        if (searchParams.get('brand')) {
+            body.brand = searchParams.get('brand') ?? '';
+        }
+
+        await setFilters({ body: body, params: { page: currentPage, limit: '25' } })
             .unwrap()
-            .then((data) => dispatch(setProducts(data)));
+            .then((data) => {
+                dispatch(setProducts(data.items));
+                dispatch(setCountProducts(data.total_items));
+            });
         onClose && onClose();
         setReset(false);
     };
@@ -72,7 +83,10 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
         setSearchParams(order ? { order } : {});
         await getProductsByCategoryId(category?.id ?? '')
             .unwrap()
-            .then((data) => dispatch(setProducts(data)));
+            .then((data) => {
+                dispatch(setProducts(data.products));
+                dispatch(setCountProducts(data.countProducts));
+            });
         onClose && onClose();
         setReset(true);
     };

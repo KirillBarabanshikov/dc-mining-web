@@ -22,6 +22,10 @@ export const CatalogPagination: FC<ICatalogPaginationProps> = ({ countProducts, 
         setSearchParams(searchParams);
     };
 
+    if (length < 2) {
+        return <></>;
+    }
+
     return (
         <div className={clsx(styles.pagination, className)}>
             {currentPage < length && (

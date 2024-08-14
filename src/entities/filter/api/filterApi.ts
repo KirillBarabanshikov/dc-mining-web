@@ -17,10 +17,17 @@ const filterApi = baseApi.injectEndpoints({
                 url: '/offers',
             }),
         }),
-        setFilters: build.mutation<IProduct[], IFilterBody>({
-            query: (body) => ({
-                url: '/filters',
+        setFilters: build.mutation<
+            { items: IProduct[]; total_items: number },
+            {
+                body: IFilterBody;
+                params: Record<string, string>;
+            }
+        >({
+            query: ({ body, params }) => ({
+                url: '/filters?page=1?limit=25',
                 method: 'POST',
+                params,
                 body,
             }),
         }),

@@ -5,10 +5,12 @@ import { ICategory } from '@/entities/category';
 type TInitialState = {
     category?: ICategory;
     products: IProduct[];
+    countProducts: number;
 };
 
 const initialState: TInitialState = {
     products: [],
+    countProducts: 0,
 };
 
 export const catalogSlice = createSlice({
@@ -24,7 +26,10 @@ export const catalogSlice = createSlice({
         setCategory: (state, action: PayloadAction<ICategory | undefined>) => {
             state.category = action.payload;
         },
+        setCountProducts: (state, action: PayloadAction<number>) => {
+            state.countProducts = action.payload;
+        },
     },
 });
 
-export const { setProducts, addProducts, setCategory } = catalogSlice.actions;
+export const { setProducts, addProducts, setCategory, setCountProducts } = catalogSlice.actions;

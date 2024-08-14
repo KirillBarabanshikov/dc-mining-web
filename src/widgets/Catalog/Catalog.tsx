@@ -5,9 +5,10 @@ import { Filters, Sorting, CatalogPagination, CustomFilters } from './ui';
 import styles from './Catalog.module.scss';
 import { useEffect } from 'react';
 import { setProducts } from '@/entities/catalog';
+import { setCountProducts } from '@/entities/catalog/model/slice.ts';
 
 export const Catalog = () => {
-    const { category } = useAppSelector((state) => state.catalog);
+    const { category, countProducts } = useAppSelector((state) => state.catalog);
     const [getProducts] = useLazyGetProductsByCategoryIdQuery();
     const { viewMode } = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
@@ -20,7 +21,10 @@ export const Catalog = () => {
     const setData = async (id: number) => {
         await getProducts(id)
             .unwrap()
-            .then((data) => dispatch(setProducts(data)));
+            .then((data) => {
+                dispatch(setProducts(data.products));
+                dispatch(setCountProducts(data.countProducts));
+            });
     };
 
     return (
@@ -29,7 +33,7 @@ export const Catalog = () => {
             <Filters className={styles.filters} />
             <Sorting className={styles.sorting} />
             <ProductsList products={products} className={styles.productList} viewMode={viewMode} />
-            <CatalogPagination countProducts={25} className={styles.pagination} />
+            <CatalogPagination countProducts={countProducts} className={styles.pagination} />
         </div>
     );
 };

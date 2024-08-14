@@ -32,11 +32,16 @@ const productApi = baseApi.injectEndpoints({
                 body: { productId },
             }),
         }),
-        getProductsByCategoryId: build.query<IProduct[], number | string>({
+        getProductsByCategoryId: build.query<{ countProducts: number; products: IProduct[] }, number | string>({
             query: (categoryId) => ({
                 url: `/productCategoryShow/${categoryId}`,
             }),
-            transformResponse: (response: IProductDto[]) => response.map(mapProduct),
+            transformResponse: (response: { category: { product_count: number; products: IProductDto[] } }) => {
+                return {
+                    countProducts: response.category.product_count,
+                    products: response.category.products.map(mapProduct),
+                };
+            },
         }),
     }),
 });

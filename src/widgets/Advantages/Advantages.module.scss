@@ -1,6 +1,7 @@
 .advantages {
     .advantagesContainer {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         gap: 32px;
     }
@@ -30,6 +31,10 @@
             font-size: 20px;
             line-height: 120%;
             white-space: pre-wrap;
+        }
+
+        @media screen and (max-width: 1375px) {
+            flex: 0 1 30%;
         }
 
         @media screen and (max-width: 768px) {
@@ -74,7 +79,7 @@
             max-width: 302px;
         }
 
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 1440px) {
             .title {
                 font-size: 20px;
                 line-height: 24px;
@@ -107,7 +112,7 @@
         }
     }
 
-    @media screen and (max-width: 992px) {
+    @media screen and (max-width: 1440px) {
         .advantagesContainer {
             gap: 24px;
         }

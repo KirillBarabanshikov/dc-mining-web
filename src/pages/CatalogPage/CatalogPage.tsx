@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/shared/ui';
 import { useGetCategoryByIdQuery } from '@/entities/category';
 import { OrderCallHelpBanner } from '@/features/call';
 import { Managers, Catalog } from '@/widgets';
-import { useAppDispatch, useMediaQuery } from '@/shared/lib';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { setCategory } from '@/entities/catalog';
 import styles from './CatalogPage.module.scss';
 
@@ -16,6 +16,7 @@ const CatalogPage = () => {
     const { data: category } = useGetCategoryByIdQuery(id as string);
     const matches = useMediaQuery('(max-width: 855px)');
     const dispatch = useAppDispatch();
+    const { countProducts } = useAppSelector((state) => state.catalog);
 
     useEffect(() => {
         dispatch(setCategory(category));
@@ -27,7 +28,7 @@ const CatalogPage = () => {
                 <Breadcrumbs paths={[...paths, { name: category?.name ?? '', path: '' }]} />
                 <div className={styles.catalogTitle}>
                     <h1>{category?.name}</h1>
-                    <span>318 товаров</span>
+                    <span>{countProducts} товаров</span>
                 </div>
             </div>
             <Catalog />

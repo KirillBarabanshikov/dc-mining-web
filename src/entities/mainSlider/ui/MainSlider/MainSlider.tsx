@@ -7,11 +7,13 @@ import { MAX_WIDTH_XL } from '@/shared/consts';
 import styles from './MainSlider.module.scss';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { useGetCategoriesQuery } from '@/entities/category';
 
 export const MainSlider = () => {
     const { data: slides } = useGetSliderQuery();
     const matches = useMediaQuery(MAX_WIDTH_XL);
     const navigate = useNavigate();
+    const { data: categories } = useGetCategoriesQuery();
 
     const handleNavigate = (link: string) => {
         let path;
@@ -22,7 +24,11 @@ export const MainSlider = () => {
                 break;
 
             case 'products':
-                path = '/catalog';
+                path = categories ? `/catalog/${categories[0].id}/${categories[0].slug}` : '/';
+                break;
+
+            case 'containers':
+                path = categories ? `/catalog/${categories[1].id}/${categories[1].slug}` : '/';
                 break;
 
             default:

@@ -2,14 +2,11 @@ import { FC, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_XXL } from '@/shared/consts';
 import { ICategory, useGetCategoriesQuery } from '@/entities/category';
 import { dropdown, dropdownItem } from './variants/variants.ts';
 import styles from './HorizontalMenu.module.scss';
 
 export const HorizontalMenu = () => {
-    const matches = useMediaQuery(MAX_WIDTH_XXL);
     const { data: categories } = useGetCategoriesQuery();
 
     return (
@@ -21,18 +18,16 @@ export const HorizontalMenu = () => {
                             return <MenuItemDropdown key={item.id} item={item} />;
                         }
 
-                        if (!matches) {
-                            return (
-                                <li key={item.id} className={styles.horizontalMenuItem}>
-                                    <Link
-                                        to={item.link ?? `/catalog/${item.id}/${item.slug}`}
-                                        className={styles.horizontalMenuLink}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            );
-                        }
+                        return (
+                            <li key={item.id} className={styles.horizontalMenuItem}>
+                                <Link
+                                    to={item.link ?? `/catalog/${item.id}/${item.slug}`}
+                                    className={styles.horizontalMenuLink}
+                                >
+                                    {item.name}
+                                </Link>
+                            </li>
+                        );
                     })}
             </ul>
         </nav>
