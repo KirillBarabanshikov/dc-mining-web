@@ -14,4 +14,13 @@
         gap: 8px;
         margin: 20px 0;
     }
+
+    @media screen and (max-width: 855px) {
+        max-width: unset;
+        padding: 8px;
+
+        .buttons {
+            margin: 20px 0 0 0;
+        }
+    }
 }

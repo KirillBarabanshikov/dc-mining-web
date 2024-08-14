@@ -18,6 +18,14 @@
         }
     }
 
+    .banners {
+        margin-top: 200px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+    }
+
     @media screen and (max-width: 992px) {
         .catalogTitle {
             margin-bottom: 14px;

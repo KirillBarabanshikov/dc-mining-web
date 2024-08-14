@@ -5,7 +5,8 @@ import { Filters, Sorting, CatalogPagination, CustomFilters } from './ui';
 import styles from './Catalog.module.scss';
 
 export const Catalog = () => {
-    const { data: products } = useGetProductsByCategoryIdQuery(1);
+    const { category } = useAppSelector((state) => state.catalog);
+    const { data: products } = useGetProductsByCategoryIdQuery(category?.id ?? 1);
     const { viewMode } = useAppSelector((state) => state.products);
 
     return (
@@ -14,7 +15,7 @@ export const Catalog = () => {
             <Filters className={styles.filters} />
             <Sorting className={styles.sorting} />
             <ProductsList products={products} className={styles.productList} viewMode={viewMode} />
-            <CatalogPagination countProducts={100} className={styles.pagination} />
+            <CatalogPagination countProducts={25} className={styles.pagination} />
         </div>
     );
 };

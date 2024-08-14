@@ -3,9 +3,11 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import { baseApi } from '@/shared/api';
 import { productsSlice } from '@/entities/product';
+import { catalogSlice } from '@/entities/catalog';
 
 const rootReducer = combineReducers({
     [productsSlice.name]: productsSlice.reducer,
+    [catalogSlice.name]: catalogSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
 });
 

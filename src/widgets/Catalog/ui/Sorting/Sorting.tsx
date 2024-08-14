@@ -5,6 +5,7 @@ import { Dropdown, IconButton, Modal } from '@/shared/ui';
 import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { setViewMode } from '@/entities/product';
+import { Filters } from '@/widgets/Catalog/ui';
 import TileIcon from '@/shared/assets/icons/view-mode-tile.svg?react';
 import SimpleIcon from '@/shared/assets/icons/view-mode-simple.svg?react';
 import SimpleIcon2 from '@/shared/assets/icons/view-mode-simple2.svg?react';
@@ -62,8 +63,8 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
                     />
                 </div>
             </div>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                filters
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
+                <Filters onClose={() => setIsOpen(false)} />
             </Modal>
         </div>
     );

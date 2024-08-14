@@ -1,5 +1,5 @@
-import { IDelivery } from '@/entities/delivery';
 import { ICategoryDto } from '@/entities/category/api';
+import { IDeliveryAndPayment } from '@/entities/deliveryAndPayment';
 
 export interface IProductDto {
     id: number;
@@ -26,6 +26,6 @@ export interface IProductDto {
         color: string;
     }[];
     display: boolean;
-    payments: IDelivery[];
-    deliveries: IDelivery[];
+    payments: IDeliveryAndPayment[];
+    deliveries: IDeliveryAndPayment[];
 }

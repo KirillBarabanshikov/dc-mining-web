@@ -12,4 +12,5 @@ export interface IFilterBody {
     characteristics: string;
     price: string;
     tags: string;
+    brand: string;
 }

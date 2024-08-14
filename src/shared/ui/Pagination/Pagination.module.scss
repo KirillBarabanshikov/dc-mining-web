@@ -29,6 +29,7 @@
         &.current {
             padding-top: 4px;
             border-bottom: 4px solid rgba(73, 70, 255, 1);
+            pointer-events: none;
         }
 
         &.disabled {
