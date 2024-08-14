@@ -48,4 +48,5 @@ export const {
     useLazyGetProductsQuery,
     useCompareProductsMutation,
     useGetProductsByCategoryIdQuery,
+    useLazyGetProductsByCategoryIdQuery,
 } = productApi;

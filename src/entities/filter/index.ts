@@ -1,1 +1,1 @@
-export { useGetFiltersQuery, useSetFiltersMutation } from './api';
+export { useGetFiltersQuery, useSetFiltersMutation, useGetOffersQuery } from './api';

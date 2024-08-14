@@ -32,6 +32,12 @@
         }
     }
 
+    @media screen and (max-width: 855px) {
+        .banners {
+            margin-top: 64px;
+        }
+    }
+
     @media screen and (max-width: 768px) {
         .catalogTitle {
             h1 {

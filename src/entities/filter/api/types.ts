@@ -9,8 +9,18 @@ export interface IFilterDto {
 
 export interface IFilterBody {
     type: string;
-    characteristics: string;
-    price: string;
-    tags: string;
-    brand: string;
+    characteristics?: string;
+    price?: string;
+    tags?: string;
+    brand?: string;
+}
+
+export interface IOfferDto {
+    id: number;
+    category: string;
+    productTags: {
+        id: number;
+        title: string;
+        color: string;
+    }[];
 }

@@ -1,13 +1,27 @@
 import { ProductsList } from '@/widgets';
-import { useGetProductsByCategoryIdQuery } from '@/entities/product';
-import { useAppSelector } from '@/shared/lib';
+import { useLazyGetProductsByCategoryIdQuery } from '@/entities/product';
+import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Filters, Sorting, CatalogPagination, CustomFilters } from './ui';
 import styles from './Catalog.module.scss';
+import { useEffect } from 'react';
+import { setProducts } from '@/entities/catalog';
 
 export const Catalog = () => {
     const { category } = useAppSelector((state) => state.catalog);
-    const { data: products } = useGetProductsByCategoryIdQuery(category?.id ?? 1);
+    const [getProducts] = useLazyGetProductsByCategoryIdQuery();
     const { viewMode } = useAppSelector((state) => state.products);
+    const dispatch = useAppDispatch();
+    const { products } = useAppSelector((state) => state.catalog);
+
+    useEffect(() => {
+        category && setData(category.id);
+    }, [category]);
+
+    const setData = async (id: number) => {
+        await getProducts(id)
+            .unwrap()
+            .then((data) => dispatch(setProducts(data)));
+    };
 
     return (
         <div className={styles.catalog}>

@@ -1,7 +1,8 @@
 import { baseApi } from '@/shared/api';
-import { IFilterDto, IFilterBody } from './types.ts';
+import { IFilterDto, IFilterBody, IOfferDto } from './types.ts';
 import { IFilter } from '../model';
 import { mapFilter } from '../lib';
+import { IProduct } from '@/entities/product';
 
 const filterApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -11,7 +12,12 @@ const filterApi = baseApi.injectEndpoints({
             }),
             transformResponse: (response: IFilterDto[]) => response.map(mapFilter),
         }),
-        setFilters: build.mutation<void, IFilterBody>({
+        getOffers: build.query<IOfferDto[], void>({
+            query: () => ({
+                url: '/offers',
+            }),
+        }),
+        setFilters: build.mutation<IProduct[], IFilterBody>({
             query: (body) => ({
                 url: '/filters',
                 method: 'POST',
@@ -21,4 +27,4 @@ const filterApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useGetFiltersQuery, useSetFiltersMutation } = filterApi;
+export const { useGetFiltersQuery, useSetFiltersMutation, useGetOffersQuery } = filterApi;

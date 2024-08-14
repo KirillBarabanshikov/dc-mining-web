@@ -18,4 +18,5 @@ export {
     useGetProductByIdQuery,
     useCompareProductsMutation,
     useGetProductsByCategoryIdQuery,
+    useLazyGetProductsByCategoryIdQuery,
 } from './api';
