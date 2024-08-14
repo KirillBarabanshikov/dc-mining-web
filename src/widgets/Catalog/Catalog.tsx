@@ -2,10 +2,10 @@ import { ProductsList } from '@/widgets';
 import { useLazyGetProductsByCategoryIdQuery } from '@/entities/product';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Filters, Sorting, CatalogPagination, CustomFilters } from './ui';
-import styles from './Catalog.module.scss';
 import { useEffect } from 'react';
 import { setProducts } from '@/entities/catalog';
 import { setCountProducts } from '@/entities/catalog/model/slice.ts';
+import styles from './Catalog.module.scss';
 
 export const Catalog = () => {
     const { category, countProducts } = useAppSelector((state) => state.catalog);

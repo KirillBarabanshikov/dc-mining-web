@@ -14,9 +14,9 @@ const paths = [{ name: 'Главная', path: '/' }];
 const CatalogPage = () => {
     const { id } = useParams();
     const { data: category } = useGetCategoryByIdQuery(id as string);
-    const matches = useMediaQuery('(max-width: 855px)');
     const dispatch = useAppDispatch();
     const { countProducts } = useAppSelector((state) => state.catalog);
+    const matches = useMediaQuery('(max-width: 855px)');
 
     useEffect(() => {
         dispatch(setCategory(category));
