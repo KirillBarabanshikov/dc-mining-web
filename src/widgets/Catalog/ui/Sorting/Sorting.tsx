@@ -63,7 +63,7 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
                     />
                 </div>
             </div>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={styles.modal}>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className={clsx(styles.modal, 'scrollbar-hide')}>
                 <Filters onClose={() => setIsOpen(false)} />
             </Modal>
         </div>

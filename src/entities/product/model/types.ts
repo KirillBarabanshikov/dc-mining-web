@@ -20,18 +20,8 @@ export interface IProduct {
     images: IProductImage[];
     tags: IProductTag[];
     display: boolean;
-    payments: IProductPayment[];
-    deliveries: IProductDelivery[];
     slug: string;
 }
-
-// interface IProductCategory {
-//     id: number;
-//     title: string;
-//     image: string;
-//     display: boolean;
-//     countOfProducts: number;
-// }
 
 export interface IProductValue {
     id: number;
@@ -51,20 +41,6 @@ interface IProductTag {
     id: number;
     title: string;
     color: string;
-}
-
-interface IProductPayment {
-    id: number;
-    image: string;
-    title: string;
-    description: string;
-}
-
-interface IProductDelivery {
-    id: number;
-    image: string;
-    title: string;
-    description: string;
 }
 
 export interface IProductsByCategory {

@@ -1,3 +1,5 @@
+import { IProduct } from '@/entities/product';
+
 export interface IFilter {
     id: number;
     category: {
@@ -11,4 +13,9 @@ export interface IFilter {
     lists: string[];
     start?: number;
     end?: number;
+}
+
+export interface IFilteredData {
+    countProducts: number;
+    products: IProduct[];
 }

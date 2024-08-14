@@ -1,21 +1,28 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { Breadcrumbs } from '@/shared/ui';
 import { useGetCategoryByIdQuery } from '@/entities/category';
-import { useGetProductsByCategoryIdQuery } from '@/entities/product';
 import { OrderCallHelpBanner } from '@/features/call';
 import { Catalog, Managers } from '@/widgets';
 import { useAppSelector, useMediaQuery } from '@/shared/lib';
 import styles from './CatalogPage.module.scss';
+import { useSetFiltersMutation } from '@/entities/filter';
+import { useEffect } from 'react';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
 const CatalogPage = () => {
     const { id } = useParams();
     const { data: category, isLoading } = useGetCategoryByIdQuery(id as string);
-    useGetProductsByCategoryIdQuery(id as string);
+    const [setFilters] = useSetFiltersMutation();
     const { countProducts } = useAppSelector((state) => state.catalog);
     const matches = useMediaQuery('(max-width: 855px)');
+    const [searchParams] = useSearchParams();
+
+    useEffect(() => {
+        const page = searchParams.get('page') ?? '1';
+        category && setFilters({ body: { type: category.title }, params: { page, limit: '25' } });
+    }, [category]);
 
     return (
         <div className={styles.catalog}>

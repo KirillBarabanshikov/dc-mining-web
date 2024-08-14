@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProduct, IProductsByCategory } from '@/entities/product';
+import { IProduct } from '@/entities/product';
 import { categoryApi, ICategory } from '@/entities/category';
-import { productApi } from '@/entities/product/api';
+import { filterApi } from '@/entities/filter';
+import { IFilteredData } from '@/entities/filter/model/types.ts';
 
 type TInitialState = {
     category?: ICategory;
@@ -17,17 +18,7 @@ const initialState: TInitialState = {
 export const catalogSlice = createSlice({
     name: 'catalog',
     initialState,
-    reducers: {
-        setProducts: (state, action: PayloadAction<IProduct[]>) => {
-            state.products = action.payload;
-        },
-        addProducts: (state, action: PayloadAction<IProduct[]>) => {
-            state.products = [...state.products, ...action.payload];
-        },
-        setCountProducts: (state, action: PayloadAction<number>) => {
-            state.countProducts = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addMatcher(
             categoryApi.endpoints.getCategoryById.matchFulfilled,
@@ -36,8 +27,8 @@ export const catalogSlice = createSlice({
             },
         );
         builder.addMatcher(
-            productApi.endpoints.getProductsByCategoryId.matchFulfilled,
-            (state, action: PayloadAction<IProductsByCategory>) => {
+            filterApi.endpoints.setFilters.matchFulfilled,
+            (state, action: PayloadAction<IFilteredData>) => {
                 state.countProducts = action.payload.countProducts;
                 state.products = action.payload.products;
             },
@@ -45,4 +36,4 @@ export const catalogSlice = createSlice({
     },
 });
 
-export const { setProducts, addProducts, setCountProducts } = catalogSlice.actions;
+export const {} = catalogSlice.actions;

@@ -1,3 +1,5 @@
+import { IProductDto } from '@/entities/product/api';
+
 export interface IFilterDto {
     id: number;
     category: string;
@@ -13,6 +15,8 @@ export interface IFilterBody {
     price?: string;
     tags?: string;
     brand?: string;
+    sortBy?: string;
+    sortOrder?: string;
 }
 
 export interface IOfferDto {
@@ -23,4 +27,9 @@ export interface IOfferDto {
         title: string;
         color: string;
     }[];
+}
+
+export interface IFilteredDataDto {
+    total_items: number;
+    items: IProductDto[];
 }

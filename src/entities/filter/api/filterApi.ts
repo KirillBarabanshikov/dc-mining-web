@@ -1,10 +1,11 @@
 import { baseApi } from '@/shared/api';
-import { IFilterDto, IFilterBody, IOfferDto } from './types.ts';
+import { IFilterDto, IFilterBody, IOfferDto, IFilteredDataDto } from './types.ts';
 import { IFilter } from '../model';
 import { mapFilter } from '../lib';
-import { IProduct } from '@/entities/product';
+import { IFilteredData } from '@/entities/filter/model/types.ts';
+import { mapProduct } from '@/entities/product/lib';
 
-const filterApi = baseApi.injectEndpoints({
+export const filterApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getFilters: build.query<IFilter[], void>({
             query: () => ({
@@ -18,17 +19,21 @@ const filterApi = baseApi.injectEndpoints({
             }),
         }),
         setFilters: build.mutation<
-            { items: IProduct[]; total_items: number },
+            IFilteredData,
             {
                 body: IFilterBody;
                 params: Record<string, string>;
             }
         >({
             query: ({ body, params }) => ({
-                url: '/filters?page=1?limit=25',
+                url: '/filters',
                 method: 'POST',
                 params,
                 body,
+            }),
+            transformResponse: (response: IFilteredDataDto): IFilteredData => ({
+                countProducts: response.total_items,
+                products: response.items.map(mapProduct),
             }),
         }),
     }),

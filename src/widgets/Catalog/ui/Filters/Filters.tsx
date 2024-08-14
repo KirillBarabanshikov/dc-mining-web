@@ -4,13 +4,10 @@ import { useGetFiltersQuery, useGetOffersQuery, useSetFiltersMutation } from '@/
 import { Button, Dropdown } from '@/shared/ui';
 import { useSearchParams } from 'react-router-dom';
 import { OrderCallHelpBanner } from '@/features/call';
-import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
+import { useAppSelector, useMediaQuery } from '@/shared/lib';
 import { CHARACTERISTICS_KEYS } from '@/shared/consts';
 import styles from './Filters.module.scss';
 import { IFilterBody } from '@/entities/filter/api';
-import { setProducts } from '@/entities/catalog';
-import { useLazyGetProductsByCategoryIdQuery } from '@/entities/product';
-import { setCountProducts } from '@/entities/catalog/model/slice.ts';
 
 interface IFiltersProps {
     onClose?: () => void;
@@ -22,10 +19,8 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
     const { data: offers } = useGetOffersQuery();
     const [searchParams, setSearchParams] = useSearchParams();
     const [setFilters] = useSetFiltersMutation();
-    const [getProductsByCategoryId] = useLazyGetProductsByCategoryIdQuery();
-    const matches = useMediaQuery('(max-width: 855)');
+    const matches = useMediaQuery('(max-width: 855px)');
     const { category } = useAppSelector((state) => state.catalog);
-    const dispatch = useAppDispatch();
     const [reset, setReset] = useState(false);
 
     const handleOnChange = ({ key, value }: { key: string; value: string[] }) => {
@@ -40,7 +35,7 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
         console.log(e.target.value);
     };
 
-    const onSetFilters = async () => {
+    const onSetFilters = () => {
         setSearchParams(searchParams);
         const characteristics: string[] = [];
         const currentPage = searchParams.get('page') ?? '1';
@@ -68,25 +63,16 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
             body.brand = searchParams.get('brand') ?? '';
         }
 
-        await setFilters({ body: body, params: { page: currentPage, limit: '25' } })
-            .unwrap()
-            .then((data) => {
-                dispatch(setProducts(data.items));
-                dispatch(setCountProducts(data.total_items));
-            });
+        setFilters({ body: body, params: { page: currentPage, limit: '25' } });
         onClose && onClose();
         setReset(false);
     };
 
     const onResetFilters = async () => {
         const order = searchParams.get('order');
+        const currentPage = searchParams.get('page') ?? '1';
         setSearchParams(order ? { order } : {});
-        await getProductsByCategoryId(category?.id ?? '')
-            .unwrap()
-            .then((data) => {
-                dispatch(setProducts(data.products));
-                dispatch(setCountProducts(data.countProducts));
-            });
+        category && setFilters({ body: { type: category.title }, params: { page: currentPage, limit: '25' } });
         onClose && onClose();
         setReset(true);
     };
@@ -142,7 +128,7 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
                     Сбросить
                 </Button>
             </div>
-            {matches && <OrderCallHelpBanner />}
+            {!matches && <OrderCallHelpBanner />}
         </div>
     );
 };
