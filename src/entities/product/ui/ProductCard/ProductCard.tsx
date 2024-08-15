@@ -32,8 +32,8 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
         <>
             <Link
                 to={`/product/${product.id}/${product.slug}`}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={() => !matches && setIsHovered(true)}
+                onMouseLeave={() => !matches && setIsHovered(false)}
             >
                 <article className={clsx(styles.productCard, styles[viewMode])}>
                     <ProductCardImage product={product} />
