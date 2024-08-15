@@ -57,13 +57,18 @@ const AboutPage = () => {
                             {info &&
                                 info.partners.map((partner) => {
                                     return (
-                                        <div
-                                            key={partner.id}
-                                            className={styles.partner}
-                                            style={{
-                                                backgroundImage: `url(${BASE_URL + partner.image})`,
-                                            }}
-                                        />
+                                        <div key={partner.id} className={styles.partner}>
+                                            <img
+                                                src={BASE_URL + partner.image}
+                                                alt={'image'}
+                                                className={styles.image}
+                                            />
+                                            <img
+                                                src={BASE_URL + partner.preview}
+                                                alt={'preview'}
+                                                className={styles.preview}
+                                            />
+                                        </div>
                                     );
                                 })}
                         </ScrollContainer>

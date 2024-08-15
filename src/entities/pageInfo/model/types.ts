@@ -7,6 +7,7 @@ export interface IAboutInfo {
     partners: {
         id: number;
         image: string;
+        preview: string;
     }[];
     main: string;
 }
