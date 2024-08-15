@@ -1,6 +1,6 @@
 import { baseApi } from '@/shared/api';
 import { IFilterDto, IFilterBody, IOfferDto, IFilteredDataDto } from './types.ts';
-import { IFilter } from '../model';
+import { ICustomFilter, IFilter } from '../model';
 import { mapFilter } from '../lib';
 import { IFilteredData } from '@/entities/filter/model/types.ts';
 import { mapProduct } from '@/entities/product/lib';
@@ -28,7 +28,7 @@ export const filterApi = baseApi.injectEndpoints({
             query: ({ body, params }) => ({
                 url: '/filters',
                 method: 'POST',
-                params,
+                params: { ...params, limit: 25 },
                 body,
             }),
             transformResponse: (response: IFilteredDataDto): IFilteredData => ({
@@ -36,7 +36,12 @@ export const filterApi = baseApi.injectEndpoints({
                 products: response.items.map(mapProduct),
             }),
         }),
+        getCustomFilters: build.query<ICustomFilter[], void>({
+            query: () => ({
+                url: '/product_custom_filters',
+            }),
+        }),
     }),
 });
 
-export const { useGetFiltersQuery, useSetFiltersMutation, useGetOffersQuery } = filterApi;
+export const { useGetFiltersQuery, useSetFiltersMutation, useGetOffersQuery, useGetCustomFiltersQuery } = filterApi;

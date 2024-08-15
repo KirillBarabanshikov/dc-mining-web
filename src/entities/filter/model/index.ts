@@ -1,1 +1,1 @@
-export type { IFilter } from './types';
+export type { IFilter, ICustomFilter } from './types';

@@ -1,1 +1,1 @@
-export { catalogSlice } from './model';
+export { catalogSlice, setCategory } from './model';

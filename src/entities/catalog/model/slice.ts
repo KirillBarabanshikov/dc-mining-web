@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProduct } from '@/entities/product';
-import { categoryApi, ICategory } from '@/entities/category';
+import { ICategory } from '@/entities/category';
 import { filterApi } from '@/entities/filter';
 import { IFilteredData } from '@/entities/filter/model/types.ts';
 
@@ -18,14 +18,12 @@ const initialState: TInitialState = {
 export const catalogSlice = createSlice({
     name: 'catalog',
     initialState,
-    reducers: {},
+    reducers: {
+        setCategory: (state, action: PayloadAction<ICategory>) => {
+            state.category = action.payload;
+        },
+    },
     extraReducers: (builder) => {
-        builder.addMatcher(
-            categoryApi.endpoints.getCategoryById.matchFulfilled,
-            (state, action: PayloadAction<ICategory>) => {
-                state.category = action.payload;
-            },
-        );
         builder.addMatcher(
             filterApi.endpoints.setFilters.matchFulfilled,
             (state, action: PayloadAction<IFilteredData>) => {
@@ -36,4 +34,4 @@ export const catalogSlice = createSlice({
     },
 });
 
-export const {} = catalogSlice.actions;
+export const { setCategory } = catalogSlice.actions;

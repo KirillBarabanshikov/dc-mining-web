@@ -19,3 +19,9 @@ export interface IFilteredData {
     countProducts: number;
     products: IProduct[];
 }
+
+export interface ICustomFilter {
+    id: number;
+    title: string;
+    productCategoryTitle: string;
+}

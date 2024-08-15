@@ -17,6 +17,9 @@ export interface IFilterBody {
     brand?: string;
     sortBy?: string;
     sortOrder?: string;
+    profitable?: boolean;
+    powerful?: boolean;
+    customFilters?: string;
 }
 
 export interface IOfferDto {

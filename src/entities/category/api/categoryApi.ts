@@ -15,7 +15,6 @@ export const categoryApi = baseApi.injectEndpoints({
             query: (id) => ({
                 url: `/product_categories/${id}`,
             }),
-            keepUnusedDataFor: 0,
             transformResponse: (response: ICategoryDto) => mapCategory(response),
         }),
     }),

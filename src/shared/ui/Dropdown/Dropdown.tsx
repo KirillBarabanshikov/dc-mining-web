@@ -41,7 +41,7 @@ export const Dropdown: FC<IDropdownProps> = ({
     const [isOpen, setIsOpen] = useState(open);
 
     useEffect(() => {
-        reset && setSelectedValue(defaultValue);
+        setSelectedValue(defaultValue);
     }, [reset]);
 
     const handleSelect = (value: string) => {

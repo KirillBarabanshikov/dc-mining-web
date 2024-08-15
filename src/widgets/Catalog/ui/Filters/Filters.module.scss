@@ -8,6 +8,17 @@
     max-width: 283px;
     width: 100%;
 
+    .switchWrap {
+        margin: 16px 0;
+
+        .switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 8px;
+        }
+    }
+
     .buttons {
         display: flex;
         flex-direction: column;
@@ -23,8 +34,4 @@
             margin: 20px 0 0 0;
         }
     }
-}
-
-.range {
-    padding: 0 !important;
 }
