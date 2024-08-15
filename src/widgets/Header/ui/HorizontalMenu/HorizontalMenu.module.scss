@@ -31,12 +31,6 @@
                 }
             }
 
-            @media screen and (max-width: 865px) {
-                &:nth-child(4) {
-                    display: none;
-                }
-            }
-
             .horizontalMenuLink {
                 font-weight: 500;
                 font-size: 16px;
@@ -96,8 +90,8 @@
                 visibility: hidden;
             }
 
-            @media screen and (max-width: 855px) {
-                &:last-child {
+            @media screen and (max-width: 865px) {
+                &:nth-child(4) {
                     display: none;
                 }
             }
