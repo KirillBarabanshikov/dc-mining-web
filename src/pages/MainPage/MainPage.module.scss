@@ -1,6 +1,5 @@
 .sections {
     margin-top: 60px;
-    margin-bottom: 200px;
 
     .bestsellersWrapper {
         position: relative;
@@ -14,6 +13,18 @@
 
             @media screen and (max-width: 992px) {
                 display: none;
+            }
+        }
+    }
+
+    .news {
+        .titleWrap {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+
+            h2 {
+                margin-bottom: unset;
             }
         }
     }
