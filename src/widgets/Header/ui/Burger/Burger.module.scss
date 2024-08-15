@@ -1,0 +1,59 @@
+.burger {
+    padding: 12px;
+    cursor: pointer;
+
+    .burgerBars {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .burgerBar {
+        display: block;
+        background-color: #3e3e3f;
+        width: 3px;
+        height: 100%;
+        animation-delay: 0s, 0.7s;
+        animation-iteration-count: 1, infinite;
+        transform-origin: 100% 100%;
+
+        &.burgerBar1 {
+            animation-duration: 0.8s, 1.03s;
+            animation-name: burger-bar-anim-default-v-1, burger-bar-anim-v;
+        }
+
+        &.burgerBar2 {
+            animation-duration: 0.8s, 1.08s;
+            animation-name: burger-bar-anim-default-v-2, burger-bar-anim-v;
+        }
+
+        &.burgerBar3 {
+            animation-duration: 0.8s, 1.2s;
+            animation-name: burger-bar-anim-default-v-3, burger-bar-anim-v;
+        }
+    }
+}
+
+@keyframes burger-bar-anim-default-v1 {
+    0% {
+        height: 26px;
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes burger-bar-anim-v {
+    0% {
+        height: 1px;
+    }
+    50% {
+        height: 20px;
+    }
+    100% {
+        height: 1px;
+    }
+}
