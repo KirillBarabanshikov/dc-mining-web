@@ -1,130 +1,89 @@
 .advantages {
     .advantagesContainer {
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 32px;
-    }
+        gap: 16px;
 
-    .item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
 
-        .image {
-            background-color: var(--background-white);
-            border-radius: 40px;
-            margin-bottom: 20px;
-            transition: background-color 300ms ease-out;
-
-            @media (hover: hover) {
-                &:hover {
-                    background-color: var(--background-secondary);
-                }
-            }
-        }
-
-        .title {
-            text-align: center;
-            width: 240px;
-            font-size: 20px;
-            line-height: 120%;
-            white-space: pre-wrap;
-        }
-
-        @media screen and (max-width: 1375px) {
-            flex: 0 1 30%;
-        }
-
-        @media screen and (max-width: 768px) {
             .image {
-                border-radius: 16px;
+                max-width: 160px;
+                max-height: 160px;
 
                 img {
-                    width: 120px;
-                    height: 120px;
+                    width: 100%;
+                    height: 100%;
                 }
             }
 
             .title {
-                font-family: 'Roboto', sans-serif;
-                width: unset;
-                font-size: 14px;
-                line-height: 18.2px;
-                white-space: pre-wrap;
-            }
-        }
-    }
-
-    &.data-center {
-        .title {
-            font-family: 'Gilroy', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            line-height: 28.8px;
-            margin-bottom: 20px;
-            height: 100%;
-
-            @media screen and (max-width: 992px) {
-                font-size: 20px;
-                line-height: 24px;
-            }
-        }
-
-        .desc {
-            line-height: 20.8px;
-            color: rgba(90, 101, 156, 1);
-            text-align: center;
-            max-width: 302px;
-        }
-
-        @media screen and (max-width: 1440px) {
-            .title {
-                font-size: 20px;
-                line-height: 24px;
+                text-align: center;
+                font-family: 'Gilroy', sans-serif;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 28.8px;
             }
 
             .desc {
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 16.8px;
-                max-width: 242px;
+                text-align: center;
+                line-height: 20.8px;
+                color: rgba(90, 101, 156, 1);
             }
+        }
 
+        @media screen and (max-width: 1765px) {
             .item {
-                &:first-child {
-                    .title {
-                        white-space: normal;
-                    }
+                .title {
+                    font-size: 20px;
+                    line-height: 24px;
+                    height: 40px;
+                }
+
+                .desc {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 16.8px;
+                    max-width: 242px;
                 }
             }
         }
 
-        @media screen and (max-width: 768px) {
-            .title {
-                font-family: 'Roboto', sans-serif;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 18.2px;
-                margin-bottom: unset;
+        @media screen and (max-width: 992px) {
+            flex-wrap: wrap;
+
+            .item {
+                flex: 1 1 24%;
             }
         }
-    }
 
-    @media screen and (max-width: 1440px) {
-        .advantagesContainer {
-            gap: 24px;
+        @media screen and (max-width: 768px) {
+            .item {
+                .image {
+                    max-width: 120px;
+                    max-height: 120px;
+                }
+
+                .title {
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 18.2px;
+                }
+
+                .desc {
+                    display: none;
+                }
+            }
         }
-    }
 
-    @media screen and (max-width: 768px) {
-        .advantagesContainer {
-            gap: 16px;
-        }
-
-        .desc {
-            display: none;
+        @media screen and (max-width: 495px) {
+            .item {
+                flex: 1 1 35%;
+            }
         }
     }
 }
