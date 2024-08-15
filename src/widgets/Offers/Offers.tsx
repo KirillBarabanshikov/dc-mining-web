@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { CategoryCard, useGetCategoriesQuery } from '@/entities/category';
 import styles from './Offers.module.scss';
 
@@ -11,11 +10,11 @@ export const Offers = () => {
                 <h2 className={'section-title'}>Мы предлагаем</h2>
                 <div className={styles.offersList}>
                     {categories &&
-                        categories.map((category) => {
-                            if (!category.display) return <Fragment key={category.id} />;
-
-                            return <CategoryCard key={category.id} category={category} />;
-                        })}
+                        categories
+                            .filter((category) => category.display)
+                            .map((category) => {
+                                return <CategoryCard key={category.id} category={category} />;
+                            })}
                 </div>
             </div>
         </section>
