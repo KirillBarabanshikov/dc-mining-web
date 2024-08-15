@@ -95,7 +95,7 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
             body.customFilters = searchParams.get('customFilters') ?? '';
         }
 
-        setFilters({ body: body, params: { page: currentPage, limit: '25' } });
+        setFilters({ body: body, params: { page: currentPage } });
     };
 
     return (

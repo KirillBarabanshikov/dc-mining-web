@@ -87,7 +87,7 @@ const CatalogPage = () => {
         }
 
         dispatch(setCategory(category));
-        setFilters({ body, params: { page: currentPage, limit: '25' } });
+        setFilters({ body, params: { page: currentPage } });
     }, [category]);
 
     return (

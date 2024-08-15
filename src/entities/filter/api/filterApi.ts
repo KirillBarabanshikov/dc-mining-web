@@ -28,7 +28,7 @@ export const filterApi = baseApi.injectEndpoints({
             query: ({ body, params }) => ({
                 url: '/filters',
                 method: 'POST',
-                params: { ...params, limit: 25 },
+                params: { ...params, limit: 10 },
                 body,
             }),
             transformResponse: (response: IFilteredDataDto): IFilteredData => ({

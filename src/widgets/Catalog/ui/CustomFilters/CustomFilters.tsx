@@ -85,7 +85,7 @@ export const CustomFilters: FC<ICustomFiltersProps> = ({ className }) => {
             body.customFilters = searchParams.get('customFilters') ?? '';
         }
 
-        setFilters({ body: body, params: { page: currentPage, limit: '25' } });
+        setFilters({ body: body, params: { page: currentPage } });
     };
 
     return (

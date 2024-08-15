@@ -22,6 +22,9 @@ export const catalogSlice = createSlice({
         setCategory: (state, action: PayloadAction<ICategory>) => {
             state.category = action.payload;
         },
+        setProducts: (state, action: PayloadAction<IProduct[]>) => {
+            state.products = [...state.products, ...action.payload];
+        },
     },
     extraReducers: (builder) => {
         builder.addMatcher(
@@ -34,4 +37,4 @@ export const catalogSlice = createSlice({
     },
 });
 
-export const { setCategory } = catalogSlice.actions;
+export const { setCategory, setProducts } = catalogSlice.actions;

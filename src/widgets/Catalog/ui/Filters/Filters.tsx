@@ -38,6 +38,7 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
     };
 
     const onSetFilters = () => {
+        searchParams.delete('page');
         setSearchParams(searchParams);
         const characteristics: string[] = [];
         const currentPage = searchParams.get('page') ?? '1';
@@ -99,7 +100,7 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
             body.customFilters = searchParams.get('customFilters') ?? '';
         }
 
-        setFilters({ body: body, params: { page: currentPage, limit: '25' } });
+        setFilters({ body: body, params: { page: currentPage } });
         onClose && onClose();
         setReset(false);
     };
@@ -108,7 +109,7 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
         const order = searchParams.get('order');
         const currentPage = searchParams.get('page') ?? '1';
         setSearchParams(order ? { order } : {});
-        category && setFilters({ body: { type: category.title }, params: { page: currentPage, limit: '25' } });
+        category && setFilters({ body: { type: category.title }, params: { page: currentPage } });
         onClose && onClose();
         setReset(true);
     };
