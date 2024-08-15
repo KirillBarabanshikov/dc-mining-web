@@ -156,7 +156,6 @@
 
     .body {
         display: flex;
-        gap: 20px;
         flex: 1;
     }
 
@@ -186,13 +185,18 @@
     }
 
     .specifications {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
+        overflow: hidden;
 
-        font-size: 14px;
-        line-height: 18.2px;
-        color: rgba(90, 101, 156, 1);
+        .specificationsList {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-bottom: 20px;
+
+            font-size: 14px;
+            line-height: 18.2px;
+            color: rgba(90, 101, 156, 1);
+        }
     }
 
     .buttons {

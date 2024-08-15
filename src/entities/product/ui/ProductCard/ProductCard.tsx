@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Badge, Button } from '@/shared/ui';
 import { IProduct } from '@/entities/product';
 import { formatter, useMediaQuery } from '@/shared/lib';
@@ -14,12 +15,26 @@ interface IProductCardProps {
 }
 
 export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
+    const [isHovered, setIsHovered] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
+    const currentVariant =
+        viewMode === 'tile'
+            ? {
+                  initial: { height: 0, opacity: 0 },
+                  animate: { height: 'auto', opacity: 1 },
+                  exit: { height: 0, opacity: 0 },
+              }
+            : {};
+
     return (
         <>
-            <Link to={`/product/${product.id}/${product.slug}`}>
+            <Link
+                to={`/product/${product.id}/${product.slug}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
                 <article className={clsx(styles.productCard, styles[viewMode])}>
                     <ProductCardImage product={product} />
                     <div className={styles.body}>
@@ -32,17 +47,25 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                             {(viewMode === 'tile' || matches) && (
                                 <p className={styles.price}>{formatter.format(product.price)}</p>
                             )}
-                            <p className={styles.name}>{product.title}</p>
-                            <div className={styles.specifications}>
-                                {product.value
-                                    .filter((value) => value.display)
-                                    .map((value) => {
-                                        return (
-                                            <div key={value.id}>
-                                                {value.valueInKey} — {value.title} {value.unitInKey}
+                            <p className={clsx(styles.name)}>{product.title}</p>
+                            <div>
+                                <AnimatePresence>
+                                    {(isHovered || viewMode === 'simple') && (
+                                        <motion.div {...currentVariant} className={styles.specifications}>
+                                            <div className={styles.specificationsList}>
+                                                {product.value
+                                                    .filter((value) => value.display)
+                                                    .map((value) => {
+                                                        return (
+                                                            <div key={value.id}>
+                                                                {value.valueInKey} — {value.title} {value.unitInKey}
+                                                            </div>
+                                                        );
+                                                    })}
                                             </div>
-                                        );
-                                    })}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                         <div className={clsx(styles.wrap, styles.buttonsWrap)}>
