@@ -103,7 +103,7 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
             <div className={styles.sortDropdown}>
                 <span className={styles.sortLabel}>Сортировка:</span>
                 <Dropdown
-                    defaultValue={['1']}
+                    defaultValue={[searchParams.get('order') ?? '1']}
                     items={[
                         { label: 'Сначала популярные', value: '1' },
                         { label: 'По скидке (%)', value: '2' },
