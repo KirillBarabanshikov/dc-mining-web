@@ -15,7 +15,6 @@ const MainPage = () => {
         <>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
-                {/*<Advantages />*/}
                 <Offers />
                 <div className={styles.bestsellersWrapper}>
                     <Bestsellers />
@@ -35,7 +34,7 @@ const MainPage = () => {
                             </Button>
                         )}
                     </div>
-                    <NewsList />
+                    <NewsList display={true} />
                     {matches && (
                         <Button size={'md'} isWide onClick={() => navigate('/news')} className={styles.button}>
                             Все новости
