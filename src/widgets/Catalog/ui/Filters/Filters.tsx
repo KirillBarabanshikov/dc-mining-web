@@ -109,7 +109,40 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
         const order = searchParams.get('order');
         const currentPage = searchParams.get('page') ?? '1';
         setSearchParams(order ? { order } : {});
-        category && setFilters({ body: { type: category.title }, params: { page: currentPage } });
+
+        const body: IFilterBody = {
+            type: category?.title ?? '',
+        };
+
+        console.log(searchParams.get('order'));
+
+        if (searchParams.get('order')) {
+            if (searchParams.get('order') === '1') {
+                body.sortBy = 'popularity';
+            }
+
+            if (searchParams.get('order') === '2') {
+                body.sortBy = 'discount';
+            }
+
+            if (searchParams.get('order') === '3') {
+                body.sortBy = 'price';
+                body.sortOrder = 'ASC';
+            }
+
+            if (searchParams.get('order') === '4') {
+                body.sortBy = 'price';
+                body.sortOrder = 'DESC';
+            }
+        } else {
+            body.sortBy = 'popularity';
+        }
+
+        if (searchParams.get('customFilters')) {
+            body.customFilters = searchParams.get('customFilters') ?? '';
+        }
+
+        category && setFilters({ body, params: { page: currentPage } });
         onClose && onClose();
         setReset(true);
     };
