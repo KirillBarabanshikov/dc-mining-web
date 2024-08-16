@@ -31,7 +31,7 @@ export const ProductBodyTile: FC<IProductBodyTileProps> = ({ product, onClick, i
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className={clsx(cardStyles.specifications)}
+                        className={clsx(cardStyles.specifications, withInfo && styles.specifications)}
                     >
                         <div className={clsx(cardStyles.specificationsList, styles.specificationsList)}>
                             {product.value
