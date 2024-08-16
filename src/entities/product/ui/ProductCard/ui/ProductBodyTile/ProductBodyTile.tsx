@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IProduct } from '@/entities/product';
 import { Badge, Button } from '@/shared/ui';
@@ -6,15 +7,15 @@ import { formatter } from '@/shared/lib';
 import { AddToCompareButton, AddToFavoritesButton } from '@/features/product';
 import cardStyles from '../../ProductCard.module.scss';
 import styles from './ProductBodyTile.module.scss';
-import clsx from 'clsx';
 
 interface IProductBodyTileProps {
     product: IProduct;
     onClick: (e: React.MouseEvent) => void;
     isHovered: boolean;
+    withInfo?: boolean;
 }
 
-export const ProductBodyTile: FC<IProductBodyTileProps> = ({ product, onClick, isHovered }) => {
+export const ProductBodyTile: FC<IProductBodyTileProps> = ({ product, onClick, isHovered, withInfo = true }) => {
     return (
         <div className={styles.body}>
             <div className={clsx(cardStyles.tags, styles.tags)}>
@@ -24,8 +25,8 @@ export const ProductBodyTile: FC<IProductBodyTileProps> = ({ product, onClick, i
             </div>
             <p className={clsx(cardStyles.price, styles.price)}>{formatter.format(product.price)}</p>
             <p className={clsx(cardStyles.name, styles.name)}>{product.title}</p>
-            <AnimatePresence>
-                {isHovered && (
+            <AnimatePresence initial={!withInfo}>
+                {(isHovered || withInfo) && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}

@@ -43,6 +43,17 @@
             margin-bottom: 12px;
         }
 
+        .specificationsList {
+            padding-bottom: 12px;
+
+            div {
+                font-family: 'Roboto', sans-serif;
+                font-size: 10px;
+                line-height: 12px;
+                text-transform: uppercase;
+            }
+        }
+
         .buttons {
             flex-wrap: wrap;
 

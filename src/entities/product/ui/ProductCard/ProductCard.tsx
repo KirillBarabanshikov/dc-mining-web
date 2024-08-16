@@ -11,9 +11,10 @@ import styles from './ProductCard.module.scss';
 interface IProductCardProps {
     product: IProduct;
     viewMode?: 'tile' | 'simple';
+    withInfo?: boolean;
 }
 
-export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' }) => {
+export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile', withInfo = true }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
@@ -38,7 +39,12 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile' 
                 <article className={clsx(styles.productCard, styles[viewMode])}>
                     <ProductImage className={styles.image} images={product.images} />
                     {viewMode === 'tile' ? (
-                        <ProductBodyTile product={product} onClick={handleOrderButton} isHovered={isHovered} />
+                        <ProductBodyTile
+                            product={product}
+                            onClick={handleOrderButton}
+                            isHovered={isHovered}
+                            withInfo={withInfo}
+                        />
                     ) : (
                         <ProductBodySimple product={product} onClick={handleOrderButton} />
                     )}

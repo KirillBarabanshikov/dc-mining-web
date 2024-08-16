@@ -11,7 +11,7 @@ export const Bestsellers = () => {
                 <div className={styles.bestsellersList}>
                     {products &&
                         products.map((product) => {
-                            return <ProductCard key={product.id} product={product} />;
+                            return <ProductCard key={product.id} product={product} withInfo={false} />;
                         })}
                 </div>
             </div>
