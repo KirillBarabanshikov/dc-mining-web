@@ -6,6 +6,7 @@ import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import { OrderCallModal } from '@/features/call';
+import { IconButton } from '@/shared/ui';
 import { SideMenu, HorizontalMenu, Burger } from './ui';
 import Logo from '@/shared/assets/logo.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
@@ -39,7 +40,7 @@ export const Header: FC = () => {
             <header className={styles.header}>
                 <div className={styles.headerContainer}>
                     <div className={styles.mainMenu}>
-                        <Burger onClick={toggleMenu} />
+                        <IconButton icon={<Burger />} onClick={toggleMenu} className={styles.menuIcon} />
                         <Link to={'/'} className={styles.logo}>
                             <Logo />
                         </Link>
