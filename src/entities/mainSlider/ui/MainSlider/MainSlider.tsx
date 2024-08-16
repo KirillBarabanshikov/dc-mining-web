@@ -50,7 +50,7 @@ export const MainSlider = () => {
                         <SwiperSlide key={slide.id}>
                             <section className={styles.slide}>
                                 <div className={styles.slideContent}>
-                                    <h2>{slide.title}</h2>
+                                    <h2 dangerouslySetInnerHTML={{ __html: slide.title }} />
                                     <div
                                         className={clsx(styles.description, 'list')}
                                         dangerouslySetInnerHTML={{ __html: slide.description }}

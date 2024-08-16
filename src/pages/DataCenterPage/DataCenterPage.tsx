@@ -29,7 +29,7 @@ const DataCenterPage = () => {
         <>
             <section className={styles.dataCenterBanner}>
                 <div className={clsx(styles.dataCenterContainer, 'container')}>
-                    <h1>{info?.title}</h1>
+                    <h1 dangerouslySetInnerHTML={{ __html: info?.title ?? '' }} />
                     <div
                         className={clsx(styles.description, 'list')}
                         dangerouslySetInnerHTML={{ __html: info?.description ?? '' }}

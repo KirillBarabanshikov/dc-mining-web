@@ -27,7 +27,7 @@ const LeasingPage = () => {
     const currentLine2 = matchesMd ? dottedLineSm2 : matchesLg ? dottedLineMd2 : dottedLine2;
 
     return (
-        <>
+        <div className={styles.leasing}>
             <div className={'sections'}>
                 <section className={styles.leasingBanner}>
                     <div className={clsx(styles.leasingContainer, 'container')}>
@@ -59,7 +59,10 @@ const LeasingPage = () => {
                 </div>
                 <section className={styles.leasingDesc}>
                     <div className={'container'}>
-                        <h2 className={clsx(styles.title, 'section-title-primary')}>{info?.informationTitle}</h2>
+                        <h2
+                            className={clsx(styles.title, 'section-title-primary')}
+                            dangerouslySetInnerHTML={{ __html: info?.informationTitle ?? '' }}
+                        ></h2>
                         <div className={styles.wrap}>
                             {info &&
                                 info.steps.map((step, index) => {
@@ -145,7 +148,7 @@ const LeasingPage = () => {
                 title={'Заказать звонок'}
                 subtitle={'Оставьте свои контакты и мы вам перезвоним'}
             />
-        </>
+        </div>
     );
 };
 
