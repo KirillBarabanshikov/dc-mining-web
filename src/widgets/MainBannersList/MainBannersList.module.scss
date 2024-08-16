@@ -1,0 +1,19 @@
+.mainBannersList {
+    display: flex;
+    gap: 32px;
+}
+
+.bannerCard {
+    h3 {
+        font-size: 32px;
+        line-height: 38.4px;
+        color: var(--text-accent-blue);
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 40px;
+    }
+}
