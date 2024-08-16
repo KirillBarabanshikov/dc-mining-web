@@ -31,6 +31,8 @@
     }
 
     @media screen and (max-width: 768px) {
+        flex: 0;
+
         .tags {
             height: unset;
             gap: 4px;
