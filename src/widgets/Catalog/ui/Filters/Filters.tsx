@@ -144,6 +144,8 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
 
         category && setFilters({ body, params: { page: currentPage } });
         onClose && onClose();
+        setIsOn(false);
+        setIsOn2(false);
         setReset(true);
     };
 
