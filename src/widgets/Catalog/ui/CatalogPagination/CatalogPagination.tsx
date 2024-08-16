@@ -17,7 +17,7 @@ export const CatalogPagination: FC<ICatalogPaginationProps> = ({ countProducts, 
     const [searchParams, setSearchParams] = useSearchParams();
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const currentPage = +(searchParams.get('page') ?? 1);
-    const length = Math.ceil(countProducts / 10);
+    const length = Math.ceil(countProducts / 12);
     const { category, products } = useAppSelector((state) => state.catalog);
     const [setFilters] = useSetFiltersMutation();
     const dispatch = useAppDispatch();
