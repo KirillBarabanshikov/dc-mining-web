@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui';
-import { Bestsellers, MainBanner, Managers, NewsList, Offers } from '@/widgets';
+import { Bestsellers, MainBanner, MainBannersList, Managers, NewsList, Offers } from '@/widgets';
 import Background from '@/shared/assets/backgrounds/main-bg.svg?react';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
@@ -15,6 +15,7 @@ const MainPage = () => {
         <>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
+                <MainBannersList />
                 <Offers />
                 <div className={styles.bestsellersWrapper}>
                     <Bestsellers />
