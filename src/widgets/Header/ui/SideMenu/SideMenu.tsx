@@ -8,14 +8,15 @@ import { useGetCategoriesQuery } from '@/entities/category';
 import { ABOUT_LINKS, BASE_URL, SERVICES_LINKS } from '@/shared/consts';
 import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
 import ArrowDown from '@/shared/assets/icons/arrow-down2.svg?react';
+import CloseIcon from '@/shared/assets/icons/close.svg?react';
 import styles from './SideMenu.module.scss';
 
 interface ISideMenuProps {
     isOpen: boolean;
-    onCLose: () => void;
+    onClose: () => void;
 }
 
-export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onCLose }) => {
+export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
     const { data: contacts } = useGetContactsQuery();
 
     return createPortal(
@@ -29,7 +30,10 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onCLose }) => {
                         exit={{ opacity: 0 }}
                     >
                         <section>
-                            <h4 className={styles.title}>Оборудование</h4>
+                            <h4 className={clsx(styles.title, styles.mainTitle)}>
+                                Оборудование
+                                <CloseIcon onClick={onClose} />
+                            </h4>
                             <CollapseItemsList />
                         </section>
                         <section>
@@ -86,7 +90,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onCLose }) => {
                         className={styles.overlay}
                         onClick={(e) => {
                             e.stopPropagation();
-                            onCLose();
+                            onClose();
                         }}
                     />
                 </>

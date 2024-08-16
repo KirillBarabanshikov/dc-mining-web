@@ -24,6 +24,24 @@
         margin-bottom: 20px;
     }
 
+    .mainTitle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        svg {
+            color: var(--text-primary);
+            transition: color 300ms ease-out;
+
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--text-accent-blue);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
     .contacts {
         display: flex;
         flex-direction: column;

@@ -68,7 +68,7 @@ export const Header: FC = () => {
                     {!matchesMD && <HorizontalMenu />}
                 </div>
             </header>
-            <SideMenu isOpen={isOpen} onCLose={toggleMenu} />
+            <SideMenu isOpen={isOpen} onClose={toggleMenu} />
         </>
     );
 };
