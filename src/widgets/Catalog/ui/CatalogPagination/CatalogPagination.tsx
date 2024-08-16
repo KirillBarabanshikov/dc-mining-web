@@ -28,9 +28,9 @@ export const CatalogPagination: FC<ICatalogPaginationProps> = ({ countProducts, 
         searchParams.set('page', `${page}`);
         setSearchParams(searchParams);
 
-        // setTimeout(() => {
-        //     window.scrollTo(0, 10);
-        // }, 0);
+        if (!more) {
+            window.scrollTo(0, 0);
+        }
 
         const characteristics: string[] = [];
         const currentPage = page;
@@ -93,7 +93,9 @@ export const CatalogPagination: FC<ICatalogPaginationProps> = ({ countProducts, 
         }
 
         await setFilters({ body: body, params: { page: `${currentPage}` } }).unwrap();
-        if (more) dispatch(setProducts(currentProducts));
+        if (more) {
+            dispatch(setProducts(currentProducts));
+        }
     };
 
     if (length < 2) {

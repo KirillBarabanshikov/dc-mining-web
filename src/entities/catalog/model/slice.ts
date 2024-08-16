@@ -23,7 +23,7 @@ export const catalogSlice = createSlice({
             state.category = action.payload;
         },
         setProducts: (state, action: PayloadAction<IProduct[]>) => {
-            state.products = [...state.products, ...action.payload];
+            state.products = [...action.payload, ...state.products];
         },
     },
     extraReducers: (builder) => {

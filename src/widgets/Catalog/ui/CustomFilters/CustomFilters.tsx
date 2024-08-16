@@ -18,6 +18,7 @@ export const CustomFilters: FC<ICustomFiltersProps> = ({ className }) => {
     const [setFilters] = useSetFiltersMutation();
 
     const handleSelect = (value: string) => {
+        searchParams.delete('page');
         if (value === searchParams.get('customFilters')) {
             searchParams.delete('customFilters', value);
         } else {
