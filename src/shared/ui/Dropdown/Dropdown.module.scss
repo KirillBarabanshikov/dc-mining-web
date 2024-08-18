@@ -79,6 +79,13 @@
                         background-color: var(--background-primary);
                     }
                 }
+
+                @media screen and (max-width: 768px) {
+                    span {
+                        font-family: 'MADE Evolve Sans', sans-serif;
+                        font-size: 14px;
+                    }
+                }
             }
         }
     }

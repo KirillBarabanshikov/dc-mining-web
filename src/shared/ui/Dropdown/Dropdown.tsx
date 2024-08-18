@@ -23,7 +23,6 @@ interface IDropdownProps extends PropsWithChildren {
     className?: string;
 }
 
-// TODO
 export const Dropdown: FC<IDropdownProps> = ({
     items,
     defaultValue = [],

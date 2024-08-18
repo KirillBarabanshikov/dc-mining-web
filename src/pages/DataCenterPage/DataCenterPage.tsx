@@ -20,7 +20,7 @@ const DataCenterPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 959px)');
-    const matchesLg = useMediaQuery('(max-width: 1440px)');
+    const matchesLg = useMediaQuery('(max-width: 1438px)');
 
     const currentLine = matchesMd ? dottedLineSm : matchesLg ? dottedLineMd : dottedLine;
     const currentLine2 = matchesMd ? dottedLineSm2 : matchesLg ? dottedLineMd2 : dottedLine2;

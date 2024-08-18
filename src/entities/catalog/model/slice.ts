@@ -22,7 +22,7 @@ export const catalogSlice = createSlice({
         setCategory: (state, action: PayloadAction<ICategory>) => {
             state.category = action.payload;
         },
-        setProducts: (state, action: PayloadAction<IProduct[]>) => {
+        addProducts: (state, action: PayloadAction<IProduct[]>) => {
             state.products = [...action.payload, ...state.products];
         },
     },
@@ -37,4 +37,4 @@ export const catalogSlice = createSlice({
     },
 });
 
-export const { setCategory, setProducts } = catalogSlice.actions;
+export const { setCategory, addProducts } = catalogSlice.actions;

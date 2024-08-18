@@ -1,1 +1,1 @@
-export { catalogSlice, setCategory, setProducts } from './slice';
+export { catalogSlice, setCategory, addProducts } from './slice';

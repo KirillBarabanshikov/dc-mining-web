@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import clsx from 'clsx';
-import styles from './CustomFilters.module.scss';
 import { useGetCustomFiltersQuery, useSetFiltersMutation } from '@/entities/filter/api/filterApi.ts';
 import { useAppSelector } from '@/shared/lib';
-import { useSearchParams } from 'react-router-dom';
-import { CHARACTERISTICS_KEYS } from '@/shared/consts';
-import { IFilterBody } from '@/entities/filter/api';
+import { useCatalogFilters } from '@/features/catalog';
+import styles from './CustomFilters.module.scss';
 
 interface ICustomFiltersProps {
     className?: string;
@@ -14,79 +12,23 @@ interface ICustomFiltersProps {
 export const CustomFilters: FC<ICustomFiltersProps> = ({ className }) => {
     const { data: customFilters } = useGetCustomFiltersQuery();
     const { category } = useAppSelector((state) => state.catalog);
-    const [searchParams, setSearchParams] = useSearchParams();
     const [setFilters] = useSetFiltersMutation();
+    const { setParams, searchParams, getFilterBody, setSearchParams } = useCatalogFilters();
 
     const handleSelect = (value: string) => {
-        searchParams.delete('page');
-        if (value === searchParams.get('customFilters')) {
-            searchParams.delete('customFilters', value);
-        } else {
-            searchParams.set('customFilters', value);
-        }
+        if (!category) return;
 
+        if (searchParams.get('filter')) {
+            setParams({ key: 'filter', value: [] });
+        } else {
+            setParams({ key: 'filter', value: [value] });
+        }
+        searchParams.delete('page');
         setSearchParams(searchParams);
 
-        const characteristics: string[] = [];
-        const currentPage = searchParams.get('page') ?? '1';
+        const body = getFilterBody(category.title);
 
-        for (const [key, value] of searchParams.entries()) {
-            if (key === 'brand') continue;
-
-            if (key in CHARACTERISTICS_KEYS) {
-                characteristics.push(`${CHARACTERISTICS_KEYS[key]}=${value}`);
-            }
-        }
-        const body: IFilterBody = {
-            type: category?.title ?? '',
-        };
-
-        if (characteristics.length) {
-            body.characteristics = characteristics.join(';');
-        }
-
-        if (searchParams.get('offers')) {
-            body.tags = searchParams.get('offers') ?? '';
-        }
-
-        if (searchParams.get('brand')) {
-            body.brand = searchParams.get('brand') ?? '';
-        }
-
-        if (searchParams.get('order')) {
-            if (searchParams.get('order') === '1') {
-                body.sortBy = 'popularity';
-            }
-
-            if (searchParams.get('order') === '2') {
-                body.sortBy = 'discount';
-            }
-
-            if (searchParams.get('order') === '3') {
-                body.sortBy = 'price';
-                body.sortOrder = 'ASC';
-            }
-
-            if (searchParams.get('order') === '4') {
-                body.sortBy = 'price';
-                body.sortOrder = 'DESC';
-            }
-        } else {
-            body.sortBy = 'popularity';
-        }
-
-        if (searchParams.get('profitable')) {
-            body.profitable = true;
-        }
-
-        if (searchParams.get('powerful')) {
-            body.powerful = true;
-        }
-        if (searchParams.get('customFilters')) {
-            body.customFilters = searchParams.get('customFilters') ?? '';
-        }
-
-        setFilters({ body: body, params: { page: currentPage } });
+        setFilters({ body: body, params: { page: '1' } });
     };
 
     return (
@@ -100,7 +42,7 @@ export const CustomFilters: FC<ICustomFiltersProps> = ({ className }) => {
                             onClick={() => handleSelect(filter.title)}
                             className={clsx(
                                 styles.receipt,
-                                searchParams.get('customFilters') === filter.title && styles.active,
+                                searchParams.get('filter') === filter.title && styles.active,
                             )}
                         >
                             {filter.title}
