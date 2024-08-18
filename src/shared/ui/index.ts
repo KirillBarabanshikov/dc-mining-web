@@ -15,3 +15,4 @@ export { Pagination } from './Pagination';
 export { NumberInput } from './NumberInput';
 export { SwiperButton } from './SwiperButton';
 export { Placeholder } from './Placeholder';
+export { Range } from './Range';

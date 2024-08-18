@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { useGetFiltersQuery, useGetOffersQuery, useSetFiltersMutation } from '@/entities/filter';
-import { Button, Dropdown, Switch } from '@/shared/ui';
+import { Button, Dropdown, Range, Switch } from '@/shared/ui';
 import { OrderCallHelpBanner } from '@/features/call';
 import { useAppSelector, useMediaQuery } from '@/shared/lib';
 import { useCatalogFilters } from '@/features/catalog';
@@ -78,7 +78,11 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
                                 multiply
                                 reset={reset}
                                 open={!!searchParams.get(filter.characteristics.value)}
-                            />
+                            >
+                                {filter.start != undefined && filter.end != undefined && (
+                                    <Range min={filter.start} max={filter.end} />
+                                )}
+                            </Dropdown>
                         );
                     })}
             {category?.title === 'asicMiners' && (

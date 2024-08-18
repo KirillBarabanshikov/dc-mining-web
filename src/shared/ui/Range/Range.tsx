@@ -1,0 +1,32 @@
+import { FC, useState } from 'react';
+import ReactSlider from 'react-slider';
+import styles from './Range.module.scss';
+
+interface IRangeProps {
+    min: number;
+    max: number;
+}
+
+export const Range: FC<IRangeProps> = ({ min, max }) => {
+    const [values, setValues] = useState([min, max]);
+
+    return (
+        <div className={styles.sliderContainer}>
+            <p>От: {values[0]}</p>
+            <p>До: {values[1]}</p>
+
+            <ReactSlider
+                className={styles.horizontalSlider}
+                thumbClassName={styles.thumb}
+                trackClassName={styles.track}
+                defaultValue={[min, max]}
+                min={min}
+                max={max}
+                value={values}
+                onChange={(newValues) => setValues(newValues)}
+                pearling
+                minDistance={5}
+            />
+        </div>
+    );
+};
