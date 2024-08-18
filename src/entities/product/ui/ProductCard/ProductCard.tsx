@@ -20,7 +20,7 @@ export const ProductCard: FC<IProductCardProps> = ({ product, viewMode = 'tile',
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     const handleOnHover = (isHovered: boolean) => {
-        if (matches) return;
+        if (matches || withInfo) return;
         setIsHovered(isHovered);
     };
 
