@@ -64,6 +64,9 @@
 
                 .dropdownList {
                     ul {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
                         padding: 16px 0 6.5px 0;
                         overflow: hidden;
                     }
