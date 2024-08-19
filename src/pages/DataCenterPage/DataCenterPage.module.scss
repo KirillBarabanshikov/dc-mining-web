@@ -211,13 +211,17 @@
 
         img {
             position: absolute;
-            top: -8px;
+            top: calc(50% - 314px);
             left: 0;
             pointer-events: none;
         }
 
         @media screen and (max-width: 992px) {
             .containersContent {
+                h2 {
+                    max-width: unset;
+                }
+
                 p {
                     font-size: 16px;
                     line-height: 19.2px;
@@ -249,7 +253,7 @@
             .containersContent {
                 h2 {
                     text-align: start;
-                    margin-bottom: 386px;
+                    margin-bottom: 40px;
                 }
 
                 p {
@@ -263,10 +267,11 @@
             }
 
             img {
+                position: static;
                 width: unset;
                 height: 288px;
-                left: -185px;
-                top: 150px;
+                margin-bottom: 40px;
+                transform: translateX(-200px);
             }
         }
     }

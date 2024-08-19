@@ -94,6 +94,7 @@ const DataCenterPage = () => {
                         <div className={styles.wrap}>
                             <div className={styles.containersContent}>
                                 <h2 className={'section-title'}>{info?.containerTitle}</h2>
+                                {matches && <img src={`${container}`} alt={'Container'} />}
                                 {info && <p dangerouslySetInnerHTML={{ __html: info.containerDescription }} />}
                                 <div className={styles.advantages}>
                                     <div className={styles.advantage}>
@@ -113,7 +114,7 @@ const DataCenterPage = () => {
                                     Выбрать контейнер
                                 </Button>
                             </div>
-                            <img src={`${container}`} alt={'Container'} />
+                            {!matches && <img src={`${container}`} alt={'Container'} />}
                         </div>
                     </div>
                 </section>
