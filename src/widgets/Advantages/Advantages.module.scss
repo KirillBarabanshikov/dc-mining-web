@@ -7,7 +7,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
             flex: 1;
 
             .image {
@@ -20,34 +19,42 @@
                 }
             }
 
-            .title {
-                text-align: center;
-                font-family: 'Gilroy', sans-serif;
-                font-weight: 700;
-                font-size: 24px;
-                line-height: 28.8px;
-            }
+            .body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
-            .desc {
-                text-align: center;
-                line-height: 20.8px;
-                color: rgba(90, 101, 156, 1);
-            }
-        }
-
-        @media screen and (max-width: 1765px) {
-            .item {
                 .title {
-                    font-size: 20px;
-                    line-height: 24px;
-                    height: 40px;
+                    text-align: center;
+                    font-family: 'Gilroy', sans-serif;
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 28.8px;
+                    margin: 20px 0;
                 }
 
                 .desc {
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 16.8px;
-                    max-width: 242px;
+                    text-align: center;
+                    line-height: 20.8px;
+                    color: rgba(90, 101, 156, 1);
+                }
+            }
+        }
+
+        @media screen and (max-width: 1300px) {
+            .item {
+                .body {
+                    .title {
+                        font-size: 20px;
+                        line-height: 24px;
+                    }
+
+                    .desc {
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 16.8px;
+                        max-width: 242px;
+                    }
                 }
             }
         }
@@ -67,15 +74,17 @@
                     max-height: 120px;
                 }
 
-                .title {
-                    font-family: 'Roboto', sans-serif;
-                    font-weight: 400;
-                    font-size: 14px;
-                    line-height: 18.2px;
-                }
+                .body {
+                    .title {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 18.2px;
+                    }
 
-                .desc {
-                    display: none;
+                    .desc {
+                        display: none;
+                    }
                 }
             }
         }

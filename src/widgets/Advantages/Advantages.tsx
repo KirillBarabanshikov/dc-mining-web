@@ -1,30 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import clsx from 'clsx';
-import { BASE_URL } from '@/shared/consts';
-// import clock from '@/shared/assets/images/advantages/clock.png';
-// import energy from '@/shared/assets/images/advantages/energy.png';
-// import camera from '@/shared/assets/images/advantages/camera.png';
-// import briefcase from '@/shared/assets/images/advantages/briefcase.png';
-// import shield from '@/shared/assets/images/advantages/shield.png';
-// import tools from '@/shared/assets/images/advantages/tools.png';
+import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
+import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Advantages.module.scss';
-
-// const items = [
-//     { image: clock, title: 'Uptime работы оборудования от 95%' },
-//     { image: energy, title: 'Стоимость электроэнергии – от 5 руб/кВт' },
-//     { image: camera, title: 'Удаленный\nмониторинг' },
-//     { image: briefcase, title: 'Страхование\nоборудования' },
-//     { image: shield, title: 'Круглосуточная\nохрана' },
-//     { image: tools, title: 'ТО и сервис\nоборудования на месте' },
-// ];
+import { useMediaQuery } from '@/shared/lib';
 
 interface IAdvantagesProps {
-    advantages?: {
-        id: number;
-        description: string;
-        image: string;
-        title: string;
-    }[];
+    advantages?: IAdvantageItem[];
 }
 
 export const Advantages: FC<IAdvantagesProps> = ({ advantages }) => {
@@ -34,29 +16,54 @@ export const Advantages: FC<IAdvantagesProps> = ({ advantages }) => {
                 {advantages &&
                     advantages.map((advantage) => {
                         return (
-                            <div key={advantage.id} className={styles.item}>
-                                <div className={styles.image}>
-                                    <img src={BASE_URL + advantage.image} alt={advantage.title} />
-                                </div>
-                                <p className={styles.title}>{advantage.title}</p>
-                                <p
-                                    className={styles.desc}
-                                    dangerouslySetInnerHTML={{ __html: advantage.description }}
-                                />
-                            </div>
+                            <AdvantageItem
+                                key={advantage.id}
+                                id={advantage.id}
+                                description={advantage.description}
+                                image={advantage.image}
+                                title={advantage.title}
+                            />
                         );
                     })}
-                {/*: items.map((item, index) => {*/}
-                {/*      return (*/}
-                {/*          <div key={index} className={styles.item}>*/}
-                {/*              <div className={styles.image}>*/}
-                {/*                  <img src={item.image} alt={item.title} />*/}
-                {/*              </div>*/}
-                {/*              <p className={styles.title}>{item.title}</p>*/}
-                {/*          </div>*/}
-                {/*      );*/}
-                {/*  })}*/}
             </div>
+        </div>
+    );
+};
+
+interface IAdvantageItem {
+    id: number;
+    description: string;
+    image: string;
+    title: string;
+}
+
+const AdvantageItem: FC<IAdvantageItem> = (advantage) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+
+    return (
+        <div className={styles.item}>
+            <motion.div
+                onHoverStart={() => setIsHovered(true)}
+                onHoverEnd={() => setIsHovered(false)}
+                className={styles.image}
+            >
+                <img src={BASE_URL + advantage.image} alt={advantage.title} />
+            </motion.div>
+            <AnimatePresence initial={false}>
+                {(isHovered || matches) && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                    >
+                        <div className={styles.body}>
+                            <p className={styles.title}>{advantage.title}</p>
+                            <p className={styles.desc} dangerouslySetInnerHTML={{ __html: advantage.description }} />
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
