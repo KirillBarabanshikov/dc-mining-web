@@ -19,12 +19,29 @@ const AboutPage = () => {
             <LogoAnimationBanner />
             <div className={'sections'}>
                 <section className={styles.about}>
-                    <div className={'container'}>
-                        <h2 className={'section-title-primary'}>О компании</h2>
-                        <div className={styles.wrap}>
-                            {info && <img src={BASE_URL + info.image} alt={'About'} />}
-                            {info && <p dangerouslySetInnerHTML={{ __html: info.description }} />}
-                        </div>
+                    <div className={clsx(styles.abouts, 'container')}>
+                        {info &&
+                            Array.from({ length: 5 }).map((_, index) => {
+                                return (
+                                    <div key={index} className={styles.wrap}>
+                                        <div className={styles.image}>
+                                            <img src={BASE_URL + info.image} alt={''} />
+                                        </div>
+                                        <div className={styles.description}>
+                                            <h2 className={'section-title-primary'}>О компании</h2>
+                                            <p>
+                                                Товарищи! сложившаяся структура организации обеспечивает широкому кругу
+                                                (специалистов) участие в формировании модели развития. Равным образом
+                                                постоянный количественный рост и сфера нашей активности влечет за собой
+                                                процесс внедрения и модернизации системы обучения кадров, соответствует
+                                                насущным потребностям. Равным образом сложившаяся структура организации
+                                                играет важную роль в формировании существенных финансовых и
+                                                административных условий.
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                     </div>
                 </section>
                 <AdvantagesDCMining advantages={info?.advantages} />
