@@ -80,7 +80,16 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
                                 open={!!searchParams.get(filter.characteristics.value)}
                             >
                                 {filter.start != undefined && filter.end != undefined && (
-                                    <Range min={filter.start} max={filter.end} />
+                                    <Range
+                                        min={filter.start}
+                                        max={filter.end}
+                                        onChange={(values) =>
+                                            setParams({
+                                                key: filter.characteristics.value,
+                                                value: [`${values[0]}`, `${values[1]}`],
+                                            })
+                                        }
+                                    />
                                 )}
                             </Dropdown>
                         );

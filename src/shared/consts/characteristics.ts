@@ -5,7 +5,7 @@ export const CHARACTERISTICS: Record<string, string> = {
     ['Тип']: '',
     ['Доход в месяц']: '',
     ['Мощность']: '',
-    ['Количество мест']: '',
+    ['Количество мест']: 'seats',
     ['Производитель']: '',
 } as const;
 
@@ -16,6 +16,6 @@ export const CHARACTERISTICS_KEYS: Record<string, string> = {
     ['Тип']: '',
     ['Доход в месяц']: '',
     ['Мощность']: '',
-    ['Количество мест']: '',
+    seats: 'Количество мест',
     ['Производитель']: '',
 } as const;

@@ -5,10 +5,16 @@ import styles from './Range.module.scss';
 interface IRangeProps {
     min: number;
     max: number;
+    onChange: (values: number[]) => void;
 }
 
-export const Range: FC<IRangeProps> = ({ min, max }) => {
+export const Range: FC<IRangeProps> = ({ min, max, onChange }) => {
     const [values, setValues] = useState([min, max]);
+
+    const handleOnChange = (newValues: number[]) => {
+        setValues(newValues);
+        onChange(newValues);
+    };
 
     return (
         <div className={styles.sliderContainer}>
@@ -23,7 +29,7 @@ export const Range: FC<IRangeProps> = ({ min, max }) => {
                 min={min}
                 max={max}
                 value={values}
-                onChange={(newValues) => setValues(newValues)}
+                onChange={handleOnChange}
                 pearling
                 minDistance={5}
             />
