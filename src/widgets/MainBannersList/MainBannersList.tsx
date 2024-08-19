@@ -7,6 +7,8 @@ import Banner1 from '@/shared/assets/images/main/banner1.png';
 import Banner2 from '@/shared/assets/images/main/banner2.png';
 import Banner3 from '@/shared/assets/images/main/banner3.png';
 import styles from './MainBannersList.module.scss';
+import { useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 
 interface IMainBannersListProps {
     className?: string;
@@ -14,18 +16,22 @@ interface IMainBannersListProps {
 
 export const MainBannersList: FC<IMainBannersListProps> = ({ className }) => {
     return (
-        <div className={clsx(styles.mainBannersList, className)}>
-            {data.map((item, index) => {
-                return (
-                    <BannerCard
-                        key={index}
-                        title={item.title}
-                        subtitle={item.subtitle}
-                        image={item.image}
-                        link={item.link}
-                    />
-                );
-            })}
+        <div>
+            <div className={'container-wide'}>
+                <div className={clsx(styles.mainBannersList, className)}>
+                    {data.map((item, index) => {
+                        return (
+                            <BannerCard
+                                key={index}
+                                title={item.title}
+                                subtitle={item.subtitle}
+                                image={item.image}
+                                link={item.link}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
@@ -40,17 +46,18 @@ interface IBannerCardProps {
 const BannerCard: FC<IBannerCardProps> = ({ title, subtitle, link, image }) => {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
+    const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
-        <div
+        <motion.div
             className={styles.bannerCard}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
         >
             <div className={styles.wrap}>
                 <h3>{title}</h3>
-                <AnimatePresence>
-                    {isHovered && (
+                <AnimatePresence initial={false}>
+                    {(isHovered || matches) && (
                         <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
@@ -66,7 +73,7 @@ const BannerCard: FC<IBannerCardProps> = ({ title, subtitle, link, image }) => {
                 </AnimatePresence>
             </div>
             <img className={styles.background} src={image} alt={`Background Image`} />
-        </div>
+        </motion.div>
     );
 };
 

@@ -1,6 +1,11 @@
 .mainBannersList {
     display: flex;
     gap: 32px;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 24px;
+    }
 }
 
 .bannerCard {
@@ -63,6 +68,12 @@
             &::before {
                 opacity: 1;
             }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        &::before {
+            opacity: 1;
         }
     }
 }
