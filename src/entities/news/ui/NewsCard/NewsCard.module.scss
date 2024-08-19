@@ -38,6 +38,10 @@
         object-fit: cover;
         filter: grayscale(1);
         transition: filter 300ms ease-out;
+
+        @media screen and (max-width: 768px) {
+            filter: unset;
+        }
     }
 
     .cardBody {
@@ -91,6 +95,13 @@
                 font-family: 'Roboto', sans-serif;
                 font-size: 12px;
                 line-height: 15.6px;
+            }
+
+            .button {
+                margin-top: 24px;
+                position: static;
+                opacity: 1;
+                pointer-events: initial;
             }
         }
     }
