@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button } from '@/shared/ui';
 import { formatter, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
@@ -14,6 +15,7 @@ import dottedLineMd2 from '@/shared/assets/images/data-center/dotted-line-md2.pn
 import dottedLineSm from '@/shared/assets/images/data-center/dotted-line-sm.png';
 import dottedLineSm2 from '@/shared/assets/images/data-center/dotted-line-sm2.png';
 import styles from './DataCenterPage.module.scss';
+// import Img from '@/shared/assets/images/main/banner1.png';
 
 const DataCenterPage = () => {
     const { data: info } = useGetDataCenterInfoQuery();
@@ -42,6 +44,19 @@ const DataCenterPage = () => {
             </section>
             <div className={clsx(styles.content, 'sections')}>
                 <Advantages advantages={info?.top} />
+                {/*<div className={'data-center-slider'}>*/}
+                {/*    <Swiper slidesPerView={3} centeredSlides loop>*/}
+                {/*        {Array.from({ length: 10 }).map((_, index) => {*/}
+                {/*            return (*/}
+                {/*                <SwiperSlide key={index}>*/}
+                {/*                    <div>*/}
+                {/*                        <img src={Img} alt={'alt'} />*/}
+                {/*                    </div>*/}
+                {/*                </SwiperSlide>*/}
+                {/*            );*/}
+                {/*        })}*/}
+                {/*    </Swiper>*/}
+                {/*</div>*/}
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>

@@ -90,3 +90,12 @@
 .product-slider .swiper-slide-thumb-active {
     outline: 1px solid var(--stroke-tertiary);
 }
+
+/*.data-center-slider .swiper-slide-active {*/
+/*    position: relative;*/
+/*    z-index: 1;*/
+/*}*/
+
+/*.data-center-slider .swiper-slide-prev,*/
+/*.swiper-slide-next {*/
+/*}*/
