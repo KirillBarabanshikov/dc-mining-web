@@ -6,7 +6,8 @@ export const SERVICES_LINKS = [
 ];
 
 export const ABOUT_LINKS = [
-    { title: 'Доставка и оплата', path: '/delivery-payment' },
+    { title: 'Доставка', path: '/delivery' },
+    { title: 'Оплата', path: '/payment' },
     { title: 'О компании', path: '/about' },
     { title: 'СМИ о нас', path: '/news' },
     { title: 'FAQ', path: '/faq' },

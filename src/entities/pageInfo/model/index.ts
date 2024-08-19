@@ -1,1 +1,8 @@
-export type { IAboutInfo, IAdvantage, IMassMedia, ILeasingInfo, IDataCenterInfo } from './types.ts';
+export type {
+    IAboutInfo,
+    IAdvantage,
+    IMassMedia,
+    ILeasingInfo,
+    IDataCenterInfo,
+    IDeliveryAndPaymentInfo,
+} from './types.ts';

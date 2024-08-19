@@ -70,3 +70,10 @@ export interface IDataCenterInfo {
         title: string;
     }[];
 }
+
+export interface IDeliveryAndPaymentInfo {
+    id: number;
+    image: string;
+    title: string;
+    description: string;
+}

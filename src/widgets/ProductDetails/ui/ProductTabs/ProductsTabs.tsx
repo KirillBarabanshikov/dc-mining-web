@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { IProduct, IProductValue } from '@/entities/product';
-import { DeliveryAndPayment } from '@/widgets';
+import { Delivery, Payments } from '@/widgets';
 import styles from './ProductsTabs.module.scss';
 
 interface IProductTabsProps {
     product: IProduct;
 }
 
-const tabs = ['Описание', 'Характеристики', 'Доставка и Оплата'];
+const tabs = ['Характеристики', 'Доставка', 'Оплата'];
 
 export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
     const [currentTab, setCurrentTab] = useState(0);
@@ -28,24 +28,16 @@ export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
                     );
                 })}
             </div>
-            <div>
-                {
-                    [
-                        <ProductDescription description={product.description} />,
-                        <ProductSpecifications value={product.value} />,
-                        <DeliveryAndPayment />,
-                    ][currentTab]
-                }
-            </div>
+            <div>{[<ProductSpecifications value={product.value} />, <Delivery />, <Payments />][currentTab]}</div>
         </div>
     );
 };
 
-const ProductDescription: FC<{ description: string }> = ({ description }) => {
-    return (
-        <div className={clsx(styles.productDescription, 'list')} dangerouslySetInnerHTML={{ __html: description }} />
-    );
-};
+// const ProductDescription: FC<{ description: string }> = ({ description }) => {
+//     return (
+//         <div className={clsx(styles.productDescription, 'list')} dangerouslySetInnerHTML={{ __html: description }} />
+//     );
+// };
 
 const ProductSpecifications: FC<{ value: IProductValue[] }> = ({ value }) => {
     return (

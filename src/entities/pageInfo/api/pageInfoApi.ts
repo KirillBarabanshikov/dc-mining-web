@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api';
-import { IAboutInfo, IDataCenterInfo, ILeasingInfo } from '@/entities/pageInfo';
+import { IAboutInfo, IDataCenterInfo, IDeliveryAndPaymentInfo, ILeasingInfo } from '@/entities/pageInfo';
 
 const pageInfoApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -18,7 +18,23 @@ const pageInfoApi = baseApi.injectEndpoints({
                 url: '/dataCenters',
             }),
         }),
+        getPaymentInfo: build.query<IDeliveryAndPaymentInfo[], void>({
+            query: () => ({
+                url: '/payments',
+            }),
+        }),
+        getDeliveryInfo: build.query<IDeliveryAndPaymentInfo[], void>({
+            query: () => ({
+                url: '/deliveries',
+            }),
+        }),
     }),
 });
 
-export const { useGetAboutInfoQuery, useGetLeasingInfoQuery, useGetDataCenterInfoQuery } = pageInfoApi;
+export const {
+    useGetAboutInfoQuery,
+    useGetLeasingInfoQuery,
+    useGetDataCenterInfoQuery,
+    useGetPaymentInfoQuery,
+    useGetDeliveryInfoQuery,
+} = pageInfoApi;

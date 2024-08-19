@@ -1,1 +1,1 @@
-export { DeliveryAndPayment } from './DeliveryAndPayment.tsx';
+export { Delivery, Payments } from './DeliveryAndPayment.tsx';
