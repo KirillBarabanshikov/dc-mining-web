@@ -15,3 +15,4 @@ export { CompareList } from './CompareList';
 export { ProductDetails } from './ProductDetails';
 export { Catalog } from './Catalog';
 export { MainBannersList } from './MainBannersList';
+export { LivePhotos } from './LivePhotos';

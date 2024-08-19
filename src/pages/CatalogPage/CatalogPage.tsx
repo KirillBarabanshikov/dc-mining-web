@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Breadcrumbs } from '@/shared/ui';
 import { useGetCategoryByIdQuery } from '@/entities/category';
 import { OrderCallHelpBanner } from '@/features/call';
-import { Catalog, Managers } from '@/widgets';
+import { Catalog, LivePhotos, Managers } from '@/widgets';
 import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { useSetFiltersMutation } from '@/entities/filter';
 import { setCategory } from '@/entities/catalog';
@@ -41,6 +41,7 @@ const CatalogPage = () => {
                 </div>
             </div>
             <Catalog />
+            <LivePhotos className={styles.livePhotos} />
             <div className={clsx(styles.banners, 'container')}>
                 {matches && <OrderCallHelpBanner />}
                 <Managers />
