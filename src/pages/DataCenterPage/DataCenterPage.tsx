@@ -60,6 +60,33 @@ const DataCenterPage = () => {
                         </div>
                     </div>
                 </div>
+                <section className={styles.howItWork}>
+                    <div className={'container'}>
+                        <h2 className={clsx(styles.title, 'section-title-primary')}>Как это работает</h2>
+                        <div className={styles.wrap}>
+                            {info &&
+                                info.steps.map((item, index) => {
+                                    return (
+                                        <div key={item.id} className={styles.item}>
+                                            <div className={styles.number}>
+                                                {index + 1}
+                                                {index < 3 && (
+                                                    <img
+                                                        src={`${index === 1 ? currentLine2 : currentLine}`}
+                                                        alt={'Line'}
+                                                        className={
+                                                            index === 1 ? styles.dottedLineLarge : styles.dottedLine
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+                                            <p dangerouslySetInnerHTML={{ __html: item.description }} />
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </div>
+                </section>
                 <section className={styles.containers}>
                     <div className={'container'}>
                         <div className={styles.wrap}>
@@ -85,33 +112,6 @@ const DataCenterPage = () => {
                                 </Button>
                             </div>
                             <img src={`${container}`} alt={'Container'} />
-                        </div>
-                    </div>
-                </section>
-                <section className={styles.howItWork}>
-                    <div className={'container'}>
-                        <h2 className={clsx(styles.title, 'section-title-primary')}>Как это работает</h2>
-                        <div className={styles.wrap}>
-                            {info &&
-                                info.steps.map((item, index) => {
-                                    return (
-                                        <div key={item.id} className={styles.item}>
-                                            <div className={styles.number}>
-                                                {index + 1}
-                                                {index < 3 && (
-                                                    <img
-                                                        src={`${index === 1 ? currentLine2 : currentLine}`}
-                                                        alt={'Line'}
-                                                        className={
-                                                            index === 1 ? styles.dottedLineLarge : styles.dottedLine
-                                                        }
-                                                    />
-                                                )}
-                                            </div>
-                                            <p dangerouslySetInnerHTML={{ __html: item.description }} />
-                                        </div>
-                                    );
-                                })}
                         </div>
                     </div>
                 </section>
