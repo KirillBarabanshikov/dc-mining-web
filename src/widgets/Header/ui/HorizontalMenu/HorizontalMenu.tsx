@@ -14,20 +14,20 @@ export const HorizontalMenu = () => {
             <ul className={styles.horizontalMenuList}>
                 {categories &&
                     categories.map((item) => {
-                        if (item.subCategory.length) {
-                            return <MenuItemDropdown key={item.id} item={item} />;
+                        if (item.link) {
+                            return (
+                                <li key={item.id} className={styles.horizontalMenuItem}>
+                                    <Link
+                                        to={item.link ?? `/catalog/${item.id}/${item.slug}`}
+                                        className={styles.horizontalMenuLink}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            );
                         }
 
-                        return (
-                            <li key={item.id} className={styles.horizontalMenuItem}>
-                                <Link
-                                    to={item.link ?? `/catalog/${item.id}/${item.slug}`}
-                                    className={styles.horizontalMenuLink}
-                                >
-                                    {item.name}
-                                </Link>
-                            </li>
-                        );
+                        return <MenuItemDropdown key={item.id} item={item} />;
                     })}
             </ul>
         </nav>
