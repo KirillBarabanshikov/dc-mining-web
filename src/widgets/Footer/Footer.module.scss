@@ -46,7 +46,8 @@
             }
 
             .socials {
-                flex-direction: row;
+                display: flex;
+                gap: 8px;
 
                 img {
                     width: 48px;
