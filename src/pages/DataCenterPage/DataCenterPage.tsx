@@ -43,7 +43,7 @@ const DataCenterPage = () => {
             </section>
             <div className={clsx(styles.content, 'sections')}>
                 <Advantages advantages={info?.top} />
-                <CardSlider />
+                {info && <CardSlider images={info.images} />}
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>

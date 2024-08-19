@@ -69,6 +69,7 @@ export interface IDataCenterInfo {
         image: string;
         title: string;
     }[];
+    images: { image: string }[];
 }
 
 export interface IDeliveryAndPaymentInfo {
