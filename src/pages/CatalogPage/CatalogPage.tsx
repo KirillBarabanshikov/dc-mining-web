@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { Breadcrumbs } from '@/shared/ui';
 import { useGetCategoryByIdQuery } from '@/entities/category';
@@ -21,15 +21,20 @@ const CatalogPage = () => {
     const matches = useMediaQuery('(max-width: 855px)');
     const dispatch = useAppDispatch();
     const { getFilterBody, getCurrentPage } = useCatalogFilters();
+    const { state } = useLocation();
 
     useEffect(() => {
         if (!category) return;
+        dispatch(setCategory(category));
+    }, [category]);
+
+    useEffect(() => {
+        if (!category) return;
+
         const body = getFilterBody(category.title);
         const page = getCurrentPage();
-
-        dispatch(setCategory(category));
         setFilters({ body, params: { page } });
-    }, [category]);
+    }, [state, category]);
 
     return (
         <div className={styles.catalog}>
@@ -40,7 +45,7 @@ const CatalogPage = () => {
                     <span>{`${countProducts} товаров`}</span>
                 </div>
             </div>
-            <Catalog />
+            <Catalog key={state} />
             <LivePhotos className={styles.livePhotos} />
             <div className={clsx(styles.banners, 'container')}>
                 {matches && <OrderCallHelpBanner />}

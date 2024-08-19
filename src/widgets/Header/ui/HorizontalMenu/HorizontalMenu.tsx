@@ -69,7 +69,12 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                                             exit={'hidden'}
                                             key={index}
                                         >
-                                            <Link to={`/catalog/${item.id}/${item.slug}`}>{child.title}</Link>
+                                            <Link
+                                                to={`/catalog/${item.id}/${item.slug}?brand=${child.title}`}
+                                                state={child.title}
+                                            >
+                                                {child.title}
+                                            </Link>
                                         </motion.li>
                                     );
                                 })}

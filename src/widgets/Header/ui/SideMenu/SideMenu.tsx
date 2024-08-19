@@ -142,7 +142,8 @@ const CollapseItemsList = () => {
                                                 return (
                                                     <Link
                                                         key={child.id}
-                                                        to={`/catalog/${item.id}/${item.slug}`}
+                                                        to={`/catalog/${item.id}/${item.slug}?brand=${child.title}`}
+                                                        state={child}
                                                         className={styles.link}
                                                     >
                                                         {child.title}
