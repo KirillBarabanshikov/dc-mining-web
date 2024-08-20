@@ -10,4 +10,5 @@ export interface ICategory {
         title: string;
     }[];
     link?: string;
+    images: { id: number; image: string }[];
 }

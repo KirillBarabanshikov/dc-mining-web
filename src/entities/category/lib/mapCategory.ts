@@ -22,5 +22,6 @@ export function mapCategory(category: ICategoryDto): ICategory {
         slug: createSlug(categoryName),
         subCategory: category.subCategory,
         link: links[category.title],
+        images: category.images,
     };
 }

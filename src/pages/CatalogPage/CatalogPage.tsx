@@ -46,7 +46,9 @@ const CatalogPage = () => {
                 </div>
             </div>
             <Catalog key={state} />
-            <LivePhotos images={[]} className={styles.livePhotos} />
+            {category && (
+                <LivePhotos images={category.images.map(({ image }) => image)} className={styles.livePhotos} />
+            )}
             <div className={clsx(styles.banners, 'container')}>
                 {matches && <OrderCallHelpBanner />}
                 <Managers />
