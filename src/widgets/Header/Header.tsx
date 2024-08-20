@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { formatPhoneNumber, intFormatPhoneNumber, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
+import { BASE_URL, MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import { OrderCallModal } from '@/features/call';
 import { IconButton } from '@/shared/ui';
@@ -13,8 +13,6 @@ import HeartIcon from '@/shared/assets/icons/heart.svg?react';
 import HeartIcon2 from '@/shared/assets/icons/heart2.svg?react';
 import StatisticIcon from '@/shared/assets/icons/statistic.svg?react';
 import StatisticIcon2 from '@/shared/assets/icons/statistic2.svg?react';
-import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
-import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
 import { SideMenu, HorizontalMenu, Burger } from './ui';
 import styles from './Header.module.scss';
@@ -52,18 +50,22 @@ export const Header: FC = () => {
                             <FavoritesOption />
                             <CompareOption />
                             <div className={styles.contacts}>
-                                <a href={''} target={'_blank'} className={styles.option}>
-                                    <div className={styles.icon}>
-                                        <TelegramIcon />
-                                    </div>
-                                    <span>Telegram</span>
-                                </a>
-                                <a href={''} target={'_blank'} className={styles.option}>
-                                    <div className={styles.icon}>
-                                        <WhatsappIcon />
-                                    </div>
-                                    <span>Whatsapp</span>
-                                </a>
+                                {contacts &&
+                                    contacts.contactHeaders.map((contact) => {
+                                        return (
+                                            <a
+                                                key={contact.id}
+                                                href={contact.url}
+                                                target={'_blank'}
+                                                className={styles.option}
+                                            >
+                                                <div className={styles.icon}>
+                                                    <img src={BASE_URL + contact.image} alt={contact.title} />
+                                                </div>
+                                                <span>{contact.title}</span>
+                                            </a>
+                                        );
+                                    })}
                                 <OrderCallOption />
                             </div>
                         </div>
