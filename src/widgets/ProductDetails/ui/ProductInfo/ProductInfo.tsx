@@ -43,7 +43,9 @@ export const ProductInfo: FC<IProductInfoProps> = ({ product }) => {
                     {!!product.oldPrice && (
                         <span className={styles.oldPrice}>{formatter.format(product.oldPrice)}</span>
                     )}
-                    <p className={styles.price}>{formatter.format(product.price)}</p>
+                    <p className={styles.price}>
+                        {product.price ? formatter.format(product.price) : 'Цена по запросу'}
+                    </p>
                 </div>
                 <div className={styles.buttons}>
                     <Button size={'sm'} className={styles.button} onClick={() => setIsOpen(true)}>

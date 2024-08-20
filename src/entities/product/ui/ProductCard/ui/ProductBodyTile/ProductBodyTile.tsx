@@ -23,7 +23,9 @@ export const ProductBodyTile: FC<IProductBodyTileProps> = ({ product, onClick, i
                     return <Badge key={tag.id} text={tag.title} color={tag.color} />;
                 })}
             </div>
-            <p className={clsx(cardStyles.price, styles.price)}>{formatter.format(product.price)}</p>
+            <p className={clsx(cardStyles.price, styles.price)}>
+                {product.price ? formatter.format(product.price) : 'Цена по запросу'}
+            </p>
             <p className={clsx(cardStyles.name, styles.name)}>{product.title}</p>
             <AnimatePresence initial={!withInfo}>
                 {(isHovered || withInfo) && (

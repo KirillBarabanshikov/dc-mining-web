@@ -32,13 +32,13 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
     const [orderProduct, { isLoading, reset: resetOrderProduct }] = useOrderProductMutation();
 
     const onChangeProductCount = (value: number) => {
-        setPrice(product.price * value);
+        product.price && setPrice(product.price * value);
         setCount(value);
     };
 
     const onSubmit = async (data: TOrderProductFormScheme) => {
         try {
-            await orderProduct({ ...data, productId: product.id, price, count }).unwrap();
+            await orderProduct({ ...data, productId: product.id, price: price ?? 0, count }).unwrap();
         } catch (error) {
             setIsError(true);
         } finally {
@@ -62,7 +62,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
             <div className={styles.wrap}>
                 <div className={styles.item}>
                     <span className={styles.label}>Цена</span>
-                    <Input disabled value={formatter.format(price)} />
+                    <Input disabled value={price ? formatter.format(price) : 'Цена по запросу'} />
                 </div>
                 <div className={styles.item}>
                     <span className={styles.label}>Количество</span>

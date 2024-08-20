@@ -23,7 +23,11 @@ export const ProductBodySimple: FC<IProductBodySimpleProps> = ({ product, onClic
                         return <Badge key={tag.id} text={tag.title} color={tag.color} />;
                     })}
                 </div>
-                {matches && <p className={clsx(cardStyles.price, styles.price)}>{formatter.format(product.price)}</p>}
+                {matches && (
+                    <p className={clsx(cardStyles.price, styles.price)}>
+                        {product.price ? formatter.format(product.price) : 'Цена по запросу'}
+                    </p>
+                )}
                 <p className={clsx(cardStyles.name, styles.name)}>{product.title}</p>
                 <div className={clsx(cardStyles.specifications)}>
                     <div className={clsx(cardStyles.specificationsList, styles.specificationsList)}>
@@ -40,7 +44,11 @@ export const ProductBodySimple: FC<IProductBodySimpleProps> = ({ product, onClic
                 </div>
             </div>
             <div className={styles.wrap}>
-                {!matches && <p className={clsx(cardStyles.price, styles.price)}>{formatter.format(product.price)}</p>}
+                {!matches && (
+                    <p className={clsx(cardStyles.price, styles.price)}>
+                        {product.price ? formatter.format(product.price) : 'Цена по запросу'}
+                    </p>
+                )}
                 <div className={clsx(cardStyles.buttons, styles.buttons)}>
                     <Button size={'sm'} className={clsx(cardStyles.button, styles.button)} onClick={onClick} isWide>
                         Заказать

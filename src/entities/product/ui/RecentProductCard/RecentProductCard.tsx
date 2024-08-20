@@ -17,7 +17,7 @@ export const RecentProductCard: FC<IRecentProductCardProps> = ({ product }) => {
             <img src={BASE_URL + product.images[0]?.image} alt={product.title} />
             <div>
                 <p className={styles.name}>{product.title}</p>
-                <p className={styles.price}>{formatter.format(product.price)}</p>
+                <p className={styles.price}>{product.price ? formatter.format(product.price) : 'Цена по запросу'}</p>
             </div>
         </article>
     );

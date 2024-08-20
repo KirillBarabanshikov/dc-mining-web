@@ -13,7 +13,7 @@ export interface IProduct {
     title: string;
     shortDescription: string;
     oldPrice?: number;
-    price: number;
+    price?: number;
     description: string;
     category?: ICategory;
     value: IProductValue[];

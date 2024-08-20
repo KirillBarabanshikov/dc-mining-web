@@ -22,7 +22,7 @@ export const ProductCompareCard: FC<IProductCompareCardProps> = ({ product, only
                 <AddToCompareButton product={product} variant={'trash'} className={styles.trash} />
                 <img src={BASE_URL + product.images[0]?.image} alt={product.title} />
                 <p className={styles.name}>{product.title}</p>
-                <p className={styles.price}>{formatter.format(product.price)}</p>
+                <p className={styles.price}>{product.price ? formatter.format(product.price) : 'Цена по запросу'}</p>
                 <div className={styles.buttons}>
                     <AddToFavoritesButton product={product} className={styles.iconButton} />
                     <Button
