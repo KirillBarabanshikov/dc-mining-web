@@ -190,5 +190,38 @@
                 }
             }
         }
+
+        .horizontalMenu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .horizontalMenuContacts {
+                position: relative;
+                display: flex;
+                gap: 8px;
+
+                a {
+                    background-color: var(--button-normal);
+                    color: var(--text-contrast);
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 19.2px;
+                    padding: 6.5px 12px;
+                    border-radius: 8px;
+                    transition: background-color 300ms ease-out;
+
+                    @media (hover: hover) {
+                        &:hover {
+                            background-color: var(--button-hover);
+                        }
+                    }
+                }
+
+                @media screen and (max-width: 900px) {
+                    display: none;
+                }
+            }
+        }
     }
 }

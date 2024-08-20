@@ -18,13 +18,13 @@
             border-radius: 8px;
             user-select: none;
 
-            @media screen and (max-width: 1255px) {
+            @media screen and (max-width: 1545px) {
                 &:nth-child(6) {
                     display: none;
                 }
             }
 
-            @media screen and (max-width: 1100px) {
+            @media screen and (max-width: 1390px) {
                 &:nth-child(5) {
                     display: none;
                 }
@@ -77,6 +77,7 @@
                             color: rgba(44, 44, 83, 1);
                             display: block;
                             transition: color 300ms ease-out;
+                            white-space: nowrap;
 
                             @media (hover: hover) {
                                 &:hover {
@@ -92,8 +93,14 @@
                 visibility: hidden;
             }
 
-            @media screen and (max-width: 865px) {
+            @media screen and (max-width: 1175px) {
                 &:nth-child(4) {
+                    display: none;
+                }
+            }
+
+            @media screen and (max-width: 1030px) {
+                &:nth-child(3) {
                     display: none;
                 }
             }

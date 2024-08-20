@@ -2,12 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { useBodyScrollLock, useMediaQuery } from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import { OrderCallModal } from '@/features/call';
 import { IconButton } from '@/shared/ui';
-import { SideMenu, HorizontalMenu, Burger } from './ui';
+import { useGetContactsQuery } from '@/entities/contacts';
 import Logo from '@/shared/assets/logo.svg?react';
 import HeartIcon from '@/shared/assets/icons/heart.svg?react';
 import HeartIcon2 from '@/shared/assets/icons/heart2.svg?react';
@@ -16,6 +16,7 @@ import StatisticIcon2 from '@/shared/assets/icons/statistic2.svg?react';
 import TelegramIcon from '@/shared/assets/icons/telegram.svg?react';
 import WhatsappIcon from '@/shared/assets/icons/whatsapp.svg?react';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
+import { SideMenu, HorizontalMenu, Burger } from './ui';
 import styles from './Header.module.scss';
 
 export const Header: FC = () => {
@@ -24,6 +25,7 @@ export const Header: FC = () => {
     const location = useLocation();
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
+    const { data: contacts } = useGetContactsQuery();
 
     useEffect(() => {
         setIsOpen(false);
@@ -66,7 +68,17 @@ export const Header: FC = () => {
                             </div>
                         </div>
                     </div>
-                    {!matchesMD && <HorizontalMenu />}
+                    <div className={styles.horizontalMenu}>
+                        {!matchesMD && <HorizontalMenu />}
+                        {contacts && (
+                            <div className={styles.horizontalMenuContacts}>
+                                <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
+                                <a href={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
+                                    {formatPhoneNumber(contacts.phone)}
+                                </a>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
             <SideMenu isOpen={isOpen} onClose={toggleMenu} />
