@@ -13,7 +13,7 @@ interface ILivePhotosProps {
 export const LivePhotos: FC<ILivePhotosProps> = ({ images, className }) => {
     return (
         <div className={clsx(styles.container, className)}>
-            <Swiper slidesPerView={'auto'} spaceBetween={16}>
+            <Swiper slidesPerView={'auto'} spaceBetween={16} className={styles.slider}>
                 <SwiperButton variant={'prev'} className={clsx(styles.swiperButton, styles.prev)} />
                 {images.map((image, index) => {
                     return (
