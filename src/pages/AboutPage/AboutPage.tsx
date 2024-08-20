@@ -21,23 +21,15 @@ const AboutPage = () => {
                 <section className={styles.about}>
                     <div className={clsx(styles.abouts, 'container')}>
                         {info &&
-                            Array.from({ length: 5 }).map((_, index) => {
+                            info.main.map((element) => {
                                 return (
-                                    <div key={index} className={styles.wrap}>
+                                    <div key={element.id} className={styles.wrap}>
                                         <div className={styles.image}>
-                                            <img src={BASE_URL + info.image} alt={''} />
+                                            <img src={BASE_URL + element.image} alt={element.title} />
                                         </div>
                                         <div className={styles.description}>
-                                            <h2 className={'section-title-primary'}>О компании</h2>
-                                            <p>
-                                                Товарищи! сложившаяся структура организации обеспечивает широкому кругу
-                                                (специалистов) участие в формировании модели развития. Равным образом
-                                                постоянный количественный рост и сфера нашей активности влечет за собой
-                                                процесс внедрения и модернизации системы обучения кадров, соответствует
-                                                насущным потребностям. Равным образом сложившаяся структура организации
-                                                играет важную роль в формировании существенных финансовых и
-                                                административных условий.
-                                            </p>
+                                            <h2 className={'section-title-primary'}>{element.title}</h2>
+                                            <p dangerouslySetInnerHTML={{ __html: element.description }} />
                                         </div>
                                     </div>
                                 );

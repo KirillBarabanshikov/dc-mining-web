@@ -9,7 +9,7 @@ export interface IAboutInfo {
         image: string;
         preview: string;
     }[];
-    main: string;
+    main: { id: number; title: string; description: string; image: string }[];
 }
 
 export interface IAdvantage {
