@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BASE_URL } from '@/shared/consts';
@@ -9,9 +9,26 @@ interface IAdvantagesProps {
 }
 
 export const Advantages: FC<IAdvantagesProps> = ({ advantages }) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!ref.current) return;
+
+        const observer = new ResizeObserver(() => {
+            if (!ref.current) return;
+            ref.current.style.height = 'initial'; // Сброс
+            const rect = ref.current.getBoundingClientRect();
+            ref.current.style.height = `${rect.height}px`;
+        });
+
+        observer.observe(ref.current);
+
+        return () => observer.disconnect();
+    }, [advantages]);
+
     return (
         <div className={clsx(styles.advantages)}>
-            <div className={clsx(styles.advantagesContainer, 'container-wide')}>
+            <div ref={ref} className={clsx(styles.advantagesContainer, 'container-wide')}>
                 {advantages &&
                     advantages.map((advantage) => {
                         return (

@@ -11,6 +11,8 @@
         background-color 300ms ease-out,
         outline-color 300ms ease-out;
     color: initial;
+    position: relative;
+    z-index: 1;
 
     .tags {
         display: flex;

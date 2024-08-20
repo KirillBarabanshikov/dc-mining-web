@@ -42,7 +42,7 @@ const DataCenterPage = () => {
                 <div className={styles.background}></div>
             </section>
             <div className={clsx(styles.content, 'sections')}>
-                <Advantages advantages={info?.top} />
+                {info && <Advantages advantages={info.top} />}
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>
