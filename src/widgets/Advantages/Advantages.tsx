@@ -1,9 +1,8 @@
 import { FC, useState } from 'react';
 import clsx from 'clsx';
-import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { AnimatePresence, motion } from 'framer-motion';
+import { BASE_URL } from '@/shared/consts';
 import styles from './Advantages.module.scss';
-import { useMediaQuery } from '@/shared/lib';
 
 interface IAdvantagesProps {
     advantages?: IAdvantageItem[];
@@ -11,7 +10,7 @@ interface IAdvantagesProps {
 
 export const Advantages: FC<IAdvantagesProps> = ({ advantages }) => {
     return (
-        <div className={clsx(styles.advantages, advantages && styles['data-center'])}>
+        <div className={clsx(styles.advantages)}>
             <div className={clsx(styles.advantagesContainer, 'container-wide')}>
                 {advantages &&
                     advantages.map((advantage) => {
@@ -39,31 +38,30 @@ interface IAdvantageItem {
 
 const AdvantageItem: FC<IAdvantageItem> = (advantage) => {
     const [isHovered, setIsHovered] = useState(false);
-    const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
-        <div className={styles.item}>
-            <motion.div
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
-                className={styles.image}
-            >
+        <motion.div
+            className={styles.item}
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+        >
+            <div className={styles.image}>
                 <img src={BASE_URL + advantage.image} alt={advantage.title} />
-            </motion.div>
+            </div>
+            <p className={styles.title}>{advantage.title}</p>
             <AnimatePresence initial={false}>
-                {(isHovered || matches) && (
+                {isHovered && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                     >
                         <div className={styles.body}>
-                            <p className={styles.title}>{advantage.title}</p>
                             <p className={styles.desc} dangerouslySetInnerHTML={{ __html: advantage.description }} />
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </motion.div>
     );
 };

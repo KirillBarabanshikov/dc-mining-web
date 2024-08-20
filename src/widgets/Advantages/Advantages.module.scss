@@ -1,98 +1,116 @@
 .advantages {
     .advantagesContainer {
         display: flex;
-        gap: 16px;
+        align-items: flex-start;
+        gap: 32px;
 
-        .item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-
-            .image {
-                max-width: 160px;
-                max-height: 160px;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            .body {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                .title {
-                    text-align: center;
-                    font-family: 'Gilroy', sans-serif;
-                    font-weight: 700;
-                    font-size: 24px;
-                    line-height: 28.8px;
-                    margin: 20px 0;
-                }
-
-                .desc {
-                    text-align: center;
-                    line-height: 20.8px;
-                    color: rgba(90, 101, 156, 1);
-                }
-            }
+        @media screen and (max-width: 1500px) {
+            gap: 24px;
         }
 
         @media screen and (max-width: 1300px) {
-            .item {
-                .body {
-                    .title {
-                        font-size: 20px;
-                        line-height: 24px;
-                    }
-
-                    .desc {
-                        font-weight: 500;
-                        font-size: 14px;
-                        line-height: 16.8px;
-                        max-width: 242px;
-                    }
-                }
-            }
+            gap: 16px;
         }
 
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 1150px) {
             flex-wrap: wrap;
+        }
+    }
+}
 
-            .item {
-                flex: 1 1 24%;
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+    border-radius: 20px;
+    transition: background-color 300ms ease-out;
+    overflow: hidden;
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--background-secondary);
+        }
+    }
+
+    .image {
+        max-width: 160px;
+        max-height: 160px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .title {
+        text-align: center;
+        font-family: 'Gilroy', sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 28.8px;
+        margin-top: 20px;
+    }
+
+    .body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+
+        .desc {
+            text-align: center;
+            line-height: 20.8px;
+            color: rgba(90, 101, 156, 1);
+        }
+    }
+
+    @media (max-width: 1500px) {
+        .title {
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+
+    @media (max-width: 1300px) {
+        .body {
+            .desc {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 16.8px;
             }
         }
+    }
 
-        @media screen and (max-width: 768px) {
-            .item {
-                .image {
-                    max-width: 120px;
-                    max-height: 120px;
-                }
+    @media screen and (max-width: 1150px) {
+        flex: 1 1 24%;
 
-                .body {
-                    .title {
-                        font-family: 'Roboto', sans-serif;
-                        font-weight: 400;
-                        font-size: 14px;
-                        line-height: 18.2px;
-                    }
+        .desc {
+            max-width: 242px;
+        }
+    }
 
-                    .desc {
-                        display: none;
-                    }
-                }
-            }
+    @media screen and (max-width: 768px) {
+        .image {
+            max-width: 120px;
+            max-height: 120px;
         }
 
-        @media screen and (max-width: 495px) {
-            .item {
-                flex: 1 1 35%;
-            }
+        .title {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18.2px;
         }
+
+        .body {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 590px) {
+        flex: 1 1 35%;
+        padding: 20px 0;
     }
 }
