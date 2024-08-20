@@ -6,7 +6,7 @@ import { MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import { OrderCallModal, OrderCallBanner } from '@/features/call';
 import { useGetDataCenterInfoQuery } from '@/entities/pageInfo';
-import { CardSlider } from '@/widgets';
+import { LivePhotos } from '@/widgets';
 import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
@@ -43,7 +43,6 @@ const DataCenterPage = () => {
             </section>
             <div className={clsx(styles.content, 'sections')}>
                 <Advantages advantages={info?.top} />
-                {info && <CardSlider images={info.images} />}
                 <div className={styles.benefits}>
                     <div className={'container'}>
                         <div className={styles.wrap}>
@@ -62,6 +61,7 @@ const DataCenterPage = () => {
                         </div>
                     </div>
                 </div>
+                {info && <LivePhotos images={info.images.map(({ image }) => image)} />}
                 <section className={styles.howItWork}>
                     <div className={'container'}>
                         <h2 className={clsx(styles.title, 'section-title-primary')}>Как это работает</h2>

@@ -2,23 +2,24 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperButton } from '@/shared/ui';
-import img from '@/shared/assets/images/main/banner1.png';
+import { BASE_URL } from '@/shared/consts';
 import styles from './LivePhotos.module.scss';
 
 interface ILivePhotosProps {
+    images: string[];
     className?: string;
 }
 
-export const LivePhotos: FC<ILivePhotosProps> = ({ className }) => {
+export const LivePhotos: FC<ILivePhotosProps> = ({ images, className }) => {
     return (
-        <div className={clsx(className, 'container')}>
+        <div className={clsx(styles.container, className)}>
             <Swiper slidesPerView={'auto'} spaceBetween={16}>
                 <SwiperButton variant={'prev'} className={clsx(styles.swiperButton, styles.prev)} />
-                {Array.from({ length: 10 }).map((_, index) => {
+                {images.map((image, index) => {
                     return (
                         <SwiperSlide key={index} className={styles.slide}>
                             <div className={styles.photo}>
-                                <img src={img} alt={'alt'} />
+                                <img src={BASE_URL + image} alt={'Photo'} />
                             </div>
                         </SwiperSlide>
                     );

@@ -46,7 +46,7 @@ const CatalogPage = () => {
                 </div>
             </div>
             <Catalog key={state} />
-            <LivePhotos className={styles.livePhotos} />
+            <LivePhotos images={[]} className={styles.livePhotos} />
             <div className={clsx(styles.banners, 'container')}>
                 {matches && <OrderCallHelpBanner />}
                 <Managers />
