@@ -24,11 +24,26 @@ export const Header: FC = () => {
     const matchesLG = useMediaQuery(MAX_WIDTH_XL);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
     const { data: contacts } = useGetContactsQuery();
+    const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
         setIsOpen(false);
         setIsLocked(false);
     }, [location, setIsLocked]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const handleScroll = () => {
+        console.log(window.scrollY);
+
+        const scrollTop = window.scrollY;
+        setIsSticky(scrollTop > 0);
+    };
 
     const toggleMenu = () => {
         setIsOpen((prev) => !prev);
@@ -37,7 +52,7 @@ export const Header: FC = () => {
 
     return (
         <>
-            <header className={styles.header}>
+            <header className={clsx(styles.header, isSticky && styles.sticky)}>
                 <div className={styles.headerContainer}>
                     <div className={styles.mainMenu}>
                         <IconButton icon={<Burger />} onClick={toggleMenu} className={styles.menuIcon} />
