@@ -39,8 +39,6 @@ export const Header: FC = () => {
     }, []);
 
     const handleScroll = () => {
-        console.log(window.scrollY);
-
         const scrollTop = window.scrollY;
         setIsSticky(scrollTop > 0);
     };
