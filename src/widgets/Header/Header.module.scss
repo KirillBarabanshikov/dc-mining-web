@@ -1,17 +1,13 @@
 .header {
-    position: relative;
-    z-index: 3;
+    position: sticky;
+    z-index: 5;
+    top: 0;
     max-width: 1840px;
     margin: 20px auto 0;
     width: 100%;
 
     @media screen and (max-width: 1840px) {
         padding: 0 40px;
-    }
-
-    @media screen and (max-width: 1200px) {
-        position: relative;
-        z-index: initial;
     }
 
     @media screen and (max-width: 992px) {
