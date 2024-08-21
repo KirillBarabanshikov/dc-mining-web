@@ -2,12 +2,11 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui';
 import { formatter, useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD } from '@/shared/consts';
+import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import { OrderCallModal, OrderCallBanner } from '@/features/call';
 import { useGetDataCenterInfoQuery } from '@/entities/pageInfo';
 import { LivePhotos } from '@/widgets';
-import container from '@/shared/assets/images/containers/container.png';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
 import dottedLineMd from '@/shared/assets/images/data-center/dotted-line-md.png';
@@ -94,7 +93,7 @@ const DataCenterPage = () => {
                         <div className={styles.wrap}>
                             <div className={styles.containersContent}>
                                 <h2 className={'section-title'}>{info?.containerTitle}</h2>
-                                {matches && <img src={`${container}`} alt={'Container'} />}
+                                {matches && info && <img src={BASE_URL + info.containerImage} alt={'Container'} />}
                                 {info && <p dangerouslySetInnerHTML={{ __html: info.containerDescription }} />}
                                 <div className={styles.advantages}>
                                     <div className={styles.advantage}>
@@ -114,7 +113,7 @@ const DataCenterPage = () => {
                                     Выбрать контейнер
                                 </Button>
                             </div>
-                            {!matches && <img src={`${container}`} alt={'Container'} />}
+                            {!matches && info && <img src={BASE_URL + info.containerImage} alt={'Container'} />}
                         </div>
                     </div>
                 </section>
