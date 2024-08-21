@@ -1,7 +1,7 @@
 export const CHARACTERISTICS: Record<string, string> = {
     ['Бренд']: 'brand',
     ['Алгоритм']: 'algorithm',
-    ['Монета']: 'coin',
+    ['Добываемые монеты']: 'coin',
     ['Тип']: '',
     ['Доход в месяц']: '',
     ['Мощность']: '',
@@ -12,7 +12,7 @@ export const CHARACTERISTICS: Record<string, string> = {
 export const CHARACTERISTICS_KEYS: Record<string, string> = {
     brand: 'Бренд',
     algorithm: 'Алгоритм',
-    coin: 'Монета',
+    coin: 'Добываемые монеты',
     ['Тип']: '',
     ['Доход в месяц']: '',
     ['Мощность']: '',
