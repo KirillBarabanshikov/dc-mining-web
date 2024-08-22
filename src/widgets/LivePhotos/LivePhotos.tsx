@@ -11,6 +11,8 @@ interface ILivePhotosProps {
 }
 
 export const LivePhotos: FC<ILivePhotosProps> = ({ images, className }) => {
+    if (!images.length) return <></>;
+
     return (
         <div className={clsx(styles.container, className)}>
             <Swiper slidesPerView={'auto'} spaceBetween={16} className={styles.slider}>

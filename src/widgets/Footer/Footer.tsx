@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useGetContactsQuery } from '@/entities/contacts';
+import { useGetCategoriesQuery } from '@/entities/category';
 import { BASE_URL } from '@/shared/consts';
 import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
 import Logo from '@/shared/assets/logo.svg?react';
@@ -8,6 +9,7 @@ import styles from './Footer.module.scss';
 
 export const Footer = () => {
     const { data: contacts } = useGetContactsQuery();
+    const { data: categories } = useGetCategoriesQuery();
 
     return (
         <footer className={styles.footer}>
@@ -22,9 +24,20 @@ export const Footer = () => {
                         <section>
                             <h5>Услуги</h5>
                             <div className={styles.wrap}>
-                                <Link to={'/catalog'} className={styles.link}>
-                                    ASIC майнеры
-                                </Link>
+                                {categories &&
+                                    categories
+                                        .filter((category) => category.title === 'asicMiners')
+                                        .map((category) => {
+                                            return (
+                                                <Link
+                                                    key={category.id}
+                                                    to={`/catalog/${category.id}/${category.slug}`}
+                                                    className={styles.link}
+                                                >
+                                                    {category.name}
+                                                </Link>
+                                            );
+                                        })}
                                 <Link to={'/data-center'} className={styles.link}>
                                     Размещение в дата центре
                                 </Link>
