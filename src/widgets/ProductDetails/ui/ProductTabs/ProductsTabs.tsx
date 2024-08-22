@@ -28,16 +28,18 @@ export const ProductsTabs: FC<IProductTabsProps> = ({ product }) => {
                     );
                 })}
             </div>
-            <div>{[<ProductSpecifications value={product.value} />, <Delivery />, <Payments />][currentTab]}</div>
+            <div>
+                {
+                    [
+                        <ProductSpecifications value={product.value} />,
+                        <Delivery variant={'productInfo'} />,
+                        <Payments variant={'productInfo'} />,
+                    ][currentTab]
+                }
+            </div>
         </div>
     );
 };
-
-// const ProductDescription: FC<{ description: string }> = ({ description }) => {
-//     return (
-//         <div className={clsx(styles.productDescription, 'list')} dangerouslySetInnerHTML={{ __html: description }} />
-//     );
-// };
 
 const ProductSpecifications: FC<{ value: IProductValue[] }> = ({ value }) => {
     return (

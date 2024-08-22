@@ -2,12 +2,17 @@ import { FC } from 'react';
 import { BASE_URL } from '@/shared/consts';
 import { IDeliveryAndPaymentInfo, useGetDeliveryInfoQuery, useGetPaymentInfoQuery } from '@/entities/pageInfo';
 import styles from './DeliveryAndPayment.module.scss';
+import clsx from 'clsx';
 
-export const Delivery = () => {
+interface IDeliveryAndPaymentProps {
+    variant?: 'page' | 'productInfo';
+}
+
+export const Delivery: FC<IDeliveryAndPaymentProps> = ({ variant = 'page' }) => {
     const { data: deliveries } = useGetDeliveryInfoQuery();
 
     return (
-        <div className={styles.delivery}>
+        <div className={clsx(styles.delivery, styles[variant])}>
             {deliveries && (
                 <section>
                     <h2>Доставка</h2>
@@ -22,11 +27,11 @@ export const Delivery = () => {
     );
 };
 
-export const Payments = () => {
+export const Payments: FC<IDeliveryAndPaymentProps> = ({ variant = 'page' }) => {
     const { data: payments } = useGetPaymentInfoQuery();
 
     return (
-        <div className={styles.delivery}>
+        <div className={clsx(styles.delivery, styles[variant])}>
             {payments && (
                 <section>
                     <h2>Оплата</h2>

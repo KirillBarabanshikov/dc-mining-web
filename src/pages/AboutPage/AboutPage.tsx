@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import ScrollContainer from 'react-indiana-drag-scroll';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { AdvantagesDCMining, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -62,25 +62,27 @@ const AboutPage = () => {
                     <div className={'container scrollable'}>
                         <h2 className={clsx(styles.title, 'section-title-primary')}>Партнеры</h2>
 
-                        <ScrollContainer className={clsx(styles.partnersList)}>
+                        <Swiper slidesPerView={'auto'} spaceBetween={32} className={styles.partnersList}>
                             {info &&
                                 info.partners.map((partner) => {
                                     return (
-                                        <div key={partner.id} className={styles.partner}>
-                                            <img
-                                                src={BASE_URL + partner.image}
-                                                alt={'image'}
-                                                className={styles.image}
-                                            />
-                                            <img
-                                                src={BASE_URL + partner.preview}
-                                                alt={'preview'}
-                                                className={styles.preview}
-                                            />
-                                        </div>
+                                        <SwiperSlide key={partner.id} className={styles.slide}>
+                                            <div className={styles.partner}>
+                                                <img
+                                                    src={BASE_URL + partner.image}
+                                                    alt={'image'}
+                                                    className={styles.image}
+                                                />
+                                                <img
+                                                    src={BASE_URL + partner.preview}
+                                                    alt={'preview'}
+                                                    className={styles.preview}
+                                                />
+                                            </div>
+                                        </SwiperSlide>
                                     );
                                 })}
-                        </ScrollContainer>
+                        </Swiper>
                     </div>
                 </section>
             </div>

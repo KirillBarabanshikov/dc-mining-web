@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from '@/shared/ui';
@@ -6,6 +7,7 @@ import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { Advantages } from '@/widgets/Advantages';
 import { OrderCallModal, OrderCallBanner } from '@/features/call';
 import { useGetDataCenterInfoQuery } from '@/entities/pageInfo';
+import { useGetCategoriesQuery } from '@/entities/category';
 import { LivePhotos } from '@/widgets';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
@@ -17,10 +19,12 @@ import styles from './DataCenterPage.module.scss';
 
 const DataCenterPage = () => {
     const { data: info } = useGetDataCenterInfoQuery();
+    const { data: categories } = useGetCategoriesQuery();
     const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 959px)');
     const matchesLg = useMediaQuery('(max-width: 1438px)');
+    const navigate = useNavigate();
 
     const currentLine = matchesMd ? dottedLineSm : matchesLg ? dottedLineMd : dottedLine;
     const currentLine2 = matchesMd ? dottedLineSm2 : matchesLg ? dottedLineMd2 : dottedLine2;
@@ -109,9 +113,22 @@ const DataCenterPage = () => {
                                     <div>Вместимость</div>
                                     <span>{info?.containerCapacity}</span>
                                 </div>
-                                <Button size={matches ? 'md' : 'lg'} isWide={matches} className={styles.button}>
-                                    Выбрать контейнер
-                                </Button>
+                                {categories &&
+                                    categories
+                                        .filter((category) => category.title === 'containersMining')
+                                        .map((category) => {
+                                            return (
+                                                <Button
+                                                    key={category.id}
+                                                    size={matches ? 'md' : 'lg'}
+                                                    isWide={matches}
+                                                    className={styles.button}
+                                                    onClick={() => navigate(`/catalog/${category.id}/${category.slug}`)}
+                                                >
+                                                    Выбрать контейнер
+                                                </Button>
+                                            );
+                                        })}
                             </div>
                             {!matches && info && <img src={BASE_URL + info.containerImage} alt={'Container'} />}
                         </div>

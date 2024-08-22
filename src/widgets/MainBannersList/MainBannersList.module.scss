@@ -29,6 +29,10 @@
             line-height: 38.4px;
             color: var(--text-contrast);
             margin-bottom: 8px;
+
+            @media screen and (max-width: 1100px) {
+                font-size: 24px;
+            }
         }
 
         p {
@@ -36,6 +40,10 @@
             line-height: 24px;
             margin-bottom: 40px;
             color: var(--text-contrast);
+
+            @media screen and (max-width: 1100px) {
+                font-size: 18px;
+            }
         }
     }
 
@@ -69,6 +77,10 @@
                 opacity: 1;
             }
         }
+    }
+
+    @media screen and (max-width: 1100px) {
+        padding: 24px;
     }
 
     @media screen and (max-width: 768px) {
