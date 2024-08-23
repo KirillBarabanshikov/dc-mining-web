@@ -60,7 +60,7 @@ export const MainSlider = () => {
                                         size={matches ? 'md' : 'lg'}
                                         onClick={() => handleNavigate(slide.links)}
                                     >
-                                        Подробнее
+                                        {slide.links === 'cloudMining' ? 'Скоро' : 'Подробнее'}
                                     </Button>
                                 </div>
                                 <div className={styles.imageWrap}>

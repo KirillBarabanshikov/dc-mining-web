@@ -18,7 +18,7 @@ export const CustomFilters: FC<ICustomFiltersProps> = ({ className }) => {
     const handleSelect = (value: string) => {
         if (!category) return;
 
-        if (searchParams.get('filter')) {
+        if (searchParams.get('filter') === value) {
             setParams({ key: 'filter', value: [] });
         } else {
             setParams({ key: 'filter', value: [value] });

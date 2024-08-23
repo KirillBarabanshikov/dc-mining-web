@@ -41,9 +41,20 @@ export const Footer = () => {
                                 <Link to={'/data-center'} className={styles.link}>
                                     Размещение в дата центре
                                 </Link>
-                                <Link to={''} className={styles.link}>
-                                    Готовый бизнес под ключ
-                                </Link>
+                                {categories &&
+                                    categories
+                                        .filter((category) => category.title === 'readyBusiness')
+                                        .map((category) => {
+                                            return (
+                                                <Link
+                                                    key={category.id}
+                                                    to={`/catalog/${category.id}/${category.slug}`}
+                                                    className={styles.link}
+                                                >
+                                                    Готовый бизнес под ключ
+                                                </Link>
+                                            );
+                                        })}
                             </div>
                         </section>
                         <section>

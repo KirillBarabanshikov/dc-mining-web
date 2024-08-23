@@ -18,6 +18,7 @@ interface ISideMenuProps {
 
 export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
     const { data: contacts } = useGetContactsQuery();
+    const { data: categories } = useGetCategoriesQuery();
 
     return createPortal(
         <AnimatePresence>
@@ -39,11 +40,28 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
                         <section>
                             <h4 className={styles.title}>Услуги</h4>
                             <div>
-                                {SERVICES_LINKS.map((link) => (
-                                    <Link key={link.path} to={link.path} className={styles.link}>
-                                        {link.title}
-                                    </Link>
-                                ))}
+                                {categories &&
+                                    SERVICES_LINKS.map((link) => {
+                                        if (link.path === '/readyBusiness') {
+                                            return categories
+                                                .filter((category) => category.title === 'readyBusiness')
+                                                .map((category) => (
+                                                    <Link
+                                                        key={link.path}
+                                                        to={`catalog/${category.id}/${category.slug}`}
+                                                        className={styles.link}
+                                                    >
+                                                        {link.title}
+                                                    </Link>
+                                                ));
+                                        }
+
+                                        return (
+                                            <Link key={link.path} to={link.path} className={styles.link}>
+                                                {link.title}
+                                            </Link>
+                                        );
+                                    })}
                             </div>
                         </section>
                         <section>

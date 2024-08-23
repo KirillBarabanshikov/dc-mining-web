@@ -30,7 +30,7 @@ export const Managers: FC<IManagersProps> = ({ className }) => {
             <section className={styles.calculator}>
                 <h4>Либо воспользуйтесь калькулятором доходности</h4>
                 <Button theme={'white'} size={!matches ? 'lg' : 'md'} className={styles.button}>
-                    Открыть калькулятор
+                    Скоро
                 </Button>
                 <img src={`${calculator}`} alt={'Calculator'} />
             </section>
