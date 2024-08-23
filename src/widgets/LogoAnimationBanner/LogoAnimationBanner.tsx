@@ -1,17 +1,15 @@
-import { MAX_WIDTH_MD } from '@/shared/consts';
-import { useMediaQuery } from '@/shared/lib';
 import animationPC from '@/shared/assets/animations/logo-animation-pc.webm';
 import animationMobile from '@/shared/assets/animations/logo-animation-mobile.webm';
 import styles from './LogoAnimationBanner.module.scss';
 
 export const LogoAnimationBanner = () => {
-    const matches = useMediaQuery(MAX_WIDTH_MD);
-
     return (
         <>
             <div className={styles.bannerWrapper}>
-                <video autoPlay loop muted>
-                    <source src={`${matches ? animationMobile : animationPC}`} />
+                <video autoPlay loop muted playsInline>
+                    <source src={animationPC} media={'(min-width: 769px)'} />
+                    <source src={animationMobile} media='(max-width: 768px)' />
+                    Ваш браузер не поддерживает тег video.
                 </video>
             </div>
             <div className={styles.cover}></div>
