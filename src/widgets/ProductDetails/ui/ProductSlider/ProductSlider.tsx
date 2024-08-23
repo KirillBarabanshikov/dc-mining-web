@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs, Mousewheel } from 'swiper/modules';
 import { IProductImage } from '@/entities/product/model';
-import { BASE_URL, MAX_WIDTH_XL } from '@/shared/consts';
+import { MAX_WIDTH_XL } from '@/shared/consts';
 import { useMediaQuery } from '@/shared/lib';
 import { SwiperButton } from '@/shared/ui';
 import styles from './ProductSlider.module.scss';
@@ -36,7 +36,7 @@ export const ProductSlider: FC<IProductSliderProps> = ({ images }) => {
                     {images.map((image) => (
                         <SwiperSlide key={image.id} className={styles.slide}>
                             <div className={styles.image}>
-                                <img src={BASE_URL + image.image} alt={'image'} />
+                                <img src={image.image} alt={'image'} />
                             </div>
                         </SwiperSlide>
                     ))}
@@ -58,7 +58,7 @@ export const ProductSlider: FC<IProductSliderProps> = ({ images }) => {
                     {images.map((image) => (
                         <SwiperSlide key={image.id}>
                             <div className={styles.mainImage}>
-                                <img src={BASE_URL + image.image} alt={'image'} />
+                                <img src={image.image} alt={'image'} />
                             </div>
                         </SwiperSlide>
                     ))}

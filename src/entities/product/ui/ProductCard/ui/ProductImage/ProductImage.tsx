@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import clsx from 'clsx';
-import { BASE_URL } from '@/shared/consts';
 import { IProductImage } from '../../../../model';
 import styles from './ProductImage.module.scss';
 
@@ -14,7 +13,7 @@ export const ProductImage: FC<IProductImageProps> = ({ images, className }) => {
 
     return (
         <div className={clsx(styles.image, className)} onMouseLeave={() => setCurrentSlide(0)}>
-            <img src={BASE_URL + `${images[currentSlide]?.image}`} alt={`Product Image ${currentSlide}`} />
+            <img src={images[currentSlide]?.image} alt={`Product Image ${currentSlide}`} />
             <div className={styles.slides}>
                 {images.length >= 2 &&
                     images.slice(0, 4).map((image, index) => {

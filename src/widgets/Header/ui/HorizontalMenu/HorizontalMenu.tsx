@@ -16,7 +16,7 @@ export const HorizontalMenu = () => {
                     categories.map((item) => {
                         if (item.link) {
                             return (
-                                <li key={item.id} className={styles.horizontalMenuItem}>
+                                <li key={item.id} className={clsx(styles.horizontalMenuItem, styles.item)}>
                                     <Link
                                         to={item.link ?? `/catalog/${item.id}/${item.slug}`}
                                         className={styles.horizontalMenuLink}
@@ -38,7 +38,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <li className={styles.horizontalMenuDropdownItem}>
+        <li className={clsx(styles.horizontalMenuDropdownItem, styles.item)}>
             <span className={clsx(styles.horizontalMenuItem, styles.hidden)} aria-hidden={true}>
                 {item.name}
             </span>

@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
 import { formatter, useMediaQuery } from '@/shared/lib';
 import { AddToCompareButton, AddToFavoritesButton, OrderProductModal } from '@/features/product';
+import placeholderImg from '@/shared/assets/images/product/placeholder.png';
 import styles from './ProductCompareCard.module.scss';
 
 interface IProductCompareCardProps {
@@ -20,7 +21,10 @@ export const ProductCompareCard: FC<IProductCompareCardProps> = ({ product, only
         <div className={clsx(styles.card)}>
             <div className={styles.header}>
                 <AddToCompareButton product={product} variant={'trash'} className={styles.trash} />
-                <img src={BASE_URL + product.images[0]?.image} alt={product.title} />
+                <img
+                    src={product.images[0] ? BASE_URL + product.images[0].image : placeholderImg}
+                    alt={product.title}
+                />
                 <p className={styles.name}>{product.title}</p>
                 <p className={styles.price}>{product.price ? formatter.format(product.price) : 'Цена по запросу'}</p>
                 <div className={styles.buttons}>
