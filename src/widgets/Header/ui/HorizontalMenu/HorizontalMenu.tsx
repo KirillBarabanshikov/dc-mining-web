@@ -14,7 +14,7 @@ export const HorizontalMenu = () => {
             <ul className={styles.horizontalMenuList}>
                 {categories &&
                     categories.map((item) => {
-                        if (item.link) {
+                        if (item.link || item.subCategory.length === 0) {
                             return (
                                 <li key={item.id} className={clsx(styles.horizontalMenuItem, styles.item)}>
                                     <Link
