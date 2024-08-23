@@ -7,6 +7,7 @@ const names: Record<string, string> = {
     repairAndService: 'Ремонт и сервис',
     usefulLinks: 'Полезные ссылки',
     readyBusiness: 'Готовый бизнес',
+    leasing: 'Лизинг',
 };
 
 export function getCategoryNameByTitle(categoryTitle: string): string {

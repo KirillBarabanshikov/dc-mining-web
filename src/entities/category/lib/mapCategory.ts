@@ -8,6 +8,7 @@ const links: Record<string, string> = {
     accommodationDataCentre: '/data-center',
     repairAndService: '/service',
     usefulLinks: '/links',
+    leasing: '/leasing',
 };
 
 export function mapCategory(category: ICategoryDto): ICategory {
