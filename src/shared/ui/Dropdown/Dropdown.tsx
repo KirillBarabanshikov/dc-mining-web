@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { Checkbox, Modal, Radio } from '@/shared/ui';
 import ArrowIcon from '@/shared/assets/icons/arrow-down2.svg?react';
 import styles from './Dropdown.module.scss';
+import { useOutsideClick } from '@/shared/lib';
 
 interface IDropdownItem {
     value: string;
@@ -38,6 +39,7 @@ export const Dropdown: FC<IDropdownProps> = ({
 }) => {
     const [selectedValue, setSelectedValue] = useState<string[]>(defaultValue);
     const [isOpen, setIsOpen] = useState(open);
+    const ref = useOutsideClick<HTMLDivElement>(() => (physical ? {} : setIsOpen(false)));
 
     useEffect(() => {
         setSelectedValue(defaultValue);
@@ -63,7 +65,10 @@ export const Dropdown: FC<IDropdownProps> = ({
     };
 
     return (
-        <div className={clsx(styles.dropdown, isOpen && styles.isOpen, physical && styles.physical, className)}>
+        <div
+            ref={ref}
+            className={clsx(styles.dropdown, isOpen && styles.isOpen, physical && styles.physical, className)}
+        >
             <div className={styles.head} onClick={() => setIsOpen(!isOpen)}>
                 <span className={styles.label}>
                     {label ? label : items.find((item) => item.value === selectedValue[0])?.label}
