@@ -34,7 +34,8 @@ export const Filters: FC<IFiltersProps> = ({ onClose, className }) => {
     const onResetFilters = () => {
         if (!category) return;
         resetFilters();
-        setFilters({ body: { type: category.title }, params: { page: '1' } });
+        const body = getFilterBody(category.title);
+        setFilters({ body, params: { page: '1' } });
         onClose && onClose();
         setReset((prev) => !prev);
     };

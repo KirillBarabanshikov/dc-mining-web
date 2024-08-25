@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 import { ICategory, useGetCategoriesQuery } from '@/entities/category';
@@ -38,6 +38,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
     const triggerRef = useRef<HTMLLIElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!triggerRef.current || !dropdownRef.current) return;
@@ -56,6 +57,20 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
         setIsOpen(false);
     };
 
+    const handleNavigate = (child: { id: number; title: string }) => {
+        let path = `/catalog/${item.id}/${item.slug}`;
+
+        if (item.title === 'asicMiners') {
+            path += `?brand=${child.title}`;
+        }
+
+        if (item.title === 'accessories') {
+            path += `?filter=${child.title}`;
+        }
+
+        navigate(path, { state: child.id });
+    };
+
     return (
         <>
             <motion.li
@@ -65,7 +80,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                 className={clsx(styles.horizontalMenuItem, isOpen && styles.open)}
             >
                 <Link
-                    to={item.link ?? `/catalog/${item.id}/${item.slug}`}
+                    to={`/catalog/${item.id}/${item.slug}`}
                     className={clsx(styles.horizontalMenuLink, styles.dropdownLink)}
                 >
                     {item.name}
@@ -86,10 +101,12 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                             <div className={styles.dropdownList}>
                                 {item.subCategory.map((child) => {
                                     return (
-                                        <div key={child.id} className={styles.dropdownItem}>
-                                            <Link to={`/catalog/${item.id}/${item.slug}?brand=${child.title}`}>
-                                                {child.title}
-                                            </Link>
+                                        <div
+                                            key={child.id}
+                                            onClick={() => handleNavigate(child)}
+                                            className={styles.dropdownItem}
+                                        >
+                                            <span>{child.title}</span>
                                         </div>
                                     );
                                 })}

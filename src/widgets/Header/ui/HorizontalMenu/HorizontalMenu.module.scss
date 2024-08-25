@@ -67,8 +67,18 @@
         padding: 6px 12px 12px 12px;
 
         .dropdownItem {
-            font-size: 14px;
-            line-height: 18.2px;
+            span {
+                font-size: 14px;
+                line-height: 18.2px;
+                transition: color 300ms ease-out;
+
+                @media (hover: hover) {
+                    &:hover {
+                        cursor: pointer;
+                        color: var(--text-accent-blue);
+                    }
+                }
+            }
         }
     }
 }
