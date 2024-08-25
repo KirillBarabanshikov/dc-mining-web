@@ -6,3 +6,4 @@ export { formatter } from './currency';
 export { formatPhoneNumber, intFormatPhoneNumber } from './phone';
 export { formatDate } from './date';
 export { createSlug } from './slug/createSlug.ts';
+export { useOutsideClick } from './click';
