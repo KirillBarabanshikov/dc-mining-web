@@ -75,9 +75,9 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: 'auto' }}
-                            exit={{ height: 0 }}
+                            initial={{ height: 0, opacity: 0.5 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0.5 }}
                             ref={dropdownRef}
                             onHoverStart={handleHoverStart}
                             onHoverEnd={handleHoverEnd}
