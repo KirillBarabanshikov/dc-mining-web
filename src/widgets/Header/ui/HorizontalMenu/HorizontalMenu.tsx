@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { FC, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 import { ICategory, useGetCategoriesQuery } from '@/entities/category';
-import { dropdown, dropdownItem } from './variants/variants.ts';
 import styles from './HorizontalMenu.module.scss';
 
 export const HorizontalMenu = () => {
@@ -16,7 +16,7 @@ export const HorizontalMenu = () => {
                     categories.map((item) => {
                         if (item.link || item.subCategory.length === 0) {
                             return (
-                                <li key={item.id} className={clsx(styles.horizontalMenuItem, styles.item)}>
+                                <li key={item.id} className={styles.horizontalMenuItem}>
                                     <Link
                                         to={item.link ?? `/catalog/${item.id}/${item.slug}`}
                                         className={styles.horizontalMenuLink}
@@ -36,53 +36,69 @@ export const HorizontalMenu = () => {
 
 const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const triggerRef = useRef<HTMLLIElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!triggerRef.current || !dropdownRef.current) return;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+
+        dropdownRef.current.style.top = `${triggerRect.top + triggerRect.height}px`;
+        dropdownRef.current.style.left = `${triggerRect.left}px`;
+        dropdownRef.current.style.width = `${triggerRect.width}px`;
+    }, [dropdownRef, triggerRef, isOpen]);
+
+    const handleHoverStart = () => {
+        setIsOpen(true);
+    };
+
+    const handleHoverEnd = () => {
+        setIsOpen(false);
+    };
 
     return (
-        <li className={clsx(styles.horizontalMenuDropdownItem, styles.item)}>
-            <span className={clsx(styles.horizontalMenuItem, styles.hidden)} aria-hidden={true}>
-                {item.name}
-            </span>
-            <motion.div
-                onHoverStart={() => setIsOpen(true)}
-                onHoverEnd={() => setIsOpen(false)}
-                className={clsx(styles.horizontalMenuItem, styles.dropdown, isOpen && styles.isOpen)}
+        <>
+            <motion.li
+                ref={triggerRef}
+                onHoverStart={handleHoverStart}
+                onHoverEnd={handleHoverEnd}
+                className={clsx(styles.horizontalMenuItem, isOpen && styles.open)}
             >
-                <Link to={`/catalog/${item.id}/${item.slug}`} className={styles.horizontalMenuLink}>
+                <Link
+                    to={item.link ?? `/catalog/${item.id}/${item.slug}`}
+                    className={clsx(styles.horizontalMenuLink, styles.dropdownLink)}
+                >
                     {item.name}
                 </Link>
+            </motion.li>
+            {createPortal(
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            variants={dropdown}
-                            initial={'hidden'}
-                            animate={'show'}
-                            exit={'hidden'}
-                            className={styles.dropdownList}
+                            initial={{ height: 0 }}
+                            animate={{ height: 'auto' }}
+                            exit={{ height: 0 }}
+                            ref={dropdownRef}
+                            onHoverStart={handleHoverStart}
+                            onHoverEnd={handleHoverEnd}
+                            className={styles.dropdown}
                         >
-                            <ul>
-                                {item.subCategory.map((child, index) => {
+                            <div className={styles.dropdownList}>
+                                {item.subCategory.map((child) => {
                                     return (
-                                        <motion.li
-                                            variants={dropdownItem}
-                                            initial={'hidden'}
-                                            animate={'show'}
-                                            exit={'hidden'}
-                                            key={index}
-                                        >
-                                            <Link
-                                                to={`/catalog/${item.id}/${item.slug}?brand=${child.title}`}
-                                                state={child.title}
-                                            >
+                                        <div key={child.id} className={styles.dropdownItem}>
+                                            <Link to={`/catalog/${item.id}/${item.slug}?brand=${child.title}`}>
                                                 {child.title}
                                             </Link>
-                                        </motion.li>
+                                        </div>
                                     );
                                 })}
-                            </ul>
+                            </div>
                         </motion.div>
                     )}
-                </AnimatePresence>
-            </motion.div>
-        </li>
+                </AnimatePresence>,
+                document.getElementById('portal') as HTMLDivElement,
+            )}
+        </>
     );
 };

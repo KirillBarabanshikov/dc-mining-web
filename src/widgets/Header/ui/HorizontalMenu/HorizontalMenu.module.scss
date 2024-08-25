@@ -1,62 +1,48 @@
 .horizontalMenu {
+    position: relative;
     padding: 0 8px;
-    height: 34px;
 
     .horizontalMenuList {
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
-
-        @media screen and (max-width: 992px) {
-            height: 32px;
-        }
-
-        .item {
-            @media screen and (max-width: 1670px) {
-                &:nth-child(7) {
-                    display: none;
-                }
-            }
-
-            @media screen and (max-width: 1545px) {
-                &:nth-child(6) {
-                    display: none;
-                }
-            }
-
-            @media screen and (max-width: 1390px) {
-                &:nth-child(5) {
-                    display: none;
-                }
-            }
-
-            @media screen and (max-width: 1175px) {
-                &:nth-child(4) {
-                    display: none;
-                }
-            }
-
-            @media screen and (max-width: 1030px) {
-                &:nth-child(3) {
-                    display: none;
-                }
-            }
-        }
+        overflow: hidden;
+        height: 32px;
 
         .horizontalMenuItem {
-            position: relative;
-            padding: 6.5px 12px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
-            user-select: none;
+            &.open {
+                .horizontalMenuLink {
+                    background-color: var(--background-white);
+                    border-radius: 8px 8px 0 0;
+                }
+            }
 
             .horizontalMenuLink {
+                display: block;
+                padding: 6.5px 12px;
+                background-color: rgba(255, 255, 255, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                border-radius: 8px;
+                user-select: none;
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 19.2px;
                 color: rgba(44, 44, 83, 1);
                 white-space: nowrap;
-                transition: color 300ms ease-out;
+                transition:
+                    color 300ms ease-out,
+                    background-color 300ms ease-out,
+                    border-radius 450ms ease-out;
+                height: 32px;
+
+                &.dropdownLink {
+                    @media (hover: hover) {
+                        &:hover {
+                            background-color: var(--background-white);
+                            border-radius: 8px 8px 0 0;
+                        }
+                    }
+                }
 
                 @media (hover: hover) {
                     &:hover {
@@ -65,52 +51,24 @@
                 }
             }
         }
+    }
+}
 
-        .horizontalMenuDropdownItem {
-            position: relative;
+.dropdown {
+    position: fixed;
+    background-color: var(--background-white);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
 
-            .dropdown {
-                position: absolute;
-                z-index: 2;
-                top: 0;
-                left: 0;
-                overflow: hidden;
-                transition: background-color 300ms ease-out;
+    .dropdownList {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 6px 12px 12px 12px;
 
-                &.isOpen {
-                    background-color: white;
-                }
-
-                .dropdownList {
-                    ul {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 8px;
-                        padding: 16px 0 6.5px 0;
-                        overflow: hidden;
-                    }
-
-                    li {
-                        a {
-                            font-size: 14px;
-                            line-height: 19.2px;
-                            color: rgba(44, 44, 83, 1);
-                            display: block;
-                            transition: color 300ms ease-out;
-
-                            @media (hover: hover) {
-                                &:hover {
-                                    color: rgba(73, 70, 255, 1);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .hidden {
-                visibility: hidden;
-            }
+        .dropdownItem {
+            font-size: 14px;
+            line-height: 18.2px;
         }
     }
 }
