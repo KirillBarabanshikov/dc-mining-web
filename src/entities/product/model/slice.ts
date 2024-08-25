@@ -58,6 +58,13 @@ export const productsSlice = createSlice({
                     recentProducts = recentProducts.slice(0, -1);
                 }
 
+                state.favorites = state.favorites.map((product) => {
+                    if (product.id === action.payload.id) {
+                        return action.payload;
+                    }
+                    return product;
+                });
+
                 state.recent = [action.payload, ...recentProducts];
             },
         );
