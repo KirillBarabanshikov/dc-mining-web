@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,6 +14,9 @@ export const HorizontalMenu = () => {
             <ul className={styles.horizontalMenuList}>
                 {categories &&
                     categories.map((item) => {
+                        if (item.title === 'readyBusiness') {
+                            return <Fragment key={item.id} />;
+                        }
                         if (item.link || item.subCategory.length === 0) {
                             return (
                                 <li key={item.id} className={styles.horizontalMenuItem}>
