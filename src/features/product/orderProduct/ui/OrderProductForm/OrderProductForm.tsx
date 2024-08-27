@@ -54,6 +54,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
     const handleClose = () => {
         reset();
         resetOrderProduct();
+        setCaptchaVerified(false);
         onClose();
     };
 
