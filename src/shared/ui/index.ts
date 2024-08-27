@@ -16,3 +16,4 @@ export { NumberInput } from './NumberInput';
 export { SwiperButton } from './SwiperButton';
 export { Placeholder } from './Placeholder';
 export { Range } from './Range';
+export { Captcha } from './Captcha';
