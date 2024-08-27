@@ -32,3 +32,13 @@
         }
     }
 }
+
+.captcha {
+    scale: 0.7;
+    max-height: 55px;
+
+    @media screen and (max-width: 855px) {
+        scale: unset;
+        max-height: unset;
+    }
+}

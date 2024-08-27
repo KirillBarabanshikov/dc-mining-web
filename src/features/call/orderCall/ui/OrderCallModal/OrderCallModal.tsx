@@ -1,5 +1,6 @@
-import { FC } from 'react';
-import { Button, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
+import { FC, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
@@ -26,8 +27,11 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
         reset,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const matches = useMediaQuery(MAX_WIDTH_MD);
+    const [captchaVerified, setCaptchaVerified] = useState(false);
+    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
     const onSubmit = async (data: TOrderCallFormScheme) => {
+        if (!captchaVerified) return;
         await orderCall({ ...data, title }).unwrap();
     };
 
@@ -69,6 +73,11 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
                         }
                         error={!!errors.checked}
                         {...register('checked')}
+                    />
+                    <Captcha
+                        ref={recaptchaRef}
+                        onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
+                        onExpired={() => setCaptchaVerified(false)}
                     />
                     <div className={styles.buttons}>
                         <Button variant={'outline'} onClick={handleClose} size={matches ? 'md' : 'lg'} isWide={matches}>

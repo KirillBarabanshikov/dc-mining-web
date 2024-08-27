@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useSendRequestMutation } from '@/entities/service';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Radio, File, Modal, StateModal } from '@/shared/ui';
+import { Button, Input, Radio, File, Modal, StateModal, Captcha } from '@/shared/ui';
 import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import styles from './SendRequestForm.module.scss';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export const SendRequestForm = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
@@ -21,11 +22,19 @@ export const SendRequestForm = () => {
     } = useForm<TSendRequestFormScheme>({
         resolver: yupResolver(sendRequestFormScheme),
     });
+    const [captchaVerified, setCaptchaVerified] = useState(false);
+    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
     const onSubmit = async (data: TSendRequestFormScheme) => {
+        if (!captchaVerified) return;
         await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile?.[0] }).unwrap();
         reset();
         setResetFile(true);
+        setCaptchaVerified(false);
+
+        if (recaptchaRef.current) {
+            recaptchaRef.current.reset();
+        }
     };
 
     const handleClose = () => {
@@ -91,9 +100,16 @@ export const SendRequestForm = () => {
                         файла: 10МБ!
                     </span>
                 </div>
-                <Button type={'submit'} size={matches ? 'md' : 'lg'} isWide={matches} disabled={isLoading}>
-                    Отправить запрос
-                </Button>
+                <div className={styles.buttons}>
+                    <Captcha
+                        ref={recaptchaRef}
+                        onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
+                        onExpired={() => setCaptchaVerified(false)}
+                    />
+                    <Button type={'submit'} size={matches ? 'md' : 'lg'} isWide={matches} disabled={isLoading}>
+                        Отправить запрос
+                    </Button>
+                </div>
             </form>
             <Modal isOpen={isError || isSuccess} onClose={handleClose}>
                 <StateModal onClose={handleClose} isError={isError} />
