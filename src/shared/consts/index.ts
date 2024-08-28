@@ -4,3 +4,4 @@ export { SERVICES_LINKS, ABOUT_LINKS } from './links.ts';
 export { CATEGORIES_KEYS, CATEGORIES_NAMES } from './categories.ts';
 export { CHARACTERISTICS, CHARACTERISTICS_KEYS } from './characteristics.ts';
 export { RECAPTCHA_SITE_KEY } from './keys.ts';
+export { PHONE_MASK } from './mask.ts';

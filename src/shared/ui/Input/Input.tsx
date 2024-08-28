@@ -24,7 +24,7 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
                 )}
             >
                 {mask ? (
-                    <MaskedInput type={type} mask={mask} disabled={disabled} {...props} />
+                    <MaskedInput type={type} mask={mask} guide={false} disabled={disabled} {...props} />
                 ) : (
                     <input type={type} disabled={disabled} ref={ref} {...props} />
                 )}

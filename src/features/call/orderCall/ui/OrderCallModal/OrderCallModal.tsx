@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD } from '@/shared/consts';
+import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
 import styles from './OrderCallModal.module.scss';
@@ -25,6 +25,8 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
         register,
         formState: { errors },
         reset,
+        setValue,
+        trigger,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [captchaVerified, setCaptchaVerified] = useState(false);
@@ -57,10 +59,16 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <Input placeholder={'Имя'} error={!!errors.name} className={styles.input} {...register('name')} />
                     <Input
+                        mask={PHONE_MASK}
                         placeholder={'Телефон'}
                         error={!!errors.phone}
                         className={styles.input}
-                        {...register('phone')}
+                        {...register('phone', {
+                            onChange: (e) => {
+                                setValue('phone', e.target.value);
+                                !!errors.phone && trigger('phone');
+                            },
+                        })}
                     />
                     <Checkbox
                         className={styles.checkbox}

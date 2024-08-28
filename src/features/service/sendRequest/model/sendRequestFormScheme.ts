@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 export const sendRequestFormScheme = yup.object().shape({
     name: yup.string().required(),
-    phone: yup.string().required(),
+    phone: yup.string().min(18).required(),
     email: yup.string().email().required(),
     buy: yup.number().integer().required(),
     title: yup.string().required(),
