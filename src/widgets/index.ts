@@ -1,0 +1,18 @@
+export { Header } from './Header';
+export { Footer } from './Footer';
+export { MainBanner } from './MainBanner';
+export { Offers } from './Offers';
+export { Bestsellers } from './Bestsellers';
+export { Managers } from './Managers';
+export { LogoAnimationBanner } from './LogoAnimationBanner';
+export { Payments, Delivery } from './DeliveryAndPayment';
+export { NewsList } from './NewsList';
+export { RecentProductsList } from './RecentProductsList';
+export { ProductsList } from './ProductsList';
+export { AdvantagesDCMining } from './AdvantagesDCMinig';
+export { CallMeBanner } from './CallMeBanner';
+export { CompareList } from './CompareList';
+export { ProductDetails } from './ProductDetails';
+export { Catalog } from './Catalog';
+export { MainBannersList } from './MainBannersList';
+export { LivePhotos } from './LivePhotos';

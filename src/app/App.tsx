@@ -1,11 +1,12 @@
-import { lazy, Suspense } from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './store/store.ts';
+import { routes } from './routes/routes.tsx';
 
-const MainPage = lazy(() => import('@/pages/MainPage/MainPage'));
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
+import '@/shared/styles/index.css';
 
 export const App = () => {
-    return (
-        <Suspense fallback={<div>loading...</div>}>
-            <MainPage></MainPage>
-        </Suspense>
-    );
+    return <ReduxProvider store={store}>{routes}</ReduxProvider>;
 };

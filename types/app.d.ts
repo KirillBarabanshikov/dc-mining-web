@@ -1,6 +1,6 @@
 declare global {
-    declare type RootState = import('../src/app/store').RootState;
-    declare type AppDispatch = import('../src/app/store').AppDispatch;
+    declare type RootState = import('../src/app/store/store.ts').RootState;
+    declare type AppDispatch = import('../src/app/store/store.ts').AppDispatch;
 
     declare module 'react-google-recaptcha';
 

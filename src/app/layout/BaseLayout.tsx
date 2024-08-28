@@ -1,0 +1,42 @@
+import { Layout } from '@/shared/ui';
+import { Footer, Header } from '@/widgets';
+import { useLocation } from 'react-router-dom';
+import { FC, PropsWithChildren, useEffect } from 'react';
+
+const pagesWithoutFooter = ['/service'];
+
+export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
+    const { pathname } = useLocation();
+
+    const footerSlot = pagesWithoutFooter.includes(pathname) ? undefined : <Footer />;
+
+    return (
+        <LocationProvider>
+            <Layout headerSlot={<Header />} footerSlot={footerSlot}>
+                {children}
+            </Layout>
+        </LocationProvider>
+    );
+};
+
+const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'pageview',
+            page: location.pathname,
+        });
+    }, [location]);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
+    return <>{children}</>;
+};

@@ -1,12 +1,17 @@
 import React from 'react';
-import { type RenderToPipeableStreamOptions, renderToPipeableStream } from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
 import { App } from './app/App.tsx';
 
-export function render(_url: string, _ssrManifest?: string, options?: RenderToPipeableStreamOptions) {
-    return renderToPipeableStream(
+export default function render(url: string, opts: any) {
+    const stream = renderToPipeableStream(
         <React.StrictMode>
-            <App />
+            <StaticRouter location={url}>
+                <App />
+            </StaticRouter>
         </React.StrictMode>,
-        options,
+        opts,
     );
+
+    return stream;
 }

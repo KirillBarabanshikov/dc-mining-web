@@ -1,0 +1,103 @@
+import { FC, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
+import { useMediaQuery } from '@/shared/lib';
+import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
+import { useOrderCallMutation } from '@/entities/call';
+import { useGetPersonalDataQuery } from '@/entities/personalData';
+import styles from './OrderCallModal.module.scss';
+
+interface IOrderCallModalProps {
+    title: string;
+    subtitle: string;
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOpen, onClose }) => {
+    const { data: personalData } = useGetPersonalDataQuery();
+    const [orderCall, { isLoading, isError, isSuccess, reset: resetOrderCall }] = useOrderCallMutation();
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+        reset,
+        setValue,
+        trigger,
+    } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
+    const matches = useMediaQuery(MAX_WIDTH_MD);
+    const [captchaVerified, setCaptchaVerified] = useState(false);
+    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+
+    const onSubmit = async (data: TOrderCallFormScheme) => {
+        if (!captchaVerified) return;
+        await orderCall({ ...data, title }).unwrap();
+        setCaptchaVerified(false);
+    };
+
+    const handleClose = () => {
+        reset();
+        resetOrderCall();
+        onClose();
+    };
+
+    const isFinally = isSuccess || isError;
+
+    return (
+        <Modal
+            isOpen={isOpen}
+            onClose={handleClose}
+            title={isFinally ? undefined : title}
+            subtitle={isFinally ? undefined : subtitle}
+        >
+            {isFinally ? (
+                <StateModal onClose={handleClose} isError={isError} />
+            ) : (
+                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                    <Input placeholder={'Имя'} error={!!errors.name} className={styles.input} {...register('name')} />
+                    <Input
+                        mask={PHONE_MASK}
+                        placeholder={'Телефон'}
+                        error={!!errors.phone}
+                        className={styles.input}
+                        {...register('phone', {
+                            onChange: (e) => {
+                                setValue('phone', e.target.value);
+                                !!errors.phone && trigger('phone');
+                            },
+                        })}
+                    />
+                    <Checkbox
+                        className={styles.checkbox}
+                        label={
+                            <>
+                                Я согласен на обработку{' '}
+                                <a href={personalData?.image} target={'_blank'}>
+                                    персональных данных
+                                </a>
+                            </>
+                        }
+                        error={!!errors.checked}
+                        {...register('checked')}
+                    />
+                    <Captcha
+                        ref={recaptchaRef}
+                        onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
+                        onExpired={() => setCaptchaVerified(false)}
+                    />
+                    <div className={styles.buttons}>
+                        <Button variant={'outline'} onClick={handleClose} size={matches ? 'md' : 'lg'} isWide={matches}>
+                            Отмена
+                        </Button>
+                        <Button type={'submit'} size={matches ? 'md' : 'lg'} isWide={matches} disabled={isLoading}>
+                            Отправить
+                        </Button>
+                    </div>
+                </form>
+            )}
+        </Modal>
+    );
+};
