@@ -1,17 +1,11 @@
-import { FC, PropsWithChildren } from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistedStore, store } from './store';
+import { lazy, Suspense } from 'react';
 
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-import '@/shared/styles/index.css';
+const MainPage = lazy(() => import('@/pages/MainPage/MainPage'));
 
-export const App: FC<PropsWithChildren> = ({ children }) => {
+export const App = () => {
     return (
-        <ReduxProvider store={store}>
-            <PersistGate persistor={persistedStore}>{children}</PersistGate>
-        </ReduxProvider>
+        <Suspense fallback={<div>loading...</div>}>
+            <MainPage></MainPage>
+        </Suspense>
     );
 };

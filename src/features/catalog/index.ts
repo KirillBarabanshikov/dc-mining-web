@@ -1,1 +1,0 @@
-export { useCatalogFilters } from './filter';
