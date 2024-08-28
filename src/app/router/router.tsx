@@ -1,4 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom';
 import {
     MainPage,
     AboutPage,
@@ -18,7 +17,7 @@ import {
 } from '@/pages';
 import { BaseLayout } from '@/app/layout';
 
-export const router = createBrowserRouter([
+export const router = [
     {
         element: <BaseLayout />,
         children: [
@@ -84,4 +83,4 @@ export const router = createBrowserRouter([
             },
         ],
     },
-]);
+];

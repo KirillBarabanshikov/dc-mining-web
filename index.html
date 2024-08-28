@@ -16,6 +16,8 @@
 
         <meta name="yandex-verification" content="a930c94ae40ba145" />
 
+        <!--app-head-->
+
         <script async>
             (function (w, d, s, l, i) {
                 w[l] = w[l] || [];
@@ -42,10 +44,12 @@
             ></iframe>
         </noscript>
 
-        <div id="root"></div>
+        <div id="root">
+            <!--app-html-->
+        </div>
         <div id="portal" style="position: relative; z-index: 100"></div>
         <div id="overlay"></div>
 
-        <script type="module" src="/src/main.tsx"></script>
+        <script type="module" src="/src/entry-client.tsx"></script>
     </body>
 </html>
