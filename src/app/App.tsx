@@ -1,7 +1,6 @@
-import { RouterProvider } from 'react-router-dom';
+import { FC, PropsWithChildren } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { router } from './router';
 import { persistedStore, store } from './store';
 
 import 'swiper/css';
@@ -9,12 +8,10 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import '@/shared/styles/index.css';
 
-export const App = () => {
+export const App: FC<PropsWithChildren> = ({ children }) => {
     return (
         <ReduxProvider store={store}>
-            <PersistGate persistor={persistedStore}>
-                <RouterProvider router={router} />
-            </PersistGate>
+            <PersistGate persistor={persistedStore}>{children}</PersistGate>
         </ReduxProvider>
     );
 };
