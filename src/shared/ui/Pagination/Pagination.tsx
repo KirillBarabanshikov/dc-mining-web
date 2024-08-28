@@ -47,7 +47,9 @@ export const Pagination: FC<IPaginationProps> = ({ currentPage, length, onChange
                         currentPage <= 4
                             ? index + 1
                             : currentPage >= length - 3
-                              ? length - 7 + index
+                              ? length <= 8
+                                  ? index + 1
+                                  : length - 7 + index
                               : currentPage - 4 + index;
                     return (
                         <div
