@@ -1,6 +1,6 @@
 export const CATEGORIES_NAMES = {
     asicMiners: 'ASIC майнеры',
-    containersMining: 'Контейнеры для майнинг ферм',
+    containersMining: 'Контейнеры для майнинга',
     firmware: 'Прошивки для оборудования',
     accessories: 'Комплектующие',
     repairAndService: 'Ремонт и сервис',
@@ -11,7 +11,7 @@ export const CATEGORIES_NAMES = {
 
 export const CATEGORIES_KEYS: Record<string, string> = {
     ['ASIC майнеры']: 'asicMiners',
-    ['Контейнеры для майнинг ферм']: 'containersMining',
+    ['Контейнеры для майнинга']: 'containersMining',
     ['Прошивки для оборудования']: 'firmware',
     ['Комплектующие']: 'accessories',
     ['Ремонт и сервис']: 'repairAndService',

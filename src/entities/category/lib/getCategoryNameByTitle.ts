@@ -1,6 +1,6 @@
 const names: Record<string, string> = {
     asicMiners: 'ASIC майнеры',
-    containersMining: 'Контейнеры для майнинг ферм',
+    containersMining: 'Контейнеры для майнинга',
     firmware: 'Прошивки для оборудования',
     accessories: 'Комплектующие',
     accommodationDataCentre: 'Размещение в дата центре',
