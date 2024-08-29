@@ -89,7 +89,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                     {item.name}
                 </Link>
             </motion.li>
-            {typeof document !== 'undefined' ? (
+            {typeof window !== 'undefined' ? (
                 createPortal(
                     <AnimatePresence>
                         {isOpen && (

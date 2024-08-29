@@ -105,14 +105,19 @@ export const Header: FC = () => {
 };
 
 const FavoritesOption = () => {
+    const [isClient, setIsClient] = useState(false);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
     const { favorites } = useSelector((state: RootState) => state.products);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <NavLink to={'/favorites'} className={({ isActive }) => clsx(styles.option, isActive && styles.active)}>
             <div className={styles.icon}>
                 {matchesMD ? <HeartIcon2 /> : <HeartIcon />}
-                {!!favorites.length && <div className={styles.count}>{favorites.length}</div>}
+                {isClient && !!favorites.length && <div className={styles.count}>{favorites.length}</div>}
             </div>
             <span>Избранное</span>
         </NavLink>
@@ -120,14 +125,19 @@ const FavoritesOption = () => {
 };
 
 const CompareOption = () => {
+    const [isClient, setIsClient] = useState(false);
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
     const { compare } = useSelector((state: RootState) => state.products);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <NavLink to={'/compare'} className={({ isActive }) => clsx(styles.option, isActive && styles.active)}>
             <div className={styles.icon}>
                 {matchesMD ? <StatisticIcon2 /> : <StatisticIcon />}
-                {!!compare.length && <div className={styles.count}>{compare.length}</div>}
+                {isClient && !!compare.length && <div className={styles.count}>{compare.length}</div>}
             </div>
             <span>Сравнить</span>
         </NavLink>

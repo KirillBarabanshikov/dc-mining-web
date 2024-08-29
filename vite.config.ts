@@ -11,4 +11,7 @@ export default defineConfig({
         }),
     ],
     resolve: { alias: { '@': '/src' } },
+    ssr: {
+        noExternal: ['react-helmet-async'],
+    },
 });

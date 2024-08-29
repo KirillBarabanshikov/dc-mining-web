@@ -80,7 +80,7 @@ export const Search: FC<ISearchProps> = ({ autoFocus = false, onClose, className
                     </motion.div>
                 )}
             </AnimatePresence>
-            {typeof document !== 'undefined' ? (
+            {typeof window !== 'undefined' ? (
                 createPortal(
                     <AnimatePresence>
                         {inFocus && (

@@ -20,7 +20,7 @@ export const Modal: FC<IModal> = ({ children, isOpen, onClose, title, subtitle, 
         setIsLocked(isOpen);
     }, [isOpen]);
 
-    return typeof document !== 'undefined' ? (
+    return typeof window !== 'undefined' ? (
         createPortal(
             <AnimatePresence>
                 {isOpen && (

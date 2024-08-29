@@ -1,48 +1,64 @@
+import fs from 'node:fs/promises';
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import renderApp from './dist/server/entry-server.js';
 import { Transform } from 'node:stream';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PORT = process.env.PORT || 3010;
+const isProduction = process.env.NODE_ENV === 'production';
+const port = process.env.PORT || 5173;
+const base = process.env.BASE || '/';
 const ABORT_DELAY = 10000;
 
-// Read the built HTML file
-const html = fs.readFileSync(path.resolve(__dirname, './dist/client/index.html')).toString();
-const [head, tail] = html.split('<!--app-->');
+const templateHtml = isProduction ? await fs.readFile('./dist/client/index.html', 'utf-8') : '';
+const ssrManifest = isProduction ? await fs.readFile('./dist/client/.vite/ssr-manifest.json', 'utf-8') : undefined;
 
 const app = express();
 
-// Serve static assets
-app.use('/assets', express.static(path.resolve(__dirname, './dist/client/assets')));
-app.use(express.static('public'));
+let vite;
+if (!isProduction) {
+    const { createServer } = await import('vite');
+    vite = await createServer({
+        server: { middlewareMode: true },
+        appType: 'custom',
+        base,
+    });
+    app.use(vite.middlewares);
+} else {
+    const compression = (await import('compression')).default;
+    const sirv = (await import('sirv')).default;
+    app.use(compression());
+    app.use(base, sirv('./dist/client', { extensions: [] }));
+}
 
-// Handle all other routes with server-side rendering
-app.use(async (req, res) => {
+app.use('*', async (req, res) => {
     try {
+        const url = req.originalUrl.replace(base, '');
+
         const response = await fetch('https://dc-mining.itlabs.top/api/seos');
-        const seos = await response.json();
+        const data = await response.json();
 
-        console.log(seos);
+        console.log(data);
 
-        const stream = renderApp(req.url, {
-            onShellReady() {},
-            onShellError(err) {
-                console.error(err);
-                res.status(500).send('Internal Server Error');
+        let template;
+        let render;
+        if (!isProduction) {
+            template = await fs.readFile('./index.html', 'utf-8');
+            template = await vite.transformIndexHtml(url, template);
+            render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
+        } else {
+            template = templateHtml;
+            render = (await import('./dist/server/entry-server.js')).render;
+        }
+
+        let didError = false;
+
+        const { stream, helmetContext } = render(req.url, data, ssrManifest, {
+            onShellError() {
+                res.status(500);
+                res.set({ 'Content-Type': 'text/html' });
+                res.send('<h1>Something went wrong</h1>');
             },
-            onAllReady() {
-                res.status(200);
-
-                const modifiedHead = head
-                    .replace('<!--title-->', `<title>${seos[0]?.title || 'title'}</title>`)
-                    .replace(
-                        '<!--description-->',
-                        `<meta name='description' content='${seos[0]?.description || 'description'}' />`,
-                    );
-                res.write(modifiedHead);
+            onShellReady() {
+                res.status(didError ? 500 : 200);
+                res.set({ 'Content-Type': 'text/html' });
 
                 const transformStream = new Transform({
                     transform(chunk, encoding, callback) {
@@ -51,14 +67,31 @@ app.use(async (req, res) => {
                     },
                 });
 
+                const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
+
+                const helmetData = helmetContext.helmet;
+
+                res.write(
+                    htmlStart
+                        .replace(
+                            '<!--app-head-->',
+                            `${helmetData?.title?.toString() || ''}\n${helmetData?.meta?.toString() || ''}\n${helmetData?.link?.toString() || ''}`,
+                        )
+                        .replace(
+                            '<!--initial-data-->',
+                            `<script defer>window.__INITIAL_DATA__ = ${JSON.stringify(data)}</script>`,
+                        ),
+                );
+
                 transformStream.on('finish', () => {
-                    res.end(tail);
+                    res.end(htmlEnd);
                 });
 
                 stream.pipe(transformStream);
             },
-            onError(err) {
-                console.error(err);
+            onError(error) {
+                didError = true;
+                console.error(error);
             },
         });
 
@@ -66,11 +99,12 @@ app.use(async (req, res) => {
             stream.abort();
         }, ABORT_DELAY);
     } catch (e) {
+        vite?.ssrFixStacktrace(e);
         console.log(e.stack);
         res.status(500).end(e.stack);
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Listening on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`);
 });

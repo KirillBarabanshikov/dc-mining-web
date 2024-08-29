@@ -23,8 +23,6 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: 'pageview',
@@ -33,8 +31,6 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     }, [location]);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
-
         window.scrollTo(0, 0);
     }, [location.pathname]);
 

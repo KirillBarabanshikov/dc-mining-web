@@ -20,7 +20,7 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
     const { data: contacts } = useGetContactsQuery();
     const { data: categories } = useGetCategoriesQuery();
 
-    return typeof document !== 'undefined' ? (
+    return typeof window !== 'undefined' ? (
         createPortal(
             <AnimatePresence>
                 {isOpen && (
