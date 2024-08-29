@@ -64,7 +64,13 @@ export const MainSlider = () => {
                                     </Button>
                                 </div>
                                 <div className={styles.imageWrap}>
-                                    <img src={`${slide.media}`} alt={slide.title} />
+                                    {slide.media.includes('.webm') ? (
+                                        <video autoPlay loop muted playsInline>
+                                            <source src={slide.media} />
+                                        </video>
+                                    ) : (
+                                        <img src={`${slide.media}`} alt={slide.title} />
+                                    )}
                                 </div>
                             </section>
                         </SwiperSlide>
