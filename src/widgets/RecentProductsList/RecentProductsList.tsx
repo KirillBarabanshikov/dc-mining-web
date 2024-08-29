@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import clsx from 'clsx';
 import { RecentProductCard } from '@/entities/product';
@@ -6,9 +7,16 @@ import { SwiperButton } from '@/shared/ui';
 import styles from './RecentProductsList.module.scss';
 
 export const RecentProductsList = () => {
+    const [isClient, setIsClient] = useState(false);
     const { recent } = useAppSelector((state) => state.products);
 
-    if (!recent.length) return <></>;
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) return null;
+
+    if (!recent.length) return null;
 
     return (
         <section className={styles.recent}>
