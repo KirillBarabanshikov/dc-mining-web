@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { AdvantagesDCMining, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -17,10 +16,6 @@ const AboutPage = () => {
 
     return (
         <>
-            <Helmet>
-                <title>О компании</title>
-                <meta name='description' content='О компании' />
-            </Helmet>
             <LogoAnimationBanner />
             <div className={'sections'}>
                 <section className={styles.about}>

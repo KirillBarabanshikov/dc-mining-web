@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui';
 import { Bestsellers, MainBanner, MainBannersList, Managers, NewsList, Offers } from '@/widgets';
 import Background from '@/shared/assets/backgrounds/main-bg.svg?react';
-import { Helmet } from 'react-helmet';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import styles from './MainPage.module.scss';
@@ -14,10 +13,6 @@ const MainPage = () => {
 
     return (
         <>
-            <Helmet>
-                <title>Оборудование для майнинга</title>
-                <meta name='description' content='Приобретайте оборудование для майнинга на сайте dc-mining.ru' />
-            </Helmet>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
                 <MainBannersList />

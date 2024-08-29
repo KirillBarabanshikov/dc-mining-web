@@ -20,11 +20,14 @@ app.use('/assets', express.static(path.resolve(__dirname, './dist/client/assets'
 app.use(express.static('public'));
 
 // Handle all other routes with server-side rendering
-app.use((req, res) => {
+app.use(async (req, res) => {
     try {
+        const response = await fetch('https://dc-mining.itlabs.top/api/seos');
+        const seos = await response.json();
+
+        console.log(seos);
+
         const stream = renderApp(req.url, {
-            res,
-            head,
             onShellReady() {},
             onShellError(err) {
                 console.error(err);
@@ -32,6 +35,14 @@ app.use((req, res) => {
             },
             onAllReady() {
                 res.status(200);
+
+                const modifiedHead = head
+                    .replace('<!--title-->', `<title>${seos[0]?.title || 'title'}</title>`)
+                    .replace(
+                        '<!--description-->',
+                        `<meta name='description' content='${seos[0]?.description || 'description'}' />`,
+                    );
+                res.write(modifiedHead);
 
                 const transformStream = new Transform({
                     transform(chunk, encoding, callback) {
