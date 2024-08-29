@@ -64,10 +64,11 @@ app.use('*', async (req, res) => {
     try {
         const url = req.originalUrl.replace(base, '');
 
-        const response = await fetch(`${baseUrl}/api/seos`);
-        const data = await response.json();
+        const seoResponse = await fetch(`${baseUrl}/api/seos`);
+        const seoData = await seoResponse.json();
 
-        console.log(data);
+        const response = await fetch(`${baseUrl}/api/settings`);
+        const { yandex } = await response.json();
 
         let template;
         let render;
@@ -82,7 +83,7 @@ app.use('*', async (req, res) => {
 
         let didError = false;
 
-        const { stream, helmetContext } = render(req.url, data, ssrManifest, {
+        const { stream, helmetContext } = render(req.url, seoData, ssrManifest, {
             onShellError() {
                 res.status(500);
                 res.set({ 'Content-Type': 'text/html' });
@@ -111,8 +112,9 @@ app.use('*', async (req, res) => {
                         )
                         .replace(
                             '<!--initial-data-->',
-                            `<script defer>window.__INITIAL_DATA__ = ${JSON.stringify(data)}</script>`,
-                        ),
+                            `<script defer>window.__INITIAL_DATA__ = ${JSON.stringify(seoData)}</script>`,
+                        )
+                        .replace('<!--analytics-->', `${yandex}`),
                 );
 
                 transformStream.on('finish', () => {
