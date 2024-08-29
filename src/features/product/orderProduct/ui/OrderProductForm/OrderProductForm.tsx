@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Captcha, Checkbox, Input, NumberInput } from '@/shared/ui';
 import { formatter, useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD } from '@/shared/consts';
+import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
 import { IProduct, useOrderProductMutation } from '@/entities/product';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
 import { orderProductFormScheme, TOrderProductFormScheme } from '../../model';
@@ -27,6 +27,8 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
         register,
         formState: { errors },
         reset,
+        setValue,
+        trigger,
     } = useForm<TOrderProductFormScheme>({
         resolver: yupResolver(orderProductFormScheme),
     });
@@ -62,7 +64,17 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.wrap}>
                 <Input placeholder={'Имя'} {...register('name')} error={!!errors.name} />
-                <Input placeholder={'Телефон'} {...register('phone')} error={!!errors.phone} />
+                <Input
+                    mask={PHONE_MASK}
+                    placeholder={'Телефон'}
+                    error={!!errors.phone}
+                    {...register('phone', {
+                        onChange: (e) => {
+                            setValue('phone', e.target.value);
+                            !!errors.phone && trigger('phone');
+                        },
+                    })}
+                />
             </div>
             <Input disabled value={product.title} className={styles.inputProduct} />
             <div className={styles.wrap}>
