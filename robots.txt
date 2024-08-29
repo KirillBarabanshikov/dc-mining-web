@@ -1,0 +1,28 @@
+User-Agent: *
+Disallow: /*?
+Disallow: /favorites
+Disallow: /compare
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+
+User-Agent: Yandex
+Disallow: /*?
+Disallow: /favorites
+Disallow: /compare
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+
+User-Agent: Googlebot
+Disallow: /*?
+Disallow: /favorites
+Disallow: /compare
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+
+Sitemap: https://dc-mining.ru/sitemap.xml
