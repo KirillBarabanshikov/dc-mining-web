@@ -9,14 +9,14 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import '@/shared/styles/index.css';
 
-// const data = window.__INITIAL_DATA__;
+const seoData = window.__INITIAL_DATA__;
 
 ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>
         <HelmetProvider>
             <BrowserRouter>
-                <App />
+                <App seoData={seoData} />
             </BrowserRouter>
         </HelmetProvider>
     </React.StrictMode>,

@@ -1,21 +1,18 @@
 import React from 'react';
+import { ISeo } from '@/entities/seo';
 import { renderToPipeableStream, RenderToPipeableStreamOptions } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 import { App } from './app/App.tsx';
 
-export function render(url: string, data: any, _ssrManifest?: string, options?: RenderToPipeableStreamOptions) {
+export function render(url: string, seoData: ISeo[], _ssrManifest?: string, options?: RenderToPipeableStreamOptions) {
     const helmetContext = {};
-
-    console.log(data);
-
-    console.log(url);
 
     const stream = renderToPipeableStream(
         <React.StrictMode>
             <HelmetProvider context={helmetContext}>
                 <StaticRouter location={`/${url}`}>
-                    <App />
+                    <App seoData={seoData} />
                 </StaticRouter>
             </HelmetProvider>
         </React.StrictMode>,

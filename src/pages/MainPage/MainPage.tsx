@@ -1,18 +1,29 @@
+import { FC } from 'react';
+import { Helmet } from 'react-helmet-async';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/ui';
 import { Bestsellers, MainBanner, MainBannersList, Managers, NewsList, Offers } from '@/widgets';
 import Background from '@/shared/assets/backgrounds/main-bg.svg?react';
+import { ISeo } from '@/entities/seo';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import styles from './MainPage.module.scss';
 
-const MainPage = () => {
+interface IMainPage {
+    seo: ISeo;
+}
+
+const MainPage: FC<IMainPage> = ({ seo }) => {
     const navigate = useNavigate();
     const matches = useMediaQuery(MAX_WIDTH_MD);
 
     return (
         <>
+            <Helmet>
+                <title>{seo.title}</title>
+                <meta name='description' content={seo.description} />
+            </Helmet>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
                 <MainBannersList />
