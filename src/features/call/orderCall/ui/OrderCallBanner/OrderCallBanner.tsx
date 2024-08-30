@@ -4,10 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
+import { maskPhone } from '@/shared/lib/phone';
 import miner from '@/shared/assets/images/data-center/miner.png';
 import styles from './OrderCallBanner.module.scss';
 
@@ -20,7 +21,6 @@ export const OrderCallBanner = () => {
         formState: { errors },
         reset,
         setValue,
-        trigger,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [captchaVerified, setCaptchaVerified] = useState(false);
@@ -55,14 +55,13 @@ export const OrderCallBanner = () => {
                                     {...register('name')}
                                 />
                                 <Input
-                                    mask={PHONE_MASK}
                                     placeholder={'Телефон'}
                                     error={!!errors.phone}
                                     className={styles.input}
+                                    defaultValue={'+7'}
                                     {...register('phone', {
                                         onChange: (e) => {
-                                            setValue('phone', e.target.value);
-                                            !!errors.phone && trigger('phone');
+                                            setValue('phone', maskPhone(e.target.value));
                                         },
                                     })}
                                 />

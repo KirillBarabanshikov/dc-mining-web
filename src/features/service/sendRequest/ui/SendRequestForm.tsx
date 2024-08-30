@@ -2,10 +2,11 @@ import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useSendRequestMutation } from '@/entities/service';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Radio, File, Modal, StateModal, Captcha } from '@/shared/ui';
+import { maskPhone } from '@/shared/lib/phone';
 import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import styles from './SendRequestForm.module.scss';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -20,7 +21,6 @@ export const SendRequestForm = () => {
         formState: { errors },
         reset,
         setValue,
-        trigger,
     } = useForm<TSendRequestFormScheme>({
         resolver: yupResolver(sendRequestFormScheme),
     });
@@ -57,14 +57,13 @@ export const SendRequestForm = () => {
                             className={styles.input}
                         />
                         <Input
-                            mask={PHONE_MASK}
                             placeholder={'Телефон'}
                             error={!!errors.phone}
                             className={styles.input}
+                            defaultValue={'+7'}
                             {...register('phone', {
                                 onChange: (e) => {
-                                    setValue('phone', e.target.value);
-                                    !!errors.phone && trigger('phone');
+                                    setValue('phone', maskPhone(e.target.value));
                                 },
                             })}
                         />

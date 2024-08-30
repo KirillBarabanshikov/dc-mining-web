@@ -5,7 +5,7 @@ import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui
 import { useOrderCallMutation } from '@/entities/call';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
-import { PHONE_MASK } from '@/shared/consts';
+import { maskPhone } from '@/shared/lib/phone';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './OrderCallHelpBanner.module.scss';
 
@@ -18,7 +18,6 @@ export const OrderCallHelpBanner = () => {
         formState: { errors },
         reset,
         setValue,
-        trigger,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA | null>(null);
@@ -39,15 +38,14 @@ export const OrderCallHelpBanner = () => {
             <h3>Помочь с выбором?</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
-                    mask={PHONE_MASK}
                     placeholder={'Телефон'}
                     theme={'dark'}
                     error={!!errors.phone}
                     className={styles.input}
+                    defaultValue={'+7'}
                     {...register('phone', {
                         onChange: (e) => {
-                            setValue('phone', e.target.value);
-                            !!errors.phone && trigger('phone');
+                            setValue('phone', maskPhone(e.target.value));
                         },
                     })}
                 />

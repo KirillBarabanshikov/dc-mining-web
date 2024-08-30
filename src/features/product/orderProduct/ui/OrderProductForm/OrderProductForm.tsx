@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Captcha, Checkbox, Input, NumberInput } from '@/shared/ui';
 import { formatter, useMediaQuery } from '@/shared/lib';
-import { MAX_WIDTH_MD, PHONE_MASK } from '@/shared/consts';
+import { MAX_WIDTH_MD } from '@/shared/consts';
 import { IProduct, useOrderProductMutation } from '@/entities/product';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
+import { maskPhone } from '@/shared/lib/phone';
 import { orderProductFormScheme, TOrderProductFormScheme } from '../../model';
 import styles from './OrderProductForm.module.scss';
 
@@ -28,7 +29,6 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
         formState: { errors },
         reset,
         setValue,
-        trigger,
     } = useForm<TOrderProductFormScheme>({
         resolver: yupResolver(orderProductFormScheme),
     });
@@ -65,13 +65,12 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
             <div className={styles.wrap}>
                 <Input placeholder={'Имя'} {...register('name')} error={!!errors.name} />
                 <Input
-                    mask={PHONE_MASK}
                     placeholder={'Телефон'}
                     error={!!errors.phone}
+                    defaultValue={'+7'}
                     {...register('phone', {
                         onChange: (e) => {
-                            setValue('phone', e.target.value);
-                            !!errors.phone && trigger('phone');
+                            setValue('phone', maskPhone(e.target.value));
                         },
                     })}
                 />
