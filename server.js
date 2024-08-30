@@ -83,7 +83,7 @@ app.use('*', async (req, res) => {
 
         let didError = false;
 
-        const { stream, helmetContext } = render(req.url, seoData, ssrManifest, {
+        const { stream, helmetContext } = render(url, seoData, ssrManifest, {
             onShellError() {
                 res.status(500);
                 res.set({ 'Content-Type': 'text/html' });

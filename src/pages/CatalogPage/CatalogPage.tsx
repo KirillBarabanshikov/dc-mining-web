@@ -10,6 +10,7 @@ import { useSetFiltersMutation } from '@/entities/filter';
 import { setCategory } from '@/entities/catalog';
 import { useCatalogFilters } from '@/features/catalog';
 import styles from './CatalogPage.module.scss';
+import { Helmet } from 'react-helmet-async';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
@@ -21,7 +22,7 @@ const CatalogPage = () => {
     const matches = useMediaQuery('(max-width: 855px)');
     const dispatch = useAppDispatch();
     const { getFilterBody, getCurrentPage } = useCatalogFilters();
-    const { state } = useLocation();
+    const { state, pathname } = useLocation();
 
     useEffect(() => {
         if (!category) return;
@@ -38,6 +39,9 @@ const CatalogPage = () => {
 
     return (
         <div className={styles.catalog}>
+            <Helmet>
+                <link rel='canonical' href={`https:/dc-mining.ru${pathname}`} />
+            </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={[...paths, { name: category?.name ?? '', path: '' }]} />
                 <div className={styles.catalogTitle}>

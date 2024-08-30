@@ -1,5 +1,5 @@
-import { forwardRef } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { forwardRef, useEffect, useState } from 'react';
+import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha';
 import clsx from 'clsx';
 import { RECAPTCHA_SITE_KEY } from '@/shared/consts';
 
@@ -9,7 +9,20 @@ interface ICaptchaProps {
     className?: string;
 }
 
-export const Captcha = forwardRef<ReCAPTCHA | null, ICaptchaProps>(({ onCaptchaVerify, onExpired, className }, ref) => {
+type ReCAPTCHAWithRef = React.ComponentType<ReCAPTCHAProps & React.RefAttributes<ReCAPTCHA>>;
+
+export const Captcha = forwardRef<ReCAPTCHA, ICaptchaProps>(({ onCaptchaVerify, onExpired, className }, ref) => {
+    const [RecaptchaComponent, setRecaptchaComponent] = useState<ReCAPTCHAWithRef | null>(null);
+
+    useEffect(() => {
+        import('react-google-recaptcha').then((module) => {
+            // @ts-ignore
+            setRecaptchaComponent(() => module.default);
+        });
+    }, []);
+
+    if (!RecaptchaComponent) return null;
+
     const handleCaptchaVerify = (token: any) => {
         if (token) {
             onCaptchaVerify(true);
@@ -20,7 +33,12 @@ export const Captcha = forwardRef<ReCAPTCHA | null, ICaptchaProps>(({ onCaptchaV
 
     return (
         <div style={{ transformOrigin: '0 0' }} className={clsx(className)}>
-            <ReCAPTCHA ref={ref} sitekey={RECAPTCHA_SITE_KEY} onChange={handleCaptchaVerify} onExpired={onExpired} />
+            <RecaptchaComponent
+                ref={ref}
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={handleCaptchaVerify}
+                onExpired={onExpired}
+            />
         </div>
     );
 });

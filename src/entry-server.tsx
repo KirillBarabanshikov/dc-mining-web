@@ -9,10 +9,12 @@ export function render(url: string, data: any, _ssrManifest?: string, options?: 
 
     console.log(data);
 
+    console.log(url);
+
     const stream = renderToPipeableStream(
         <React.StrictMode>
             <HelmetProvider context={helmetContext}>
-                <StaticRouter location={url}>
+                <StaticRouter location={`/${url}`}>
                     <App />
                 </StaticRouter>
             </HelmetProvider>
