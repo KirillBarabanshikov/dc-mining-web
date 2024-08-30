@@ -58,9 +58,21 @@
 
             .items {
                 max-height: 208px;
-                overflow-y: scroll;
+                overflow-y: auto;
                 scrollbar-color: var(--stroke-fourthiary) var(--background-tonal);
                 scrollbar-width: thin;
+
+                &::-webkit-scrollbar {
+                    width: 8px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: var(--stroke-fourthiary);
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: var(--background-tonal);
+                }
             }
 
             .item {

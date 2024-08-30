@@ -18,8 +18,10 @@ export const Range: FC<IRangeProps> = ({ min, max, onChange }) => {
 
     return (
         <div className={styles.sliderContainer}>
-            <p>От: {values[0]}</p>
-            <p>До: {values[1]}</p>
+            <div className={styles.values}>
+                <p>От: {values[0]}</p>
+                <p>До: {values[1]}</p>
+            </div>
 
             <ReactSlider
                 className={styles.horizontalSlider}

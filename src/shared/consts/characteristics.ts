@@ -2,20 +2,20 @@ export const CHARACTERISTICS: Record<string, string> = {
     ['Бренд']: 'brand',
     ['Алгоритм']: 'algorithm',
     ['Добываемые монеты']: 'coin',
-    ['Тип']: '',
-    ['Доход в месяц']: '',
-    ['Мощность']: '',
+    ['Тип']: 'type',
+    ['Доход в месяц']: 'income',
+    ['Мощность']: 'power',
     ['Количество мест']: 'seats',
-    ['Производитель']: '',
+    ['Производитель']: 'manufacturer',
 } as const;
 
 export const CHARACTERISTICS_KEYS: Record<string, string> = {
     brand: 'Бренд',
     algorithm: 'Алгоритм',
     coin: 'Добываемые монеты',
-    ['Тип']: '',
-    ['Доход в месяц']: '',
-    ['Мощность']: '',
+    type: 'Тип',
+    income: 'Доход в месяц',
+    power: 'Мощность',
     seats: 'Количество мест',
-    ['Производитель']: '',
+    manufacturer: 'Производитель',
 } as const;
