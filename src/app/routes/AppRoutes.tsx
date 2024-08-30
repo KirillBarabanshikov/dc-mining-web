@@ -27,7 +27,7 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
     return (
         <BaseLayout>
             <Routes>
-                <Route path={'/'} element={<MainPage seo={seoData.find((seo) => seo.choose === 'Сайт')!} />} />
+                <Route path={'/'} element={<MainPage seo={seoData.find((seo) => seo.choose === 'Сайт')} />} />
                 <Route path={'/about'} element={<AboutPage />} />
                 <Route path={'/leasing'} element={<LeasingPage />} />
                 <Route path={'/data-center'} element={<DataCenterPage />} />

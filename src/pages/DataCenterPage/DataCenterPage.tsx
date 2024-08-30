@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/shared/ui';
 import { formatter, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
@@ -31,6 +32,9 @@ const DataCenterPage = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Дата центр</title>
+            </Helmet>
             <section className={styles.dataCenterBanner}>
                 <div className={clsx(styles.dataCenterContainer, 'container')}>
                     <h1 dangerouslySetInnerHTML={{ __html: info?.title ?? '' }} />

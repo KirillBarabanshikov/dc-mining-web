@@ -11,7 +11,7 @@ import { MAX_WIDTH_MD } from '@/shared/consts';
 import styles from './MainPage.module.scss';
 
 interface IMainPage {
-    seo: ISeo;
+    seo?: ISeo;
 }
 
 const MainPage: FC<IMainPage> = ({ seo }) => {
@@ -21,8 +21,8 @@ const MainPage: FC<IMainPage> = ({ seo }) => {
     return (
         <>
             <Helmet>
-                <title>{seo.title}</title>
-                <meta name='description' content={seo.description} />
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
             </Helmet>
             <MainBanner />
             <div className={clsx(styles.sections, 'sections')}>
