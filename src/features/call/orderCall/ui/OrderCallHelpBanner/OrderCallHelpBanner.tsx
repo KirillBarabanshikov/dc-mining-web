@@ -25,6 +25,11 @@ export const OrderCallHelpBanner = () => {
     const onSubmit = async (data: TOrderCallFormScheme) => {
         if (!captchaVerified) return;
         await orderCall({ ...data, title: 'Помочь с выбором' }).unwrap();
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                event: 'formSuccess',
+            });
+        }
         reset();
         setCaptchaVerified(false);
 

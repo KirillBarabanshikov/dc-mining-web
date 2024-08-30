@@ -46,6 +46,11 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
 
         try {
             await orderProduct({ ...data, productId: product.id, price: price ?? 0, count }).unwrap();
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    event: 'formSuccess',
+                });
+            }
         } catch (error) {
             setIsError(true);
         } finally {

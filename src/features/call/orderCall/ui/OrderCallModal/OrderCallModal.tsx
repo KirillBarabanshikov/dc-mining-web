@@ -35,6 +35,11 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
     const onSubmit = async (data: TOrderCallFormScheme) => {
         if (!captchaVerified) return;
         await orderCall({ ...data, title }).unwrap();
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                event: 'formSuccess',
+            });
+        }
         setCaptchaVerified(false);
     };
 
