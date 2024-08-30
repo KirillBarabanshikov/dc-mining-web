@@ -7,6 +7,8 @@ export const CHARACTERISTICS: Record<string, string> = {
     ['Мощность']: 'power',
     ['Количество мест']: 'seats',
     ['Производитель']: 'manufacturer',
+    ['Первоначальные вложения']: 'investments',
+    ['Вычислительная мощность']: 'compPower',
 } as const;
 
 export const CHARACTERISTICS_KEYS: Record<string, string> = {
@@ -18,4 +20,6 @@ export const CHARACTERISTICS_KEYS: Record<string, string> = {
     power: 'Мощность',
     seats: 'Количество мест',
     manufacturer: 'Производитель',
+    investments: 'Первоначальные вложения',
+    compPower: 'Вычислительная мощность',
 } as const;
