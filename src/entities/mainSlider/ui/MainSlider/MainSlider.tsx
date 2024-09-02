@@ -64,7 +64,7 @@ export const MainSlider = () => {
                                     </Button>
                                 </div>
                                 <div className={styles.imageWrap}>
-                                    {slide.media.includes('.webm') ? (
+                                    {slide.media.includes('.webm') || slide.media.includes('.mp4') ? (
                                         <video autoPlay loop muted playsInline>
                                             <source src={slide.media} />
                                         </video>
