@@ -2,7 +2,7 @@ import { useGetSliderQuery } from '@/entities/mainSlider/api';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Button } from '@/shared/ui';
-import { useMediaQuery } from '@/shared/lib';
+import { useIsSafari, useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_XL } from '@/shared/consts';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
@@ -14,6 +14,7 @@ export const MainSlider = () => {
     const matches = useMediaQuery(MAX_WIDTH_XL);
     const navigate = useNavigate();
     const { data: categories } = useGetCategoriesQuery();
+    const { isSafari } = useIsSafari();
 
     const handleNavigate = (link: string) => {
         if (!categories) return;
@@ -64,7 +65,9 @@ export const MainSlider = () => {
                                     </Button>
                                 </div>
                                 <div className={styles.imageWrap}>
-                                    {slide.media.includes('.webm') || slide.media.includes('.mp4') ? (
+                                    {isSafari ? (
+                                        <img src={`${slide.image}`} alt={slide.title} />
+                                    ) : slide.media.includes('.webm') || slide.media.includes('.mp4') ? (
                                         <video autoPlay loop muted playsInline>
                                             <source src={slide.media} />
                                         </video>

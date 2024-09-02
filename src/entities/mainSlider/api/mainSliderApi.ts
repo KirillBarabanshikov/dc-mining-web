@@ -9,7 +9,11 @@ const mainSliderApi = baseApi.injectEndpoints({
                 url: '/main_slider',
             }),
             transformResponse: (response: ISlide[]) => {
-                return response.map((slide) => ({ ...slide, media: BASE_URL + slide.media }));
+                return response.map((slide) => ({
+                    ...slide,
+                    media: BASE_URL + slide.media,
+                    image: BASE_URL + slide.image,
+                }));
             },
         }),
     }),

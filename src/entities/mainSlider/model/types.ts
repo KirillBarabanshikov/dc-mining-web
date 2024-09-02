@@ -3,5 +3,6 @@ export interface ISlide {
     title: string;
     description: string;
     media: string;
+    image: string;
     links: string;
 }
