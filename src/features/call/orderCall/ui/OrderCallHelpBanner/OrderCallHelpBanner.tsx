@@ -32,10 +32,7 @@ export const OrderCallHelpBanner = () => {
         }
         reset();
         setCaptchaVerified(false);
-
-        if (recaptchaRef.current) {
-            recaptchaRef.current.reset();
-        }
+        if (recaptchaRef.current) recaptchaRef.current.reset();
     };
 
     return (
