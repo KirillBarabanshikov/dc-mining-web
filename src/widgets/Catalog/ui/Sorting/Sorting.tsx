@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Dropdown, IconButton, Modal } from '@/shared/ui';
 import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
@@ -25,6 +25,11 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
     const [setFilters] = useSetFiltersMutation();
     const { category } = useAppSelector((state) => state.catalog);
     const { setSearchParams, searchParams, getFilterBody } = useCatalogFilters();
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const onChangeSort = (value: string[]) => {
         if (!category) return;
@@ -62,12 +67,12 @@ export const Sorting: FC<ISortingProps> = ({ className }) => {
                     <IconButton
                         icon={matches ? <SimpleIcon2 /> : <SimpleIcon />}
                         onClick={() => dispatch(setViewMode('simple'))}
-                        className={clsx(styles.iconButton, viewMode === 'simple' && styles.selected)}
+                        className={clsx(styles.iconButton, isClient && viewMode === 'simple' && styles.selected)}
                     />
                     <IconButton
                         icon={<TileIcon />}
                         onClick={() => dispatch(setViewMode('tile'))}
-                        className={clsx(styles.iconButton, viewMode === 'tile' && styles.selected)}
+                        className={clsx(styles.iconButton, isClient && viewMode === 'tile' && styles.selected)}
                     />
                 </div>
             </div>
