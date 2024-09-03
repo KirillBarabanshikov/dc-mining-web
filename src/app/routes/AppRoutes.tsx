@@ -44,7 +44,7 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
                     element={<DataCenterPage seo={seoData.find((seo) => seo.choose === 'Размещение в дата центре')} />}
                 />
                 <Route path={'/compare'} element={<ComparePage />} />
-                <Route path={'/catalog/:id/:slug'} element={<CatalogPage />} />
+                <Route path={'/catalog/:id/:slug'} element={<CatalogPage seoData={seoData} />} />
                 <Route path={'/product/:id/:slug'} element={<ProductPage />} />
                 <Route path={'/faq'} element={<FAQPage seo={seoData.find((seo) => seo.choose === 'FAQ')} />} />
                 <Route

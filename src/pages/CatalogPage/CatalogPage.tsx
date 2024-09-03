@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { ISeo } from '@/entities/seo';
 import { useLocation, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { Breadcrumbs } from '@/shared/ui';
@@ -10,11 +12,14 @@ import { useSetFiltersMutation } from '@/entities/filter';
 import { setCategory } from '@/entities/catalog';
 import { useCatalogFilters } from '@/features/catalog';
 import styles from './CatalogPage.module.scss';
-import { Helmet } from 'react-helmet-async';
 
 const paths = [{ name: 'Главная', path: '/' }];
 
-const CatalogPage = () => {
+interface ICatalogPageProps {
+    seoData: ISeo[];
+}
+
+const CatalogPage: FC<ICatalogPageProps> = ({ seoData }) => {
     const { id } = useParams();
     const { data: category } = useGetCategoryByIdQuery(id as string);
     const [setFilters] = useSetFiltersMutation();
@@ -37,15 +42,37 @@ const CatalogPage = () => {
         setFilters({ body, params: { page } });
     }, [state, category]);
 
+    const getCategorySeo = (): ISeo | undefined => {
+        if (!category) return;
+
+        if (category.title === 'asicMiners') {
+            return seoData.find((seo) => seo.choose === 'Асик майнеры');
+        }
+        if (category.title === 'containersMining') {
+            return seoData.find((seo) => seo.choose === 'Контейнеры для майнинга');
+        }
+        if (category.title === 'firmware') {
+            return seoData.find((seo) => seo.choose === 'Прошивки для оборудования');
+        }
+        if (category.title === 'accessories') {
+            return seoData.find((seo) => seo.choose === 'Комплектующие');
+        }
+        if (category.title === 'readyBusiness') {
+            return seoData.find((seo) => seo.choose === 'Готовый бизнес');
+        }
+    };
+
     return (
         <div className={styles.catalog}>
             <Helmet>
-                <link rel='canonical' href={`${pathname}`} />
+                <title>{getCategorySeo()?.title}</title>
+                <meta name='description' content={getCategorySeo()?.description} />
+                <link rel='canonical' href={'https://dc-mining.ru' + pathname} />
             </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={[...paths, { name: category?.name ?? '', path: '' }]} />
                 <div className={styles.catalogTitle}>
-                    <h1>{category?.name}</h1>
+                    <h1>{getCategorySeo()?.hOne}</h1>
                     <span>{`${countProducts} товаров`}</span>
                 </div>
             </div>
