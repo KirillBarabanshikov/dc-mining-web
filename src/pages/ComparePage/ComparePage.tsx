@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/shared/ui';
 import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
@@ -12,6 +13,9 @@ const ComparePage = () => {
 
     return (
         <div className={'sections'}>
+            <Helmet>
+                <title>Сравнение</title>
+            </Helmet>
             <section className={styles.compare}>
                 <div className={'container'}>
                     <div className={styles.head}>

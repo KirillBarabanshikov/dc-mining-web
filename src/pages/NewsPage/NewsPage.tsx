@@ -1,3 +1,6 @@
+import { FC } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { ISeo } from '@/entities/seo';
 import { Breadcrumbs } from '@/shared/ui';
 import { NewsList } from '@/widgets';
 
@@ -6,9 +9,17 @@ const paths = [
     { name: 'СМИ о нас', path: '/news' },
 ];
 
-const NewsPage = () => {
+interface INewsPageProps {
+    seo?: ISeo;
+}
+
+const NewsPage: FC<INewsPageProps> = ({ seo }) => {
     return (
         <div>
+            <Helmet>
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
+            </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={paths} />
             </div>

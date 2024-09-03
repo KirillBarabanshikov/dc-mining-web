@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/shared/ui';
@@ -10,6 +10,7 @@ import { OrderCallModal, OrderCallBanner } from '@/features/call';
 import { useGetDataCenterInfoQuery } from '@/entities/pageInfo';
 import { useGetCategoriesQuery } from '@/entities/category';
 import { LivePhotos } from '@/widgets';
+import { ISeo } from '@/entities/seo';
 import dottedLine from '@/shared/assets/images/data-center/dotted-line.png';
 import dottedLine2 from '@/shared/assets/images/data-center/dotted-line2.png';
 import dottedLineMd from '@/shared/assets/images/data-center/dotted-line-md.png';
@@ -18,7 +19,11 @@ import dottedLineSm from '@/shared/assets/images/data-center/dotted-line-sm.png'
 import dottedLineSm2 from '@/shared/assets/images/data-center/dotted-line-sm2.png';
 import styles from './DataCenterPage.module.scss';
 
-const DataCenterPage = () => {
+interface IMainPageProps {
+    seo?: ISeo;
+}
+
+const DataCenterPage: FC<IMainPageProps> = ({ seo }) => {
     const { data: info } = useGetDataCenterInfoQuery();
     const { data: categories } = useGetCategoriesQuery();
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +38,8 @@ const DataCenterPage = () => {
     return (
         <>
             <Helmet>
-                <title>Дата центр</title>
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
             </Helmet>
             <section className={styles.dataCenterBanner}>
                 <div className={clsx(styles.dataCenterContainer, 'container')}>

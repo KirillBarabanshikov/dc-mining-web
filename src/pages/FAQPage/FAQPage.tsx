@@ -1,3 +1,6 @@
+import { FC } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { ISeo } from '@/entities/seo';
 import { Accordion, Breadcrumbs } from '@/shared/ui';
 import { useGetFaqQuery } from '@/entities/faq';
 import styles from './FAQPage.module.scss';
@@ -7,11 +10,19 @@ const paths = [
     { name: 'FAQ', path: '/faq' },
 ];
 
-const FAQPage = () => {
+interface IFAQPageProps {
+    seo?: ISeo;
+}
+
+const FAQPage: FC<IFAQPageProps> = ({ seo }) => {
     const { data: faqs } = useGetFaqQuery();
 
     return (
         <div className={styles.faq}>
+            <Helmet>
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
+            </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={paths} />
             </div>

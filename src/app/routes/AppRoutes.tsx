@@ -27,20 +27,44 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
     return (
         <BaseLayout>
             <Routes>
-                <Route path={'/'} element={<MainPage seo={seoData.find((seo) => seo.choose === 'Сайт')} />} />
-                <Route path={'/about'} element={<AboutPage />} />
-                <Route path={'/leasing'} element={<LeasingPage />} />
-                <Route path={'/data-center'} element={<DataCenterPage />} />
+                <Route
+                    path={'/'}
+                    element={<MainPage seo={seoData.find((seo) => seo.choose === 'Главная страница')} />}
+                />
+                <Route
+                    path={'/about'}
+                    element={<AboutPage seo={seoData.find((seo) => seo.choose === 'О компании')} />}
+                />
+                <Route
+                    path={'/leasing'}
+                    element={<LeasingPage seo={seoData.find((seo) => seo.choose === 'Лизинг')} />}
+                />
+                <Route
+                    path={'/data-center'}
+                    element={<DataCenterPage seo={seoData.find((seo) => seo.choose === 'Размещение в дата центре')} />}
+                />
                 <Route path={'/compare'} element={<ComparePage />} />
                 <Route path={'/catalog/:id/:slug'} element={<CatalogPage />} />
                 <Route path={'/product/:id/:slug'} element={<ProductPage />} />
-                <Route path={'/faq'} element={<FAQPage />} />
-                <Route path={'/delivery'} element={<DeliveryPage />} />
-                <Route path={'/payment'} element={<PaymentPage />} />
-                <Route path={'/news'} element={<NewsPage />} />
-                <Route path={'/service'} element={<ServicePage />} />
+                <Route path={'/faq'} element={<FAQPage seo={seoData.find((seo) => seo.choose === 'FAQ')} />} />
+                <Route
+                    path={'/delivery'}
+                    element={<DeliveryPage seo={seoData.find((seo) => seo.choose === 'Доставка')} />}
+                />
+                <Route
+                    path={'/payment'}
+                    element={<PaymentPage seo={seoData.find((seo) => seo.choose === 'Оплата')} />}
+                />
+                <Route path={'/news'} element={<NewsPage seo={seoData.find((seo) => seo.choose === 'СМИ о нас')} />} />
+                <Route
+                    path={'/service'}
+                    element={<ServicePage seo={seoData.find((seo) => seo.choose === 'Ремонт и сервис')} />}
+                />
                 <Route path={'/favorites'} element={<FavoritesPage />} />
-                <Route path={'/links'} element={<LinksPage />} />
+                <Route
+                    path={'/links'}
+                    element={<LinksPage seo={seoData.find((seo) => seo.choose === 'Полезные ссылки')} />}
+                />
                 <Route path={'/links/:id/:slug'} element={<LinkDetailsPage />} />
             </Routes>
         </BaseLayout>

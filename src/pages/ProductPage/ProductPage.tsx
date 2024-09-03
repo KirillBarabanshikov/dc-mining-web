@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { Breadcrumbs } from '@/shared/ui';
 import { AdvantagesDCMining, CallMeBanner, ProductDetails, RecentProductsList } from '@/widgets';
@@ -26,6 +27,9 @@ const ProductPage = () => {
 
     return (
         <div className={'container'}>
+            <Helmet>
+                <title>{product?.title}</title>
+            </Helmet>
             {product && !isFetching && <Breadcrumbs paths={breadcrumbsPaths} className={styles.breadcrumbs} />}
             <div className={'sections'}>
                 <ProductDetails product={product} isFetching={isFetching} />

@@ -10,11 +10,11 @@ import { useMediaQuery } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import styles from './MainPage.module.scss';
 
-interface IMainPage {
+interface IMainPageProps {
     seo?: ISeo;
 }
 
-const MainPage: FC<IMainPage> = ({ seo }) => {
+const MainPage: FC<IMainPageProps> = ({ seo }) => {
     const navigate = useNavigate();
     const matches = useMediaQuery(MAX_WIDTH_MD);
 

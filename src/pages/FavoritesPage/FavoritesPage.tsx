@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/shared/ui';
 import { useAppDispatch, useAppSelector, useMediaQuery } from '@/shared/lib';
 import { clearFavorites, ProductCard } from '@/entities/product';
@@ -11,6 +12,9 @@ const FavoritesPage = () => {
 
     return (
         <section className={styles.favorites}>
+            <Helmet>
+                <title>Избранное</title>
+            </Helmet>
             <div className={'container'}>
                 <div className={styles.head}>
                     <h1 className={'section-title-secondary'}>Избранное</h1>

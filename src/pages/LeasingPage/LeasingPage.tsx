@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { ISeo } from '@/entities/seo';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui';
@@ -15,7 +17,11 @@ import dottedLineSm from '@/shared/assets/images/leasing/dotted-line-sm.png';
 import dottedLineSm2 from '@/shared/assets/images/leasing/dotted-line-sm2.png';
 import styles from './Leasing.module.scss';
 
-const LeasingPage = () => {
+interface ILeasingPageProps {
+    seo?: ISeo;
+}
+
+const LeasingPage: FC<ILeasingPageProps> = ({ seo }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { data: info } = useGetLeasingInfoQuery();
     const { data: contacts } = useGetContactsQuery();
@@ -28,6 +34,11 @@ const LeasingPage = () => {
 
     return (
         <div className={styles.leasing}>
+            <Helmet>
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
+            </Helmet>
+
             <div className={'sections'}>
                 <section className={styles.leasingBanner}>
                     <div className={clsx(styles.leasingContainer, 'container')}>

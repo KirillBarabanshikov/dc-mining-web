@@ -15,7 +15,7 @@ export const Delivery: FC<IDeliveryAndPaymentProps> = ({ variant = 'page' }) => 
         <div className={clsx(styles.delivery, styles[variant])}>
             {deliveries && (
                 <section>
-                    <h2>Доставка</h2>
+                    {variant === 'page' ? <h1>Доставка</h1> : <h2>Доставка</h2>}
                     <div className={styles.wrap}>
                         {deliveries.map((data) => {
                             return <DeliveryAndPaymentCard key={data.id} data={data} />;
@@ -34,7 +34,7 @@ export const Payments: FC<IDeliveryAndPaymentProps> = ({ variant = 'page' }) => 
         <div className={clsx(styles.delivery, styles[variant])}>
             {payments && (
                 <section>
-                    <h2>Оплата</h2>
+                    {variant === 'page' ? <h1>Оплата</h1> : <h2>Оплата</h2>}
                     <div className={styles.wrap}>
                         {payments.map((data) => {
                             return <DeliveryAndPaymentCard key={data.id} data={data} />;

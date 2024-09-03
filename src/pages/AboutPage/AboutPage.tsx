@@ -1,6 +1,9 @@
+import { FC } from 'react';
 import clsx from 'clsx';
+import { Helmet } from 'react-helmet-async';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router-dom';
+import { ISeo } from '@/entities/seo';
 import { AdvantagesDCMining, LogoAnimationBanner } from '@/widgets';
 import { useMediaQuery } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -9,13 +12,21 @@ import { useGetAboutInfoQuery } from '@/entities/pageInfo';
 import { NewsCard } from '@/entities/news';
 import styles from './AboutPage.module.scss';
 
-const AboutPage = () => {
+interface IAboutPageProps {
+    seo?: ISeo;
+}
+
+const AboutPage: FC<IAboutPageProps> = ({ seo }) => {
     const { data: info } = useGetAboutInfoQuery();
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const navigate = useNavigate();
 
     return (
         <>
+            <Helmet>
+                <title>{seo?.title}</title>
+                <meta name='description' content={seo?.description} />
+            </Helmet>
             <LogoAnimationBanner />
             <div className={'sections'}>
                 <section className={styles.about}>

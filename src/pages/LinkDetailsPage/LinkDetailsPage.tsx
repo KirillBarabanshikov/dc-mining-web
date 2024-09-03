@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useGetLinkByIdQuery } from '@/entities/link';
 import { Accordion, Breadcrumbs } from '@/shared/ui';
@@ -16,6 +17,9 @@ const LinksDetailsPage = () => {
 
     return (
         <div className={styles.link}>
+            <Helmet>
+                <title>{link.title}</title>
+            </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={[...paths, { name: link.title, path: '' }]} />
             </div>
