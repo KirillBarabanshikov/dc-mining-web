@@ -40,7 +40,7 @@ const CatalogPage = () => {
     return (
         <div className={styles.catalog}>
             <Helmet>
-                <link rel='canonical' href={`https:/dc-mining.ru${pathname}`} />
+                <link rel='canonical' href={`${pathname}`} />
             </Helmet>
             <div className={'container'}>
                 <Breadcrumbs paths={[...paths, { name: category?.name ?? '', path: '' }]} />
