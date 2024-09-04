@@ -23,7 +23,7 @@ export const ProductInfo: FC<IProductInfoProps> = ({ product }) => {
                 </div>
             )}
             <div className={styles.content}>
-                <h1>{product.title}</h1>
+                <h1>{product.seoHOne ? product.seoHOne : product.title}</h1>
                 <div className={styles.specifications}>
                     {product.value
                         .filter((value) => value.display)

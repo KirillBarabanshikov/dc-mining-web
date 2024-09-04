@@ -25,6 +25,9 @@ export interface IProductDto {
         color: string;
     }[];
     display: boolean;
+    seoTitle: string;
+    seoDescription: string;
+    seoHOne: string;
 }
 
 export interface IProductsByCategoryDto {

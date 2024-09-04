@@ -28,7 +28,8 @@ const ProductPage = () => {
     return (
         <div className={'container'}>
             <Helmet>
-                <title>{product?.title}</title>
+                <title>{product?.seoTitle ? product?.seoTitle : product?.title}</title>
+                <meta name='description' content={product?.seoDescription} />
             </Helmet>
             {product && !isFetching && <Breadcrumbs paths={breadcrumbsPaths} className={styles.breadcrumbs} />}
             <div className={'sections'}>

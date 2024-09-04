@@ -21,6 +21,9 @@ export interface IProduct {
     tags: IProductTag[];
     display: boolean;
     slug: string;
+    seoTitle: string;
+    seoDescription: string;
+    seoHOne: string;
 }
 
 export interface IProductValue {
