@@ -24,11 +24,27 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     // const prevPath = useRef(location.pathname);
 
     useEffect(() => {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'pageview',
-            page: location.pathname,
-        });
+        const timeoutId = setTimeout(() => {
+            const pageTitle = document.title;
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'virtualPageview',
+                pageUrl: location.pathname,
+                pageTitle: pageTitle,
+            });
+        }, 0);
+
+        return () => clearTimeout(timeoutId); // Очищаем таймер при размонтировании
+
+        // const pageTitle = document.title;
+        //
+        // window.dataLayer = window.dataLayer || [];
+        // window.dataLayer.push({
+        //     event: 'virtualPageview',
+        //     pageUrl: `${window.location.origin}${location.pathname}${location.search}`,
+        //     pageTitle,
+        // });
         // if (prevPath.current !== location.pathname) {
         //     prevPath.current = location.pathname;
         //     window.location.href = location.pathname;
