@@ -9,6 +9,8 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import '@/shared/styles/index.css';
 
+// import { TagManager } from '@/app/layout/BaseLayout.tsx';
+
 interface IAppProps {
     seoData: ISeo[];
 }
@@ -16,6 +18,7 @@ interface IAppProps {
 export const App: FC<IAppProps> = ({ seoData }) => {
     return (
         <ReduxProvider store={store}>
+            {/*<TagManager />*/}
             <AppRoutes seoData={seoData} />
         </ReduxProvider>
     );
