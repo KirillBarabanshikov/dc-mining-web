@@ -66,6 +66,7 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
                     element={<LinksPage seo={seoData.find((seo) => seo.choose === 'Полезные ссылки')} />}
                 />
                 <Route path={'/links/:id/:slug'} element={<LinkDetailsPage />} />
+                <Route path={'*'} element={<div>404</div>} />
             </Routes>
         </BaseLayout>
     );
