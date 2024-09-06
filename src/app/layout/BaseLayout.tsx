@@ -23,11 +23,11 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'pageview',
-            page: location.pathname,
-        });
+        // window.dataLayer = window.dataLayer || [];
+        // window.dataLayer.push({
+        //     event: 'pageview',
+        //     page: location.pathname,
+        // });
         ym(344196948, 'hit', location.pathname);
     }, [location]);
 
