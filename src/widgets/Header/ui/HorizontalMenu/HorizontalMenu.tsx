@@ -67,7 +67,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
             path += `?brand=${child.title}`;
         }
 
-        if (item.title === 'accessories') {
+        if (item.title === 'accessories' || item.title === 'containersMining') {
             path += `?filter=${child.title}`;
         }
 
