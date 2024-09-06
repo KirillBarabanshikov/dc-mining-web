@@ -18,6 +18,7 @@ import CatalogPage from '@/pages/CatalogPage/CatalogPage.tsx';
 import ProductPage from '@/pages/ProductPage/ProductPage.tsx';
 import LinksPage from '@/pages/LinksPage/LinksPage.tsx';
 import LinkDetailsPage from '@/pages/LinkDetailsPage/LinkDetailsPage.tsx';
+import NotFoundPage from '@/pages/NotFound/NotFoundPage.tsx';
 
 interface IAppRoutes {
     seoData: ISeo[];
@@ -66,7 +67,7 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
                     element={<LinksPage seo={seoData.find((seo) => seo.choose === 'Полезные ссылки')} />}
                 />
                 <Route path={'/links/:id/:slug'} element={<LinkDetailsPage />} />
-                <Route path={'*'} element={<div>404</div>} />
+                <Route path={'*'} element={<NotFoundPage />} />
             </Routes>
         </BaseLayout>
     );
