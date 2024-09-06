@@ -21,34 +21,13 @@ export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
 
 const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     const location = useLocation();
-    // const prevPath = useRef(location.pathname);
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            const pageTitle = document.title;
-
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: 'virtualPageview',
-                pageUrl: location.pathname,
-                pageTitle: pageTitle,
-            });
-        }, 0);
-
-        return () => clearTimeout(timeoutId); // Очищаем таймер при размонтировании
-
-        // const pageTitle = document.title;
-        //
-        // window.dataLayer = window.dataLayer || [];
-        // window.dataLayer.push({
-        //     event: 'virtualPageview',
-        //     pageUrl: `${window.location.origin}${location.pathname}${location.search}`,
-        //     pageTitle,
-        // });
-        // if (prevPath.current !== location.pathname) {
-        //     prevPath.current = location.pathname;
-        //     window.location.href = location.pathname;
-        // }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'pageview',
+            page: location.pathname,
+        });
     }, [location]);
 
     useEffect(() => {
