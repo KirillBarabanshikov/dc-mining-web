@@ -28,6 +28,7 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
             event: 'pageview',
             page: location.pathname,
         });
+        ym(344196948, 'hit', location.pathname);
     }, [location]);
 
     useEffect(() => {

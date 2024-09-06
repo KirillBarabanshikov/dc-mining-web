@@ -8,6 +8,8 @@ declare global {
         dataLayer: Record<string, any>[];
         __INITIAL_DATA__: any;
     }
+
+    declare const ym: any;
 }
 
 export {};

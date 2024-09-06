@@ -30,11 +30,12 @@ export const SendRequestForm = () => {
     const onSubmit = async (data: TSendRequestFormScheme) => {
         if (!captchaVerified) return;
         await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile?.[0] }).unwrap();
-        if (window.dataLayer) {
-            window.dataLayer.push({
-                event: 'formSuccess',
-            });
-        }
+        // if (window.dataLayer) {
+        //     window.dataLayer.push({
+        //         event: 'formSuccess',
+        //     });
+        // }
+        ym(98130237, 'reachGoal', 'metrika_goal');
         reset();
         setResetFile(true);
         setCaptchaVerified(false);

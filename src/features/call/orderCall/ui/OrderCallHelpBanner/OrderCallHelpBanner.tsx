@@ -25,11 +25,12 @@ export const OrderCallHelpBanner = () => {
     const onSubmit = async (data: TOrderCallFormScheme) => {
         if (!captchaVerified) return;
         await orderCall({ ...data, title: 'Помочь с выбором' }).unwrap();
-        if (window.dataLayer) {
-            window.dataLayer.push({
-                event: 'formSuccess',
-            });
-        }
+        // if (window.dataLayer) {
+        //     window.dataLayer.push({
+        //         event: 'formSuccess',
+        //     });
+        // }
+        ym(98130237, 'reachGoal', 'metrika_goal');
         reset();
         setCaptchaVerified(false);
         if (recaptchaRef.current) recaptchaRef.current.reset();

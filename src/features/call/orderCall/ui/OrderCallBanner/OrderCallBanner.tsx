@@ -30,11 +30,12 @@ export const OrderCallBanner = () => {
         if (!captchaVerified) return;
 
         await orderCall({ ...data, title: 'Заказать обратный звонок' }).unwrap();
-        if (window.dataLayer) {
-            window.dataLayer.push({
-                event: 'formSuccess',
-            });
-        }
+        // if (window.dataLayer) {
+        //     window.dataLayer.push({
+        //         event: 'formSuccess',
+        //     });
+        // }
+        ym(98130237, 'reachGoal', 'metrika_goal');
         reset();
         setCaptchaVerified(false);
 
