@@ -1,7 +1,7 @@
 import { Layout } from '@/shared/ui';
 import { Footer, Header } from '@/widgets';
 import { useLocation } from 'react-router-dom';
-import { FC, PropsWithChildren, useEffect, useRef } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 
 const pagesWithoutFooter = ['/service'];
 
@@ -21,7 +21,7 @@ export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
 
 const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
     const location = useLocation();
-    const prevPath = useRef(location.pathname);
+    // const prevPath = useRef(location.pathname);
 
     useEffect(() => {
         window.dataLayer = window.dataLayer || [];
@@ -29,10 +29,10 @@ const LocationProvider: FC<PropsWithChildren> = ({ children }) => {
             event: 'pageview',
             page: location.pathname,
         });
-        if (prevPath.current !== location.pathname) {
-            prevPath.current = location.pathname;
-            window.location.href = location.pathname;
-        }
+        // if (prevPath.current !== location.pathname) {
+        //     prevPath.current = location.pathname;
+        //     window.location.href = location.pathname;
+        // }
     }, [location]);
 
     useEffect(() => {
