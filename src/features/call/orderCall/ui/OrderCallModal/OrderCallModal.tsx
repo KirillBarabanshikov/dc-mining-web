@@ -4,7 +4,7 @@ import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
-import { useMediaQuery } from '@/shared/lib';
+import { useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
@@ -31,16 +31,12 @@ export const OrderCallModal: FC<IOrderCallModalProps> = ({ title, subtitle, isOp
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TOrderCallFormScheme) => {
         if (!captchaVerified) return;
         await orderCall({ ...data, title }).unwrap();
-        // if (window.dataLayer) {
-        //     window.dataLayer.push({
-        //         event: 'formSuccess',
-        //     });
-        // }
-        ym(98130237, 'reachGoal', 'metrika_goal');
+        sendMetrikaGoal();
         setCaptchaVerified(false);
     };
 

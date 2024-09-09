@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
-import { useMediaQuery } from '@/shared/lib';
+import { useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useSendRequestMutation } from '@/entities/service';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,16 +26,12 @@ export const SendRequestForm = () => {
     });
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TSendRequestFormScheme) => {
         if (!captchaVerified) return;
         await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile?.[0] }).unwrap();
-        // if (window.dataLayer) {
-        //     window.dataLayer.push({
-        //         event: 'formSuccess',
-        //     });
-        // }
-        ym(98130237, 'reachGoal', 'metrika_goal');
+        sendMetrikaGoal();
         reset();
         setResetFile(true);
         setCaptchaVerified(false);

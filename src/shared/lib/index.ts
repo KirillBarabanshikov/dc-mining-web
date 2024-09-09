@@ -8,3 +8,4 @@ export { formatDate } from './date';
 export { createSlug } from './slug/createSlug.ts';
 export { useOutsideClick } from './click';
 export { useIsSafari } from './browser';
+export { useMetrikaGoal } from './metrika';

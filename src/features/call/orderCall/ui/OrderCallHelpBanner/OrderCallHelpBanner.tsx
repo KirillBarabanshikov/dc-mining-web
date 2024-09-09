@@ -8,6 +8,7 @@ import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/order
 import { maskPhone } from '@/shared/lib/phone';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './OrderCallHelpBanner.module.scss';
+import { useMetrikaGoal } from '@/shared/lib';
 
 export const OrderCallHelpBanner = () => {
     const { data: personalData } = useGetPersonalDataQuery();
@@ -21,16 +22,12 @@ export const OrderCallHelpBanner = () => {
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TOrderCallFormScheme) => {
         if (!captchaVerified) return;
         await orderCall({ ...data, title: 'Помочь с выбором' }).unwrap();
-        // if (window.dataLayer) {
-        //     window.dataLayer.push({
-        //         event: 'formSuccess',
-        //     });
-        // }
-        ym(98130237, 'reachGoal', 'metrika_goal');
+        sendMetrikaGoal();
         reset();
         setCaptchaVerified(false);
         if (recaptchaRef.current) recaptchaRef.current.reset();

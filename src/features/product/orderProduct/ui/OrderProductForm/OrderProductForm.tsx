@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Captcha, Checkbox, Input, NumberInput } from '@/shared/ui';
-import { formatter, useMediaQuery } from '@/shared/lib';
+import { formatter, useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { IProduct, useOrderProductMutation } from '@/entities/product';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
@@ -35,6 +35,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
     const [orderProduct, { isLoading, reset: resetOrderProduct }] = useOrderProductMutation();
     const [captchaVerified, setCaptchaVerified] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onChangeProductCount = (value: number) => {
         product.price && setPrice(product.price * value);
@@ -46,12 +47,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
 
         try {
             await orderProduct({ ...data, productId: product.id, price: price ?? 0, count }).unwrap();
-            // if (window.dataLayer) {
-            //     window.dataLayer.push({
-            //         event: 'formSuccess',
-            //     });
-            // }
-            ym(98130237, 'reachGoal', 'metrika_goal');
+            sendMetrikaGoal();
         } catch (error) {
             setIsError(true);
         } finally {
