@@ -91,7 +91,7 @@ export const Header: FC = () => {
                         {contacts && (
                             <div className={styles.horizontalMenuContacts}>
                                 <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
-                                <a href={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
+                                <a className='mgo-number' href={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
                                     {formatPhoneNumber(contacts.phone)}
                                 </a>
                             </div>

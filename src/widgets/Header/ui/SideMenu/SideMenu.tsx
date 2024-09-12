@@ -81,7 +81,10 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
                                     <div className={styles.contacts}>
                                         <div>
                                             <div className={styles.subtitle}>Многоконтактный телефон</div>
-                                            <a href={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
+                                            <a
+                                                className='mgo-number'
+                                                href={`tel:${intFormatPhoneNumber(contacts.phone)}`}
+                                            >
                                                 {formatPhoneNumber(contacts.phone)}
                                             </a>
                                         </div>

@@ -22,7 +22,7 @@ export const CallMeBanner = () => {
                         <p>Свяжитесь с нами, мы поможем подобрать оптимальное решение</p>
                         {contacts && (
                             <div className={styles.links}>
-                                <Link to={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
+                                <Link className='mgo-number' to={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
                                     {formatPhoneNumber(contacts.phone)}
                                 </Link>
                                 <Link to={`mailto:${contacts.email}`}>{contacts.email}</Link>
