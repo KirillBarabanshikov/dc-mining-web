@@ -19,6 +19,7 @@ import ProductPage from '@/pages/ProductPage/ProductPage.tsx';
 import LinksPage from '@/pages/LinksPage/LinksPage.tsx';
 import LinkDetailsPage from '@/pages/LinkDetailsPage/LinkDetailsPage.tsx';
 import NotFoundPage from '@/pages/NotFound/NotFoundPage.tsx';
+import NewsDetailsPage from '@/pages/NewsDetailsPage/NewsDetailsPage.tsx';
 
 interface IAppRoutes {
     seoData: ISeo[];
@@ -57,6 +58,7 @@ export const AppRoutes: FC<IAppRoutes> = ({ seoData }) => {
                     element={<PaymentPage seo={seoData.find((seo) => seo.choose === 'Оплата')} />}
                 />
                 <Route path={'/news'} element={<NewsPage seo={seoData.find((seo) => seo.choose === 'СМИ о нас')} />} />
+                <Route path={'/news/:id/:slug'} element={<NewsDetailsPage />} />
                 <Route
                     path={'/service'}
                     element={<ServicePage seo={seoData.find((seo) => seo.choose === 'Ремонт и сервис')} />}
