@@ -1,4 +1,6 @@
 .newsCard {
+    display: flex;
+    flex-direction: column;
     background-color: var(--background-white);
     border-radius: 20px;
     overflow: hidden;
@@ -47,6 +49,7 @@
     .cardBody {
         padding: 32px;
         position: relative;
+        flex: 1;
 
         time {
             font-weight: 700;
@@ -66,6 +69,12 @@
             line-height: 18.2px;
             color: rgba(90, 101, 156, 1);
             transition: opacity 300ms ease-out;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            height: 72px;
         }
 
         .button {
