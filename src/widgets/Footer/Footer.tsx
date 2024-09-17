@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { useGetCategoriesQuery } from '@/entities/category';
 import { BASE_URL } from '@/shared/consts';
-import { formatPhoneNumber, intFormatPhoneNumber, useMangoNumber } from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
 import Logo from '@/shared/assets/logo.svg?react';
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
     const { data: contacts } = useGetContactsQuery();
     const { data: categories } = useGetCategoriesQuery();
-    useMangoNumber();
 
     return (
         <footer className={styles.footer}>

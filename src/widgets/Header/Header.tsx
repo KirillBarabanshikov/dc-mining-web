@@ -2,13 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import {
-    formatPhoneNumber,
-    intFormatPhoneNumber,
-    useBodyScrollLock,
-    useMangoNumber,
-    useMediaQuery,
-} from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import { OrderCallModal } from '@/features/call';
@@ -31,7 +25,6 @@ export const Header: FC = () => {
     const matchesMD = useMediaQuery(MAX_WIDTH_MD);
     const { data: contacts } = useGetContactsQuery();
     const [isSticky, setIsSticky] = useState(false);
-    useMangoNumber();
 
     useEffect(() => {
         setIsOpen(false);

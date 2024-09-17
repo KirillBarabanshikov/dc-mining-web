@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { useGetCategoriesQuery } from '@/entities/category';
 import { ABOUT_LINKS, BASE_URL, SERVICES_LINKS } from '@/shared/consts';
-import { formatPhoneNumber, intFormatPhoneNumber, useMangoNumber } from '@/shared/lib';
+import { formatPhoneNumber, getMangoNumber, intFormatPhoneNumber } from '@/shared/lib';
 import ArrowDown from '@/shared/assets/icons/arrow-down2.svg?react';
 import CloseIcon from '@/shared/assets/icons/close.svg?react';
 import styles from './SideMenu.module.scss';
@@ -19,7 +19,10 @@ interface ISideMenuProps {
 export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
     const { data: contacts } = useGetContactsQuery();
     const { data: categories } = useGetCategoriesQuery();
-    useMangoNumber();
+
+    useEffect(() => {
+        getMangoNumber();
+    }, [contacts]);
 
     return typeof window !== 'undefined' ? (
         createPortal(

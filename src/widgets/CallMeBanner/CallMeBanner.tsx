@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
-import { useMangoNumber } from '@/shared/lib';
 import img from '@/shared/assets/images/call/call-me.png';
 import styles from './CallMeBanner.module.scss';
 
 export const CallMeBanner = () => {
     const { data: contacts } = useGetContactsQuery();
     const [isClient, setIsClient] = useState(false);
-    useMangoNumber();
 
     useEffect(() => {
         setIsClient(true);

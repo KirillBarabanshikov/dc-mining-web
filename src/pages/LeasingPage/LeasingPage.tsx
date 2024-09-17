@@ -4,7 +4,7 @@ import { ISeo } from '@/entities/seo';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui';
-import { formatPhoneNumber, intFormatPhoneNumber, useMangoNumber, useMediaQuery } from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber, useMediaQuery } from '@/shared/lib';
 import { OrderCallModal } from '@/features/call';
 import { useGetLeasingInfoQuery } from '@/entities/pageInfo';
 import { useGetContactsQuery } from '@/entities/contacts';
@@ -28,7 +28,6 @@ const LeasingPage: FC<ILeasingPageProps> = ({ seo }) => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const matchesMd = useMediaQuery('(max-width: 854px)');
     const matchesLg = useMediaQuery(MAX_WIDTH_LG);
-    useMangoNumber();
 
     const currentLine = matchesMd ? dottedLineSm : matchesLg ? dottedLineMd : dottedLine;
     const currentLine2 = matchesMd ? dottedLineSm2 : matchesLg ? dottedLineMd2 : dottedLine2;

@@ -1,1 +1,1 @@
-export { useMangoNumber } from './useMangoNumber.tsx';
+export { getMangoNumber } from './geMangoNumber.ts';
