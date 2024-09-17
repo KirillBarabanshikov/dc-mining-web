@@ -23,7 +23,7 @@ export const NewsCard: FC<INewsCardProps> = ({ media, className }) => {
             <div className={styles.cardBody}>
                 <time dateTime={media.dateAt}>{formatDate(media.dateAt)}</time>
                 <h5 className={styles.title}>{media.title}</h5>
-                <div className={styles.subtitle} dangerouslySetInnerHTML={{ __html: media.description }} />
+                <p className={styles.subtitle} dangerouslySetInnerHTML={{ __html: media.description }} />
                 <Link to={currentLink} target={media.link ? '_blank' : ''}>
                     <Button size={matches ? 'md' : 'lg'} className={styles.button}>
                         Подробнее

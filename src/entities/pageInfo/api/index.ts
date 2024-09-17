@@ -4,4 +4,5 @@ export {
     useGetDataCenterInfoQuery,
     useGetDeliveryInfoQuery,
     useGetPaymentInfoQuery,
+    useGetAboutMassMediaInfoQuery,
 } from './pageInfoApi.ts';

@@ -12,4 +12,5 @@ export {
     useGetDataCenterInfoQuery,
     useGetPaymentInfoQuery,
     useGetDeliveryInfoQuery,
+    useGetAboutMassMediaInfoQuery,
 } from './api';
