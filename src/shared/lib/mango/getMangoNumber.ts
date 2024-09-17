@@ -7,5 +7,7 @@ export const getMangoNumber = () => {
         });
     });
 
+    console.log(number);
+
     return number;
 };
