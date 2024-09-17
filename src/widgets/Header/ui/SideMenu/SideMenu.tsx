@@ -80,12 +80,12 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
                                 {contacts && (
                                     <div className={styles.contacts}>
                                         <div>
-                                            {getMangoNumber()}
                                             <div className={styles.subtitle}>Многоконтактный телефон</div>
                                             <a
                                                 className='mgo-number'
                                                 href={`tel:${intFormatPhoneNumber(contacts.phone)}`}
                                             >
+                                                {getMangoNumber()}
                                                 {formatPhoneNumber(contacts.phone)}
                                             </a>
                                         </div>

@@ -1,1 +1,1 @@
-export { getMangoNumber } from './geMangoNumber.ts';
+export { getMangoNumber } from './getMangoNumber.ts';
