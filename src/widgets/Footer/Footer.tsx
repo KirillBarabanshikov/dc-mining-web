@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { useGetCategoriesQuery } from '@/entities/category';
 import { BASE_URL } from '@/shared/consts';
-import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
+import { formatPhoneNumber, getMangoNumber, intFormatPhoneNumber } from '@/shared/lib';
 import Logo from '@/shared/assets/logo.svg?react';
 import styles from './Footer.module.scss';
 
@@ -55,30 +55,33 @@ export const Footer = () => {
                                 })}
                     </div>
                 </section>
-                <section>
-                    <h5>Контакты</h5>
-                    <div className={styles.wrap}>
-                        <a
-                            href={`tel:${intFormatPhoneNumber(contacts?.phone)}`}
-                            className={styles.contact + ' mgo-number'}
-                        >
-                            {formatPhoneNumber(contacts?.phone)}
-                        </a>
-                        <a href={`mailto:${contacts?.email}`} className={styles.contact}>
-                            {contacts?.email}
-                        </a>
-                    </div>
-                </section>
                 {contacts && (
-                    <section>
-                        <h5>Офис</h5>
-                        <div className={styles.wrap}>
-                            <div
-                                className={clsx(styles.link, styles.address)}
-                                dangerouslySetInnerHTML={{ __html: contacts.office }}
-                            />
-                        </div>
-                    </section>
+                    <>
+                        <section>
+                            <h5>Контакты</h5>
+                            <div className={styles.wrap}>
+                                {getMangoNumber()}
+                                <a
+                                    href={`tel:${intFormatPhoneNumber(contacts?.phone)}`}
+                                    className={styles.contact + ' mgo-number'}
+                                >
+                                    {formatPhoneNumber(contacts?.phone)}
+                                </a>
+                                <a href={`mailto:${contacts?.email}`} className={styles.contact}>
+                                    {contacts?.email}
+                                </a>
+                            </div>
+                        </section>
+                        <section>
+                            <h5>Офис</h5>
+                            <div className={styles.wrap}>
+                                <div
+                                    className={clsx(styles.link, styles.address)}
+                                    dangerouslySetInnerHTML={{ __html: contacts.office }}
+                                />
+                            </div>
+                        </section>
+                    </>
                 )}
                 {contacts && (
                     <section>
