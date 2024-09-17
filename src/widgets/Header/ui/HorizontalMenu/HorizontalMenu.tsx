@@ -74,6 +74,8 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
         navigate(path, { state: child.id });
     };
 
+    const subCategories = [...item.subCategory].sort((a, b) => a.title.localeCompare(b.title));
+
     return (
         <>
             <motion.li
@@ -103,7 +105,7 @@ const MenuItemDropdown: FC<{ item: ICategory }> = ({ item }) => {
                                 className={styles.dropdown}
                             >
                                 <div className={styles.dropdownList}>
-                                    {item.subCategory.map((child) => {
+                                    {subCategories.map((child) => {
                                         return (
                                             <div
                                                 key={child.id}
