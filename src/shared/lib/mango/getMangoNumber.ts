@@ -1,5 +1,5 @@
 export const getMangoNumber = () => {
-    console.log(mgo);
+    console.log('mgo', mgo);
 
     mgo(function (test: any) {
         console.log('test', test);
