@@ -103,9 +103,9 @@ export const Header: FC = () => {
                                 <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
                                 <a
                                     className='mgo-number'
-                                    href={`tel:${intFormatPhoneNumber(window.phone ?? contacts.phone)}`}
+                                    href={`tel:${intFormatPhoneNumber(window.phone ? window.phone : contacts.phone)}`}
                                 >
-                                    {formatPhoneNumber(window.phone ?? contacts.phone)}
+                                    {formatPhoneNumber(window.phone ? window.phone : contacts.phone)}
                                 </a>
                             </div>
                         )}
