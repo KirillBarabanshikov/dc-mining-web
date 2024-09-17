@@ -2,7 +2,7 @@ export const getMangoNumber = () => {
     console.log(mgo);
 
     mgo(function (test: any) {
-        console.log(test);
+        console.log('test', test);
 
         // Запрашиваем номер
         // mgo?.getNumber('', function (result: any) {
