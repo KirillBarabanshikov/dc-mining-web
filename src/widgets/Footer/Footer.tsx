@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { useGetCategoriesQuery } from '@/entities/category';
 import { BASE_URL } from '@/shared/consts';
-import { formatPhoneNumber, getMangoNumber, intFormatPhoneNumber } from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber } from '@/shared/lib';
 import Logo from '@/shared/assets/logo.svg?react';
 import styles from './Footer.module.scss';
 
@@ -60,7 +60,6 @@ export const Footer = () => {
                         <section>
                             <h5>Контакты</h5>
                             <div className={styles.wrap}>
-                                {getMangoNumber()}
                                 <a
                                     href={`tel:${intFormatPhoneNumber(contacts?.phone)}`}
                                     className={styles.contact + ' mgo-number'}

@@ -4,7 +4,7 @@ import { ISeo } from '@/entities/seo';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui';
-import { formatPhoneNumber, getMangoNumber, intFormatPhoneNumber, useMediaQuery } from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber, useMediaQuery } from '@/shared/lib';
 import { OrderCallModal } from '@/features/call';
 import { useGetLeasingInfoQuery } from '@/entities/pageInfo';
 import { useGetContactsQuery } from '@/entities/contacts';
@@ -143,7 +143,6 @@ const LeasingPage: FC<ILeasingPageProps> = ({ seo }) => {
                                 <div className={styles.links}>
                                     {contacts && (
                                         <>
-                                            {getMangoNumber()}
                                             <Link
                                                 className='mgo-number'
                                                 to={`tel:${intFormatPhoneNumber(contacts.phone)}`}

@@ -1,17 +1,16 @@
 export const getMangoNumber = () => {
-    let number = '';
+    console.log(mgo);
 
-    console.log(mgo());
+    mgo(function (test: any) {
+        console.log(test);
 
-    mgo(function (mgo: any) {
-        console.log(mgo);
-
-        mgo?.getNumber('', function (result: any) {
-            number = result.number;
-        });
+        // Запрашиваем номер
+        // mgo?.getNumber('', function (result: any) {
+        //     // Вставляем номер телефона во все теги с классом mgo-number
+        //     document.querySelectorAll('.mgo-number').forEach(function (elem: any) {
+        //         console.log(result);
+        //         elem.innerText = result.number;
+        //     });
+        // });
     });
-
-    console.log(number);
-
-    return number;
 };

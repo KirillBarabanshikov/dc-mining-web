@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
@@ -19,6 +19,10 @@ interface ISideMenuProps {
 export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
     const { data: contacts } = useGetContactsQuery();
     const { data: categories } = useGetCategoriesQuery();
+
+    useEffect(() => {
+        getMangoNumber();
+    }, [contacts]);
 
     return typeof window !== 'undefined' ? (
         createPortal(
@@ -85,7 +89,6 @@ export const SideMenu: FC<ISideMenuProps> = ({ isOpen, onClose }) => {
                                                 className='mgo-number'
                                                 href={`tel:${intFormatPhoneNumber(contacts.phone)}`}
                                             >
-                                                {getMangoNumber()}
                                                 {formatPhoneNumber(contacts.phone)}
                                             </a>
                                         </div>

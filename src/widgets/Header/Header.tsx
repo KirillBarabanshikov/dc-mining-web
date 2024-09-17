@@ -2,13 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
-import {
-    formatPhoneNumber,
-    getMangoNumber,
-    intFormatPhoneNumber,
-    useBodyScrollLock,
-    useMediaQuery,
-} from '@/shared/lib';
+import { formatPhoneNumber, intFormatPhoneNumber, useBodyScrollLock, useMediaQuery } from '@/shared/lib';
 import { BASE_URL, MAX_WIDTH_MD, MAX_WIDTH_XL } from '@/shared/consts';
 import { Search, SearchButton } from '@/features/search';
 import { OrderCallModal } from '@/features/call';
@@ -96,7 +90,6 @@ export const Header: FC = () => {
                         {!matchesMD && <HorizontalMenu />}
                         {contacts && (
                             <div className={styles.horizontalMenuContacts}>
-                                {getMangoNumber()}
                                 <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
                                 <a className='mgo-number' href={`tel:${intFormatPhoneNumber(contacts.phone)}`}>
                                     {formatPhoneNumber(contacts.phone)}
