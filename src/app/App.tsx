@@ -1,6 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ISeo } from '@/entities/seo';
+import { getMangoNumber } from '@/shared/lib';
 import { store } from './store/store.ts';
 import { AppRoutes } from './routes/AppRoutes.tsx';
 
@@ -16,6 +17,10 @@ interface IAppProps {
 }
 
 export const App: FC<IAppProps> = ({ seoData }) => {
+    useEffect(() => {
+        getMangoNumber();
+    }, []);
+
     return (
         <ReduxProvider store={store}>
             {/*<TagManager />*/}
