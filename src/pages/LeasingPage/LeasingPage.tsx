@@ -145,9 +145,9 @@ const LeasingPage: FC<ILeasingPageProps> = ({ seo }) => {
                                         <>
                                             <Link
                                                 className='mgo-number'
-                                                to={`tel:${intFormatPhoneNumber(contacts.phone)}`}
+                                                to={`tel:${intFormatPhoneNumber(window.phone ?? contacts.phone)}`}
                                             >
-                                                {formatPhoneNumber(contacts.phone)}
+                                                {formatPhoneNumber(window.phone ?? contacts.phone)}
                                             </Link>
                                         </>
                                     )}

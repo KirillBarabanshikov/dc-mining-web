@@ -61,10 +61,10 @@ export const Footer = () => {
                             <h5>Контакты</h5>
                             <div className={styles.wrap}>
                                 <a
-                                    href={`tel:${intFormatPhoneNumber(contacts?.phone)}`}
+                                    href={`tel:${intFormatPhoneNumber(window.phone ?? contacts.phone)}`}
                                     className={styles.contact + ' mgo-number'}
                                 >
-                                    {formatPhoneNumber(contacts?.phone)}
+                                    {formatPhoneNumber(window.phone ?? contacts.phone)}
                                 </a>
                                 <a href={`mailto:${contacts?.email}`} className={styles.contact}>
                                     {contacts?.email}
