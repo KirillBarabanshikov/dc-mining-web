@@ -10,6 +10,7 @@ declare global {
     }
 
     declare const ym: any;
+    declare const mgo: any;
 }
 
 export {};

@@ -9,3 +9,4 @@ export { createSlug } from './slug/createSlug.ts';
 export { useOutsideClick } from './click';
 export { useIsSafari } from './browser';
 export { useMetrikaGoal } from './metrika';
+export { useMangoNumber } from './mango';
