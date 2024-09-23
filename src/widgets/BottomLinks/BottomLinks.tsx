@@ -1,15 +1,12 @@
 import { createPortal } from 'react-dom';
-import { useState } from 'react';
 import clsx from 'clsx';
-import { useMediaQuery } from '@/shared/lib';
+import { intFormatPhoneNumber, useMediaQuery } from '@/shared/lib';
 import { useGetContactsQuery } from '@/entities/contacts';
 import { BASE_URL, MAX_WIDTH_MD } from '@/shared/consts';
-import { OrderCallModal } from '@/features/call';
 import PhoneIcon from '@/shared/assets/icons/phone.svg?react';
 import styles from './BottomLinks.module.scss';
 
 export const BottomLinks = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const matches = useMediaQuery(MAX_WIDTH_MD);
     const { data: contacts } = useGetContactsQuery();
 
@@ -32,18 +29,15 @@ export const BottomLinks = () => {
                             </a>
                         );
                     })}
-                <div className={styles.option} onClick={() => setIsOpen(true)}>
+                <a
+                    href={`tel:${intFormatPhoneNumber(window.phone ? window.phone : contacts?.phone)}`}
+                    className={styles.option}
+                >
                     <div className={styles.icon}>
                         <PhoneIcon />
                     </div>
-                </div>
+                </a>
             </div>
-            <OrderCallModal
-                title={'Заказать звонок'}
-                subtitle={'Оставьте свои контакты и мы вам перезвоним'}
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-            />
         </div>,
         document.getElementById('portal') as HTMLDivElement,
     );
