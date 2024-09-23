@@ -83,7 +83,7 @@ export const Header: FC = () => {
                                                 key={contact.id}
                                                 href={contact.url}
                                                 target={'_blank'}
-                                                className={styles.option}
+                                                className={clsx(styles.option, styles[contact.title.toLowerCase()])}
                                             >
                                                 <div className={styles.icon}>
                                                     <img src={BASE_URL + contact.image} alt={contact.title} />
