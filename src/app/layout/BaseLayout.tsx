@@ -1,5 +1,5 @@
 import { Layout } from '@/shared/ui';
-import { Footer, Header } from '@/widgets';
+import { BottomLinks, Footer, Header } from '@/widgets';
 import { useLocation } from 'react-router-dom';
 import { FC, PropsWithChildren, useEffect } from 'react';
 
@@ -12,7 +12,7 @@ export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
 
     return (
         <LocationProvider>
-            <Layout headerSlot={<Header />} footerSlot={footerSlot}>
+            <Layout headerSlot={<Header />} footerSlot={footerSlot} bottomSlot={<BottomLinks />}>
                 {children}
             </Layout>
         </LocationProvider>
