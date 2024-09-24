@@ -1,7 +1,14 @@
-import { useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import { useRef, useState } from 'react';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
-import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
+import {
+    Button,
+    // Captcha,
+    Checkbox,
+    Input,
+    Modal,
+    StateModal,
+} from '@/shared/ui';
 import { useOrderCallMutation } from '@/entities/call';
 import { useGetPersonalDataQuery } from '@/entities/personalData';
 import { orderCallFormScheme, TOrderCallFormScheme } from '@/features/call/orderCall';
@@ -20,17 +27,17 @@ export const OrderCallHelpBanner = () => {
         reset,
         setValue,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
-    const [captchaVerified, setCaptchaVerified] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    // const [captchaVerified, setCaptchaVerified] = useState(false);
+    // const recaptchaRef = useRef<ReCAPTCHA | null>(null);
     const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TOrderCallFormScheme) => {
-        if (!captchaVerified) return;
+        // if (!captchaVerified) return;
         await orderCall({ ...data, title: 'Помочь с выбором' }).unwrap();
         sendMetrikaGoal();
         reset();
-        setCaptchaVerified(false);
-        if (recaptchaRef.current) recaptchaRef.current.reset();
+        // setCaptchaVerified(false);
+        // if (recaptchaRef.current) recaptchaRef.current.reset();
     };
 
     return (
@@ -64,12 +71,12 @@ export const OrderCallHelpBanner = () => {
                     className={styles.checkbox}
                     {...register('checked')}
                 />
-                <Captcha
-                    ref={recaptchaRef}
-                    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
-                    onExpired={() => setCaptchaVerified(false)}
-                    className={styles.captcha}
-                />
+                {/*<Captcha*/}
+                {/*    ref={recaptchaRef}*/}
+                {/*    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}*/}
+                {/*    onExpired={() => setCaptchaVerified(false)}*/}
+                {/*    className={styles.captcha}*/}
+                {/*/>*/}
                 <Button type={'submit'} size={'md'} disabled={isLoading}>
                     Отправить
                 </Button>

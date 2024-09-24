@@ -1,8 +1,18 @@
-import { FC, useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import {
+    FC,
+    // useRef,
+    useState,
+} from 'react';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Captcha, Checkbox, Input, NumberInput } from '@/shared/ui';
+import {
+    Button,
+    // Captcha,
+    Checkbox,
+    Input,
+    NumberInput,
+} from '@/shared/ui';
 import { formatter, useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { IProduct, useOrderProductMutation } from '@/entities/product';
@@ -33,8 +43,8 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
         resolver: yupResolver(orderProductFormScheme),
     });
     const [orderProduct, { isLoading, reset: resetOrderProduct }] = useOrderProductMutation();
-    const [captchaVerified, setCaptchaVerified] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    // const [captchaVerified, setCaptchaVerified] = useState(false);
+    // const recaptchaRef = useRef<ReCAPTCHA | null>(null);
     const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onChangeProductCount = (value: number) => {
@@ -43,7 +53,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
     };
 
     const onSubmit = async (data: TOrderProductFormScheme) => {
-        if (!captchaVerified) return;
+        // if (!captchaVerified) return;
 
         try {
             await orderProduct({ ...data, productId: product.id, price: price ?? 0, count }).unwrap();
@@ -58,7 +68,7 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
     const handleClose = () => {
         reset();
         resetOrderProduct();
-        setCaptchaVerified(false);
+        // setCaptchaVerified(false);
         onClose();
     };
 
@@ -101,11 +111,11 @@ export const OrderProductForm: FC<IOrderProductFormProps> = ({ onClose, product,
                     {...register('checked')}
                     error={!!errors.checked}
                 />
-                <Captcha
-                    ref={recaptchaRef}
-                    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
-                    onExpired={() => setCaptchaVerified(false)}
-                />
+                {/*<Captcha*/}
+                {/*    ref={recaptchaRef}*/}
+                {/*    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}*/}
+                {/*    onExpired={() => setCaptchaVerified(false)}*/}
+                {/*/>*/}
                 <div className={styles.wrap}>
                     <Button variant={'outline'} onClick={handleClose} size={matches ? 'md' : 'lg'} isWide>
                         Отмена

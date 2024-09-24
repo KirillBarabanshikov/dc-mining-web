@@ -1,15 +1,26 @@
-import { useRef, useState } from 'react';
+import {
+    // useRef,
+    useState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useSendRequestMutation } from '@/entities/service';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Radio, File, Modal, StateModal, Captcha } from '@/shared/ui';
+import {
+    Button,
+    Input,
+    Radio,
+    File,
+    Modal,
+    StateModal,
+    // Captcha
+} from '@/shared/ui';
 import { maskPhone } from '@/shared/lib/phone';
 import { sendRequestFormScheme, TSendRequestFormScheme } from '../model';
 import styles from './SendRequestForm.module.scss';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 export const SendRequestForm = () => {
     const matches = useMediaQuery(MAX_WIDTH_MD);
@@ -24,21 +35,21 @@ export const SendRequestForm = () => {
     } = useForm<TSendRequestFormScheme>({
         resolver: yupResolver(sendRequestFormScheme),
     });
-    const [captchaVerified, setCaptchaVerified] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    // const [captchaVerified, setCaptchaVerified] = useState(false);
+    // const recaptchaRef = useRef<ReCAPTCHA | null>(null);
     const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TSendRequestFormScheme) => {
-        if (!captchaVerified) return;
+        // if (!captchaVerified) return;
         await sendRequest({ ...data, buy: !!data.buy, mediaFile: data.mediaFile?.[0] }).unwrap();
         sendMetrikaGoal();
         reset();
         setResetFile(true);
-        setCaptchaVerified(false);
+        // setCaptchaVerified(false);
 
-        if (recaptchaRef.current) {
-            recaptchaRef.current.reset();
-        }
+        // if (recaptchaRef.current) {
+        //     recaptchaRef.current.reset();
+        // }
     };
 
     const handleClose = () => {
@@ -110,11 +121,11 @@ export const SendRequestForm = () => {
                     </span>
                 </div>
                 <div className={styles.buttons}>
-                    <Captcha
-                        ref={recaptchaRef}
-                        onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
-                        onExpired={() => setCaptchaVerified(false)}
-                    />
+                    {/*<Captcha*/}
+                    {/*    ref={recaptchaRef}*/}
+                    {/*    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}*/}
+                    {/*    onExpired={() => setCaptchaVerified(false)}*/}
+                    {/*/>*/}
                     <Button type={'submit'} size={matches ? 'md' : 'lg'} isWide={matches} disabled={isLoading}>
                         Отправить запрос
                     </Button>

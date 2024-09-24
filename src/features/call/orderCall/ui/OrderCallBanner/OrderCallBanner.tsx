@@ -1,8 +1,15 @@
-import { useRef, useState } from 'react';
+// import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { Button, Captcha, Checkbox, Input, Modal, StateModal } from '@/shared/ui';
+// import ReCAPTCHA from 'react-google-recaptcha';
+import {
+    Button,
+    // Captcha,
+    Checkbox,
+    Input,
+    Modal,
+    StateModal,
+} from '@/shared/ui';
 import { useMediaQuery, useMetrikaGoal } from '@/shared/lib';
 import { MAX_WIDTH_MD } from '@/shared/consts';
 import { useOrderCallMutation } from '@/entities/call';
@@ -23,21 +30,21 @@ export const OrderCallBanner = () => {
         setValue,
     } = useForm<TOrderCallFormScheme>({ resolver: yupResolver(orderCallFormScheme) });
     const matches = useMediaQuery(MAX_WIDTH_MD);
-    const [captchaVerified, setCaptchaVerified] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+    // const [captchaVerified, setCaptchaVerified] = useState(false);
+    // const recaptchaRef = useRef<ReCAPTCHA | null>(null);
     const { sendMetrikaGoal } = useMetrikaGoal();
 
     const onSubmit = async (data: TOrderCallFormScheme) => {
-        if (!captchaVerified) return;
+        // if (!captchaVerified) return;
 
         await orderCall({ ...data, title: 'Заказать обратный звонок' }).unwrap();
         sendMetrikaGoal();
         reset();
-        setCaptchaVerified(false);
+        // setCaptchaVerified(false);
 
-        if (recaptchaRef.current) {
-            recaptchaRef.current.reset();
-        }
+        // if (recaptchaRef.current) {
+        //     recaptchaRef.current.reset();
+        // }
     };
 
     return (
@@ -83,11 +90,11 @@ export const OrderCallBanner = () => {
                                 {...register('checked')}
                             />
                             <div className={styles.buttons}>
-                                <Captcha
-                                    ref={recaptchaRef}
-                                    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}
-                                    onExpired={() => setCaptchaVerified(false)}
-                                />
+                                {/*<Captcha*/}
+                                {/*    ref={recaptchaRef}*/}
+                                {/*    onCaptchaVerify={(verify) => setCaptchaVerified(verify)}*/}
+                                {/*    onExpired={() => setCaptchaVerified(false)}*/}
+                                {/*/>*/}
                                 <Button
                                     type={'submit'}
                                     size={matches ? 'md' : 'lg'}
